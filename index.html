@@ -7,8 +7,10 @@
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="apple-touch-icon" href="images/favicon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
   :root {
     --gold: #D4AF37;
@@ -431,7 +433,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-headshot">
-        <img src="images/headshot.jpg" alt="Corey L. Cook - Author of DREAM/BIG">
+        <img src="images/headshot.JPG" alt="Corey L. Cook - Author of DREAM/BIG">
       </div>
       <div class="about-content">
         <span class="section-label">About the Author</span>
@@ -536,8 +538,10 @@
     <h2 class="section-title">Small Steps. Big Updates.</h2>
     <div class="divider" style="margin:1.5rem auto;"></div>
     <p class="section-text" style="margin:0 auto; text-align:center;">I&rsquo;m still on this journey, and I want to bring you along. Sign up for the newsletter and you&rsquo;ll get updates on new content, speaking events, financial tips, and stories from the DREAM/BIG community. No spam. No fluff. Just real talk delivered to your inbox.</p>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--gold);font-size:1.1rem;padding:1rem;\'>You\'re in. Welcome to the DREAM/BIG community.</p>';">
-      <input type="email" placeholder="Your email address" required>
+    <form class="newsletter-form" action="https://lifeinpa.us7.list-manage.com/subscribe/post?u=8982d51e277053fe83cd5a18f&amp;id=d34b8c20be&amp;f_id=00bfbfe4f0" method="post" target="_blank">
+      <input type="email" name="EMAIL" placeholder="Your email address" required>
+      <!-- Honeypot field — hidden from humans, catches bots -->
+      <div style="position:absolute;left:-5000px;" aria-hidden="true"><input type="text" name="b_8982d51e277053fe83cd5a18f_d34b8c20be" tabindex="-1" value=""></div>
       <button type="submit" class="btn btn-gold">Subscribe</button>
     </form>
     <p class="newsletter-fine-print">By subscribing, you agree to receive occasional emails from Corey L. Cook and Cook Media LLC. We respect your privacy and will never sell or share your email address. You can unsubscribe at any time by clicking the unsubscribe link in any email. View our <a href="#" onclick="event.preventDefault(); openLegal('privacy');">Privacy Policy</a>.</p>
