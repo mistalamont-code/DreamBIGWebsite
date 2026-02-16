@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DREAM/BIG — By Corey L. Cook</title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/favicon-512.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --purple-deep: #0F0620;
+    --purple-dark: #1A0A2E;
+    --purple-mid: #2D1B4E;
+    --purple-card: #231340;
+    --purple-surface: #2E1A50;
+    --purple-light: #3D2766;
+    --text: #F5F5F5;
+    --text-muted: #B8A8D0;
+    --accent: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--purple-deep);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0 2rem; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; white-space: nowrap; }
+  .nav-subtitle { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; font-style: italic; letter-spacing: 0.3px; white-space: nowrap; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 1rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { cursor: pointer; }
+  .nav-dropdown > a::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    padding-top: 12px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(15,6,32,0.98); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 0.5rem 0; min-width: 180px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
+    letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 120px 2rem 80px;
+    background: url('images/erie-sunset.jpg') center center / cover no-repeat;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      rgba(15,6,32,0.85) 0%,
+      rgba(26,10,46,0.7) 30%,
+      rgba(45,27,78,0.6) 50%,
+      rgba(26,10,46,0.8) 75%,
+      rgba(15,6,32,1) 100%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px;
+    background: linear-gradient(0deg, var(--purple-deep) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 900px; text-align: center; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block; padding: 6px 20px; border: 1px solid var(--gold);
+    border-radius: 30px; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900; line-height: 1.05; margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-muted);
+    margin-bottom: 0.5rem; font-weight: 300;
+  }
+  .hero-author { font-size: 1rem; color: var(--gold); margin-bottom: 2.5rem; font-weight: 500; }
+  .hero-quote {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text);
+    max-width: 650px; margin: 0 auto 3rem; line-height: 1.8; opacity: 0.9;
+  }
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block; padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; transition: all 0.3s; cursor: pointer; border: none;
+  }
+  .btn-gold { background: var(--gold); color: var(--purple-deep); }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+  .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
+  .nav-links .btn-gold:hover { color: var(--purple-deep); }
+  .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .section-text { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; line-height: 1.8; }
+
+  /* ABOUT */
+  .about { background: var(--purple-deep); }
+  .about-grid {
+    display: flex; flex-direction: column; gap: 2.5rem; align-items: center;
+  }
+  .about-image {
+    width: 100%; max-width: 500px; aspect-ratio: 16/10; background: var(--purple-card); border-radius: 8px;
+    border: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center;
+    justify-content: center; color: var(--text-muted); font-size: 0.9rem;
+    text-align: center; padding: 0; overflow: hidden;
+  }
+  .about-image img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .about-headshot {
+    width: 220px; height: 220px; border-radius: 50%; overflow: hidden;
+    border: 3px solid var(--gold);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.15);
+  }
+  .about-headshot img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .about-content { text-align: center; }
+  .about-content .section-label, .about-content .section-title { text-align: center; }
+  .about-content .divider { margin: 1.5rem auto; }
+  .about-content .section-text { margin: 0 auto 1.5rem; text-align: center; }
+  .about-stats { display: flex; gap: 2rem; margin-top: 2rem; justify-content: center; }
+  .stat { text-align: center; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-weight: 700; }
+  .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* BOOK SECTION */
+  .book-section {
+    background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
+  }
+  .book-cover-display {
+    margin: 3rem auto; text-align: center;
+  }
+  .book-cover-display img {
+    max-width: 100%; width: 600px; border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.1);
+    transition: transform 0.3s;
+  }
+  .book-cover-display img:hover {
+    transform: scale(1.02);
+  }
+  .book-features {
+    display: flex; flex-direction: column; gap: 1.25rem; margin-top: 3rem;
+  }
+  .feature-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px; padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .feature-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+  .feature-letter {
+    font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900;
+    color: var(--gold); flex-shrink: 0; line-height: 1;
+  }
+  .feature-body { flex: 1; }
+  .feature-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+  .feature-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* CALCULATORS */
+  .calculators { background: var(--purple-deep); }
+  .calc-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .calc-tab {
+    padding: 10px 24px; border: 1px solid rgba(201,168,76,0.3); background: transparent;
+    color: var(--text-muted); border-radius: 4px; cursor: pointer; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; font-family: 'Inter', sans-serif;
+  }
+  .calc-tab.active { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .calc-tab:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .calc-panel { display: none; }
+  .calc-panel.active { display: block; }
+  .calc-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px; padding: 2.5rem;
+  }
+  .calc-intro { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; font-style: italic; }
+  .calc-grid {
+    display: flex; flex-direction: column; gap: 2.5rem;
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
+  }
+  .form-group input, .form-group select {
+    width: 100%; padding: 12px 16px; background: var(--purple-surface); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px; color: var(--text); font-size: 1rem; font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+  }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--gold); }
+  .result-box {
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 2rem; text-align: center;
+  }
+  .result-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .result-value { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; }
+  .result-sub { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .result-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-label { color: var(--text-muted); font-size: 0.9rem; }
+  .result-row-value { font-weight: 600; }
+  .compare-box {
+    margin-top: 1.5rem; padding: 1.5rem; background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.2); border-radius: 8px;
+  }
+  .compare-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: #E74C3C; }
+  .compare-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+  .compare-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #E74C3C; font-weight: 700; }
+
+  /* CALCULATOR DISCLAIMER */
+  .calc-disclaimer {
+    margin-top: 2rem; padding: 1.25rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+  }
+  .calc-disclaimer p {
+    color: var(--text-muted); font-size: 0.78rem; line-height: 1.6; opacity: 0.8;
+  }
+  .calc-disclaimer strong { color: var(--text-muted); }
+
+  /* GLOSSARY */
+  .glossary {
+    background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
+  }
+  .glossary-search {
+    width: 100%; max-width: 500px; padding: 14px 20px; background: var(--purple-card);
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; color: var(--text);
+    font-size: 1rem; margin-bottom: 2rem; font-family: 'Inter', sans-serif;
+  }
+  .glossary-search:focus { outline: none; border-color: var(--gold); }
+  .glossary-grid {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .glossary-item {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 8px; padding: 1.5rem; transition: border-color 0.3s;
+  }
+  .glossary-item:hover { border-color: rgba(201,168,76,0.25); }
+  .glossary-term { font-weight: 600; font-size: 1rem; color: var(--gold); margin-bottom: 0.4rem; }
+  .glossary-def { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* SPEAKING */
+  .speaking { background: var(--purple-deep); }
+  .speaking-topics {
+    display: flex; flex-direction: column; gap: 1.25rem; margin: 2.5rem 0;
+  }
+  .topic-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px; padding: 1.5rem; transition: border-color 0.3s;
+  }
+  .topic-card:hover { border-color: rgba(201,168,76,0.3); }
+  .topic-title { font-weight: 600; margin-bottom: 0.5rem; }
+  .topic-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
+    text-align: center;
+  }
+  .newsletter-form { display: flex; gap: 0.75rem; max-width: 500px; margin: 2rem auto 0; flex-wrap: wrap; justify-content: center; }
+  .newsletter-form input {
+    flex: 1; min-width: 250px; padding: 14px 20px; background: var(--purple-card);
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; color: var(--text);
+    font-size: 1rem; font-family: 'Inter', sans-serif;
+  }
+  .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+  .newsletter-fine-print {
+    margin-top: 1rem; font-size: 0.78rem; color: var(--text-muted); opacity: 0.7; line-height: 1.5;
+  }
+  .newsletter-fine-print a { color: var(--gold); text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);
+    background: var(--purple-deep);
+  }
+  footer p { color: var(--text-muted); font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-legal { margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.78rem; color: var(--text-muted); text-decoration: underline; opacity: 0.7; transition: opacity 0.3s; }
+  .footer-legal a:hover { opacity: 1; color: var(--gold); }
+
+  /* LEGAL PAGES (modal overlay) */
+  .legal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(10px);
+    overflow-y: auto; padding: 100px 2rem 3rem;
+  }
+  .legal-overlay.active { display: block; }
+  .legal-content {
+    max-width: 700px; margin: 0 auto;
+  }
+  .legal-content h2 {
+    font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .legal-content h3 {
+    font-size: 1.1rem; font-weight: 600; color: var(--text); margin: 1.5rem 0 0.75rem;
+  }
+  .legal-content p {
+    color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem;
+  }
+  .legal-content ul {
+    color: var(--text-muted); font-size: 0.95rem; line-height: 1.8;
+    margin: 0 0 1rem 1.5rem;
+  }
+  .legal-close {
+    position: fixed; top: 20px; right: 30px; z-index: 210;
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold); width: 40px; height: 40px; border-radius: 50%;
+    font-size: 1.2rem; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: background 0.3s;
+  }
+  .legal-close:hover { background: var(--purple-light); }
+
+  /* DIVIDER */
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute;
+      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
+      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-dropdown > a::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+    .about-stats { flex-wrap: wrap; }
+    .feature-card { flex-direction: column; gap: 0.75rem; }
+    section { padding: 60px 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <span class="nav-logo">DREAM/BIG</span>
+    <span class="nav-subtitle">A Father &amp; Mentor's Guide to Life After High School</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#book">The Book</a></li>
+    <li class="nav-dropdown">
+      <a>Tools</a>
+      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="calculators.html">Calculators</a>
+        <a href="glossary.html">Glossary</a>
+      </div></div>
+    </li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#book" class="btn btn-gold btn-nav">Get the Book</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Now Available &mdash; First Edition 2025</div>
+    <h1>DREAM/BIG</h1>
+    <p class="hero-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</p>
+    <p class="hero-author">By Corey L. Cook</p>
+    <p class="hero-quote">&ldquo;I graduated high school at 20 years old. I&rsquo;d been held back twice. I wasn&rsquo;t supposed to make it. Twenty-one years later, I am the Chief Operating Officer of a major development corporation. Every chapter of this book is built from the decisions that got me here. This is your roadmap.&rdquo;</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn btn-gold">Order Your Copy</a>
+      <a href="calculators.html" class="btn btn-outline">Try the Calculators</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-headshot">
+        <img src="images/headshot.jpg" alt="Corey L. Cook - Author of DREAM/BIG">
+      </div>
+      <div class="about-content">
+        <span class="section-label">About the Author</span>
+        <h2 class="section-title">Corey L. Cook</h2>
+        <div class="divider"></div>
+        <p class="section-text">Corey Cook was born and raised on the lower east side of Erie, Pennsylvania &mdash; a place that helped shape his values, work ethic, and deep belief in community. His career has taken him through corporate America, the nonprofit world, and entrepreneurship, experiences that have given him a real-world understanding of success, setbacks, and everything in between.</p>
+        <p class="section-text" style="margin-top:1rem;">This book started as something deeply personal. Corey wrote it as a graduation gift for his children &mdash; a way to pass down the advice, lessons, and perspective he wished someone had clearly laid out at that stage of life. But as he wrote, it became clear this message was bigger than just his own family.</p>
+        <p class="section-text" style="margin-top:1rem;">The years right after high school can be exciting, confusing, stressful, and full of pressure. They can also be incredibly defining. Corey wanted young people to have an honest, practical roadmap &mdash; one that talks about discovering your path, building strong relationships, valuing education, staying adaptable, understanding money and credit, building a meaningful career, finding fulfillment through your gifts, and remembering the importance of giving back.</p>
+        <p class="section-text" style="margin-top:1rem;">At its heart, this book is about helping the next generation make confident, intentional decisions during one of the most important transitions of their lives.</p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-number">21</div><div class="stat-label">Years of Growth</div></div>
+          <div class="stat"><div class="stat-number">16+</div><div class="stat-label">Years at UPS</div></div>
+          <div class="stat"><div class="stat-number">100s</div><div class="stat-label">Youth Mentored</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book-section" id="book">
+  <div class="container">
+    <span class="section-label">Inside the Book</span>
+    <h2 class="section-title">Small Decisions. Compounded Over Time.<br>Big Impact.</h2>
+    <div class="divider"></div>
+    <p class="section-text">This book isn&rsquo;t theory. It&rsquo;s lived experience. Every chapter comes from real decisions I made&mdash;some good, some I had to learn from the hard way. I wrote it for my kids. But I also wrote it for you&mdash;the young person standing at the edge of adulthood, trying to figure out what comes next. Especially if you&rsquo;re from communities like mine, where the roadmap isn&rsquo;t always clear, where examples of what&rsquo;s possible feel rare, and where one wrong decision can follow you for years.</p>
+
+    <div class="book-cover-display">
+      <img src="images/book-cover.png" alt="DREAM/BIG by Corey L. Cook - Book Cover">
+    </div>
+
+    <div class="book-features">
+      <div class="feature-card">
+        <div class="feature-letter">D</div>
+        <div class="feature-body">
+          <div class="feature-title">Discovering Your Path</div>
+          <div class="feature-desc">Every big journey starts with one small decision. Your path won&rsquo;t look like mine. And that&rsquo;s the point.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">R</div>
+        <div class="feature-body">
+          <div class="feature-title">Relationships &amp; Support Systems</div>
+          <div class="feature-desc">Your network is your net worth. Not just about money&mdash;it&rsquo;s the compound interest of treating people well.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">E</div>
+        <div class="feature-body">
+          <div class="feature-title">Education &amp; Lifelong Learning</div>
+          <div class="feature-desc">Education doesn&rsquo;t stop when you walk across that graduation stage. That&rsquo;s just the beginning.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">A</div>
+        <div class="feature-body">
+          <div class="feature-title">Adaptability &amp; Resilience</div>
+          <div class="feature-desc">How you wait matters as much as what you&rsquo;re waiting for. Stay patient. Stay consistent. Stay ready.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">M</div>
+        <div class="feature-body">
+          <div class="feature-title">Monetary Success</div>
+          <div class="feature-desc">That $600 credit card taught me a lesson that cost me thousands. I&rsquo;m trying to save you from learning it the same way.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">B</div>
+        <div class="feature-body">
+          <div class="feature-title">Building a Career</div>
+          <div class="feature-desc">I stopped just working a job and decided: I&rsquo;m going to learn everything I can. That&rsquo;s when it became a career.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">I</div>
+        <div class="feature-body">
+          <div class="feature-title">Inner Fulfillment Through Sharing</div>
+          <div class="feature-desc">The fulfillment I got from teaching music far exceeded the fulfillment I got from playing it. That changed everything.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-letter">G</div>
+        <div class="feature-body">
+          <div class="feature-title">Giving Back</div>
+          <div class="feature-desc">Your success is incomplete if you&rsquo;re the only one who benefits from it. Real success lifts others as you rise.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="#" class="btn btn-gold">Order DREAM/BIG Now</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="container" style="max-width:700px;">
+    <span class="section-label">Stay Connected</span>
+    <h2 class="section-title">Small Steps. Big Updates.</h2>
+    <div class="divider" style="margin:1.5rem auto;"></div>
+    <p class="section-text" style="margin:0 auto; text-align:center;">I&rsquo;m still on this journey, and I want to bring you along. Sign up for the newsletter and you&rsquo;ll get updates on new content, speaking events, financial tips, and stories from the DREAM/BIG community. No spam. No fluff. Just real talk delivered to your inbox.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--gold);font-size:1.1rem;padding:1rem;\'>You\'re in. Welcome to the DREAM/BIG community.</p>';">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit" class="btn btn-gold">Subscribe</button>
+    </form>
+    <p class="newsletter-fine-print">By subscribing, you agree to receive occasional emails from Corey L. Cook and Cook Media LLC. We respect your privacy and will never sell or share your email address. You can unsubscribe at any time by clicking the unsubscribe link in any email. View our <a href="#" onclick="event.preventDefault(); openLegal('privacy');">Privacy Policy</a>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
+  <p>&copy; 2025 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
+  <p style="margin-top:0.5rem;"><a href="mailto:corey@cook-media.com">Contact</a></p>
+  <div class="footer-legal">
+    <a href="#" onclick="event.preventDefault(); openLegal('privacy');">Privacy Policy</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('terms');">Terms of Use</a>
+  </div>
+</footer>
+
+<!-- PRIVACY POLICY OVERLAY -->
+<div class="legal-overlay" id="legal-privacy">
+  <button class="legal-close" onclick="closeLegal('privacy')">&times;</button>
+  <div class="legal-content">
+    <h2>Privacy Policy</h2>
+    <p><em>Last updated: 2025</em></p>
+
+    <h3>Who We Are</h3>
+    <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit dreambigbook.com.</p>
+
+    <h3>What We Collect</h3>
+    <p>We collect only the information you voluntarily provide:</p>
+    <ul>
+      <li><strong>Email address</strong> &mdash; when you subscribe to our newsletter</li>
+      <li><strong>Name and contact information</strong> &mdash; when you submit a speaking engagement inquiry</li>
+    </ul>
+    <p>The financial calculators on this site run entirely in your browser. We do not collect, store, or transmit any data you enter into the calculators.</p>
+
+    <h3>How We Use Your Information</h3>
+    <p>Your email address is used solely to send you newsletter updates about new content, speaking events, financial tips, and DREAM/BIG community news. We will never sell, rent, or share your email address with third parties for marketing purposes.</p>
+
+    <h3>Email Communications</h3>
+    <p>By subscribing to our newsletter, you consent to receiving periodic emails. Every email will include an option to unsubscribe. We comply with the CAN-SPAM Act and all applicable email marketing regulations. Our physical mailing address is:</p>
+    <p>Cook Media LLC<br>Erie, PA 16501</p>
+
+    <h3>Cookies &amp; Tracking</h3>
+    <p>This website does not use cookies or tracking technologies by default. If analytics or third-party services are added in the future, this policy will be updated accordingly.</p>
+
+    <h3>Data Security</h3>
+    <p>We take reasonable measures to protect your personal information. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
+
+    <h3>Your Rights</h3>
+    <p>You may request access to, correction of, or deletion of your personal information at any time by contacting us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>. If you are a California resident, you may have additional rights under the CCPA.</p>
+
+    <h3>Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+
+    <h3>Contact</h3>
+    <p>Questions about this policy? Email us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<!-- TERMS OF USE OVERLAY -->
+<div class="legal-overlay" id="legal-terms">
+  <button class="legal-close" onclick="closeLegal('terms')">&times;</button>
+  <div class="legal-content">
+    <h2>Terms of Use</h2>
+    <p><em>Last updated: 2025</em></p>
+
+    <h3>Acceptance of Terms</h3>
+    <p>By accessing and using this website (dreambigbook.com), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use this site.</p>
+
+    <h3>Educational Purpose</h3>
+    <p>The content on this website, including the book excerpts, financial calculators, and glossary, is provided for general educational and informational purposes only. Nothing on this site constitutes professional financial, investment, tax, or legal advice.</p>
+
+    <h3>Financial Calculator Disclaimer</h3>
+    <p>The financial calculators provided on this site are tools for illustration and education. Results are estimates based on the inputs you provide and standard mathematical formulas. They do not account for all factors that affect actual loan terms or investment returns, including but not limited to: fees, taxes, insurance, market volatility, or individual lender requirements. Always consult a licensed financial professional before making financial decisions.</p>
+
+    <h3>Intellectual Property</h3>
+    <p>All content on this website &mdash; including text, graphics, logos, images, and the DREAM/BIG name and framework &mdash; is the property of Corey L. Cook and Cook Media LLC and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
+
+    <h3>Third-Party Links</h3>
+    <p>This website may contain links to external websites. We are not responsible for the content, privacy practices, or availability of those sites.</p>
+
+    <h3>Limitation of Liability</h3>
+    <p>Corey L. Cook and Cook Media LLC shall not be liable for any damages arising from the use of this website, including but not limited to financial losses resulting from reliance on calculator results or other content provided on the site.</p>
+
+    <h3>Governing Law</h3>
+    <p>These terms are governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, without regard to its conflict of law provisions.</p>
+
+    <h3>Changes to These Terms</h3>
+    <p>We reserve the right to update these Terms of Use at any time. Continued use of the site after changes are posted constitutes acceptance of the revised terms.</p>
+
+    <h3>Contact</h3>
+    <p>Questions about these terms? Email us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<script>
+// LEGAL OVERLAY FUNCTIONS
+function openLegal(type) {
+  document.getElementById('legal-' + type).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLegal(type) {
+  document.getElementById('legal-' + type).classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.legal-overlay.active').forEach(el => {
+      el.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+});
+
+</script>
+</body>
+</html>

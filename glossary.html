@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Literacy Glossary — DREAM/BIG by Corey L. Cook</title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/favicon-512.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --purple-deep: #0F0620;
+    --purple-dark: #1A0A2E;
+    --purple-mid: #2D1B4E;
+    --purple-card: #231340;
+    --purple-surface: #2E1A50;
+    --purple-light: #3D2766;
+    --text: #F5F5F5;
+    --text-muted: #B8A8D0;
+    --accent: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--purple-deep);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0 2rem; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; white-space: nowrap; }
+  .nav-subtitle { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; font-style: italic; letter-spacing: 0.3px; white-space: nowrap; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 1rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { cursor: pointer; }
+  .nav-dropdown > a::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    padding-top: 12px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(15,6,32,0.98); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 0.5rem 0; min-width: 180px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
+    letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold) !important; }
+
+  .btn {
+    display: inline-block; padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; transition: all 0.3s; cursor: pointer; border: none;
+  }
+  .btn-gold { background: var(--gold); color: var(--purple-deep); }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
+  .nav-links .btn-gold:hover { color: var(--purple-deep); }
+  .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .section-text { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; line-height: 1.8; }
+
+  /* DIVIDER */
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+
+  /* GLOSSARY */
+  .glossary {
+    padding-top: 140px;
+    background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
+    min-height: 100vh;
+  }
+  .glossary-search {
+    width: 100%; max-width: 500px; padding: 14px 20px; background: var(--purple-card);
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; color: var(--text);
+    font-size: 1rem; margin-bottom: 2rem; font-family: 'Inter', sans-serif;
+  }
+  .glossary-search:focus { outline: none; border-color: var(--gold); }
+  .glossary-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .glossary-item {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 8px; padding: 1.5rem; transition: border-color 0.3s;
+  }
+  .glossary-item:hover { border-color: rgba(201,168,76,0.25); }
+  .glossary-term { font-weight: 600; font-size: 1rem; color: var(--gold); margin-bottom: 0.4rem; }
+  .glossary-def { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--gold); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    margin-top: 3rem; transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);
+    background: var(--purple-deep);
+  }
+  footer p { color: var(--text-muted); font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute;
+      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
+      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-dropdown > a::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+    .glossary-grid { grid-template-columns: 1fr; }
+    section { padding: 60px 1.25rem; }
+    .glossary { padding-top: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-logo">DREAM/BIG</span>
+    <span class="nav-subtitle">A Father &amp; Mentor's Guide to Life After High School</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#book">The Book</a></li>
+    <li class="nav-dropdown">
+      <a style="color:var(--gold);">Tools</a>
+      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="calculators.html">Calculators</a>
+        <a href="glossary.html" style="color:var(--gold);">Glossary</a>
+      </div></div>
+    </li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#book" class="btn btn-gold btn-nav">Get the Book</a></li>
+  </ul>
+</nav>
+
+<!-- GLOSSARY -->
+<section class="glossary">
+  <div class="container">
+    <span class="section-label">Financial Literacy Glossary</span>
+    <h2 class="section-title">Know the Language. Know the Game.</h2>
+    <div class="divider"></div>
+    <p class="section-text" style="margin-bottom:2rem;">These topics are often not taught in regular high school classes, but they can have a huge impact on your quality of life. Here are the terms you need to know&mdash;explained in plain language, no jargon.</p>
+    <input type="text" class="glossary-search" placeholder="Search terms..." oninput="filterGlossary(this.value)">
+    <div class="glossary-grid" id="glossary-grid"></div>
+    <a href="index.html" class="back-link">&larr; Back to DREAM/BIG</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
+  <p>&copy; 2025 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
+</footer>
+
+<script>
+const glossaryTerms = [
+  { term: 'APR (Annual Percentage Rate)', def: 'The yearly cost of borrowing money, including fees and interest. The higher the APR, the more you pay. This is the number that really matters when comparing loans.' },
+  { term: 'Asset', def: 'Something you own that has value\u2014a house, a car, money in the bank, investments. Building assets is how you build wealth over time.' },
+  { term: 'Amortization', def: 'How your loan payments are split between interest and principal over time. Early payments are mostly interest. Later payments go toward what you actually owe. Knowing this changes how you think about paying extra.' },
+  { term: 'Budget', def: 'A plan for your money. What comes in, what goes out, and where it goes. If you don\'t tell your money where to go, it disappears. Simple as that.' },
+  { term: 'Co-Signing', def: 'Putting your name on someone else\'s loan. If they stop paying, you owe every penny. It can wreck your credit and your relationship. Think long and hard before you sign\u2014or ask someone else to sign\u2014for a debt that isn\'t yours.' },
+  { term: 'Compound Interest', def: 'Interest that earns interest. When you invest, your money grows on top of its own growth. Start early and it works for you. Start late and you\'re chasing what you missed. This is the most powerful force in personal finance.' },
+  { term: 'Cost of Borrowing', def: 'Money costs money. A $25,000 car at 7% interest for 6 years costs you over $30,000 by the time you\'re done. That extra $5,000+ is the real price of not paying cash. Always ask yourself: what is this really going to cost me?' },
+  { term: 'Credit Score', def: 'A number (usually 300\u2013850) that tells lenders how responsible you are with money. It affects your interest rates, housing options, and sometimes even job opportunities. Protect it.' },
+  { term: 'Credit Report', def: 'Your financial report card. It lists every account, every payment, and every mistake. You can check it for free once a year. Do it.' },
+  { term: 'Credit Utilization', def: 'How much of your available credit you\'re using. If you have a $1,000 limit, try to keep your balance under $300. Lenders like to see you can borrow without maxing out.' },
+  { term: 'Debt-to-Income Ratio', def: 'How much of your monthly income goes to debt payments. Lenders use this to decide if you can afford more borrowing. Lower is better.' },
+  { term: 'Default', def: 'When you stop paying a debt entirely. It wrecks your credit and follows you for years. I defaulted on a $600 credit card. It cost me thousands in higher interest rates for years after.' },
+  { term: 'Depreciation', def: 'How fast something loses value. A brand-new car can lose 20% of its value the moment you drive it off the lot. In three years, it could be worth half what you paid. Understanding this changes how you think about what\'s worth buying new.' },
+  { term: 'Down Payment', def: 'The upfront cash you put toward a big purchase like a car or house. The more you put down, the less you borrow, and the less interest you pay over time.' },
+  { term: 'Emergency Fund', def: 'Money set aside for when life happens. Tires blow. Heaters break. Having $1,000 set aside keeps a bad day from becoming a financial disaster.' },
+  { term: 'Equity', def: 'The portion of something you actually own. If your house is worth $200,000 and you owe $150,000, you have $50,000 in equity. Equity is wealth.' },
+  { term: 'FICO Score', def: 'The most commonly used credit score. Ranges from 300 to 850. Above 700 is good. Above 750 is great. Below 600 and doors start closing.' },
+  { term: 'Fixed Rate', def: 'An interest rate that stays the same for the life of the loan. No surprises. You know exactly what you\'re paying every month.' },
+  { term: 'Front-Loaded Interest', def: 'The way most loans are structured so that your early payments go mostly toward interest\u2014not what you actually owe. On a 30-year mortgage, you could pay for 5 years and barely touch the principal. The bank gets paid first. Know this before you sign.' },
+  { term: 'Grace Period', def: 'The window of time\u2014usually 21 to 25 days\u2014where you can pay your credit card balance in full without being charged interest. If you pay within the grace period, borrowing that money was free. Miss it, and interest kicks in on everything.' },
+  { term: 'Interest', def: 'The cost of borrowing money. It\'s what the lender charges you for using their money. With good credit, it\'s manageable. With bad credit, it\'s expensive. Really expensive.' },
+  { term: 'Liability', def: 'Something you owe. Credit card debt, car loans, student loans\u2014these are liabilities. The goal is to have more assets than liabilities.' },
+  { term: 'Minimum Payment Trap', def: 'Credit card companies let you pay a small minimum each month\u2014usually $25 or 2% of your balance. Sounds easy, right? That\'s the trap. A $3,000 balance at 22% interest, paying only the minimum, takes over 17 years to pay off. And you\'ll pay more in interest than the original debt.' },
+  { term: 'Mortgage', def: 'A loan specifically for buying a home. Usually 15 or 30 years. The interest rate you get depends heavily on your credit score.' },
+  { term: 'Needs vs. Wants', def: 'Rent, food, transportation\u2014those are needs. The latest sneakers, a new gaming setup, eating out every day\u2014those are wants. The line between them gets blurry fast, and that\'s where money disappears. Get honest about the difference early. It\'s one of the most important financial habits you can build.' },
+  { term: 'Net Worth', def: 'What you own minus what you owe. That\'s your real financial picture. It\'s not about how much you make\u2014it\'s about how much you keep and grow.' },
+  { term: 'Predatory Lending', def: 'Payday loans, buy-here-pay-here car lots, rent-to-own stores\u2014these target people who feel like they have no other options. The interest rates can be 300% or higher. They\'re designed to keep you in a cycle of debt. If a deal sounds too easy, it\'s probably too expensive.' },
+  { term: 'Principal', def: 'The original amount you borrowed, not counting interest. When you make extra payments, you want them going toward the principal.' },
+  { term: 'Retirement Account (401k/IRA)', def: 'Accounts designed for long-term savings with tax benefits. A 401k comes through your employer. An IRA you open yourself. Start contributing as early as you can\u2014compound interest does the heavy lifting.' },
+  { term: 'Secured Credit Card', def: 'A credit card where you put down a deposit that becomes your limit. It\'s how I rebuilt my credit after that $600 default. It works. It just takes time and discipline.' },
+  { term: 'Simple Interest', def: 'Interest calculated only on the original amount borrowed, not on accumulated interest. Less common than compound interest, but better for the borrower.' },
+  { term: 'Variable Rate', def: 'An interest rate that can change over time based on market conditions. Your payment could go up or down. Predictability matters\u2014be careful with these.' },
+];
+
+function renderGlossary(filter = '') {
+  const grid = document.getElementById('glossary-grid');
+  const filtered = glossaryTerms.filter(t =>
+    t.term.toLowerCase().includes(filter.toLowerCase()) ||
+    t.def.toLowerCase().includes(filter.toLowerCase())
+  );
+  grid.innerHTML = filtered.map(t =>
+    `<div class="glossary-item"><div class="glossary-term">${t.term}</div><div class="glossary-def">${t.def}</div></div>`
+  ).join('');
+}
+function filterGlossary(val) { renderGlossary(val); }
+renderGlossary();
+</script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Calculators — DREAM/BIG by Corey L. Cook</title>
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/favicon-512.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --purple-deep: #0F0620;
+    --purple-dark: #1A0A2E;
+    --purple-mid: #2D1B4E;
+    --purple-card: #231340;
+    --purple-surface: #2E1A50;
+    --purple-light: #3D2766;
+    --text: #F5F5F5;
+    --text-muted: #B8A8D0;
+    --accent: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--purple-deep);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0 2rem; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; white-space: nowrap; }
+  .nav-subtitle { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; font-style: italic; letter-spacing: 0.3px; white-space: nowrap; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 1rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { cursor: pointer; }
+  .nav-dropdown > a::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    padding-top: 12px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(15,6,32,0.98); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 0.5rem 0; min-width: 180px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
+    letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold) !important; }
+
+  .btn {
+    display: inline-block; padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; transition: all 0.3s; cursor: pointer; border: none;
+  }
+  .btn-gold { background: var(--gold); color: var(--purple-deep); }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
+  .nav-links .btn-gold:hover { color: var(--purple-deep); }
+  .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .section-text { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; line-height: 1.8; }
+
+  /* DIVIDER */
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+
+  /* CALCULATORS */
+  .calculators {
+    padding-top: 140px;
+    background: var(--purple-deep);
+    min-height: 100vh;
+  }
+  .calc-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .calc-tab {
+    padding: 10px 24px; border: 1px solid rgba(201,168,76,0.3); background: transparent;
+    color: var(--text-muted); border-radius: 4px; cursor: pointer; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; font-family: 'Inter', sans-serif;
+  }
+  .calc-tab.active { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .calc-tab:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .calc-panel { display: none; }
+  .calc-panel.active { display: block; }
+  .calc-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px; padding: 2.5rem;
+  }
+  .calc-intro { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; font-style: italic; }
+  .calc-grid { display: flex; flex-direction: column; gap: 2.5rem; }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
+  }
+  .form-group input, .form-group select {
+    width: 100%; padding: 12px 16px; background: var(--purple-surface); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px; color: var(--text); font-size: 1rem; font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+  }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--gold); }
+  .result-box {
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 2rem; text-align: center;
+  }
+  .result-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .result-value { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; }
+  .result-sub { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .result-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-label { color: var(--text-muted); font-size: 0.9rem; }
+  .result-row-value { font-weight: 600; }
+  .compare-box {
+    margin-top: 1.5rem; padding: 1.5rem; background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.2); border-radius: 8px;
+  }
+  .compare-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: #E74C3C; }
+  .compare-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+  .compare-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #E74C3C; font-weight: 700; }
+
+  .calc-disclaimer {
+    margin-top: 2rem; padding: 1.25rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+  }
+  .calc-disclaimer p { color: var(--text-muted); font-size: 0.78rem; line-height: 1.6; opacity: 0.8; }
+  .calc-disclaimer strong { color: var(--text-muted); }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--gold); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    margin-top: 3rem; transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);
+    background: var(--purple-deep);
+  }
+  footer p { color: var(--text-muted); font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute;
+      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
+      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-dropdown > a::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+    section { padding: 60px 1.25rem; }
+    .calculators { padding-top: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-logo">DREAM/BIG</span>
+    <span class="nav-subtitle">A Father &amp; Mentor's Guide to Life After High School</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#book">The Book</a></li>
+    <li class="nav-dropdown">
+      <a style="color:var(--gold);">Tools</a>
+      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="calculators.html" style="color:var(--gold);">Calculators</a>
+        <a href="glossary.html">Glossary</a>
+      </div></div>
+    </li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#book" class="btn btn-gold btn-nav">Get the Book</a></li>
+  </ul>
+</nav>
+
+<!-- CALCULATORS -->
+<section class="calculators">
+  <div class="container">
+    <span class="section-label">Companion Tools</span>
+    <h2 class="section-title">See the Numbers for Yourself</h2>
+    <div class="divider"></div>
+    <p class="section-text" style="margin-bottom:2.5rem;">In the book, I break down exactly what bad credit costs you&mdash;and what good financial decisions can build over time. These calculators let you plug in your own numbers and see it for yourself. Because the decisions you make about money right now will echo for decades. Make them count.</p>
+
+    <div class="calc-tabs">
+      <button class="calc-tab active" onclick="switchCalc('auto')">Auto Loan</button>
+      <button class="calc-tab" onclick="switchCalc('home')">Home Loan</button>
+      <button class="calc-tab" onclick="switchCalc('retirement')">Retirement</button>
+    </div>
+
+    <!-- AUTO LOAN -->
+    <div class="calc-panel active" id="calc-auto">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;When I went to buy my first real car&mdash;a 1998 Buick Park Avenue, $6,500&mdash;the interest rate was 13%. I remember sitting in that dealership, signing those papers, and doing the math in my head. I was paying so much money in interest.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group"><label>Vehicle Price ($)</label><input type="number" id="auto-price" value="25000" oninput="calcAuto()"></div>
+            <div class="form-group"><label>Down Payment ($)</label><input type="number" id="auto-down" value="2000" oninput="calcAuto()"></div>
+            <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="auto-rate" value="6" step="0.1" oninput="calcAuto()"></div>
+            <div class="form-group"><label>Loan Term (Years)</label>
+              <select id="auto-term" onchange="calcAuto()">
+                <option value="3">3 Years</option><option value="4">4 Years</option>
+                <option value="5" selected>5 Years</option><option value="6">6 Years</option><option value="7">7 Years</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly">$445</div></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$23,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$3,679</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$26,679</span></div>
+            <div class="compare-box">
+              <div class="compare-title">What Bad Credit Would Cost You</div>
+              <div class="compare-text">At 13% (bad credit), the same car costs:</div>
+              <div class="compare-amount" id="auto-bad-total">$31,548</div>
+              <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="auto-bad-diff">$4,869</strong> more&mdash;just because of bad credit. Protect your credit.</div>
+            </div>
+          </div>
+        </div>
+        <div class="amort-chart-wrapper" style="margin-top:2rem;">
+          <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem; color:var(--gold);">Where Your Money Goes Each Month</div>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">This is amortization. Early in your loan, most of your payment goes to interest&mdash;not the car. You&rsquo;re paying the bank before you&rsquo;re paying yourself.</p>
+          <div class="chart-legend" style="display:flex; gap:1.5rem; margin-bottom:0.75rem; font-size:0.8rem;">
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:#E74C3C;border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Interest</span></span>
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Principal</span></span>
+          </div>
+          <canvas id="auto-amort-chart" width="740" height="300" style="width:100%;height:300px;border-radius:8px;background:var(--purple-surface);"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOME LOAN -->
+    <div class="calc-panel" id="calc-home">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;Good credit at 5%: your total cost is $289,800. Bad credit at 8.5%: your total cost is $415,080. That&rsquo;s $125,280 more over the life of the loan. Read that number again.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group"><label>Home Price ($)</label><input type="number" id="home-price" value="200000" oninput="calcHome()"></div>
+            <div class="form-group"><label>Down Payment ($)</label><input type="number" id="home-down" value="20000" oninput="calcHome()"></div>
+            <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="home-rate" value="6.5" step="0.1" oninput="calcHome()"></div>
+            <div class="form-group"><label>Loan Term (Years)</label>
+              <select id="home-term" onchange="calcHome()">
+                <option value="15">15 Years</option><option value="20">20 Years</option><option value="30" selected>30 Years</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly">$1,137</div></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$180,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$229,468</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Home</span><span class="result-row-value" id="home-total">$409,468</span></div>
+            <div class="compare-box">
+              <div class="compare-title">What Bad Credit Would Cost You</div>
+              <div class="compare-text">At 8.5% (bad credit), the same home costs:</div>
+              <div class="compare-amount" id="home-bad-total">$511,380</div>
+              <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="home-bad-diff">$101,912</strong> more. That&rsquo;s not a small number. That&rsquo;s life-changing money.</div>
+            </div>
+          </div>
+        </div>
+        <div class="amort-chart-wrapper" style="margin-top:2rem;">
+          <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem; color:var(--gold);">Where Your Money Goes Each Month</div>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">On a 30-year mortgage, you can pay more in interest than the house itself. Look at how much of your early payments go straight to the bank. This is why credit score matters so much.</p>
+          <div class="chart-legend" style="display:flex; gap:1.5rem; margin-bottom:0.75rem; font-size:0.8rem;">
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:#E74C3C;border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Interest</span></span>
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Principal</span></span>
+          </div>
+          <canvas id="home-amort-chart" width="740" height="300" style="width:100%;height:300px;border-radius:8px;background:var(--purple-surface);"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- RETIREMENT -->
+    <div class="calc-panel" id="calc-retirement">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;The power of compound interest is real. Money you invest in your 20s is worth exponentially more than money you invest in your 40s. Small decisions. Compounded over time. Big impact.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group"><label>Your Current Age</label><input type="number" id="ret-age" value="22" oninput="calcRetirement()"></div>
+            <div class="form-group"><label>Retirement Age</label><input type="number" id="ret-retire" value="65" oninput="calcRetirement()"></div>
+            <div class="form-group"><label>Monthly Contribution ($)</label><input type="number" id="ret-monthly" value="200" oninput="calcRetirement()"></div>
+            <div class="form-group"><label>Expected Annual Return (%)</label><input type="number" id="ret-return" value="7" step="0.5" oninput="calcRetirement()"></div>
+            <div class="form-group"><label>Current Savings ($)</label><input type="number" id="ret-current" value="0" oninput="calcRetirement()"></div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Estimated Retirement Savings</div><div class="result-value" id="ret-total">$578,326</div></div>
+            <div class="result-row"><span class="result-row-label">Years of Growth</span><span class="result-row-value" id="ret-years">43 years</span></div>
+            <div class="result-row"><span class="result-row-label">Total You Contribute</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
+            <div class="result-row"><span class="result-row-label">Growth From Interest</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
+            <div class="result-row"><span class="result-row-label">Interest as % of Total</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">82%</span></div>
+            <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">What Waiting 10 Years Costs You</div>
+              <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
+              <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$264,012</div>
+              <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$314,314</strong> less. Time is the most powerful ingredient. Start now.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCIAL CALCULATOR DISCLAIMER -->
+    <div class="calc-disclaimer">
+      <p><strong>Disclaimer:</strong> These calculators are provided for educational and illustrative purposes only and do not constitute financial, investment, tax, or legal advice. All results are estimates based on the information you enter and standard mathematical formulas. Actual loan terms, interest rates, and investment returns will vary based on your creditworthiness, lender, market conditions, and other factors. Consult a qualified financial advisor, tax professional, or licensed lender before making any financial decisions. Corey L. Cook and Cook Media LLC are not responsible for any financial decisions made based on these calculators.</p>
+    </div>
+
+    <a href="index.html" class="back-link">&larr; Back to DREAM/BIG</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
+  <p>&copy; 2025 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
+</footer>
+
+<script>
+// AMORTIZATION CHART
+function drawAmortChart(canvasId, principal, annualRate, years) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const cssW = canvas.clientWidth || 740;
+  const cssH = 300;
+  // Skip drawing if canvas is in a hidden panel (will redraw on tab switch)
+  if (canvas.clientWidth < 10) return;
+  canvas.width = cssW * dpr;
+  canvas.height = cssH * dpr;
+  canvas.style.height = cssH + 'px';
+  ctx.scale(dpr, dpr);
+
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--purple-surface').trim() || '#2E1A50';
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, cssW, cssH);
+
+  if (principal <= 0 || annualRate <= 0 || years <= 0) return;
+
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+  let balance = principal;
+  const yearData = [];
+  for (let yr = 1; yr <= years; yr++) {
+    let yearInterest = 0, yearPrincipal = 0;
+    for (let m = 0; m < 12; m++) {
+      if (balance <= 0) break;
+      const intPmt = balance * r;
+      const prinPmt = Math.min(monthly - intPmt, balance);
+      yearInterest += intPmt;
+      yearPrincipal += prinPmt;
+      balance -= prinPmt;
+    }
+    yearData.push({ year: yr, interest: yearInterest, principal: yearPrincipal, total: yearInterest + yearPrincipal });
+  }
+
+  const pad = { top: 50, right: 20, bottom: 45, left: 75 };
+  const chartW = cssW - pad.left - pad.right;
+  const chartH = cssH - pad.top - pad.bottom;
+  const maxVal = Math.max(...yearData.map(d => d.total)) * 1.1;
+  const barW = Math.max(4, Math.min(30, (chartW / yearData.length) - (yearData.length > 15 ? 2 : 4)));
+  const gap = (chartW - barW * yearData.length) / (yearData.length + 1);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  const gridLines = 4;
+  ctx.font = '12px Inter, sans-serif';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + chartH - (chartH * i / gridLines);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(cssW - pad.right, y); ctx.stroke();
+    const val = Math.round(maxVal * i / gridLines);
+    const label = val >= 1000 ? '$' + (val / 1000).toFixed(val >= 10000 ? 0 : 1) + 'k' : '$' + val.toLocaleString();
+    ctx.fillText(label, pad.left - 8, y + 4);
+  }
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.font = '11px Inter, sans-serif';
+  const labelEvery = years <= 7 ? 1 : years <= 15 ? 2 : 5;
+  yearData.forEach((d, i) => {
+    const x = pad.left + gap + i * (barW + gap) + barW / 2;
+    if (d.year % labelEvery === 0 || d.year === 1) ctx.fillText('Yr ' + d.year, x, cssH - pad.bottom + 18);
+  });
+
+  ctx.save();
+  ctx.translate(14, pad.top + chartH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.font = '11px Inter, sans-serif';
+  ctx.fillText('Annual Payment', 0, 0);
+  ctx.restore();
+  ctx.fillStyle = '#B8A8D0';
+  ctx.textAlign = 'center';
+  ctx.font = '11px Inter, sans-serif';
+  ctx.fillText('Loan Year', pad.left + chartW / 2, cssH - 5);
+
+  yearData.forEach((d, i) => {
+    const x = pad.left + gap + i * (barW + gap);
+    const intH = (d.interest / maxVal) * chartH;
+    const prinH = (d.principal / maxVal) * chartH;
+    const baseY = pad.top + chartH;
+    const rad = Math.min(3, barW / 3);
+
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath(); roundRect(ctx, x, baseY - prinH, barW, prinH, { bl: rad, br: rad, tl: 0, tr: 0 }); ctx.fill();
+    ctx.fillStyle = '#E74C3C';
+    ctx.beginPath(); roundRect(ctx, x, baseY - prinH - intH, barW, intH, { bl: 0, br: 0, tl: rad, tr: rad }); ctx.fill();
+  });
+
+  const crossIdx = yearData.findIndex(d => d.principal >= d.interest);
+  if (crossIdx > 0) {
+    const x = pad.left + gap + crossIdx * (barW + gap) + barW / 2;
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, pad.top + chartH); ctx.stroke();
+    ctx.setLineDash([]);
+    // Small crossover label at top of dashed line
+    ctx.fillStyle = '#1A0A2E';
+    const labelW = 64;
+    const labelH = 16;
+    roundRect(ctx, x - labelW / 2, pad.top - 18, labelW, labelH, { tl: 3, tr: 3, bl: 3, br: 3 });
+    ctx.fill();
+    ctx.fillStyle = '#B8A8D0';
+    ctx.font = '9px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Yr ' + yearData[crossIdx].year + ' crossover', x, pad.top - 5);
+  }
+
+  if (yearData.length > 0) {
+    const d = yearData[0];
+    const pct = Math.round((d.interest / d.total) * 100);
+    // Small callout pinned to top-right, above the bars
+    const calloutW = Math.min(170, chartW * 0.35);
+    const calloutH = 36;
+    const calloutX = cssW - pad.right - calloutW - 6;
+    const calloutY = 4;
+    ctx.fillStyle = '#1A0A2E';
+    roundRect(ctx, calloutX, calloutY, calloutW, calloutH, { tl: 4, tr: 4, bl: 4, br: 4 });
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(231,76,60,0.5)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, calloutX, calloutY, calloutW, calloutH, { tl: 4, tr: 4, bl: 4, br: 4 });
+    ctx.stroke();
+    ctx.fillStyle = '#E74C3C';
+    ctx.font = 'bold 10px Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Yr 1: ' + pct + '% to interest', calloutX + 8, calloutY + 15);
+    ctx.fillStyle = '#B8A8D0';
+    ctx.font = '9px Inter, sans-serif';
+    ctx.fillText('$' + Math.round(d.interest).toLocaleString() + ' int / $' + Math.round(d.principal).toLocaleString() + ' prin', calloutX + 8, calloutY + 28);
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  if (typeof r === 'number') r = { tl: r, tr: r, bl: r, br: r };
+  ctx.beginPath();
+  ctx.moveTo(x + r.tl, y);
+  ctx.lineTo(x + w - r.tr, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+  ctx.lineTo(x + w, y + h - r.br);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+  ctx.lineTo(x + r.bl, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+  ctx.lineTo(x, y + r.tl);
+  ctx.quadraticCurveTo(x, y, x + r.tl, y);
+  ctx.closePath();
+}
+
+// CALCULATOR FUNCTIONS
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+function calcLoan(principal, annualRate, years) {
+  if (annualRate === 0) return { monthly: principal / (years * 12), totalInterest: 0, total: principal };
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  const total = monthly * n;
+  return { monthly, totalInterest: total - principal, total };
+}
+
+function calcAuto() {
+  const price = +document.getElementById('auto-price').value || 0;
+  const down = +document.getElementById('auto-down').value || 0;
+  const rate = +document.getElementById('auto-rate').value || 0;
+  const term = +document.getElementById('auto-term').value || 5;
+  const loan = price - down;
+  const good = calcLoan(loan, rate, term);
+  const bad = calcLoan(loan, 13, term);
+  document.getElementById('auto-monthly').textContent = fmt(good.monthly);
+  document.getElementById('auto-loan').textContent = fmt(loan);
+  document.getElementById('auto-interest').textContent = fmt(good.totalInterest);
+  document.getElementById('auto-total').textContent = fmt(good.total + down);
+  document.getElementById('auto-bad-total').textContent = fmt(bad.total + down);
+  document.getElementById('auto-bad-diff').textContent = fmt(bad.total - good.total);
+  drawAmortChart('auto-amort-chart', loan, rate, term);
+}
+
+function calcHome() {
+  const price = +document.getElementById('home-price').value || 0;
+  const down = +document.getElementById('home-down').value || 0;
+  const rate = +document.getElementById('home-rate').value || 0;
+  const term = +document.getElementById('home-term').value || 30;
+  const loan = price - down;
+  const good = calcLoan(loan, rate, term);
+  const bad = calcLoan(loan, rate + 2.5, term);
+  document.getElementById('home-monthly').textContent = fmt(good.monthly);
+  document.getElementById('home-loan').textContent = fmt(loan);
+  document.getElementById('home-interest').textContent = fmt(good.totalInterest);
+  document.getElementById('home-total').textContent = fmt(good.total + down);
+  document.getElementById('home-bad-total').textContent = fmt(bad.total + down);
+  document.getElementById('home-bad-diff').textContent = fmt((bad.total + down) - (good.total + down));
+  drawAmortChart('home-amort-chart', loan, rate, term);
+}
+
+function calcRetirement() {
+  const age = +document.getElementById('ret-age').value || 22;
+  const retire = +document.getElementById('ret-retire').value || 65;
+  const monthly = +document.getElementById('ret-monthly').value || 0;
+  const ret = +document.getElementById('ret-return').value || 7;
+  const current = +document.getElementById('ret-current').value || 0;
+  const years = Math.max(retire - age, 0);
+  const r = ret / 100 / 12;
+  const n = years * 12;
+  let total = current * Math.pow(1 + r, n);
+  if (r > 0) total += monthly * ((Math.pow(1 + r, n) - 1) / r);
+  else total += monthly * n;
+  const contributed = current + (monthly * n);
+  const growth = total - contributed;
+  const lateYears = Math.max(years - 10, 0);
+  const lateN = lateYears * 12;
+  let lateTotal = current * Math.pow(1 + r, lateN);
+  if (r > 0) lateTotal += monthly * ((Math.pow(1 + r, lateN) - 1) / r);
+  else lateTotal += monthly * lateN;
+  document.getElementById('ret-total').textContent = fmt(total);
+  document.getElementById('ret-years').textContent = years + ' years';
+  document.getElementById('ret-contributed').textContent = fmt(contributed);
+  document.getElementById('ret-growth').textContent = fmt(growth);
+  document.getElementById('ret-pct').textContent = total > 0 ? Math.round(growth / total * 100) + '%' : '0%';
+  document.getElementById('ret-late-age').textContent = age + 10;
+  document.getElementById('ret-start-age').textContent = age;
+  document.getElementById('ret-late-total').textContent = fmt(lateTotal);
+  document.getElementById('ret-lost').textContent = fmt(total - lateTotal);
+}
+
+function switchCalc(id) {
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('calc-' + id).classList.add('active');
+  event.target.classList.add('active');
+  // Redraw chart after panel becomes visible (needs a frame for layout)
+  requestAnimationFrame(function() {
+    if (id === 'auto') calcAuto();
+    else if (id === 'home') calcHome();
+    else if (id === 'retirement') calcRetirement();
+  });
+}
+
+// INIT — run auto first (visible), defer others until their tab is shown
+calcAuto();
+calcRetirement();
+// Home chart needs its panel briefly visible to get dimensions
+window.addEventListener('resize', function() {
+  const activePanel = document.querySelector('.calc-panel.active');
+  if (activePanel) {
+    const id = activePanel.id.replace('calc-', '');
+    if (id === 'auto') calcAuto();
+    else if (id === 'home') calcHome();
+    else if (id === 'retirement') calcRetirement();
+  }
+});
+</script>
+</body>
+</html>
