@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Financial Literacy Glossary — DREAM/BIG by Corey L. Cook</title>
+<meta name="description" content="Financial literacy glossary from DREAM/BIG — 32 essential money terms explained in plain language. No jargon, just real talk about the terms that affect your life.">
+<meta property="og:title" content="Financial Literacy Glossary — DREAM/BIG">
+<meta property="og:description" content="32 essential money terms explained in plain language. No jargon, just real talk.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lifeafterhighschoolbook.com/glossary.html">
+<meta property="og:image" content="https://lifeafterhighschoolbook.com/images/book-cover.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="apple-touch-icon" href="images/favicon-512.png">
@@ -163,7 +169,7 @@
 <nav>
   <a href="index.html" class="nav-brand">
     <span class="nav-logo">DREAM/BIG</span>
-    <span class="nav-subtitle">A Father &amp; Mentor's Guide to Life After High School</span>
+    <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
   <ul class="nav-links">
@@ -201,6 +207,13 @@
 </footer>
 
 <script>
+// MOBILE NAV: close menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
 const glossaryTerms = [
   { term: 'APR (Annual Percentage Rate)', def: 'The yearly cost of borrowing money, including fees and interest. The higher the APR, the more you pay. This is the number that really matters when comparing loans.' },
   { term: 'Asset', def: 'Something you own that has value\u2014a house, a car, money in the bank, investments. Building assets is how you build wealth over time.' },

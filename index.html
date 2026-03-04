@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DREAM/BIG — By Corey L. Cook</title>
+<meta name="description" content="DREAM/BIG by Corey L. Cook — A father and mentor's guide to life after high school. Real decisions, real lessons, and a practical roadmap for the next generation.">
+<meta property="og:title" content="DREAM/BIG — By Corey L. Cook">
+<meta property="og:description" content="A father and mentor's guide to life after high school. Real decisions, real lessons, and a practical roadmap for the next generation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lifeafterhighschoolbook.com">
+<meta property="og:image" content="https://lifeafterhighschoolbook.com/images/book-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DREAM/BIG — By Corey L. Cook">
+<meta name="twitter:description" content="A father and mentor's guide to life after high school. Real decisions, real lessons, and a practical roadmap for the next generation.">
+<meta name="twitter:image" content="https://lifeafterhighschoolbook.com/images/book-cover.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="apple-touch-icon" href="images/favicon-512.png">
@@ -405,7 +415,7 @@
 <nav>
   <a href="#" class="nav-brand">
     <span class="nav-logo">DREAM/BIG</span>
-    <span class="nav-subtitle">A Father &amp; Mentor's Guide to Life After High School</span>
+    <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
   <ul class="nav-links">
@@ -579,7 +589,7 @@
     <p><em>Last updated: 2026</em></p>
 
     <h3>Who We Are</h3>
-    <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit dreambigbook.com.</p>
+    <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit lifeafterhighschoolbook.com.</p>
 
     <h3>What We Collect</h3>
     <p>We collect only the information you voluntarily provide:</p>
@@ -621,7 +631,7 @@
     <p><em>Last updated: 2026</em></p>
 
     <h3>Acceptance of Terms</h3>
-    <p>By accessing and using this website (dreambigbook.com), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use this site.</p>
+    <p>By accessing and using this website (lifeafterhighschoolbook.com), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use this site.</p>
 
     <h3>Educational Purpose</h3>
     <p>The content on this website, including the book excerpts, financial calculators, and glossary, is provided for general educational and informational purposes only. Nothing on this site constitutes professional financial, investment, tax, or legal advice.</p>
@@ -650,6 +660,13 @@
 </div>
 
 <script>
+// MOBILE NAV: close menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
 // LEGAL OVERLAY FUNCTIONS
 function openLegal(type) {
   document.getElementById('legal-' + type).classList.add('active');
@@ -667,6 +684,23 @@ document.addEventListener('keydown', function(e) {
     });
   }
 });
+
+// CALCULATOR BANNER
+(function() {
+  if (sessionStorage.getItem('calcBannerDismissed')) return;
+  var banner = document.createElement('div');
+  banner.id = 'calc-banner';
+  banner.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;"><span style="font-size:0.9rem;color:#F5F5F5;"><strong style="color:#D4AF37;">Free Financial Calculators</strong> — See what your decisions really cost before you sign.</span><a href="calculators.html" style="display:inline-block;padding:7px 20px;background:#D4AF37;color:#0F0620;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;border-radius:3px;text-decoration:none;">Try Them</a><button onclick="dismissCalcBanner()" style="background:none;border:none;color:#B8A8D0;font-size:1.3rem;cursor:pointer;padding:0 0 0 0.5rem;line-height:1;" aria-label="Dismiss">&times;</button></div>';
+  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(26,10,46,0.97);backdrop-filter:blur(12px);border-top:1px solid rgba(212,175,55,0.25);padding:12px 2rem;transform:translateY(100%);transition:transform 0.4s ease;';
+  document.body.appendChild(banner);
+  setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 5000);
+})();
+function dismissCalcBanner() {
+  var b = document.getElementById('calc-banner');
+  b.style.transform = 'translateY(100%)';
+  sessionStorage.setItem('calcBannerDismissed', '1');
+  setTimeout(function() { b.remove(); }, 400);
+}
 
 </script>
 </body>
