@@ -243,6 +243,8 @@
       <button class="calc-tab active" onclick="switchCalc('auto', this)">Auto Loan</button>
       <button class="calc-tab" onclick="switchCalc('home', this)">Home Loan</button>
       <button class="calc-tab" onclick="switchCalc('retirement', this)">Retirement</button>
+      <button class="calc-tab" onclick="switchCalc('credit', this)">Credit Score</button>
+      <button class="calc-tab" onclick="switchCalc('budget', this)">Budget</button>
     </div>
 
     <!-- AUTO LOAN -->
@@ -349,6 +351,128 @@
               <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
               <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$264,012</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$314,314</strong> less. Time is the most powerful ingredient. Start now.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREDIT SCORE ESTIMATOR -->
+    <div class="calc-panel" id="calc-credit">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;Your credit score is your financial reputation. It follows you everywhere&mdash;apartments, car lots, job applications. Nobody teaches you this in school, but it&rsquo;s one of the most important numbers in your life.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group"><label>Payment History</label>
+              <select id="credit-payment" onchange="calcCredit()">
+                <option value="5">Excellent &mdash; Always on time</option>
+                <option value="4" selected>Good &mdash; Missed 1&ndash;2 payments</option>
+                <option value="3">Fair &mdash; A few late payments</option>
+                <option value="2">Poor &mdash; Multiple late/missed</option>
+                <option value="1">Very Poor &mdash; Collections or defaults</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Credit Utilization (% of limit used)</label><input type="number" id="credit-util" value="30" min="0" max="100" step="1" oninput="calcCredit()"></div>
+            <div class="form-group"><label>Length of Credit History</label>
+              <select id="credit-length" onchange="calcCredit()">
+                <option value="1">Less than 1 year</option>
+                <option value="2" selected>1&ndash;3 years</option>
+                <option value="3">3&ndash;7 years</option>
+                <option value="4">7&ndash;15 years</option>
+                <option value="5">15+ years</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Credit Mix</label>
+              <select id="credit-mix" onchange="calcCredit()">
+                <option value="1">One type only (e.g. just a credit card)</option>
+                <option value="2" selected>Two types (card + loan)</option>
+                <option value="3">Three or more types</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Recent Hard Inquiries (last 2 years)</label>
+              <select id="credit-inquiries" onchange="calcCredit()">
+                <option value="0" selected>None</option>
+                <option value="1">1&ndash;2 inquiries</option>
+                <option value="3">3&ndash;5 inquiries</option>
+                <option value="6">6+ inquiries</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;">
+              <div class="result-label">Estimated Credit Score Range</div>
+              <div class="result-value" id="credit-score">650 &ndash; 700</div>
+              <div class="result-sub" id="credit-rating" style="font-weight:600;">Good</div>
+            </div>
+            <div id="credit-score-bar" style="margin:1.5rem 0; height:32px; border-radius:16px; position:relative; overflow:visible;">
+              <div style="height:100%; border-radius:16px; display:flex; overflow:hidden;">
+                <div style="flex:1; background:#E74C3C;"></div>
+                <div style="flex:1; background:#E67E22;"></div>
+                <div style="flex:1; background:#F1C40F;"></div>
+                <div style="flex:1; background:#27AE60;"></div>
+                <div style="flex:1; background:#1ABC9C;"></div>
+              </div>
+              <div id="credit-marker" style="position:absolute; top:-6px; width:4px; height:44px; background:white; border-radius:2px; box-shadow:0 0 8px rgba(255,255,255,0.5); transition:left 0.4s;"></div>
+              <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:0.7rem; color:var(--text-muted);">
+                <span>300</span><span>500</span><span>600</span><span>700</span><span>780</span><span>850</span>
+              </div>
+            </div>
+            <div class="result-row"><span class="result-row-label">Payment History (35%)</span><span class="result-row-value" id="credit-detail-payment">Good</span></div>
+            <div class="result-row"><span class="result-row-label">Credit Utilization (30%)</span><span class="result-row-value" id="credit-detail-util">30%</span></div>
+            <div class="result-row"><span class="result-row-label">Length of History (15%)</span><span class="result-row-value" id="credit-detail-length">1&ndash;3 years</span></div>
+            <div class="result-row"><span class="result-row-label">Credit Mix (10%)</span><span class="result-row-value" id="credit-detail-mix">Two types</span></div>
+            <div class="result-row"><span class="result-row-label">New Inquiries (10%)</span><span class="result-row-value" id="credit-detail-inq">None</span></div>
+            <div id="credit-tips" style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">How to Improve Your Score</div>
+              <div id="credit-tips-list" style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUDGET CALCULATOR -->
+    <div class="calc-panel" id="calc-budget">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;Nobody sits you down after graduation and says, &lsquo;Here&rsquo;s how to manage a paycheck.&rsquo; You get that first real check and it feels like a lot&mdash;until rent, food, a car payment, and a phone bill eat it alive. A budget isn&rsquo;t about restricting yourself. It&rsquo;s about knowing where your money goes so you can make it work for you.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group"><label>Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2800" oninput="calcBudget()"></div>
+            <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.5rem; margin-top:0.5rem;">
+              <div style="font-weight:600; font-size:0.85rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Your Monthly Expenses</div>
+              <div class="form-group"><label>Rent / Housing ($)</label><input type="number" id="budget-rent" value="800" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Car Payment ($)</label><input type="number" id="budget-car" value="350" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Phone ($)</label><input type="number" id="budget-phone" value="80" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Groceries / Food ($)</label><input type="number" id="budget-food" value="400" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Gas / Transportation ($)</label><input type="number" id="budget-gas" value="150" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Subscriptions &amp; Entertainment ($)</label><input type="number" id="budget-subs" value="100" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Other Expenses ($)</label><input type="number" id="budget-other" value="100" oninput="calcBudget()"></div>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;">
+              <div class="result-label">Money Left Over</div>
+              <div class="result-value" id="budget-remaining">$670</div>
+              <div class="result-sub" id="budget-status">You have room to save and invest</div>
+            </div>
+            <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,800</span></div>
+            <div class="result-row"><span class="result-row-label">Total Expenses</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$2,130</span></div>
+            <div class="result-row"><span class="result-row-label">Expenses as % of Income</span><span class="result-row-value" id="budget-pct">76%</span></div>
+
+            <div style="margin-top:1.5rem;">
+              <div style="font-weight:600; font-size:0.9rem; margin-bottom:0.75rem; color:var(--gold);">Where Your Money Goes</div>
+              <div id="budget-bars"></div>
+            </div>
+
+            <div id="budget-advice" style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">The 50/30/20 Rule</div>
+              <div style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">
+                <div class="result-row"><span class="result-row-label">Needs (50% = <span id="budget-50">$1,400</span>)</span><span class="result-row-value" id="budget-needs-actual">$1,300</span></div>
+                <div class="result-row"><span class="result-row-label">Wants (30% = <span id="budget-30">$840</span>)</span><span class="result-row-value" id="budget-wants-actual">$100</span></div>
+                <div class="result-row"><span class="result-row-label">Savings (20% = <span id="budget-20">$560</span>)</span><span class="result-row-value" id="budget-savings-actual">$670</span></div>
+              </div>
+              <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
             </div>
           </div>
         </div>
@@ -611,6 +735,165 @@ function calcRetirement() {
   document.getElementById('ret-lost').textContent = fmt(total - lateTotal);
 }
 
+// CREDIT SCORE ESTIMATOR
+function calcCredit() {
+  var payment = +document.getElementById('credit-payment').value;
+  var util = +document.getElementById('credit-util').value;
+  var length = +document.getElementById('credit-length').value;
+  var mix = +document.getElementById('credit-mix').value;
+  var inquiries = +document.getElementById('credit-inquiries').value;
+
+  // FICO-like weighted score: Payment 35%, Utilization 30%, Length 15%, Mix 10%, Inquiries 10%
+  // Each factor scores 0-100, then weighted and mapped to 300-850 range
+  var paymentScore = [0, 15, 35, 60, 85, 100][payment]; // index 1-5
+  var utilScore;
+  if (util <= 10) utilScore = 100;
+  else if (util <= 20) utilScore = 90;
+  else if (util <= 30) utilScore = 75;
+  else if (util <= 50) utilScore = 50;
+  else if (util <= 75) utilScore = 25;
+  else utilScore = 10;
+
+  var lengthScore = [0, 20, 40, 65, 85, 100][length];
+  var mixScore = [0, 40, 70, 100][mix];
+  var inqScore;
+  if (inquiries === 0) inqScore = 100;
+  else if (inquiries <= 2) inqScore = 70;
+  else if (inquiries <= 5) inqScore = 40;
+  else inqScore = 15;
+
+  var weighted = paymentScore * 0.35 + utilScore * 0.30 + lengthScore * 0.15 + mixScore * 0.10 + inqScore * 0.10;
+  var scoreLow = Math.round(300 + weighted * 5.0);
+  var scoreHigh = Math.min(850, scoreLow + 50);
+  var scoreMid = (scoreLow + scoreHigh) / 2;
+
+  var rating, ratingColor;
+  if (scoreMid >= 780) { rating = 'Excellent'; ratingColor = '#1ABC9C'; }
+  else if (scoreMid >= 700) { rating = 'Good'; ratingColor = '#27AE60'; }
+  else if (scoreMid >= 640) { rating = 'Fair'; ratingColor = '#F1C40F'; }
+  else if (scoreMid >= 560) { rating = 'Poor'; ratingColor = '#E67E22'; }
+  else { rating = 'Very Poor'; ratingColor = '#E74C3C'; }
+
+  document.getElementById('credit-score').innerHTML = scoreLow + ' &ndash; ' + scoreHigh;
+  document.getElementById('credit-score').style.color = ratingColor;
+  document.getElementById('credit-rating').textContent = rating;
+  document.getElementById('credit-rating').style.color = ratingColor;
+
+  // Position marker on score bar (300-850 range)
+  var pct = ((scoreMid - 300) / 550) * 100;
+  document.getElementById('credit-marker').style.left = Math.max(0, Math.min(98, pct)) + '%';
+
+  // Detail labels
+  var paymentLabels = ['', 'Very Poor', 'Poor', 'Fair', 'Good', 'Excellent'];
+  document.getElementById('credit-detail-payment').textContent = paymentLabels[payment];
+  document.getElementById('credit-detail-util').textContent = util + '%';
+  document.getElementById('credit-detail-util').style.color = util <= 30 ? '#27AE60' : util <= 50 ? '#F1C40F' : '#E74C3C';
+  var lengthLabels = ['', '<1 year', '1\u20133 years', '3\u20137 years', '7\u201315 years', '15+ years'];
+  document.getElementById('credit-detail-length').textContent = lengthLabels[length];
+  var mixLabels = ['', 'One type', 'Two types', 'Three+ types'];
+  document.getElementById('credit-detail-mix').textContent = mixLabels[mix];
+  var inqLabels = { 0: 'None', 1: '1\u20132', 3: '3\u20135', 6: '6+' };
+  document.getElementById('credit-detail-inq').textContent = inqLabels[inquiries] || inquiries;
+
+  // Tips
+  var tips = [];
+  if (payment < 5) tips.push('\u2022 Pay every bill on time. Payment history is 35% of your score\u2014the biggest factor.');
+  if (util > 30) tips.push('\u2022 Get your credit utilization below 30%. You\u2019re at ' + util + '%. Pay down balances or request a credit limit increase.');
+  if (util > 10 && util <= 30) tips.push('\u2022 Your utilization is decent at ' + util + '%, but under 10% is ideal for the best scores.');
+  if (length <= 2) tips.push('\u2022 Keep your oldest accounts open. Time is your friend\u2014credit history length builds slowly.');
+  if (mix < 3) tips.push('\u2022 A healthy mix of credit types (cards, auto loan, etc.) helps. Only take on what you can handle.');
+  if (inquiries >= 3) tips.push('\u2022 Slow down on new credit applications. Each hard inquiry stays on your report for 2 years.');
+  if (tips.length === 0) tips.push('\u2022 You\u2019re doing great. Keep paying on time, keep utilization low, and let time work for you.');
+  document.getElementById('credit-tips-list').innerHTML = tips.join('<br>');
+}
+
+// BUDGET CALCULATOR
+function calcBudget() {
+  var income = +document.getElementById('budget-income').value || 0;
+  var expenses = {
+    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Car Payment': +document.getElementById('budget-car').value || 0,
+    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
+    'Phone': +document.getElementById('budget-phone').value || 0,
+    'Groceries / Food': +document.getElementById('budget-food').value || 0,
+    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
+    'Subscriptions': +document.getElementById('budget-subs').value || 0,
+    'Other': +document.getElementById('budget-other').value || 0
+  };
+
+  var totalExp = 0;
+  for (var k in expenses) totalExp += expenses[k];
+  var remaining = income - totalExp;
+  var pct = income > 0 ? Math.round((totalExp / income) * 100) : 0;
+
+  document.getElementById('budget-remaining').textContent = (remaining >= 0 ? '' : '-') + fmt(Math.abs(remaining));
+  document.getElementById('budget-remaining').style.color = remaining >= 0 ? 'var(--gold)' : '#E74C3C';
+  document.getElementById('budget-total-income').textContent = fmt(income);
+  document.getElementById('budget-total-expenses').textContent = fmt(totalExp);
+  document.getElementById('budget-pct').textContent = pct + '%';
+  document.getElementById('budget-pct').style.color = pct > 90 ? '#E74C3C' : pct > 75 ? '#F1C40F' : 'var(--gold)';
+
+  if (remaining < 0) {
+    document.getElementById('budget-status').textContent = 'You\u2019re spending more than you make';
+    document.getElementById('budget-status').style.color = '#E74C3C';
+  } else if (remaining < income * 0.1) {
+    document.getElementById('budget-status').textContent = 'Tight\u2014not much room to save';
+    document.getElementById('budget-status').style.color = '#E67E22';
+  } else if (remaining < income * 0.2) {
+    document.getElementById('budget-status').textContent = 'Decent\u2014try to save more if you can';
+    document.getElementById('budget-status').style.color = '#F1C40F';
+  } else {
+    document.getElementById('budget-status').textContent = 'You have room to save and invest';
+    document.getElementById('budget-status').style.color = '#27AE60';
+  }
+
+  // Budget bars
+  var colors = ['#9B59B6','#E74C3C','#E67E22','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
+  var barsHTML = '';
+  var i = 0;
+  for (var label in expenses) {
+    var val = expenses[label];
+    if (val <= 0) { i++; continue; }
+    var barPct = income > 0 ? Math.min((val / income) * 100, 100) : 0;
+    barsHTML += '<div style="margin-bottom:0.6rem;">';
+    barsHTML += '<div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.2rem;">';
+    barsHTML += '<span style="color:var(--text-muted);">' + label + '</span>';
+    barsHTML += '<span style="font-weight:600;">' + fmt(val) + ' (' + Math.round(barPct) + '%)</span>';
+    barsHTML += '</div>';
+    barsHTML += '<div style="height:8px; background:var(--purple-surface); border-radius:4px; overflow:hidden;">';
+    barsHTML += '<div style="height:100%; width:' + barPct + '%; background:' + colors[i % colors.length] + '; border-radius:4px; transition:width 0.3s;"></div>';
+    barsHTML += '</div></div>';
+    i++;
+  }
+  document.getElementById('budget-bars').innerHTML = barsHTML;
+
+  // 50/30/20 rule
+  var needs50 = Math.round(income * 0.50);
+  var wants30 = Math.round(income * 0.30);
+  var save20 = Math.round(income * 0.20);
+  document.getElementById('budget-50').textContent = fmt(needs50);
+  document.getElementById('budget-30').textContent = fmt(wants30);
+  document.getElementById('budget-20').textContent = fmt(save20);
+
+  // Categorize: Needs = rent, car, insurance, food, gas. Wants = phone, subs, other.
+  var needsActual = expenses['Rent / Housing'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Groceries / Food'] + expenses['Gas / Transport'];
+  var wantsActual = expenses['Phone'] + expenses['Subscriptions'] + expenses['Other'];
+  var savingsActual = Math.max(0, remaining);
+  document.getElementById('budget-needs-actual').textContent = fmt(needsActual);
+  document.getElementById('budget-needs-actual').style.color = needsActual > needs50 ? '#E74C3C' : '#27AE60';
+  document.getElementById('budget-wants-actual').textContent = fmt(wantsActual);
+  document.getElementById('budget-wants-actual').style.color = wantsActual > wants30 ? '#E74C3C' : '#27AE60';
+  document.getElementById('budget-savings-actual').textContent = fmt(savingsActual);
+  document.getElementById('budget-savings-actual').style.color = savingsActual >= save20 ? '#27AE60' : '#E74C3C';
+
+  var rec = '';
+  if (remaining < 0) rec = 'You\u2019re in the red. Look at your biggest expenses and find one thing to cut or reduce. Even $50 a month changes the trajectory.';
+  else if (savingsActual < save20) rec = 'You\u2019re saving ' + fmt(savingsActual) + ' but the 20% target is ' + fmt(save20) + '. Look for places to trim\u2014subscriptions and eating out are usually the easiest wins.';
+  else if (needsActual > needs50) rec = 'Your needs are above 50% of income. That\u2019s common when you\u2019re starting out. As your income grows, work to get this ratio down.';
+  else rec = 'You\u2019re in solid shape. Consider putting that extra ' + fmt(savingsActual) + ' into an emergency fund first (3 months of expenses), then start investing.';
+  document.getElementById('budget-recommendation').textContent = rec;
+}
+
 function switchCalc(id, el) {
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
@@ -621,13 +904,17 @@ function switchCalc(id, el) {
     if (id === 'auto') calcAuto();
     else if (id === 'home') calcHome();
     else if (id === 'retirement') calcRetirement();
+    else if (id === 'credit') calcCredit();
+    else if (id === 'budget') calcBudget();
   });
 }
 
 // INIT — run auto first (visible), defer others until their tab is shown
 calcAuto();
 calcRetirement();
-// Home chart needs its panel briefly visible to get dimensions
+calcCredit();
+calcBudget();
+// Redraw active calculator on resize
 window.addEventListener('resize', function() {
   const activePanel = document.querySelector('.calc-panel.active');
   if (activePanel) {
@@ -635,6 +922,8 @@ window.addEventListener('resize', function() {
     if (id === 'auto') calcAuto();
     else if (id === 'home') calcHome();
     else if (id === 'retirement') calcRetirement();
+    else if (id === 'credit') calcCredit();
+    else if (id === 'budget') calcBudget();
   }
 });
 </script>
