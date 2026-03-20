@@ -986,13 +986,13 @@ function createPDFBase(title) {
   pdf.rect(0, 0, 612, 80, 'F');
 
   // Title
-  pdf.setFont('Playfair Display', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(24);
   pdf.setTextColor(212, 175, 55);
   pdf.text('DREAM/BIG', 306, 35, { align: 'center' });
 
   // Subtitle
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(184, 168, 208);
   pdf.text('www.lifeafterhs.com', 306, 55, { align: 'center' });
@@ -1000,13 +1000,13 @@ function createPDFBase(title) {
   // Title section
   pdf.setFontSize(14);
   pdf.setTextColor(212, 175, 55);
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.text(title, 40, 110);
 
   // Date
   pdf.setFontSize(9);
   pdf.setTextColor(184, 168, 208);
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   const today = new Date();
   const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   pdf.text('Generated: ' + dateStr, 40, 130);
@@ -1015,7 +1015,7 @@ function createPDFBase(title) {
 }
 
 function addPDFSection(pdf, startY, title) {
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(11);
   pdf.setTextColor(212, 175, 55);
   pdf.text(title, 40, startY);
@@ -1026,7 +1026,7 @@ function addPDFSection(pdf, startY, title) {
 }
 
 function addPDFRow(pdf, y, label, value) {
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(245, 245, 245);
   pdf.text(label, 40, y);
@@ -1063,17 +1063,17 @@ function downloadAutoPDF() {
 
   // Bad Credit Comparison
   y = addPDFSection(pdf, y, 'What Bad Credit Would Cost You');
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(245, 245, 245);
   pdf.text('At 13% (bad credit), the same car costs:', 40, y);
   y += 15;
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(14);
   pdf.setTextColor(231, 76, 60);
   pdf.text(document.getElementById('auto-bad-total').textContent, 40, y);
   y += 18;
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(184, 168, 208);
   const diff = document.getElementById('auto-bad-diff').textContent;
@@ -1117,17 +1117,17 @@ function downloadHomePDF() {
   // Bad Credit Comparison
   y = addPDFSection(pdf, y, 'What Bad Credit Would Cost You');
   const badRate = document.getElementById('home-bad-rate').textContent;
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(245, 245, 245);
   pdf.text('At ' + badRate + '% (bad credit), the same home costs:', 40, y);
   y += 15;
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(14);
   pdf.setTextColor(231, 76, 60);
   pdf.text(document.getElementById('home-bad-total').textContent, 40, y);
   y += 18;
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(184, 168, 208);
   const diff = document.getElementById('home-bad-diff').textContent;
@@ -1175,17 +1175,17 @@ function downloadRetirementPDF() {
   y = addPDFSection(pdf, y, 'What Waiting 10 Years Costs You');
   const startAge = document.getElementById('ret-start-age').textContent;
   const lateAge = document.getElementById('ret-late-age').textContent;
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(245, 245, 245);
   pdf.text('If you start at ' + lateAge + ' instead of ' + startAge + ':', 40, y);
   y += 15;
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(14);
   pdf.setTextColor(212, 175, 55);
   pdf.text(document.getElementById('ret-late-total').textContent, 40, y);
   y += 18;
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(10);
   pdf.setTextColor(184, 168, 208);
   const lost = document.getElementById('ret-lost').textContent;
@@ -1213,7 +1213,7 @@ function downloadCreditPDF() {
   y = addPDFSection(pdf, y, 'Your Estimated Credit Score');
   const score = document.getElementById('credit-score').textContent;
   const rating = document.getElementById('credit-rating').textContent;
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(16);
   pdf.setTextColor(212, 175, 55);
   pdf.text(score, 40, y);
@@ -1235,7 +1235,7 @@ function downloadCreditPDF() {
   // Tips
   y = addPDFSection(pdf, y, 'How to Improve Your Score');
   const tips = document.getElementById('credit-tips-list').textContent.split('•').filter(t => t.trim());
-  pdf.setFont('Inter', 'normal');
+  pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(9);
   pdf.setTextColor(184, 168, 208);
   tips.forEach(tip => {
@@ -1258,12 +1258,14 @@ function downloadBudgetPDF() {
   const income = +document.getElementById('budget-income').value || 0;
   const expenses = {
     'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Utilities': +document.getElementById('budget-utilities').value || 0,
     'Car Payment': +document.getElementById('budget-car').value || 0,
     'Car Insurance': +document.getElementById('budget-insurance').value || 0,
-    'Phone': +document.getElementById('budget-phone').value || 0,
+    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
+    'Cell Phone': +document.getElementById('budget-phone').value || 0,
     'Groceries / Food': +document.getElementById('budget-food').value || 0,
-    'Gas / Transportation': +document.getElementById('budget-gas').value || 0,
-    'Subscriptions': +document.getElementById('budget-subs').value || 0,
+    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
+    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
     'Other': +document.getElementById('budget-other').value || 0
   };
 
@@ -1288,7 +1290,7 @@ function downloadBudgetPDF() {
   }
 
   y += 5;
-  pdf.setFont('Inter', 'bold');
+  pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(10);
   pdf.setTextColor(212, 175, 55);
   pdf.text('Total Expenses:', 40, y);
@@ -1302,13 +1304,13 @@ function downloadBudgetPDF() {
 
   y += 20;
 
-  // 50/30/20 Rule
-  y = addPDFSection(pdf, y, 'The 50/30/20 Rule');
+  // 50/30/20 Guideline
+  y = addPDFSection(pdf, y, 'The 50/30/20 Guideline');
   const needs50 = Math.round(income * 0.50);
   const wants30 = Math.round(income * 0.30);
   const save20 = Math.round(income * 0.20);
-  const needsActual = expenses['Rent / Housing'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Groceries / Food'] + expenses['Gas / Transportation'];
-  const wantsActual = expenses['Phone'] + expenses['Subscriptions'] + expenses['Other'];
+  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
+  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
   const savingsActual = Math.max(0, remaining);
 
   y = addPDFRow(pdf, y, 'Needs (50% target = ' + fmt(needs50) + '):', fmt(needsActual));
@@ -1327,12 +1329,14 @@ function downloadBudgetExcel() {
   const income = +document.getElementById('budget-income').value || 0;
   const expenses = {
     'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Utilities': +document.getElementById('budget-utilities').value || 0,
     'Car Payment': +document.getElementById('budget-car').value || 0,
     'Car Insurance': +document.getElementById('budget-insurance').value || 0,
-    'Phone': +document.getElementById('budget-phone').value || 0,
+    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
+    'Cell Phone': +document.getElementById('budget-phone').value || 0,
     'Groceries / Food': +document.getElementById('budget-food').value || 0,
-    'Gas / Transportation': +document.getElementById('budget-gas').value || 0,
-    'Subscriptions': +document.getElementById('budget-subs').value || 0,
+    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
+    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
     'Other': +document.getElementById('budget-other').value || 0
   };
 
@@ -1359,11 +1363,11 @@ function downloadBudgetExcel() {
   data.push(['Total Expenses', totalExp]);
   data.push(['Money Left Over', remaining]);
   data.push(['']);
-  data.push(['THE 50/30/20 RULE']);
+  data.push(['THE 50/30/20 GUIDELINE']);
   data.push(['', 'Target (% of Income)', 'Your Target ($)', 'Actual ($)', 'Status']);
 
-  const needsActual = expenses['Rent / Housing'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Groceries / Food'] + expenses['Gas / Transportation'];
-  const wantsActual = expenses['Phone'] + expenses['Subscriptions'] + expenses['Other'];
+  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
+  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
   const savingsActual = Math.max(0, remaining);
 
   data.push(['Needs', '50%', needs50, needsActual, needsActual <= needs50 ? 'On Track' : 'Over']);
