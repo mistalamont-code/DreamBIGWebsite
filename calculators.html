@@ -286,11 +286,6 @@
               <div class="compare-amount" id="auto-bad-total">$31,548</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="auto-bad-diff">$4,869</strong> more&mdash;just because of bad credit. Protect your credit.</div>
             </div>
-            <div class="download-btns">
-              <button class="btn-download" onclick="downloadAutoPDF()" title="Download results as PDF">
-                <span>📄</span> Download PDF
-              </button>
-            </div>
           </div>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
@@ -331,11 +326,6 @@
               <div class="compare-amount" id="home-bad-total">$511,380</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="home-bad-diff">$101,912</strong> more. That&rsquo;s not a small number. That&rsquo;s life-changing money.</div>
             </div>
-            <div class="download-btns">
-              <button class="btn-download" onclick="downloadHomePDF()" title="Download results as PDF">
-                <span>📄</span> Download PDF
-              </button>
-            </div>
           </div>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
@@ -374,10 +364,7 @@
               <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$264,012</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$314,314</strong> less. Time is the most powerful ingredient. Start now.</div>
             </div>
-            <div class="download-btns">
-              <button class="btn-download" onclick="downloadRetirementPDF()" title="Download results as PDF">
-                <span>📄</span> Download PDF
-              </button>
+
             </div>
           </div>
         </div>
@@ -453,11 +440,7 @@
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">How to Improve Your Score</div>
               <div id="credit-tips-list" style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;"></div>
             </div>
-            <div class="download-btns">
-              <button class="btn-download" onclick="downloadCreditPDF()" title="Download results as PDF">
-                <span>📄</span> Download PDF
-              </button>
-            </div>
+
           </div>
         </div>
       </div>
@@ -510,9 +493,6 @@
               <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
             </div>
             <div class="download-btns">
-              <button class="btn-download" onclick="downloadBudgetPDF()" title="Download results as PDF">
-                <span>📄</span> Download PDF
-              </button>
               <button class="btn-download" onclick="downloadBudgetExcel()" title="Download results as Excel">
                 <span>📊</span> Download Excel
               </button>
@@ -537,9 +517,8 @@
   <p>&copy; 2026 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
 </footer>
 
-<!-- PDF & EXCEL LIBRARIES -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- EXCEL LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous"></script>
 
 <script>
 // MOBILE NAV: close menu when a link is clicked
@@ -975,355 +954,6 @@ window.addEventListener('resize', function() {
     else if (id === 'budget') calcBudget();
   }
 });
-
-// PDF DOWNLOAD FUNCTIONS
-function createPDFBase(title) {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
-
-  // Dark header
-  pdf.setFillColor(15, 6, 32);
-  pdf.rect(0, 0, 612, 80, 'F');
-
-  // Title
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(24);
-  pdf.setTextColor(212, 175, 55);
-  pdf.text('DREAM/BIG', 306, 35, { align: 'center' });
-
-  // Subtitle
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(184, 168, 208);
-  pdf.text('www.lifeafterhs.com', 306, 55, { align: 'center' });
-
-  // Title section
-  pdf.setFontSize(14);
-  pdf.setTextColor(212, 175, 55);
-  pdf.setFont('helvetica', 'bold');
-  pdf.text(title, 40, 110);
-
-  // Date
-  pdf.setFontSize(9);
-  pdf.setTextColor(184, 168, 208);
-  pdf.setFont('helvetica', 'normal');
-  const today = new Date();
-  const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  pdf.text('Generated: ' + dateStr, 40, 130);
-
-  return { pdf, startY: 150 };
-}
-
-function addPDFSection(pdf, startY, title) {
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(11);
-  pdf.setTextColor(212, 175, 55);
-  pdf.text(title, 40, startY);
-  pdf.setDrawColor(201, 168, 76);
-  pdf.setLineWidth(0.5);
-  pdf.line(40, startY + 5, 572, startY + 5);
-  return startY + 20;
-}
-
-function addPDFRow(pdf, y, label, value) {
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(245, 245, 245);
-  pdf.text(label, 40, y);
-  pdf.text(value, 572, y, { align: 'right' });
-  return y + 18;
-}
-
-function downloadAutoPDF() {
-  const price = +document.getElementById('auto-price').value || 0;
-  const down = +document.getElementById('auto-down').value || 0;
-  const rate = +document.getElementById('auto-rate').value || 0;
-  const term = +document.getElementById('auto-term').value || 5;
-
-  const { pdf, startY } = createPDFBase('Auto Loan Calculator');
-  let y = startY;
-
-  // Inputs
-  y = addPDFSection(pdf, y, 'Your Inputs');
-  y = addPDFRow(pdf, y, 'Vehicle Price:', fmt(price));
-  y = addPDFRow(pdf, y, 'Down Payment:', fmt(down));
-  y = addPDFRow(pdf, y, 'Interest Rate:', rate.toFixed(1) + '%');
-  y = addPDFRow(pdf, y, 'Loan Term:', term + ' years');
-
-  y += 10;
-
-  // Results
-  y = addPDFSection(pdf, y, 'Your Results');
-  y = addPDFRow(pdf, y, 'Monthly Payment:', document.getElementById('auto-monthly').textContent);
-  y = addPDFRow(pdf, y, 'Loan Amount:', document.getElementById('auto-loan').textContent);
-  y = addPDFRow(pdf, y, 'Total Interest Paid:', document.getElementById('auto-interest').textContent);
-  y = addPDFRow(pdf, y, 'Total Cost of Vehicle:', document.getElementById('auto-total').textContent);
-
-  y += 10;
-
-  // Bad Credit Comparison
-  y = addPDFSection(pdf, y, 'What Bad Credit Would Cost You');
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(245, 245, 245);
-  pdf.text('At 13% (bad credit), the same car costs:', 40, y);
-  y += 15;
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(14);
-  pdf.setTextColor(231, 76, 60);
-  pdf.text(document.getElementById('auto-bad-total').textContent, 40, y);
-  y += 18;
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(184, 168, 208);
-  const diff = document.getElementById('auto-bad-diff').textContent;
-  pdf.text('That\'s ' + diff + ' more. Protect your credit.', 40, y, { maxWidth: 500 });
-
-  // Footer
-  pdf.setFontSize(8);
-  pdf.setTextColor(184, 168, 208);
-  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
-
-  pdf.save('Auto-Loan-Results.pdf');
-}
-
-function downloadHomePDF() {
-  const price = +document.getElementById('home-price').value || 0;
-  const down = +document.getElementById('home-down').value || 0;
-  const rate = +document.getElementById('home-rate').value || 0;
-  const term = +document.getElementById('home-term').value || 30;
-
-  const { pdf, startY } = createPDFBase('Home Loan Calculator');
-  let y = startY;
-
-  // Inputs
-  y = addPDFSection(pdf, y, 'Your Inputs');
-  y = addPDFRow(pdf, y, 'Home Price:', fmt(price));
-  y = addPDFRow(pdf, y, 'Down Payment:', fmt(down));
-  y = addPDFRow(pdf, y, 'Interest Rate:', rate.toFixed(1) + '%');
-  y = addPDFRow(pdf, y, 'Loan Term:', term + ' years');
-
-  y += 10;
-
-  // Results
-  y = addPDFSection(pdf, y, 'Your Results');
-  y = addPDFRow(pdf, y, 'Monthly Payment:', document.getElementById('home-monthly').textContent);
-  y = addPDFRow(pdf, y, 'Loan Amount:', document.getElementById('home-loan').textContent);
-  y = addPDFRow(pdf, y, 'Total Interest Paid:', document.getElementById('home-interest').textContent);
-  y = addPDFRow(pdf, y, 'Total Cost of Home:', document.getElementById('home-total').textContent);
-
-  y += 10;
-
-  // Bad Credit Comparison
-  y = addPDFSection(pdf, y, 'What Bad Credit Would Cost You');
-  const badRate = document.getElementById('home-bad-rate').textContent;
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(245, 245, 245);
-  pdf.text('At ' + badRate + '% (bad credit), the same home costs:', 40, y);
-  y += 15;
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(14);
-  pdf.setTextColor(231, 76, 60);
-  pdf.text(document.getElementById('home-bad-total').textContent, 40, y);
-  y += 18;
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(184, 168, 208);
-  const diff = document.getElementById('home-bad-diff').textContent;
-  pdf.text('That\'s ' + diff + ' more. That\'s life-changing money.', 40, y, { maxWidth: 500 });
-
-  // Footer
-  pdf.setFontSize(8);
-  pdf.setTextColor(184, 168, 208);
-  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
-
-  pdf.save('Home-Loan-Results.pdf');
-}
-
-function downloadRetirementPDF() {
-  const age = +document.getElementById('ret-age').value || 22;
-  const retire = +document.getElementById('ret-retire').value || 65;
-  const monthly = +document.getElementById('ret-monthly').value || 0;
-  const ret = +document.getElementById('ret-return').value || 7;
-  const current = +document.getElementById('ret-current').value || 0;
-
-  const { pdf, startY } = createPDFBase('Retirement Savings Calculator');
-  let y = startY;
-
-  // Inputs
-  y = addPDFSection(pdf, y, 'Your Inputs');
-  y = addPDFRow(pdf, y, 'Current Age:', age + ' years');
-  y = addPDFRow(pdf, y, 'Retirement Age:', retire + ' years');
-  y = addPDFRow(pdf, y, 'Monthly Contribution:', fmt(monthly));
-  y = addPDFRow(pdf, y, 'Expected Annual Return:', ret.toFixed(1) + '%');
-  y = addPDFRow(pdf, y, 'Current Savings:', fmt(current));
-
-  y += 10;
-
-  // Results
-  y = addPDFSection(pdf, y, 'Your Results');
-  y = addPDFRow(pdf, y, 'Estimated Total Savings:', document.getElementById('ret-total').textContent);
-  y = addPDFRow(pdf, y, 'Years of Growth:', document.getElementById('ret-years').textContent);
-  y = addPDFRow(pdf, y, 'Total You Contribute:', document.getElementById('ret-contributed').textContent);
-  y = addPDFRow(pdf, y, 'Growth From Interest:', document.getElementById('ret-growth').textContent);
-  y = addPDFRow(pdf, y, 'Interest as % of Total:', document.getElementById('ret-pct').textContent);
-
-  y += 10;
-
-  // Late Start Comparison
-  y = addPDFSection(pdf, y, 'What Waiting 10 Years Costs You');
-  const startAge = document.getElementById('ret-start-age').textContent;
-  const lateAge = document.getElementById('ret-late-age').textContent;
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(245, 245, 245);
-  pdf.text('If you start at ' + lateAge + ' instead of ' + startAge + ':', 40, y);
-  y += 15;
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(14);
-  pdf.setTextColor(212, 175, 55);
-  pdf.text(document.getElementById('ret-late-total').textContent, 40, y);
-  y += 18;
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(184, 168, 208);
-  const lost = document.getElementById('ret-lost').textContent;
-  pdf.text('That\'s ' + lost + ' less. Time is the most powerful ingredient.', 40, y, { maxWidth: 500 });
-
-  // Footer
-  pdf.setFontSize(8);
-  pdf.setTextColor(184, 168, 208);
-  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
-
-  pdf.save('Retirement-Savings-Results.pdf');
-}
-
-function downloadCreditPDF() {
-  const payment = document.getElementById('credit-detail-payment').textContent;
-  const util = document.getElementById('credit-detail-util').textContent;
-  const length = document.getElementById('credit-detail-length').textContent;
-  const mix = document.getElementById('credit-detail-mix').textContent;
-  const inq = document.getElementById('credit-detail-inq').textContent;
-
-  const { pdf, startY } = createPDFBase('Credit Score Estimator');
-  let y = startY;
-
-  // Score
-  y = addPDFSection(pdf, y, 'Your Estimated Credit Score');
-  const score = document.getElementById('credit-score').textContent;
-  const rating = document.getElementById('credit-rating').textContent;
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(16);
-  pdf.setTextColor(212, 175, 55);
-  pdf.text(score, 40, y);
-  pdf.setFontSize(11);
-  pdf.setTextColor(201, 168, 76);
-  pdf.text(rating, 40, y + 20);
-  y += 50;
-
-  // Factors
-  y = addPDFSection(pdf, y, 'Score Factors (FICO-Like Model)');
-  y = addPDFRow(pdf, y, 'Payment History (35%):', payment);
-  y = addPDFRow(pdf, y, 'Credit Utilization (30%):', util);
-  y = addPDFRow(pdf, y, 'Length of History (15%):', length);
-  y = addPDFRow(pdf, y, 'Credit Mix (10%):', mix);
-  y = addPDFRow(pdf, y, 'New Inquiries (10%):', inq);
-
-  y += 10;
-
-  // Tips
-  y = addPDFSection(pdf, y, 'How to Improve Your Score');
-  const tips = document.getElementById('credit-tips-list').textContent.split('•').filter(t => t.trim());
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(9);
-  pdf.setTextColor(184, 168, 208);
-  tips.forEach(tip => {
-    const wrapped = pdf.splitTextToSize('• ' + tip.trim(), 520);
-    wrapped.forEach(line => {
-      pdf.text(line, 40, y);
-      y += 12;
-    });
-  });
-
-  // Footer
-  pdf.setFontSize(8);
-  pdf.setTextColor(184, 168, 208);
-  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
-
-  pdf.save('Credit-Score-Results.pdf');
-}
-
-function downloadBudgetPDF() {
-  const income = +document.getElementById('budget-income').value || 0;
-  const expenses = {
-    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
-    'Utilities': +document.getElementById('budget-utilities').value || 0,
-    'Car Payment': +document.getElementById('budget-car').value || 0,
-    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
-    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
-    'Cell Phone': +document.getElementById('budget-phone').value || 0,
-    'Groceries / Food': +document.getElementById('budget-food').value || 0,
-    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
-    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
-    'Other': +document.getElementById('budget-other').value || 0
-  };
-
-  const { pdf, startY } = createPDFBase('Monthly Budget Calculator');
-  let y = startY;
-
-  // Income
-  y = addPDFSection(pdf, y, 'Your Income');
-  y = addPDFRow(pdf, y, 'Monthly Take-Home Pay:', fmt(income));
-
-  y += 10;
-
-  // Expenses
-  y = addPDFSection(pdf, y, 'Your Expenses');
-  let totalExp = 0;
-  for (const label in expenses) {
-    const val = expenses[label];
-    if (val > 0) {
-      y = addPDFRow(pdf, y, label + ':', fmt(val));
-      totalExp += val;
-    }
-  }
-
-  y += 5;
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(10);
-  pdf.setTextColor(212, 175, 55);
-  pdf.text('Total Expenses:', 40, y);
-  pdf.text(fmt(totalExp), 572, y, { align: 'right' });
-  y += 18;
-
-  const remaining = income - totalExp;
-  pdf.setTextColor(remaining >= 0 ? 212 : 231, remaining >= 0 ? 175 : 76, remaining >= 0 ? 55 : 60);
-  pdf.text('Money Left Over:', 40, y);
-  pdf.text((remaining >= 0 ? '' : '−') + fmt(Math.abs(remaining)), 572, y, { align: 'right' });
-
-  y += 20;
-
-  // 50/30/20 Guideline
-  y = addPDFSection(pdf, y, 'The 50/30/20 Guideline');
-  const needs50 = Math.round(income * 0.50);
-  const wants30 = Math.round(income * 0.30);
-  const save20 = Math.round(income * 0.20);
-  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
-  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
-  const savingsActual = Math.max(0, remaining);
-
-  y = addPDFRow(pdf, y, 'Needs (50% target = ' + fmt(needs50) + '):', fmt(needsActual));
-  y = addPDFRow(pdf, y, 'Wants (30% target = ' + fmt(wants30) + '):', fmt(wantsActual));
-  y = addPDFRow(pdf, y, 'Savings (20% target = ' + fmt(save20) + '):', fmt(savingsActual));
-
-  // Footer
-  pdf.setFontSize(8);
-  pdf.setTextColor(184, 168, 208);
-  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
-
-  pdf.save('Budget-Results.pdf');
-}
 
 function downloadBudgetExcel() {
   const income = +document.getElementById('budget-income').value || 0;
