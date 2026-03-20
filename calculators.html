@@ -180,6 +180,18 @@
   }
   .back-link:hover { opacity: 0.8; }
 
+  /* DOWNLOAD BUTTONS */
+  .download-btns { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 10px 20px; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; cursor: pointer; border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.1); color: var(--gold);
+    font-family: 'Inter', sans-serif; transition: all 0.3s;
+  }
+  .btn-download:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+
   /* FOOTER */
   footer {
     padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);
@@ -274,6 +286,11 @@
               <div class="compare-amount" id="auto-bad-total">$31,548</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="auto-bad-diff">$4,869</strong> more&mdash;just because of bad credit. Protect your credit.</div>
             </div>
+            <div class="download-btns">
+              <button class="btn-download" onclick="downloadAutoPDF()" title="Download results as PDF">
+                <span>📄</span> Download PDF
+              </button>
+            </div>
           </div>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
@@ -314,6 +331,11 @@
               <div class="compare-amount" id="home-bad-total">$511,380</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="home-bad-diff">$101,912</strong> more. That&rsquo;s not a small number. That&rsquo;s life-changing money.</div>
             </div>
+            <div class="download-btns">
+              <button class="btn-download" onclick="downloadHomePDF()" title="Download results as PDF">
+                <span>📄</span> Download PDF
+              </button>
+            </div>
           </div>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
@@ -351,6 +373,11 @@
               <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
               <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$264,012</div>
               <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$314,314</strong> less. Time is the most powerful ingredient. Start now.</div>
+            </div>
+            <div class="download-btns">
+              <button class="btn-download" onclick="downloadRetirementPDF()" title="Download results as PDF">
+                <span>📄</span> Download PDF
+              </button>
             </div>
           </div>
         </div>
@@ -426,6 +453,11 @@
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">How to Improve Your Score</div>
               <div id="credit-tips-list" style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;"></div>
             </div>
+            <div class="download-btns">
+              <button class="btn-download" onclick="downloadCreditPDF()" title="Download results as PDF">
+                <span>📄</span> Download PDF
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -437,17 +469,19 @@
         <p class="calc-intro">&ldquo;Nobody sits you down after graduation and says, &lsquo;Here&rsquo;s how to manage a paycheck.&rsquo; You get that first real check and it feels like a lot&mdash;until rent, food, a car payment, and a phone bill eat it alive. A budget isn&rsquo;t about restricting yourself. It&rsquo;s about knowing where your money goes so you can make it work for you.&rdquo;</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label>Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2800" oninput="calcBudget()"></div>
+            <div class="form-group"><label>Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" oninput="calcBudget()"></div>
             <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.5rem; margin-top:0.5rem;">
               <div style="font-weight:600; font-size:0.85rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Your Monthly Expenses</div>
-              <div class="form-group"><label>Rent / Housing ($)</label><input type="number" id="budget-rent" value="800" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Car Payment ($)</label><input type="number" id="budget-car" value="350" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Utilities &mdash; Electric, Water, Gas ($)</label><input type="number" id="budget-utilities" value="120" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Car Payment ($)</label><input type="number" id="budget-car" value="280" oninput="calcBudget()"></div>
               <div class="form-group"><label>Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Phone ($)</label><input type="number" id="budget-phone" value="80" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Groceries / Food ($)</label><input type="number" id="budget-food" value="400" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Gas / Transportation ($)</label><input type="number" id="budget-gas" value="150" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Subscriptions &amp; Entertainment ($)</label><input type="number" id="budget-subs" value="100" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Other Expenses ($)</label><input type="number" id="budget-other" value="100" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Gas / Transportation ($)</label><input type="number" id="budget-gas" value="120" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Cell Phone ($)</label><input type="number" id="budget-phone" value="65" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Groceries / Food ($)</label><input type="number" id="budget-food" value="300" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" oninput="calcBudget()"></div>
+              <div class="form-group"><label>Other Expenses ($)</label><input type="number" id="budget-other" value="50" oninput="calcBudget()"></div>
             </div>
           </div>
           <div>
@@ -466,13 +500,22 @@
             </div>
 
             <div id="budget-advice" style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
-              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">The 50/30/20 Rule</div>
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">The 50/30/20 Guideline</div>
+              <div style="color:var(--text-muted); font-size:0.82rem; line-height:1.6; margin-bottom:0.75rem;">A lot of financial experts recommend this framework as a starting point. It&rsquo;s not a strict rule&mdash;do what works for your situation. The goal is to be intentional about where your money goes.</div>
               <div style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">
-                <div class="result-row"><span class="result-row-label">Needs (50% = <span id="budget-50">$1,400</span>)</span><span class="result-row-value" id="budget-needs-actual">$1,300</span></div>
-                <div class="result-row"><span class="result-row-label">Wants (30% = <span id="budget-30">$840</span>)</span><span class="result-row-value" id="budget-wants-actual">$100</span></div>
-                <div class="result-row"><span class="result-row-label">Savings (20% = <span id="budget-20">$560</span>)</span><span class="result-row-value" id="budget-savings-actual">$670</span></div>
+                <div class="result-row"><span class="result-row-label">Needs (50% = <span id="budget-50">$1,200</span>)</span><span class="result-row-value" id="budget-needs-actual">$1,370</span></div>
+                <div class="result-row"><span class="result-row-label">Wants (30% = <span id="budget-30">$720</span>)</span><span class="result-row-value" id="budget-wants-actual">$190</span></div>
+                <div class="result-row"><span class="result-row-label">Savings (20% = <span id="budget-20">$480</span>)</span><span class="result-row-value" id="budget-savings-actual">$490</span></div>
               </div>
               <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
+            </div>
+            <div class="download-btns">
+              <button class="btn-download" onclick="downloadBudgetPDF()" title="Download results as PDF">
+                <span>📄</span> Download PDF
+              </button>
+              <button class="btn-download" onclick="downloadBudgetExcel()" title="Download results as Excel">
+                <span>📊</span> Download Excel
+              </button>
             </div>
           </div>
         </div>
@@ -493,6 +536,10 @@
   <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
   <p>&copy; 2026 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
 </footer>
+
+<!-- PDF & EXCEL LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script>
 // MOBILE NAV: close menu when a link is clicked
@@ -812,12 +859,14 @@ function calcBudget() {
   var income = +document.getElementById('budget-income').value || 0;
   var expenses = {
     'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Utilities': +document.getElementById('budget-utilities').value || 0,
     'Car Payment': +document.getElementById('budget-car').value || 0,
     'Car Insurance': +document.getElementById('budget-insurance').value || 0,
-    'Phone': +document.getElementById('budget-phone').value || 0,
-    'Groceries / Food': +document.getElementById('budget-food').value || 0,
     'Gas / Transport': +document.getElementById('budget-gas').value || 0,
-    'Subscriptions': +document.getElementById('budget-subs').value || 0,
+    'Cell Phone': +document.getElementById('budget-phone').value || 0,
+    'Groceries / Food': +document.getElementById('budget-food').value || 0,
+    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
+    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
     'Other': +document.getElementById('budget-other').value || 0
   };
 
@@ -848,7 +897,7 @@ function calcBudget() {
   }
 
   // Budget bars
-  var colors = ['#9B59B6','#E74C3C','#E67E22','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
+  var colors = ['#9B59B6','#8E44AD','#E74C3C','#E67E22','#F39C12','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
   var barsHTML = '';
   var i = 0;
   for (var label in expenses) {
@@ -875,9 +924,9 @@ function calcBudget() {
   document.getElementById('budget-30').textContent = fmt(wants30);
   document.getElementById('budget-20').textContent = fmt(save20);
 
-  // Categorize: Needs = rent, car, insurance, food, gas. Wants = phone, subs, other.
-  var needsActual = expenses['Rent / Housing'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Groceries / Food'] + expenses['Gas / Transport'];
-  var wantsActual = expenses['Phone'] + expenses['Subscriptions'] + expenses['Other'];
+  // Categorize: Needs = rent, utilities, car, insurance, gas, food, phone. Wants = streaming, personal, other.
+  var needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
+  var wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
   var savingsActual = Math.max(0, remaining);
   document.getElementById('budget-needs-actual').textContent = fmt(needsActual);
   document.getElementById('budget-needs-actual').style.color = needsActual > needs50 ? '#E74C3C' : '#27AE60';
@@ -887,10 +936,10 @@ function calcBudget() {
   document.getElementById('budget-savings-actual').style.color = savingsActual >= save20 ? '#27AE60' : '#E74C3C';
 
   var rec = '';
-  if (remaining < 0) rec = 'You\u2019re in the red. Look at your biggest expenses and find one thing to cut or reduce. Even $50 a month changes the trajectory.';
-  else if (savingsActual < save20) rec = 'You\u2019re saving ' + fmt(savingsActual) + ' but the 20% target is ' + fmt(save20) + '. Look for places to trim\u2014subscriptions and eating out are usually the easiest wins.';
-  else if (needsActual > needs50) rec = 'Your needs are above 50% of income. That\u2019s common when you\u2019re starting out. As your income grows, work to get this ratio down.';
-  else rec = 'You\u2019re in solid shape. Consider putting that extra ' + fmt(savingsActual) + ' into an emergency fund first (3 months of expenses), then start investing.';
+  if (remaining < 0) rec = 'You\u2019re spending more than you bring in. That\u2019s not sustainable. Look at your biggest expenses and find one thing to cut or reduce. Even $50 a month changes the trajectory.';
+  else if (savingsActual < save20) rec = 'You\u2019re saving ' + fmt(savingsActual) + ' \u2014 the guideline suggests ' + fmt(save20) + '. That\u2019s okay if you\u2019re just starting out. The important thing is you\u2019re saving something. Look for places to trim if you can \u2014 streaming services and eating out are usually the easiest wins.';
+  else if (needsActual > needs50) rec = 'Your needs are above 50% of income. That\u2019s common when you\u2019re young and building your life. As your income grows, work to get this ratio down. The fact that you\u2019re tracking it means you\u2019re already ahead of most people.';
+  else rec = 'You\u2019re in solid shape. Consider putting that extra ' + fmt(savingsActual) + ' into an emergency fund first (aim for 3 months of expenses), then start investing. Even small amounts invested early grow into big numbers over time.';
   document.getElementById('budget-recommendation').textContent = rec;
 }
 
@@ -926,6 +975,410 @@ window.addEventListener('resize', function() {
     else if (id === 'budget') calcBudget();
   }
 });
+
+// PDF DOWNLOAD FUNCTIONS
+function createPDFBase(title) {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+
+  // Dark header
+  pdf.setFillColor(15, 6, 32);
+  pdf.rect(0, 0, 612, 80, 'F');
+
+  // Title
+  pdf.setFont('Playfair Display', 'bold');
+  pdf.setFontSize(24);
+  pdf.setTextColor(212, 175, 55);
+  pdf.text('DREAM/BIG', 306, 35, { align: 'center' });
+
+  // Subtitle
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(184, 168, 208);
+  pdf.text('www.lifeafterhs.com', 306, 55, { align: 'center' });
+
+  // Title section
+  pdf.setFontSize(14);
+  pdf.setTextColor(212, 175, 55);
+  pdf.setFont('Inter', 'bold');
+  pdf.text(title, 40, 110);
+
+  // Date
+  pdf.setFontSize(9);
+  pdf.setTextColor(184, 168, 208);
+  pdf.setFont('Inter', 'normal');
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  pdf.text('Generated: ' + dateStr, 40, 130);
+
+  return { pdf, startY: 150 };
+}
+
+function addPDFSection(pdf, startY, title) {
+  pdf.setFont('Inter', 'bold');
+  pdf.setFontSize(11);
+  pdf.setTextColor(212, 175, 55);
+  pdf.text(title, 40, startY);
+  pdf.setDrawColor(201, 168, 76);
+  pdf.setLineWidth(0.5);
+  pdf.line(40, startY + 5, 572, startY + 5);
+  return startY + 20;
+}
+
+function addPDFRow(pdf, y, label, value) {
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(245, 245, 245);
+  pdf.text(label, 40, y);
+  pdf.text(value, 572, y, { align: 'right' });
+  return y + 18;
+}
+
+function downloadAutoPDF() {
+  const price = +document.getElementById('auto-price').value || 0;
+  const down = +document.getElementById('auto-down').value || 0;
+  const rate = +document.getElementById('auto-rate').value || 0;
+  const term = +document.getElementById('auto-term').value || 5;
+
+  const { pdf, startY } = createPDFBase('Auto Loan Calculator');
+  let y = startY;
+
+  // Inputs
+  y = addPDFSection(pdf, y, 'Your Inputs');
+  y = addPDFRow(pdf, y, 'Vehicle Price:', fmt(price));
+  y = addPDFRow(pdf, y, 'Down Payment:', fmt(down));
+  y = addPDFRow(pdf, y, 'Interest Rate:', rate.toFixed(1) + '%');
+  y = addPDFRow(pdf, y, 'Loan Term:', term + ' years');
+
+  y += 10;
+
+  // Results
+  y = addPDFSection(pdf, y, 'Your Results');
+  y = addPDFRow(pdf, y, 'Monthly Payment:', document.getElementById('auto-monthly').textContent);
+  y = addPDFRow(pdf, y, 'Loan Amount:', document.getElementById('auto-loan').textContent);
+  y = addPDFRow(pdf, y, 'Total Interest Paid:', document.getElementById('auto-interest').textContent);
+  y = addPDFRow(pdf, y, 'Total Cost of Vehicle:', document.getElementById('auto-total').textContent);
+
+  y += 10;
+
+  // Bad Credit Comparison
+  y = addPDFSection(pdf, y, 'What Bad Credit Would Cost You');
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(245, 245, 245);
+  pdf.text('At 13% (bad credit), the same car costs:', 40, y);
+  y += 15;
+  pdf.setFont('Inter', 'bold');
+  pdf.setFontSize(14);
+  pdf.setTextColor(231, 76, 60);
+  pdf.text(document.getElementById('auto-bad-total').textContent, 40, y);
+  y += 18;
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(184, 168, 208);
+  const diff = document.getElementById('auto-bad-diff').textContent;
+  pdf.text('That\'s ' + diff + ' more. Protect your credit.', 40, y, { maxWidth: 500 });
+
+  // Footer
+  pdf.setFontSize(8);
+  pdf.setTextColor(184, 168, 208);
+  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
+
+  pdf.save('Auto-Loan-Results.pdf');
+}
+
+function downloadHomePDF() {
+  const price = +document.getElementById('home-price').value || 0;
+  const down = +document.getElementById('home-down').value || 0;
+  const rate = +document.getElementById('home-rate').value || 0;
+  const term = +document.getElementById('home-term').value || 30;
+
+  const { pdf, startY } = createPDFBase('Home Loan Calculator');
+  let y = startY;
+
+  // Inputs
+  y = addPDFSection(pdf, y, 'Your Inputs');
+  y = addPDFRow(pdf, y, 'Home Price:', fmt(price));
+  y = addPDFRow(pdf, y, 'Down Payment:', fmt(down));
+  y = addPDFRow(pdf, y, 'Interest Rate:', rate.toFixed(1) + '%');
+  y = addPDFRow(pdf, y, 'Loan Term:', term + ' years');
+
+  y += 10;
+
+  // Results
+  y = addPDFSection(pdf, y, 'Your Results');
+  y = addPDFRow(pdf, y, 'Monthly Payment:', document.getElementById('home-monthly').textContent);
+  y = addPDFRow(pdf, y, 'Loan Amount:', document.getElementById('home-loan').textContent);
+  y = addPDFRow(pdf, y, 'Total Interest Paid:', document.getElementById('home-interest').textContent);
+  y = addPDFRow(pdf, y, 'Total Cost of Home:', document.getElementById('home-total').textContent);
+
+  y += 10;
+
+  // Bad Credit Comparison
+  y = addPDFSection(pdf, y, 'What Bad Credit Would Cost You');
+  const badRate = document.getElementById('home-bad-rate').textContent;
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(245, 245, 245);
+  pdf.text('At ' + badRate + '% (bad credit), the same home costs:', 40, y);
+  y += 15;
+  pdf.setFont('Inter', 'bold');
+  pdf.setFontSize(14);
+  pdf.setTextColor(231, 76, 60);
+  pdf.text(document.getElementById('home-bad-total').textContent, 40, y);
+  y += 18;
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(184, 168, 208);
+  const diff = document.getElementById('home-bad-diff').textContent;
+  pdf.text('That\'s ' + diff + ' more. That\'s life-changing money.', 40, y, { maxWidth: 500 });
+
+  // Footer
+  pdf.setFontSize(8);
+  pdf.setTextColor(184, 168, 208);
+  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
+
+  pdf.save('Home-Loan-Results.pdf');
+}
+
+function downloadRetirementPDF() {
+  const age = +document.getElementById('ret-age').value || 22;
+  const retire = +document.getElementById('ret-retire').value || 65;
+  const monthly = +document.getElementById('ret-monthly').value || 0;
+  const ret = +document.getElementById('ret-return').value || 7;
+  const current = +document.getElementById('ret-current').value || 0;
+
+  const { pdf, startY } = createPDFBase('Retirement Savings Calculator');
+  let y = startY;
+
+  // Inputs
+  y = addPDFSection(pdf, y, 'Your Inputs');
+  y = addPDFRow(pdf, y, 'Current Age:', age + ' years');
+  y = addPDFRow(pdf, y, 'Retirement Age:', retire + ' years');
+  y = addPDFRow(pdf, y, 'Monthly Contribution:', fmt(monthly));
+  y = addPDFRow(pdf, y, 'Expected Annual Return:', ret.toFixed(1) + '%');
+  y = addPDFRow(pdf, y, 'Current Savings:', fmt(current));
+
+  y += 10;
+
+  // Results
+  y = addPDFSection(pdf, y, 'Your Results');
+  y = addPDFRow(pdf, y, 'Estimated Total Savings:', document.getElementById('ret-total').textContent);
+  y = addPDFRow(pdf, y, 'Years of Growth:', document.getElementById('ret-years').textContent);
+  y = addPDFRow(pdf, y, 'Total You Contribute:', document.getElementById('ret-contributed').textContent);
+  y = addPDFRow(pdf, y, 'Growth From Interest:', document.getElementById('ret-growth').textContent);
+  y = addPDFRow(pdf, y, 'Interest as % of Total:', document.getElementById('ret-pct').textContent);
+
+  y += 10;
+
+  // Late Start Comparison
+  y = addPDFSection(pdf, y, 'What Waiting 10 Years Costs You');
+  const startAge = document.getElementById('ret-start-age').textContent;
+  const lateAge = document.getElementById('ret-late-age').textContent;
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(245, 245, 245);
+  pdf.text('If you start at ' + lateAge + ' instead of ' + startAge + ':', 40, y);
+  y += 15;
+  pdf.setFont('Inter', 'bold');
+  pdf.setFontSize(14);
+  pdf.setTextColor(212, 175, 55);
+  pdf.text(document.getElementById('ret-late-total').textContent, 40, y);
+  y += 18;
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(184, 168, 208);
+  const lost = document.getElementById('ret-lost').textContent;
+  pdf.text('That\'s ' + lost + ' less. Time is the most powerful ingredient.', 40, y, { maxWidth: 500 });
+
+  // Footer
+  pdf.setFontSize(8);
+  pdf.setTextColor(184, 168, 208);
+  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
+
+  pdf.save('Retirement-Savings-Results.pdf');
+}
+
+function downloadCreditPDF() {
+  const payment = document.getElementById('credit-detail-payment').textContent;
+  const util = document.getElementById('credit-detail-util').textContent;
+  const length = document.getElementById('credit-detail-length').textContent;
+  const mix = document.getElementById('credit-detail-mix').textContent;
+  const inq = document.getElementById('credit-detail-inq').textContent;
+
+  const { pdf, startY } = createPDFBase('Credit Score Estimator');
+  let y = startY;
+
+  // Score
+  y = addPDFSection(pdf, y, 'Your Estimated Credit Score');
+  const score = document.getElementById('credit-score').textContent;
+  const rating = document.getElementById('credit-rating').textContent;
+  pdf.setFont('Inter', 'bold');
+  pdf.setFontSize(16);
+  pdf.setTextColor(212, 175, 55);
+  pdf.text(score, 40, y);
+  pdf.setFontSize(11);
+  pdf.setTextColor(201, 168, 76);
+  pdf.text(rating, 40, y + 20);
+  y += 50;
+
+  // Factors
+  y = addPDFSection(pdf, y, 'Score Factors (FICO-Like Model)');
+  y = addPDFRow(pdf, y, 'Payment History (35%):', payment);
+  y = addPDFRow(pdf, y, 'Credit Utilization (30%):', util);
+  y = addPDFRow(pdf, y, 'Length of History (15%):', length);
+  y = addPDFRow(pdf, y, 'Credit Mix (10%):', mix);
+  y = addPDFRow(pdf, y, 'New Inquiries (10%):', inq);
+
+  y += 10;
+
+  // Tips
+  y = addPDFSection(pdf, y, 'How to Improve Your Score');
+  const tips = document.getElementById('credit-tips-list').textContent.split('•').filter(t => t.trim());
+  pdf.setFont('Inter', 'normal');
+  pdf.setFontSize(9);
+  pdf.setTextColor(184, 168, 208);
+  tips.forEach(tip => {
+    const wrapped = pdf.splitTextToSize('• ' + tip.trim(), 520);
+    wrapped.forEach(line => {
+      pdf.text(line, 40, y);
+      y += 12;
+    });
+  });
+
+  // Footer
+  pdf.setFontSize(8);
+  pdf.setTextColor(184, 168, 208);
+  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
+
+  pdf.save('Credit-Score-Results.pdf');
+}
+
+function downloadBudgetPDF() {
+  const income = +document.getElementById('budget-income').value || 0;
+  const expenses = {
+    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Car Payment': +document.getElementById('budget-car').value || 0,
+    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
+    'Phone': +document.getElementById('budget-phone').value || 0,
+    'Groceries / Food': +document.getElementById('budget-food').value || 0,
+    'Gas / Transportation': +document.getElementById('budget-gas').value || 0,
+    'Subscriptions': +document.getElementById('budget-subs').value || 0,
+    'Other': +document.getElementById('budget-other').value || 0
+  };
+
+  const { pdf, startY } = createPDFBase('Monthly Budget Calculator');
+  let y = startY;
+
+  // Income
+  y = addPDFSection(pdf, y, 'Your Income');
+  y = addPDFRow(pdf, y, 'Monthly Take-Home Pay:', fmt(income));
+
+  y += 10;
+
+  // Expenses
+  y = addPDFSection(pdf, y, 'Your Expenses');
+  let totalExp = 0;
+  for (const label in expenses) {
+    const val = expenses[label];
+    if (val > 0) {
+      y = addPDFRow(pdf, y, label + ':', fmt(val));
+      totalExp += val;
+    }
+  }
+
+  y += 5;
+  pdf.setFont('Inter', 'bold');
+  pdf.setFontSize(10);
+  pdf.setTextColor(212, 175, 55);
+  pdf.text('Total Expenses:', 40, y);
+  pdf.text(fmt(totalExp), 572, y, { align: 'right' });
+  y += 18;
+
+  const remaining = income - totalExp;
+  pdf.setTextColor(remaining >= 0 ? 212 : 231, remaining >= 0 ? 175 : 76, remaining >= 0 ? 55 : 60);
+  pdf.text('Money Left Over:', 40, y);
+  pdf.text((remaining >= 0 ? '' : '−') + fmt(Math.abs(remaining)), 572, y, { align: 'right' });
+
+  y += 20;
+
+  // 50/30/20 Rule
+  y = addPDFSection(pdf, y, 'The 50/30/20 Rule');
+  const needs50 = Math.round(income * 0.50);
+  const wants30 = Math.round(income * 0.30);
+  const save20 = Math.round(income * 0.20);
+  const needsActual = expenses['Rent / Housing'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Groceries / Food'] + expenses['Gas / Transportation'];
+  const wantsActual = expenses['Phone'] + expenses['Subscriptions'] + expenses['Other'];
+  const savingsActual = Math.max(0, remaining);
+
+  y = addPDFRow(pdf, y, 'Needs (50% target = ' + fmt(needs50) + '):', fmt(needsActual));
+  y = addPDFRow(pdf, y, 'Wants (30% target = ' + fmt(wants30) + '):', fmt(wantsActual));
+  y = addPDFRow(pdf, y, 'Savings (20% target = ' + fmt(save20) + '):', fmt(savingsActual));
+
+  // Footer
+  pdf.setFontSize(8);
+  pdf.setTextColor(184, 168, 208);
+  pdf.text('Generated from the DREAM/BIG companion web app', 306, 760, { align: 'center' });
+
+  pdf.save('Budget-Results.pdf');
+}
+
+function downloadBudgetExcel() {
+  const income = +document.getElementById('budget-income').value || 0;
+  const expenses = {
+    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Car Payment': +document.getElementById('budget-car').value || 0,
+    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
+    'Phone': +document.getElementById('budget-phone').value || 0,
+    'Groceries / Food': +document.getElementById('budget-food').value || 0,
+    'Gas / Transportation': +document.getElementById('budget-gas').value || 0,
+    'Subscriptions': +document.getElementById('budget-subs').value || 0,
+    'Other': +document.getElementById('budget-other').value || 0
+  };
+
+  // Build data
+  const totalExp = Object.values(expenses).reduce((a, b) => a + b, 0);
+  const remaining = income - totalExp;
+  const needs50 = Math.round(income * 0.50);
+  const wants30 = Math.round(income * 0.30);
+  const save20 = Math.round(income * 0.20);
+
+  const data = [
+    ['DREAM/BIG Monthly Budget'],
+    [''],
+    ['INCOME'],
+    ['Monthly Take-Home Pay', income],
+    [''],
+    ['EXPENSES'],
+  ];
+
+  for (const label in expenses) {
+    data.push([label, expenses[label]]);
+  }
+
+  data.push(['Total Expenses', totalExp]);
+  data.push(['Money Left Over', remaining]);
+  data.push(['']);
+  data.push(['THE 50/30/20 RULE']);
+  data.push(['', 'Target (% of Income)', 'Your Target ($)', 'Actual ($)', 'Status']);
+
+  const needsActual = expenses['Rent / Housing'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Groceries / Food'] + expenses['Gas / Transportation'];
+  const wantsActual = expenses['Phone'] + expenses['Subscriptions'] + expenses['Other'];
+  const savingsActual = Math.max(0, remaining);
+
+  data.push(['Needs', '50%', needs50, needsActual, needsActual <= needs50 ? 'On Track' : 'Over']);
+  data.push(['Wants', '30%', wants30, wantsActual, wantsActual <= wants30 ? 'On Track' : 'Over']);
+  data.push(['Savings', '20%', save20, savingsActual, savingsActual >= save20 ? 'On Track' : 'Under']);
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Budget');
+
+  // Set column widths
+  ws['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 12 }];
+
+  XLSX.writeFile(wb, 'Budget-Results.xlsx');
+}
 </script>
 </body>
 </html>
