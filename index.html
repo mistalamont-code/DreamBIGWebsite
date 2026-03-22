@@ -328,6 +328,29 @@
   .topic-title { font-weight: 600; margin-bottom: 0.5rem; }
   .topic-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 
+  /* TESTIMONIALS */
+  .testimonials {
+    background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
+  }
+  .testimonials .container { max-width: 700px; text-align: center; }
+  .testimonial-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px; padding: 2.5rem 2rem; position: relative;
+  }
+  .testimonial-card::before {
+    content: '\201C'; position: absolute; top: -10px; left: 24px;
+    font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold);
+    opacity: 0.25; line-height: 1;
+  }
+  .testimonial-text {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--text); line-height: 1.9; opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+  .testimonial-author {
+    font-size: 0.9rem; font-weight: 600; color: var(--gold); letter-spacing: 0.5px;
+  }
+
   /* NEWSLETTER */
   .newsletter {
     background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
@@ -555,6 +578,19 @@
   </div>
 </section>
 
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <span class="section-label">Early Readers</span>
+    <h2 class="section-title">What People Are Saying</h2>
+    <div class="divider" style="margin:1.5rem auto;"></div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">&ldquo;Finished the book today and I really enjoyed it. I liked how you talked about all the different lanes you were in and how they mixed together to get you where you are now &mdash; and speaking on where you come from. Can&rsquo;t wait for it to come out. Definitely going to recommend it to a bunch of people.&rdquo;</p>
+      <p class="testimonial-author">&mdash; Billy Lucas</p>
+    </div>
+  </div>
+</section>
 
 <!-- NEWSLETTER -->
 <section class="newsletter" id="newsletter">
