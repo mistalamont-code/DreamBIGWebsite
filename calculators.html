@@ -147,6 +147,32 @@
     display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;
     text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
   }
+  /* INFO TOOLTIP */
+  .label-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .label-row label { margin-bottom: 0; }
+  .info-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.1); color: var(--gold); font-size: 11px; font-weight: 700;
+    cursor: pointer; flex-shrink: 0; font-family: 'Inter', sans-serif;
+    transition: all 0.2s; line-height: 1; position: relative;
+  }
+  .info-btn:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .info-tooltip {
+    display: none; position: absolute; left: 50%; transform: translateX(-50%);
+    top: calc(100% + 8px); width: 260px; padding: 12px 14px;
+    background: var(--purple-mid); border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 50; font-size: 0.82rem; font-weight: 400; color: var(--text);
+    line-height: 1.6; letter-spacing: 0; text-transform: none; text-align: left;
+  }
+  .info-tooltip::before {
+    content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; background: var(--purple-mid);
+    border-left: 1px solid rgba(201,168,76,0.25); border-top: 1px solid rgba(201,168,76,0.25);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .info-btn.active .info-tooltip { display: block; }
   .form-group input, .form-group select {
     width: 100%; padding: 12px 16px; background: var(--purple-surface); border: 1px solid rgba(201,168,76,0.2);
     border-radius: 4px; color: var(--text); font-size: 1rem; font-family: 'Inter', sans-serif;
@@ -284,6 +310,10 @@
     .compare-bar-label { width: 65px; font-size: 0.75rem; }
     .compare-bar-fill { font-size: 0.7rem; min-width: 50px; }
     .gauge-wrapper canvas { width: 240px !important; height: 150px !important; }
+
+    /* Info tooltips */
+    .info-tooltip { width: 220px; left: auto; right: -10px; transform: none; }
+    .info-tooltip::before { left: auto; right: 14px; transform: rotate(45deg); }
 
     /* Charts */
     .amort-chart-wrapper canvas { height: 220px !important; }
@@ -449,18 +479,45 @@
         <p class="calc-intro">&ldquo;The power of compound interest is real. Money you invest in your 20s is worth exponentially more than money you invest in your 40s. Small decisions. Compounded over time. Big impact.&rdquo;</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label>Your Current Age</label><input type="number" id="ret-age" value="22" oninput="calcRetirement()"></div>
-            <div class="form-group"><label>Retirement Age</label><input type="number" id="ret-retire" value="65" oninput="calcRetirement()"></div>
-            <div class="form-group"><label>Monthly Contribution ($)</label><input type="number" id="ret-monthly" value="200" oninput="calcRetirement()"></div>
-            <div class="form-group"><label>Expected Annual Return (%)</label><input type="number" id="ret-return" value="7" step="0.5" oninput="calcRetirement()"></div>
-            <div class="form-group"><label>Current Savings ($)</label><input type="number" id="ret-current" value="0" oninput="calcRetirement()"></div>
+            <div class="form-group">
+              <label>Your Current Age</label>
+              <input type="number" id="ret-age" value="22" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>When Do You Want to Retire?</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Most people retire between 62 and 67. The longer you work, the more time your money has to grow. Even a few extra years makes a big difference.</span></span>
+              </div>
+              <input type="number" id="ret-retire" value="65" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>How Much Can You Save Per Month?</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is money you put into a retirement account like a 401(k) through your job or an IRA you open yourself. Even $50/month matters. If your job matches contributions, that&rsquo;s free money&mdash;always take it.</span></span>
+              </div>
+              <input type="number" id="ret-monthly" value="200" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Average Yearly Growth (%)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is how much your investments grow each year on average. The stock market has historically returned about 7% per year over long periods. You don&rsquo;t need to pick stocks&mdash;a simple index fund does this for you. Leave this at 7% if you&rsquo;re not sure.</span></span>
+              </div>
+              <input type="number" id="ret-return" value="7" step="0.5" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Money You&rsquo;ve Already Saved ($)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">If you already have money in a savings account, 401(k), or any investment, put that number here. Starting from zero? That&rsquo;s fine&mdash;most people your age are. The point is to start now.</span></span>
+              </div>
+              <input type="number" id="ret-current" value="0" oninput="calcRetirement()">
+            </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Estimated Retirement Savings</div><div class="result-value" id="ret-total">$578,326</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">What You Could Retire With</div><div class="result-value" id="ret-total">$578,326</div></div>
             <div class="result-row"><span class="result-row-label">Years of Growth</span><span class="result-row-value" id="ret-years">43 years</span></div>
-            <div class="result-row"><span class="result-row-label">Total You Contribute</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
-            <div class="result-row"><span class="result-row-label">Growth From Interest</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
-            <div class="result-row"><span class="result-row-label">Interest as % of Total</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">82%</span></div>
+            <div class="result-row"><span class="result-row-label">What You Put In</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
+            <div class="result-row"><span class="result-row-label">What Your Money Earned on Its Own</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
+            <div class="result-row"><span class="result-row-label">Growth vs. Your Contributions</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">82%</span></div>
             <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">What Waiting 10 Years Costs You</div>
               <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
@@ -479,38 +536,60 @@
         <p class="calc-intro">&ldquo;Your credit score is your financial reputation. It follows you everywhere&mdash;apartments, car lots, job applications. Nobody teaches you this in school, but it&rsquo;s one of the most important numbers in your life.&rdquo;</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label>Payment History</label>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Do You Pay Bills on Time?</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is the single biggest factor in your credit score&mdash;35% of it. Every late payment hurts. Every on-time payment builds trust. Set up autopay if you can.</span></span>
+              </div>
               <select id="credit-payment" onchange="calcCredit()">
-                <option value="5">Excellent &mdash; Always on time</option>
-                <option value="4" selected>Good &mdash; Missed 1&ndash;2 payments</option>
-                <option value="3">Fair &mdash; A few late payments</option>
-                <option value="2">Poor &mdash; Multiple late/missed</option>
-                <option value="1">Very Poor &mdash; Collections or defaults</option>
+                <option value="5">Always &mdash; never missed one</option>
+                <option value="4" selected>Mostly &mdash; slipped once or twice</option>
+                <option value="3">Sometimes &mdash; been late a few times</option>
+                <option value="2">Not great &mdash; missed several</option>
+                <option value="1">Defaulted &mdash; went to collections</option>
               </select>
             </div>
-            <div class="form-group"><label>Credit Utilization (% of limit used)</label><input type="number" id="credit-util" value="30" min="0" max="100" step="1" oninput="calcCredit()"></div>
-            <div class="form-group"><label>Length of Credit History</label>
+            <div class="form-group">
+              <div class="label-row">
+                <label>How Much of Your Credit Do You Use?</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">If your credit card limit is $1,000 and your balance is $300, you&rsquo;re using 30%. Lenders like to see you use less than 30% of what&rsquo;s available. Under 10% is even better. This is 30% of your score.</span></span>
+              </div>
+              <input type="number" id="credit-util" value="30" min="0" max="100" step="1" oninput="calcCredit()" placeholder="e.g. 30 means 30%">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>How Long Have You Had Credit?</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The longer your credit history, the better. This is why you should keep your first credit card open even if you don&rsquo;t use it much. Closing old accounts shortens your history and can drop your score.</span></span>
+              </div>
               <select id="credit-length" onchange="calcCredit()">
-                <option value="1">Less than 1 year</option>
+                <option value="1">Just started &mdash; less than a year</option>
                 <option value="2" selected>1&ndash;3 years</option>
                 <option value="3">3&ndash;7 years</option>
                 <option value="4">7&ndash;15 years</option>
                 <option value="5">15+ years</option>
               </select>
             </div>
-            <div class="form-group"><label>Credit Mix</label>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Types of Credit You Have</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Lenders like to see you can handle different kinds of credit&mdash;like a credit card plus a car loan. You don&rsquo;t need to go get a loan just for this, but having more than one type helps. This is 10% of your score.</span></span>
+              </div>
               <select id="credit-mix" onchange="calcCredit()">
-                <option value="1">One type only (e.g. just a credit card)</option>
-                <option value="2" selected>Two types (card + loan)</option>
+                <option value="1">Just one &mdash; like a credit card only</option>
+                <option value="2" selected>Two types &mdash; card + a loan</option>
                 <option value="3">Three or more types</option>
               </select>
             </div>
-            <div class="form-group"><label>Recent Hard Inquiries (last 2 years)</label>
+            <div class="form-group">
+              <div class="label-row">
+                <label>How Often Have You Applied for Credit?</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Every time you apply for a credit card, car loan, or apartment, the lender checks your credit. That&rsquo;s a &ldquo;hard inquiry&rdquo; and it stays on your report for 2 years. Too many in a short time looks desperate to lenders.</span></span>
+              </div>
               <select id="credit-inquiries" onchange="calcCredit()">
-                <option value="0" selected>None</option>
-                <option value="1">1&ndash;2 inquiries</option>
-                <option value="3">3&ndash;5 inquiries</option>
-                <option value="6">6+ inquiries</option>
+                <option value="0" selected>Haven&rsquo;t applied recently</option>
+                <option value="1">Applied once or twice</option>
+                <option value="3">Applied 3&ndash;5 times</option>
+                <option value="6">Applied 6+ times</option>
               </select>
             </div>
           </div>
@@ -1366,6 +1445,20 @@ function calcBudget() {
   else rec = 'You\u2019re in solid shape. Consider putting that extra ' + fmt(savingsActual) + ' into an emergency fund first (aim for 3 months of expenses), then start investing. Even small amounts invested early grow into big numbers over time.';
   document.getElementById('budget-recommendation').textContent = rec;
 }
+
+// INFO TOOLTIP TOGGLE
+function toggleInfo(btn) {
+  const wasActive = btn.classList.contains('active');
+  // Close all other tooltips first
+  document.querySelectorAll('.info-btn.active').forEach(b => b.classList.remove('active'));
+  if (!wasActive) btn.classList.add('active');
+}
+// Close tooltips when clicking elsewhere
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.info-btn')) {
+    document.querySelectorAll('.info-btn.active').forEach(b => b.classList.remove('active'));
+  }
+});
 
 function switchCalc(id, el) {
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
