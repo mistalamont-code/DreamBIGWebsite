@@ -423,7 +423,14 @@
   /* DIVIDER */
   .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
 
-  /* RESPONSIVE */
+  /* RESPONSIVE — TABLET */
+  @media (max-width: 1024px) {
+    .hero-inner { max-width: 700px; }
+    .hero-quote { max-width: 580px; }
+    .about-headshot { width: 180px; height: 180px; }
+  }
+
+  /* RESPONSIVE — MOBILE */
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .nav-toggle { display: block; }
@@ -437,9 +444,45 @@
     .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
     .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
     .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
-    .about-stats { flex-wrap: wrap; }
-    .feature-card { flex-direction: column; gap: 0.75rem; }
     section { padding: 60px 1.25rem; }
+
+    /* Hero */
+    .hero { padding: 100px 1.25rem 60px; min-height: auto; }
+    .hero-quote { font-size: 0.95rem; line-height: 1.7; max-width: 100%; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .hero-cta .btn { width: 100%; max-width: 280px; text-align: center; }
+
+    /* About */
+    .about-headshot { width: 160px; height: 160px; }
+    .about-headline { font-size: 1.3rem; }
+    .about-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .stat-number { font-size: 1.5rem; }
+
+    /* Book */
+    .feature-card { flex-direction: column; gap: 0.75rem; }
+    .feature-letter { font-size: 2rem; }
+
+    /* Testimonials */
+    .testimonial-card { padding: 2rem 1.5rem; }
+    .testimonial-text { font-size: 1rem; line-height: 1.8; }
+    .testimonial-card::before { font-size: 3.5rem; top: -6px; left: 16px; }
+
+    /* Newsletter */
+    .newsletter-form input { min-width: 200px; }
+  }
+
+  /* RESPONSIVE — SMALL PHONE */
+  @media (max-width: 380px) {
+    nav { padding: 0 1rem; }
+    .nav-logo { font-size: 1.2rem; }
+    section { padding: 50px 1rem; }
+    .hero { padding: 90px 1rem 50px; }
+    .hero-quote { font-size: 0.9rem; }
+    .stat-number { font-size: 1.3rem; }
+    .about-headshot { width: 130px; height: 130px; }
+    .section-text { font-size: 0.95rem; }
+    .testimonial-card { padding: 1.5rem 1.25rem; }
+    .btn { padding: 12px 28px; font-size: 0.85rem; }
   }
 </style>
 </head>
