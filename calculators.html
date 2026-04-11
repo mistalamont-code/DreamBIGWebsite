@@ -198,6 +198,121 @@
   .compare-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
   .compare-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #E74C3C; font-weight: 700; }
 
+  /* CREDIT SCORE SLIDER */
+  .credit-slider-box {
+    margin-top: 2rem; padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, rgba(15,6,32,0.9), rgba(45,27,78,0.9));
+    border: 2px solid rgba(201,168,76,0.25); border-radius: 12px;
+    position: relative; overflow: hidden;
+  }
+  .credit-slider-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, #E74C3C, #E67E22, #F1C40F, #27AE60, #1ABC9C);
+  }
+  .credit-slider-header { text-align: center; margin-bottom: 1.5rem; }
+  .credit-slider-title {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .credit-slider-subtitle {
+    font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; margin: 0 auto;
+  }
+  .slider-main-layout {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .slider-control-area { text-align: center; }
+  .slider-score-display {
+    text-align: center; margin-bottom: 0.5rem;
+  }
+  .slider-score-num {
+    font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700;
+    line-height: 1; transition: color 0.3s;
+  }
+  .slider-score-label {
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-top: 0.25rem; transition: color 0.3s;
+  }
+  .credit-range-slider {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 12px;
+    border-radius: 6px; outline: none; margin: 1rem 0 0.5rem; cursor: pointer;
+    background: linear-gradient(to right, #E74C3C 0%, #E67E22 25%, #F1C40F 50%, #27AE60 75%, #1ABC9C 100%);
+  }
+  .credit-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 32px; height: 32px;
+    border-radius: 50%; background: white; cursor: grab;
+    border: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 3px rgba(201,168,76,0.3);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .credit-range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.6), 0 0 0 5px rgba(201,168,76,0.4);
+  }
+  .credit-range-slider::-webkit-slider-thumb:active { cursor: grabbing; }
+  .credit-range-slider::-moz-range-thumb {
+    width: 32px; height: 32px; border-radius: 50%; background: white;
+    cursor: grab; border: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 3px rgba(201,168,76,0.3);
+  }
+  .slider-range-labels {
+    display: flex; justify-content: space-between; font-size: 0.72rem;
+    color: var(--text-muted); margin-top: 0.25rem; text-align: center;
+  }
+  .slider-range-labels em { display: block; font-style: normal; font-size: 0.65rem; opacity: 0.6; margin-top: 1px; }
+  .slider-results {
+    display: flex; align-items: stretch; justify-content: center; gap: 0; margin-top: 0.5rem;
+  }
+  .slider-vs {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--gold); opacity: 0.6; padding: 0 1rem; flex-shrink: 0;
+  }
+  .slider-result-card {
+    flex: 1; max-width: 240px; padding: 1.25rem 1rem; border-radius: 10px; text-align: center;
+  }
+  .slider-result-card.yours {
+    background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3);
+  }
+  .slider-result-card.slider {
+    background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .slider-result-card.slider.good {
+    background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.3);
+  }
+  .slider-card-emoji { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .slider-card-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .slider-card-label.yours { color: #27AE60; }
+  .slider-card-label.slider { color: #E74C3C; }
+  .slider-card-label.slider.good { color: #27AE60; }
+  .slider-card-rate {
+    font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.35rem;
+  }
+  .slider-card-total {
+    font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text);
+  }
+  .slider-card-monthly {
+    font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;
+  }
+  .slider-diff-bar {
+    margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 8px;
+    text-align: center; font-size: 1rem; line-height: 1.6;
+    background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.2);
+    transition: all 0.3s;
+  }
+  .slider-diff-bar.savings {
+    background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.2);
+  }
+  .slider-diff-amount {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
+    display: inline-block; transition: color 0.3s;
+  }
+  .slider-diff-amount.cost { color: #E74C3C; }
+  .slider-diff-amount.save { color: #27AE60; }
+
   /* DONUT CHART */
   .donut-wrapper { display: flex; align-items: center; gap: 1.5rem; margin: 1.5rem 0; }
   .donut-canvas { flex-shrink: 0; }
@@ -317,6 +432,20 @@
 
     /* Charts */
     .amort-chart-wrapper canvas { height: 220px !important; }
+
+    /* Credit slider */
+    .credit-slider-box { padding: 1.5rem 1.25rem; }
+    .credit-slider-title { font-size: 1.1rem; }
+    .credit-slider-subtitle { font-size: 0.85rem; }
+    .slider-score-num { font-size: 2.5rem; }
+    .slider-results { flex-direction: column; align-items: center; gap: 0.5rem; }
+    .slider-result-card { max-width: 100%; width: 100%; }
+    .slider-vs { padding: 0.25rem 0; font-size: 0.9rem; }
+    .slider-card-total { font-size: 1.3rem; }
+    .slider-diff-amount { font-size: 1.4rem; }
+    .slider-diff-bar { font-size: 0.9rem; }
+    .credit-range-slider { height: 10px; }
+    .credit-range-slider::-webkit-slider-thumb { width: 28px; height: 28px; }
   }
 
   /* RESPONSIVE — SMALL PHONE */
@@ -378,37 +507,94 @@
         <p class="calc-intro">&ldquo;When I went to buy my first real car&mdash;a 1998 Buick Park Avenue, $6,500&mdash;the interest rate was 13%. I remember sitting in that dealership, signing those papers, and doing the math in my head. I was paying so much money in interest.&rdquo; Do the math: 13% interest on that $6,500 loan over five years meant roughly $2,374 in interest alone&mdash;paying nearly $8,874 total for a $6,500 car.</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label>Vehicle Price ($)</label><input type="number" id="auto-price" value="25000" oninput="calcAuto()"></div>
-            <div class="form-group"><label>Down Payment ($)</label><input type="number" id="auto-down" value="2000" oninput="calcAuto()"></div>
-            <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="auto-rate" value="6" step="0.1" oninput="calcAuto()"></div>
-            <div class="form-group"><label>Loan Term (Years)</label>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Vehicle Price ($)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The sticker price of the car. Remember, a brand-new car loses 20% of its value the moment you drive it off the lot. A two- or three-year-old car with low miles can save you thousands and still feel new.</span></span>
+              </div>
+              <input type="number" id="auto-price" value="25000" oninput="calcAuto()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Down Payment ($)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The cash you pay upfront. The more you put down, the less you borrow, and the less interest you pay over the life of the loan. Even an extra $500 down can save you hundreds in interest.</span></span>
+              </div>
+              <input type="number" id="auto-down" value="2000" oninput="calcAuto()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Interest Rate (%)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is based on your credit score. Good credit (700+) might get you 4&ndash;6%. Bad credit can mean 15&ndash;20% or higher. That&rsquo;s the difference between paying $28K and $40K for the same car. Your credit score is money.</span></span>
+              </div>
+              <input type="number" id="auto-rate" value="6" step="0.1" oninput="calcAuto()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Loan Term (Years)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">How long you take to pay it off. Longer terms mean lower monthly payments, but way more interest. A 7-year loan costs thousands more than a 4-year loan on the same car. Keep it as short as you can afford.</span></span>
+              </div>
               <select id="auto-term" onchange="calcAuto()">
                 <option value="3">3 Years</option><option value="4">4 Years</option>
-                <option value="5" selected>5 Years</option><option value="6">6 Years</option><option value="7">7 Years</option>
+                <option value="5">5 Years</option><option value="6">6 Years</option><option value="7" selected>7 Years</option>
               </select>
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly">$445</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly">$336</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$23,000</span></div>
-            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$3,679</span></div>
-            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$26,679</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$5,224</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$28,224</span></div>
             <div class="donut-wrapper">
               <canvas id="auto-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
               <div class="donut-legend">
                 <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="auto-donut-prin">$23,000</strong></div>
-                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="auto-donut-int">$3,679</strong></div>
-                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="auto-donut-pct">14% of your payments go to the bank</div>
+                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="auto-donut-int">$5,224</strong></div>
+                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="auto-donut-pct">19% of your payments go to the bank</div>
               </div>
             </div>
-            <div class="compare-box">
-              <div class="compare-title">What Bad Credit Would Cost You</div>
-              <div class="compare-visual">
-                <div class="compare-bar-row"><span class="compare-bar-label">Your rate</span><div class="compare-bar-track"><div class="compare-bar-fill" id="auto-good-bar" style="background: #27AE60;">$26,679</div></div></div>
-                <div class="compare-bar-row"><span class="compare-bar-label">Bad credit</span><div class="compare-bar-track"><div class="compare-bar-fill" id="auto-bad-bar" style="background: #E74C3C;">$31,548</div></div></div>
+          </div>
+        </div>
+        <!-- CREDIT SCORE SLIDER — FULL WIDTH -->
+        <div class="credit-slider-box" id="auto-slider-box">
+          <div class="credit-slider-header">
+            <div class="credit-slider-title">What Does Your Credit Score Really Cost You?</div>
+            <div class="credit-slider-subtitle">Slide to any credit score. Watch what happens to the price of this car. Same car. Same loan. The only thing that changes is your credit.</div>
+          </div>
+          <div class="slider-main-layout">
+            <div class="slider-control-area">
+              <div class="slider-score-display">
+                <div class="slider-score-num" id="auto-slider-score">550</div>
+                <div class="slider-score-label" id="auto-slider-rating" style="color:#E74C3C;">Poor</div>
               </div>
-              <div class="compare-text" style="margin-top:0.75rem;">That&rsquo;s <strong id="auto-bad-diff" style="color:#E74C3C; font-size:1.1rem;">$4,869</strong> more&mdash;just because of bad credit. Protect your credit.</div>
+              <input type="range" class="credit-range-slider" id="auto-credit-slider" min="300" max="850" value="550" oninput="updateAutoSlider()">
+              <div class="slider-range-labels">
+                <span>300<br><em>Worst</em></span>
+                <span>580<br><em>Poor</em></span>
+                <span>670<br><em>Fair</em></span>
+                <span>740<br><em>Good</em></span>
+                <span>850<br><em>Best</em></span>
+              </div>
             </div>
+            <div class="slider-results">
+              <div class="slider-result-card yours">
+                <div class="slider-card-emoji">&#x2705;</div>
+                <div class="slider-card-label yours">With Your Rate</div>
+                <div class="slider-card-rate" id="auto-yours-rate">6.0% interest</div>
+                <div class="slider-card-total" id="auto-yours-total">$28,224</div>
+                <div class="slider-card-monthly" id="auto-yours-monthly">$336/mo</div>
+              </div>
+              <div class="slider-vs">VS</div>
+              <div class="slider-result-card slider" id="auto-slider-card">
+                <div class="slider-card-emoji" id="auto-slider-emoji">&#x274C;</div>
+                <div class="slider-card-label slider" id="auto-slider-label">Score of <span id="auto-slider-card-score">550</span></div>
+                <div class="slider-card-rate" id="auto-slider-rate">18.0% interest</div>
+                <div class="slider-card-total" id="auto-slider-total">$38,961</div>
+                <div class="slider-card-monthly" id="auto-slider-monthly">$464/mo</div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-diff-bar" id="auto-slider-diff">
+            <span id="auto-slider-diff-text">Bad credit would cost you </span><span class="slider-diff-amount cost" id="auto-slider-diff-amt">$10,737</span><span id="auto-slider-diff-suffix"> extra&mdash;for the exact same car.</span>
           </div>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
@@ -429,36 +615,93 @@
         <p class="calc-intro">&ldquo;Good credit at 5%: your total cost is $289,800. Bad credit at 8.5%: your total cost is $415,080. That&rsquo;s $125,280 more over the life of the loan. Read that number again.&rdquo;</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label>Home Price ($)</label><input type="number" id="home-price" value="200000" oninput="calcHome()"></div>
-            <div class="form-group"><label>Down Payment ($)</label><input type="number" id="home-down" value="20000" oninput="calcHome()"></div>
-            <div class="form-group"><label>Interest Rate (%)</label><input type="number" id="home-rate" value="6.5" step="0.1" oninput="calcHome()"></div>
-            <div class="form-group"><label>Loan Term (Years)</label>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Home Price ($)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The purchase price of the home. In Erie, a solid starter home can run $100K&ndash;$200K. Focus on what you can actually afford, not what a bank will approve you for. Those are two very different numbers.</span></span>
+              </div>
+              <input type="number" id="home-price" value="150000" oninput="calcHome()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Down Payment ($)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The cash you bring to closing. 20% down avoids PMI (private mortgage insurance)&mdash;an extra monthly fee that protects the bank, not you. Even if you can&rsquo;t hit 20%, every dollar you put down reduces what you borrow and what you pay in interest.</span></span>
+              </div>
+              <input type="number" id="home-down" value="15000" oninput="calcHome()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Interest Rate (%)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Your mortgage rate depends on your credit score, the market, and your down payment. Even half a percent difference on a 30-year mortgage can mean tens of thousands of dollars. Shop around&mdash;don&rsquo;t just take the first offer.</span></span>
+              </div>
+              <input type="number" id="home-rate" value="6.5" step="0.1" oninput="calcHome()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label>Loan Term (Years)</label>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">15-year loans have higher monthly payments but save you a massive amount in interest. 30-year loans are easier month to month, but you&rsquo;ll pay for the house nearly twice over. Run both options here and see the difference.</span></span>
+              </div>
               <select id="home-term" onchange="calcHome()">
                 <option value="15">15 Years</option><option value="20">20 Years</option><option value="30" selected>30 Years</option>
               </select>
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly">$1,137</div></div>
-            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$180,000</span></div>
-            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$229,468</span></div>
-            <div class="result-row"><span class="result-row-label">Total Cost of Home</span><span class="result-row-value" id="home-total">$409,468</span></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly">$853</div></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$135,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$172,185</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Home</span><span class="result-row-value" id="home-total">$307,185</span></div>
             <div class="donut-wrapper">
               <canvas id="home-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
               <div class="donut-legend">
-                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="home-donut-prin">$180,000</strong></div>
-                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="home-donut-int">$229,468</strong></div>
+                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="home-donut-prin">$135,000</strong></div>
+                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="home-donut-int">$172,185</strong></div>
                 <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="home-donut-pct">56% of your payments go to the bank</div>
               </div>
             </div>
-            <div class="compare-box">
-              <div class="compare-title">What Bad Credit Would Cost You</div>
-              <div class="compare-visual">
-                <div class="compare-bar-row"><span class="compare-bar-label">Your rate</span><div class="compare-bar-track"><div class="compare-bar-fill" id="home-good-bar" style="background: #27AE60;">$409,468</div></div></div>
-                <div class="compare-bar-row"><span class="compare-bar-label">Bad credit</span><div class="compare-bar-track"><div class="compare-bar-fill" id="home-bad-bar" style="background: #E74C3C;">$511,380</div></div></div>
+          </div>
+        </div>
+        <!-- CREDIT SCORE SLIDER — FULL WIDTH -->
+        <div class="credit-slider-box" id="home-slider-box">
+          <div class="credit-slider-header">
+            <div class="credit-slider-title">What Does Your Credit Score Really Cost You?</div>
+            <div class="credit-slider-subtitle">This is where it gets serious. On a 30-year mortgage, bad credit doesn&rsquo;t just cost you thousands&mdash;it costs you a house worth of money. Slide and see.</div>
+          </div>
+          <div class="slider-main-layout">
+            <div class="slider-control-area">
+              <div class="slider-score-display">
+                <div class="slider-score-num" id="home-slider-score">550</div>
+                <div class="slider-score-label" id="home-slider-rating" style="color:#E74C3C;">Poor</div>
               </div>
-              <div class="compare-text" style="margin-top:0.75rem;">That&rsquo;s <strong id="home-bad-diff" style="color:#E74C3C; font-size:1.1rem;">$101,912</strong> more. That&rsquo;s not a small number. That&rsquo;s life-changing money.</div>
+              <input type="range" class="credit-range-slider" id="home-credit-slider" min="300" max="850" value="550" oninput="updateHomeSlider()">
+              <div class="slider-range-labels">
+                <span>300<br><em>Worst</em></span>
+                <span>580<br><em>Poor</em></span>
+                <span>670<br><em>Fair</em></span>
+                <span>740<br><em>Good</em></span>
+                <span>850<br><em>Best</em></span>
+              </div>
             </div>
+            <div class="slider-results">
+              <div class="slider-result-card yours">
+                <div class="slider-card-emoji">&#x2705;</div>
+                <div class="slider-card-label yours">With Your Rate</div>
+                <div class="slider-card-rate" id="home-yours-rate">6.5% interest</div>
+                <div class="slider-card-total" id="home-yours-total">$307,185</div>
+                <div class="slider-card-monthly" id="home-yours-monthly">$853/mo</div>
+              </div>
+              <div class="slider-vs">VS</div>
+              <div class="slider-result-card slider" id="home-slider-card">
+                <div class="slider-card-emoji" id="home-slider-emoji">&#x274C;</div>
+                <div class="slider-card-label slider" id="home-slider-label">Score of <span id="home-slider-card-score">550</span></div>
+                <div class="slider-card-rate" id="home-slider-rate">9.8% interest</div>
+                <div class="slider-card-total" id="home-slider-total">$444,290</div>
+                <div class="slider-card-monthly" id="home-slider-monthly">$1,165/mo</div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-diff-bar" id="home-slider-diff">
+            <span id="home-slider-diff-text">Bad credit would cost you </span><span class="slider-diff-amount cost" id="home-slider-diff-amt">$137,105</span><span id="home-slider-diff-suffix"> extra&mdash;for the exact same house.</span>
           </div>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
@@ -1192,8 +1435,6 @@ function calcAuto() {
   document.getElementById('auto-loan').textContent = fmt(loan);
   document.getElementById('auto-interest').textContent = fmt(good.totalInterest);
   animatedFmt('auto-total', good.total + down);
-  animatedFmt('auto-bad-diff', bad.total - good.total);
-
   // Donut chart
   const intPct = good.total > 0 ? Math.round((good.totalInterest / good.total) * 100) : 0;
   drawDonut('auto-donut', [
@@ -1204,14 +1445,11 @@ function calcAuto() {
   document.getElementById('auto-donut-int').textContent = fmt(good.totalInterest);
   document.getElementById('auto-donut-pct').textContent = intPct + '% of your payments go to the bank';
 
-  // Comparison bars
-  const goodTotal = good.total + down;
-  const badTotal = bad.total + down;
-  const maxBar = badTotal * 1.05;
-  document.getElementById('auto-good-bar').style.width = (goodTotal / maxBar * 100) + '%';
-  document.getElementById('auto-good-bar').textContent = fmt(goodTotal);
-  document.getElementById('auto-bad-bar').style.width = (badTotal / maxBar * 100) + '%';
-  document.getElementById('auto-bad-bar').textContent = fmt(badTotal);
+  // Update "Your Rate" side of slider
+  document.getElementById('auto-yours-rate').textContent = rate.toFixed(1) + '% interest';
+  document.getElementById('auto-yours-total').textContent = fmt(good.total + down);
+  document.getElementById('auto-yours-monthly').textContent = fmt(good.monthly) + '/mo';
+  updateAutoSlider();
 
   drawAmortChart('auto-amort-chart', loan, rate, term);
 }
@@ -1228,8 +1466,6 @@ function calcHome() {
   document.getElementById('home-loan').textContent = fmt(loan);
   document.getElementById('home-interest').textContent = fmt(good.totalInterest);
   animatedFmt('home-total', good.total + down);
-  animatedFmt('home-bad-diff', (bad.total + down) - (good.total + down));
-
   // Donut chart
   const intPct = good.total > 0 ? Math.round((good.totalInterest / good.total) * 100) : 0;
   drawDonut('home-donut', [
@@ -1240,17 +1476,124 @@ function calcHome() {
   document.getElementById('home-donut-int').textContent = fmt(good.totalInterest);
   document.getElementById('home-donut-pct').textContent = intPct + '% of your payments go to the bank';
 
-  // Comparison bars
-  const goodTotal = good.total + down;
-  const badTotal = bad.total + down;
-  const maxBar = badTotal * 1.05;
-  document.getElementById('home-good-bar').style.width = (goodTotal / maxBar * 100) + '%';
-  document.getElementById('home-good-bar').textContent = fmt(goodTotal);
-  document.getElementById('home-bad-bar').style.width = (badTotal / maxBar * 100) + '%';
-  document.getElementById('home-bad-bar').textContent = fmt(badTotal);
+  // Update "Your Rate" side of slider
+  document.getElementById('home-yours-rate').textContent = rate.toFixed(1) + '% interest';
+  document.getElementById('home-yours-total').textContent = fmt(good.total + down);
+  document.getElementById('home-yours-monthly').textContent = fmt(good.monthly) + '/mo';
+  updateHomeSlider();
 
   drawAmortChart('home-amort-chart', loan, rate, term);
 }
+
+// === CREDIT SCORE SLIDER SYSTEM ===
+// Real-world rate tiers based on credit score ranges
+function autoRateFromScore(score) {
+  if (score >= 780) return 4.5;
+  if (score >= 740) return 5.2;
+  if (score >= 700) return 6.5;
+  if (score >= 670) return 8.5;
+  if (score >= 620) return 11.5;
+  if (score >= 560) return 14.5;
+  if (score >= 500) return 18.0;
+  return 22.0;
+}
+function homeRateFromScore(score) {
+  if (score >= 780) return 5.8;
+  if (score >= 740) return 6.2;
+  if (score >= 700) return 6.8;
+  if (score >= 670) return 7.5;
+  if (score >= 620) return 8.5;
+  if (score >= 560) return 9.8;
+  if (score >= 500) return 11.5;
+  return 13.5;
+}
+function creditRating(score) {
+  if (score >= 750) return { label: 'Excellent', color: '#1ABC9C' };
+  if (score >= 700) return { label: 'Good', color: '#27AE60' };
+  if (score >= 650) return { label: 'Fair', color: '#F1C40F' };
+  if (score >= 580) return { label: 'Poor', color: '#E67E22' };
+  return { label: 'Very Poor', color: '#E74C3C' };
+}
+
+function updateCreditSlider(prefix, rateFunc, suffix) {
+  const score = +document.getElementById(prefix + '-credit-slider').value;
+  const rating = creditRating(score);
+  const sliderRate = rateFunc(score);
+
+  // Read current loan params
+  const priceId = prefix === 'auto' ? 'auto-price' : 'home-price';
+  const downId = prefix === 'auto' ? 'auto-down' : 'home-down';
+  const rateId = prefix === 'auto' ? 'auto-rate' : 'home-rate';
+  const termId = prefix === 'auto' ? 'auto-term' : 'home-term';
+
+  const price = +document.getElementById(priceId).value || 0;
+  const down = +document.getElementById(downId).value || 0;
+  const userRate = +document.getElementById(rateId).value || 0;
+  const term = +document.getElementById(termId).value || (prefix === 'auto' ? 7 : 30);
+  const loan = price - down;
+
+  const userCalc = calcLoan(loan, userRate, term);
+  const sliderCalc = calcLoan(loan, sliderRate, term);
+  const userTotal = userCalc.total + down;
+  const sliderTotal = sliderCalc.total + down;
+  const diff = sliderTotal - userTotal;
+
+  // Score display — color the number to match rating
+  const scoreEl = document.getElementById(prefix + '-slider-score');
+  scoreEl.textContent = score;
+  scoreEl.style.color = rating.color;
+  document.getElementById(prefix + '-slider-rating').textContent = rating.label;
+  document.getElementById(prefix + '-slider-rating').style.color = rating.color;
+
+  // Slider card
+  document.getElementById(prefix + '-slider-rate').textContent = sliderRate.toFixed(1) + '% interest';
+  document.getElementById(prefix + '-slider-total').textContent = fmt(sliderTotal);
+  document.getElementById(prefix + '-slider-monthly').textContent = fmt(sliderCalc.monthly) + '/mo';
+  document.getElementById(prefix + '-slider-card-score').textContent = score;
+
+  // Emoji + card color
+  const card = document.getElementById(prefix + '-slider-card');
+  const label = document.getElementById(prefix + '-slider-label');
+  const emoji = document.getElementById(prefix + '-slider-emoji');
+  if (diff <= 0) {
+    card.classList.add('good'); label.classList.add('good');
+    emoji.textContent = '\u2705';
+  } else {
+    card.classList.remove('good'); label.classList.remove('good');
+    emoji.textContent = '\u274C';
+  }
+
+  // Diff bar — three states: same, costs more, saves money
+  const diffBar = document.getElementById(prefix + '-slider-diff');
+  const diffAmt = document.getElementById(prefix + '-slider-diff-amt');
+  const diffText = document.getElementById(prefix + '-slider-diff-text');
+  const diffSuffix = document.getElementById(prefix + '-slider-diff-suffix');
+
+  const threshold = prefix === 'auto' ? 50 : 100;
+
+  if (Math.abs(diff) < threshold) {
+    diffAmt.textContent = 'about the same';
+    diffAmt.className = 'slider-diff-amount';
+    diffText.textContent = 'At this score, you\u2019d pay ';
+    diffSuffix.textContent = ' as your current rate.';
+    diffBar.classList.remove('savings');
+  } else if (diff > 0) {
+    diffAmt.textContent = fmt(diff);
+    diffAmt.className = 'slider-diff-amount cost';
+    diffText.textContent = 'Bad credit would cost you ';
+    diffSuffix.textContent = ' extra\u2014for the exact same ' + suffix + '.';
+    diffBar.classList.remove('savings');
+  } else {
+    diffAmt.textContent = fmt(Math.abs(diff));
+    diffAmt.className = 'slider-diff-amount save';
+    diffText.textContent = 'Better credit would save you ';
+    diffSuffix.textContent = ' on this ' + suffix + '. That\u2019s real money.';
+    diffBar.classList.add('savings');
+  }
+}
+
+function updateAutoSlider() { updateCreditSlider('auto', autoRateFromScore, 'car'); }
+function updateHomeSlider() { updateCreditSlider('home', homeRateFromScore, 'house'); }
 
 function calcRetirement() {
   const age = +document.getElementById('ret-age').value || 22;
