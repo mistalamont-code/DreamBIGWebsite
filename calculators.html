@@ -519,37 +519,37 @@
                 <label>Down Payment ($)</label>
                 <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The cash you pay upfront. The more you put down, the less you borrow, and the less interest you pay over the life of the loan. Even an extra $500 down can save you hundreds in interest.</span></span>
               </div>
-              <input type="number" id="auto-down" value="2000" oninput="calcAuto()">
+              <input type="number" id="auto-down" value="0" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label>Interest Rate (%)</label>
                 <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is based on your credit score. Good credit (700+) might get you 4&ndash;6%. Bad credit can mean 15&ndash;20% or higher. That&rsquo;s the difference between paying $28K and $40K for the same car. Your credit score is money.</span></span>
               </div>
-              <input type="number" id="auto-rate" value="6" step="0.1" oninput="calcAuto()">
+              <input type="number" id="auto-rate" value="4" step="0.1" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label>Loan Term (Years)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">How long you take to pay it off. Longer terms mean lower monthly payments, but way more interest. A 7-year loan costs thousands more than a 4-year loan on the same car. Keep it as short as you can afford.</span></span>
+                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">How long you take to pay it off. Longer terms mean lower monthly payments, but way more interest. A 6-year loan costs thousands more than a 4-year loan on the same car. Keep it as short as you can afford.</span></span>
               </div>
               <select id="auto-term" onchange="calcAuto()">
                 <option value="3">3 Years</option><option value="4">4 Years</option>
-                <option value="5">5 Years</option><option value="6">6 Years</option><option value="7" selected>7 Years</option>
+                <option value="5" selected>5 Years</option><option value="6">6 Years</option><option value="7">7 Years</option>
               </select>
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly">$336</div></div>
-            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$23,000</span></div>
-            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$5,224</span></div>
-            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$28,224</span></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly">$460</div></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$25,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$2,625</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$27,625</span></div>
             <div class="donut-wrapper">
               <canvas id="auto-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
               <div class="donut-legend">
-                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="auto-donut-prin">$23,000</strong></div>
-                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="auto-donut-int">$5,224</strong></div>
-                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="auto-donut-pct">19% of your payments go to the bank</div>
+                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="auto-donut-prin">$25,000</strong></div>
+                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="auto-donut-int">$2,625</strong></div>
+                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="auto-donut-pct">10% of your payments go to the bank</div>
               </div>
             </div>
           </div>
@@ -579,9 +579,9 @@
               <div class="slider-result-card yours">
                 <div class="slider-card-emoji">&#x2705;</div>
                 <div class="slider-card-label yours">With Your Rate</div>
-                <div class="slider-card-rate" id="auto-yours-rate">6.0% interest</div>
-                <div class="slider-card-total" id="auto-yours-total">$28,224</div>
-                <div class="slider-card-monthly" id="auto-yours-monthly">$336/mo</div>
+                <div class="slider-card-rate" id="auto-yours-rate">4.0% interest</div>
+                <div class="slider-card-total" id="auto-yours-total">$27,625</div>
+                <div class="slider-card-monthly" id="auto-yours-monthly">$460/mo</div>
               </div>
               <div class="slider-vs">VS</div>
               <div class="slider-result-card slider" id="auto-slider-card">
@@ -1529,7 +1529,7 @@ function updateCreditSlider(prefix, rateFunc, suffix) {
   const price = +document.getElementById(priceId).value || 0;
   const down = +document.getElementById(downId).value || 0;
   const userRate = +document.getElementById(rateId).value || 0;
-  const term = +document.getElementById(termId).value || (prefix === 'auto' ? 7 : 30);
+  const term = +document.getElementById(termId).value || (prefix === 'auto' ? 5 : 30);
   const loan = price - down;
 
   const userCalc = calcLoan(loan, userRate, term);
