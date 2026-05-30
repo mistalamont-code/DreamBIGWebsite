@@ -25,6 +25,7 @@
 <meta name="twitter:title" content="Financial Calculators — DREAM/BIG">
 <meta name="twitter:description" content="Free financial calculators — see what auto loans, home loans, and retirement savings really cost. Make smarter decisions.">
 <meta name="twitter:image" content="https://lifeafterhighschoolbook.com/images/og-image.png">
+<link rel="canonical" href="https://lifeafterhighschoolbook.com/calculators.html">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="apple-touch-icon" href="images/favicon-512.png">
@@ -49,6 +50,16 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  /* SKIP LINK */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 1000;
+    background: var(--gold); color: var(--purple-deep);
+    padding: .6rem 1rem; font-weight: 700; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
 
   body {
     font-family: 'Inter', sans-serif;
@@ -86,6 +97,13 @@
     box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
   }
   .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown > button {
+    background: none; border: none; cursor: pointer; font: inherit;
+    color: var(--gold); padding: 0; letter-spacing: 0.5px; text-transform: uppercase;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .nav-dropdown > button::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
   .nav-dropdown-menu a {
     display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
     letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
@@ -155,7 +173,7 @@
     width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.4);
     background: rgba(201,168,76,0.1); color: var(--gold); font-size: 11px; font-weight: 700;
     cursor: pointer; flex-shrink: 0; font-family: 'Inter', sans-serif;
-    transition: all 0.2s; line-height: 1; position: relative;
+    transition: all 0.2s; line-height: 1; position: relative; padding: 0;
   }
   .info-btn:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
   .info-tooltip {
@@ -178,7 +196,7 @@
     border-radius: 4px; color: var(--text); font-size: 1rem; font-family: 'Inter', sans-serif;
     transition: border-color 0.3s;
   }
-  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--gold); }
+  .form-group input:focus, .form-group select:focus { outline: 2px solid var(--gold-light); outline-offset: 2px; border-color: var(--gold); }
   .result-box {
     background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
     border-radius: 8px; padding: 2rem; text-align: center;
@@ -459,9 +477,38 @@
     .section-text { font-size: 0.95rem; }
     .btn { padding: 12px 28px; font-size: 0.85rem; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      transition-duration: .001ms !important;
+    }
+  }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DREAM/BIG Financial Calculators",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "url": "https://lifeafterhighschoolbook.com/calculators.html",
+  "description": "Five free financial calculators from DREAM/BIG: an auto loan calculator, a home loan calculator, a retirement savings calculator, a credit score estimator, and a budget calculator. See what loans really cost and how your money can grow over time.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Corey L. Cook"
+  }
+}
+</script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <!-- NAV -->
 <nav>
@@ -469,36 +516,38 @@
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
-  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
-  <ul class="nav-links">
+  <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#book">The Book</a></li>
     <li class="nav-dropdown">
-      <a style="color:var(--gold);">Tools</a>
+      <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
         <a href="calculators.html" style="color:var(--gold);">Calculators</a>
         <a href="glossary.html">Glossary</a>
       </div></div>
     </li>
     <li><a href="index.html#newsletter">Newsletter</a></li>
-    <li><a href="index.html#book" class="btn btn-gold btn-nav">Coming Soon</a></li>
+    <li><a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-gold btn-nav" target="_blank" rel="noopener">Buy the Book</a></li>
   </ul>
 </nav>
+
+<main id="main">
 
 <!-- CALCULATORS -->
 <section class="calculators">
   <div class="container">
     <span class="section-label">Companion Tools</span>
-    <h2 class="section-title">See the Numbers for Yourself</h2>
+    <h1 class="section-title">See the Numbers for Yourself</h1>
     <div class="divider"></div>
     <p class="section-text" style="margin-bottom:2.5rem;">In the book, I break down exactly what bad credit costs you&mdash;and what good financial decisions can build over time. These calculators let you plug in your own numbers and see it for yourself. Because the decisions you make about money right now will echo for decades. Make them count.</p>
 
     <div class="calc-tabs">
-      <button class="calc-tab active" onclick="switchCalc('auto', this)">Auto Loan</button>
-      <button class="calc-tab" onclick="switchCalc('home', this)">Home Loan</button>
-      <button class="calc-tab" onclick="switchCalc('retirement', this)">Retirement</button>
-      <button class="calc-tab" onclick="switchCalc('credit', this)">Credit Score</button>
-      <button class="calc-tab" onclick="switchCalc('budget', this)">Budget</button>
+      <button class="calc-tab active" aria-selected="true" onclick="switchCalc('auto', this)">Auto Loan</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('home', this)">Home Loan</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('retirement', this)">Retirement</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('credit', this)">Credit Score</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('budget', this)">Budget</button>
     </div>
 
     <!-- AUTO LOAN -->
@@ -509,29 +558,29 @@
           <div>
             <div class="form-group">
               <div class="label-row">
-                <label>Vehicle Price ($)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The sticker price of the car. Remember, a brand-new car loses 20% of its value the moment you drive it off the lot. A two- or three-year-old car with low miles can save you thousands and still feel new.</span></span>
+                <label for="auto-price">Vehicle Price ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The sticker price of the car. Remember, a brand-new car loses 20% of its value the moment you drive it off the lot. A two- or three-year-old car with low miles can save you thousands and still feel new.</span></button>
               </div>
               <input type="number" id="auto-price" value="25000" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Down Payment ($)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The cash you pay upfront. The more you put down, the less you borrow, and the less interest you pay over the life of the loan. Even an extra $500 down can save you hundreds in interest.</span></span>
+                <label for="auto-down">Down Payment ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you pay upfront. The more you put down, the less you borrow, and the less interest you pay over the life of the loan. Even an extra $500 down can save you hundreds in interest.</span></button>
               </div>
               <input type="number" id="auto-down" value="0" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Interest Rate (%)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is based on your credit score. Good credit (700+) might get you 4&ndash;6%. Bad credit can mean 15&ndash;20% or higher. That&rsquo;s the difference between paying $28K and $40K for the same car. Your credit score is money.</span></span>
+                <label for="auto-rate">Interest Rate (%)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is based on your credit score. Good credit (700+) might get you 4&ndash;6%. Bad credit can mean 15&ndash;20% or higher. That&rsquo;s the difference between paying $28K and $40K for the same car. Your credit score is money.</span></button>
               </div>
               <input type="number" id="auto-rate" value="4" step="0.1" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Loan Term (Years)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">How long you take to pay it off. Longer terms mean lower monthly payments, but way more interest. A 6-year loan costs thousands more than a 4-year loan on the same car. Keep it as short as you can afford.</span></span>
+                <label for="auto-term">Loan Term (Years)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">How long you take to pay it off. Longer terms mean lower monthly payments, but way more interest. A 6-year loan costs thousands more than a 4-year loan on the same car. Keep it as short as you can afford.</span></button>
               </div>
               <select id="auto-term" onchange="calcAuto()">
                 <option value="3">3 Years</option><option value="4">4 Years</option>
@@ -540,7 +589,7 @@
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly">$460</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly" aria-live="polite">$460</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$25,000</span></div>
             <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$2,625</span></div>
             <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$27,625</span></div>
@@ -617,29 +666,29 @@
           <div>
             <div class="form-group">
               <div class="label-row">
-                <label>Home Price ($)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The purchase price of the home. In Erie, a solid starter home can run $100K&ndash;$200K. Focus on what you can actually afford, not what a bank will approve you for. Those are two very different numbers.</span></span>
+                <label for="home-price">Home Price ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The purchase price of the home. In Erie, a solid starter home can run $100K&ndash;$200K. Focus on what you can actually afford, not what a bank will approve you for. Those are two very different numbers.</span></button>
               </div>
               <input type="number" id="home-price" value="150000" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Down Payment ($)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The cash you bring to closing. 20% down avoids PMI (private mortgage insurance)&mdash;an extra monthly fee that protects the bank, not you. Even if you can&rsquo;t hit 20%, every dollar you put down reduces what you borrow and what you pay in interest.</span></span>
+                <label for="home-down">Down Payment ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you bring to closing. 20% down avoids PMI (private mortgage insurance)&mdash;an extra monthly fee that protects the bank, not you. Even if you can&rsquo;t hit 20%, every dollar you put down reduces what you borrow and what you pay in interest.</span></button>
               </div>
               <input type="number" id="home-down" value="15000" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Interest Rate (%)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Your mortgage rate depends on your credit score, the market, and your down payment. Even half a percent difference on a 30-year mortgage can mean tens of thousands of dollars. Shop around&mdash;don&rsquo;t just take the first offer.</span></span>
+                <label for="home-rate">Interest Rate (%)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Your mortgage rate depends on your credit score, the market, and your down payment. Even half a percent difference on a 30-year mortgage can mean tens of thousands of dollars. Shop around&mdash;don&rsquo;t just take the first offer.</span></button>
               </div>
               <input type="number" id="home-rate" value="6.5" step="0.1" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Loan Term (Years)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">15-year loans have higher monthly payments but save you a massive amount in interest. 30-year loans are easier month to month, but you&rsquo;ll pay for the house nearly twice over. Run both options here and see the difference.</span></span>
+                <label for="home-term">Loan Term (Years)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">15-year loans have higher monthly payments but save you a massive amount in interest. 30-year loans are easier month to month, but you&rsquo;ll pay for the house nearly twice over. Run both options here and see the difference.</span></button>
               </div>
               <select id="home-term" onchange="calcHome()">
                 <option value="15">15 Years</option><option value="20">20 Years</option><option value="30" selected>30 Years</option>
@@ -647,7 +696,7 @@
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly">$853</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly" aria-live="polite">$853</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$135,000</span></div>
             <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$172,185</span></div>
             <div class="result-row"><span class="result-row-label">Total Cost of Home</span><span class="result-row-value" id="home-total">$307,185</span></div>
@@ -723,40 +772,40 @@
         <div class="calc-grid">
           <div>
             <div class="form-group">
-              <label>Your Current Age</label>
+              <label for="ret-age">Your Current Age</label>
               <input type="number" id="ret-age" value="22" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>When Do You Want to Retire?</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Most people retire between 62 and 67. The longer you work, the more time your money has to grow. Even a few extra years makes a big difference.</span></span>
+                <label for="ret-retire">When Do You Want to Retire?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Most people retire between 62 and 67. The longer you work, the more time your money has to grow. Even a few extra years makes a big difference.</span></button>
               </div>
               <input type="number" id="ret-retire" value="65" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>How Much Can You Save Per Month?</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is money you put into a retirement account like a 401(k) through your job or an IRA you open yourself. Even $50/month matters. If your job matches contributions, that&rsquo;s free money&mdash;always take it.</span></span>
+                <label for="ret-monthly">How Much Can You Save Per Month?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is money you put into a retirement account like a 401(k) through your job or an IRA you open yourself. Even $50/month matters. If your job matches contributions, that&rsquo;s free money&mdash;always take it.</span></button>
               </div>
               <input type="number" id="ret-monthly" value="200" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Average Yearly Growth (%)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is how much your investments grow each year on average. The stock market has historically returned about 7% per year over long periods. You don&rsquo;t need to pick stocks&mdash;a simple index fund does this for you. Leave this at 7% if you&rsquo;re not sure.</span></span>
+                <label for="ret-return">Average Yearly Growth (%)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is how much your investments grow each year on average. The stock market has historically returned about 7% per year over long periods. You don&rsquo;t need to pick stocks&mdash;a simple index fund does this for you. Leave this at 7% if you&rsquo;re not sure.</span></button>
               </div>
               <input type="number" id="ret-return" value="7" step="0.5" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Money You&rsquo;ve Already Saved ($)</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">If you already have money in a savings account, 401(k), or any investment, put that number here. Starting from zero? That&rsquo;s fine&mdash;most people your age are. The point is to start now.</span></span>
+                <label for="ret-current">Money You&rsquo;ve Already Saved ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">If you already have money in a savings account, 401(k), or any investment, put that number here. Starting from zero? That&rsquo;s fine&mdash;most people your age are. The point is to start now.</span></button>
               </div>
               <input type="number" id="ret-current" value="0" oninput="calcRetirement()">
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">What You Could Retire With</div><div class="result-value" id="ret-total">$578,326</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">What You Could Retire With</div><div class="result-value" id="ret-total" aria-live="polite">$578,326</div></div>
             <div class="result-row"><span class="result-row-label">Years of Growth</span><span class="result-row-value" id="ret-years">43 years</span></div>
             <div class="result-row"><span class="result-row-label">What You Put In</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
             <div class="result-row"><span class="result-row-label">What Your Money Earned on Its Own</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
@@ -781,8 +830,8 @@
           <div>
             <div class="form-group">
               <div class="label-row">
-                <label>Do You Pay Bills on Time?</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">This is the single biggest factor in your credit score&mdash;35% of it. Every late payment hurts. Every on-time payment builds trust. Set up autopay if you can.</span></span>
+                <label for="credit-payment">Do You Pay Bills on Time?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is the single biggest factor in your credit score&mdash;35% of it. Every late payment hurts. Every on-time payment builds trust. Set up autopay if you can.</span></button>
               </div>
               <select id="credit-payment" onchange="calcCredit()">
                 <option value="5">Always &mdash; never missed one</option>
@@ -794,15 +843,15 @@
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>How Much of Your Credit Do You Use?</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">If your credit card limit is $1,000 and your balance is $300, you&rsquo;re using 30%. Lenders like to see you use less than 30% of what&rsquo;s available. Under 10% is even better. This is 30% of your score.</span></span>
+                <label for="credit-util">How Much of Your Credit Do You Use?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">If your credit card limit is $1,000 and your balance is $300, you&rsquo;re using 30%. Lenders like to see you use less than 30% of what&rsquo;s available. Under 10% is even better. This is 30% of your score.</span></button>
               </div>
               <input type="number" id="credit-util" value="30" min="0" max="100" step="1" oninput="calcCredit()" placeholder="e.g. 30 means 30%">
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>How Long Have You Had Credit?</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">The longer your credit history, the better. This is why you should keep your first credit card open even if you don&rsquo;t use it much. Closing old accounts shortens your history and can drop your score.</span></span>
+                <label for="credit-length">How Long Have You Had Credit?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The longer your credit history, the better. This is why you should keep your first credit card open even if you don&rsquo;t use it much. Closing old accounts shortens your history and can drop your score.</span></button>
               </div>
               <select id="credit-length" onchange="calcCredit()">
                 <option value="1">Just started &mdash; less than a year</option>
@@ -814,8 +863,8 @@
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>Types of Credit You Have</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Lenders like to see you can handle different kinds of credit&mdash;like a credit card plus a car loan. You don&rsquo;t need to go get a loan just for this, but having more than one type helps. This is 10% of your score.</span></span>
+                <label for="credit-mix">Types of Credit You Have</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Lenders like to see you can handle different kinds of credit&mdash;like a credit card plus a car loan. You don&rsquo;t need to go get a loan just for this, but having more than one type helps. This is 10% of your score.</span></button>
               </div>
               <select id="credit-mix" onchange="calcCredit()">
                 <option value="1">Just one &mdash; like a credit card only</option>
@@ -825,8 +874,8 @@
             </div>
             <div class="form-group">
               <div class="label-row">
-                <label>How Often Have You Applied for Credit?</label>
-                <span class="info-btn" onclick="toggleInfo(this)">?<span class="info-tooltip">Every time you apply for a credit card, car loan, or apartment, the lender checks your credit. That&rsquo;s a &ldquo;hard inquiry&rdquo; and it stays on your report for 2 years. Too many in a short time looks desperate to lenders.</span></span>
+                <label for="credit-inquiries">How Often Have You Applied for Credit?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Every time you apply for a credit card, car loan, or apartment, the lender checks your credit. That&rsquo;s a &ldquo;hard inquiry&rdquo; and it stays on your report for 2 years. Too many in a short time looks desperate to lenders.</span></button>
               </div>
               <select id="credit-inquiries" onchange="calcCredit()">
                 <option value="0" selected>Haven&rsquo;t applied recently</option>
@@ -839,7 +888,7 @@
           <div>
             <div class="result-box" style="margin-bottom:1rem;">
               <div class="result-label">Estimated Credit Score Range</div>
-              <div class="result-value" id="credit-score">650 &ndash; 700</div>
+              <div class="result-value" id="credit-score" aria-live="polite">650 &ndash; 700</div>
               <div class="result-sub" id="credit-rating" style="font-weight:600;">Good</div>
             </div>
             <div class="gauge-wrapper">
@@ -866,26 +915,26 @@
         <p class="calc-intro">&ldquo;Nobody sits you down after graduation and says, &lsquo;Here&rsquo;s how to manage a paycheck.&rsquo; You get that first real check and it feels like a lot&mdash;until rent, food, a car payment, and a phone bill eat it alive. A budget isn&rsquo;t about restricting yourself. It&rsquo;s about knowing where your money goes so you can make it work for you.&rdquo;</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label>Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" oninput="calcBudget()"></div>
+            <div class="form-group"><label for="budget-income">Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" oninput="calcBudget()"></div>
             <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.5rem; margin-top:0.5rem;">
               <div style="font-weight:600; font-size:0.85rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Your Monthly Expenses</div>
-              <div class="form-group"><label>Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Utilities &mdash; Electric, Water, Gas ($)</label><input type="number" id="budget-utilities" value="120" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Car Payment ($)</label><input type="number" id="budget-car" value="280" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Gas / Transportation ($)</label><input type="number" id="budget-gas" value="120" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Cell Phone ($)</label><input type="number" id="budget-phone" value="65" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Groceries / Food ($)</label><input type="number" id="budget-food" value="300" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" oninput="calcBudget()"></div>
-              <div class="form-group"><label>Other Expenses ($)</label><input type="number" id="budget-other" value="50" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-rent">Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-utilities">Utilities &mdash; Electric, Water, Gas ($)</label><input type="number" id="budget-utilities" value="120" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-car">Car Payment ($)</label><input type="number" id="budget-car" value="280" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-insurance">Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-gas">Gas / Transportation ($)</label><input type="number" id="budget-gas" value="120" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-phone">Cell Phone ($)</label><input type="number" id="budget-phone" value="65" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-food">Groceries / Food ($)</label><input type="number" id="budget-food" value="300" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-streaming">Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-personal">Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-other">Other Expenses ($)</label><input type="number" id="budget-other" value="50" oninput="calcBudget()"></div>
             </div>
           </div>
           <div>
             <div class="result-box" style="margin-bottom:1rem;">
               <div class="result-label">Money Left Over</div>
-              <div class="result-value" id="budget-remaining">$670</div>
-              <div class="result-sub" id="budget-status">You have room to save and invest</div>
+              <div class="result-value" id="budget-remaining" aria-live="polite">$670</div>
+              <div class="result-sub" id="budget-status" aria-live="polite">You have room to save and invest</div>
             </div>
             <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,800</span></div>
             <div class="result-row"><span class="result-row-label">Total Expenses</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$2,130</span></div>
@@ -911,7 +960,7 @@
               <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
             </div>
             <div class="download-btns">
-              <button class="btn-download" onclick="downloadBudgetExcel()" title="Download results as Excel">
+              <button class="btn-download" onclick="downloadBudgetExcel(this)" title="Download results as Excel">
                 <span>📊</span> Download Excel
               </button>
             </div>
@@ -929,6 +978,8 @@
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
@@ -942,10 +993,10 @@
 </footer>
 
 <!-- PRIVACY POLICY OVERLAY -->
-<div class="legal-overlay" id="legal-privacy">
-  <button class="legal-close" onclick="closeLegal('privacy')">&times;</button>
+<div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
+  <button class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
   <div class="legal-content">
-    <h2>Privacy Policy</h2>
+    <h2 id="legal-privacy-title">Privacy Policy</h2>
     <p><em>Last updated: 2026</em></p>
     <h3>Who We Are</h3>
     <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit lifeafterhighschoolbook.com.</p>
@@ -986,10 +1037,10 @@
 </div>
 
 <!-- TERMS OF USE OVERLAY -->
-<div class="legal-overlay" id="legal-terms">
-  <button class="legal-close" onclick="closeLegal('terms')">&times;</button>
+<div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
+  <button class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
   <div class="legal-content">
-    <h2>Terms of Use</h2>
+    <h2 id="legal-terms-title">Terms of Use</h2>
     <p><em>Last updated: 2026</em></p>
     <h3>Acceptance of Terms</h3>
     <p>By accessing and using this website (lifeafterhighschoolbook.com), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use this site.</p>
@@ -1013,10 +1064,10 @@
 </div>
 
 <!-- ACCESSIBILITY STATEMENT OVERLAY -->
-<div class="legal-overlay" id="legal-accessibility">
-  <button class="legal-close" onclick="closeLegal('accessibility')">&times;</button>
+<div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
+  <button class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
   <div class="legal-content">
-    <h2>Accessibility Statement</h2>
+    <h2 id="legal-accessibility-title">Accessibility Statement</h2>
     <p><em>Last updated: 2026</em></p>
     <h3>Our Commitment</h3>
     <p>Corey L. Cook and Cook Media LLC are committed to ensuring that lifeafterhighschoolbook.com is accessible to people with disabilities. We strive to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at the AA level and continuously work to improve the accessibility of our site.</p>
@@ -1040,10 +1091,10 @@
 </div>
 
 <!-- DMCA NOTICE OVERLAY -->
-<div class="legal-overlay" id="legal-dmca">
-  <button class="legal-close" onclick="closeLegal('dmca')">&times;</button>
+<div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
+  <button class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
   <div class="legal-content">
-    <h2>DMCA Notice</h2>
+    <h2 id="legal-dmca-title">DMCA Notice</h2>
     <p><em>Last updated: 2026</em></p>
     <h3>Copyright Protection</h3>
     <p>All original content on this website &mdash; including written text, the DREAM/BIG framework, book excerpts, financial calculator designs, and associated graphics &mdash; is the copyrighted property of Corey L. Cook and Cook Media LLC. This content is protected under the Digital Millennium Copyright Act (DMCA) and applicable copyright laws.</p>
@@ -1066,15 +1117,47 @@
   </div>
 </div>
 
-<!-- EXCEL LIBRARY -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous"></script>
-
 <script>
+// MOBILE NAV: toggle menu + ARIA state
+function toggleNav(btn) {
+  const open = document.querySelector('.nav-links').classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 // MOBILE NAV: close menu when a link is clicked
 document.querySelectorAll('.nav-links a').forEach(function(link) {
   link.addEventListener('click', function() {
     document.querySelector('.nav-links').classList.remove('open');
+    const t = document.querySelector('.nav-toggle');
+    if (t) t.setAttribute('aria-expanded', 'false');
   });
+});
+
+// TOOLS DROPDOWN: click toggle (hover still works via CSS)
+function toggleToolsMenu(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  const menu = btn.nextElementSibling;
+  if (menu) menu.style.display = expanded ? '' : 'block';
+}
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.nav-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    const btn = dd.querySelector('button[aria-haspopup]');
+    const menu = dd.querySelector('.nav-dropdown-menu');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (menu) menu.style.display = '';
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const dd = document.querySelector('.nav-dropdown');
+    if (dd) {
+      const btn = dd.querySelector('button[aria-haspopup]');
+      const menu = dd.querySelector('.nav-dropdown-menu');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (menu) menu.style.display = '';
+    }
+  }
 });
 
 // AMORTIZATION CHART
@@ -1235,6 +1318,9 @@ function roundRect(ctx, x, y, w, h, r) {
 
 // ANIMATED NUMBER COUNTER
 function animateValue(el, start, end, duration) {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    el.textContent = fmt(end); return;
+  }
   if (Math.abs(end - start) < 2) { el.textContent = fmt(end); return; }
   const startTime = performance.now();
   function update(now) {
@@ -1428,9 +1514,8 @@ function calcAuto() {
   const down = +document.getElementById('auto-down').value || 0;
   const rate = +document.getElementById('auto-rate').value || 0;
   const term = +document.getElementById('auto-term').value || 5;
-  const loan = price - down;
+  const loan = Math.max(0, price - down);
   const good = calcLoan(loan, rate, term);
-  const bad = calcLoan(loan, 13, term);
   animatedFmt('auto-monthly', good.monthly);
   document.getElementById('auto-loan').textContent = fmt(loan);
   document.getElementById('auto-interest').textContent = fmt(good.totalInterest);
@@ -1459,9 +1544,8 @@ function calcHome() {
   const down = +document.getElementById('home-down').value || 0;
   const rate = +document.getElementById('home-rate').value || 0;
   const term = +document.getElementById('home-term').value || 30;
-  const loan = price - down;
+  const loan = Math.max(0, price - down);
   const good = calcLoan(loan, rate, term);
-  const bad = calcLoan(loan, rate + 2.5, term);
   animatedFmt('home-monthly', good.monthly);
   document.getElementById('home-loan').textContent = fmt(loan);
   document.getElementById('home-interest').textContent = fmt(good.totalInterest);
@@ -1530,7 +1614,7 @@ function updateCreditSlider(prefix, rateFunc, suffix) {
   const down = +document.getElementById(downId).value || 0;
   const userRate = +document.getElementById(rateId).value || 0;
   const term = +document.getElementById(termId).value || (prefix === 'auto' ? 5 : 30);
-  const loan = price - down;
+  const loan = Math.max(0, price - down);
 
   const userCalc = calcLoan(loan, userRate, term);
   const sliderCalc = calcLoan(loan, sliderRate, term);
@@ -1653,16 +1737,14 @@ function calcCredit() {
   else inqScore = 15;
 
   var weighted = paymentScore * 0.35 + utilScore * 0.30 + lengthScore * 0.15 + mixScore * 0.10 + inqScore * 0.10;
-  var scoreLow = Math.round(300 + weighted * 5.0);
+  var scoreLow = Math.max(300, Math.round(300 + weighted * 5.0));
   var scoreHigh = Math.min(850, scoreLow + 50);
   var scoreMid = (scoreLow + scoreHigh) / 2;
 
-  var rating, ratingColor;
-  if (scoreMid >= 780) { rating = 'Excellent'; ratingColor = '#1ABC9C'; }
-  else if (scoreMid >= 700) { rating = 'Good'; ratingColor = '#27AE60'; }
-  else if (scoreMid >= 640) { rating = 'Fair'; ratingColor = '#F1C40F'; }
-  else if (scoreMid >= 560) { rating = 'Poor'; ratingColor = '#E67E22'; }
-  else { rating = 'Very Poor'; ratingColor = '#E74C3C'; }
+  // Unified rating: same thresholds the credit-score slider uses
+  var ratingInfo = creditRating(scoreMid);
+  var rating = ratingInfo.label;
+  var ratingColor = ratingInfo.color;
 
   document.getElementById('credit-score').innerHTML = scoreLow + ' &ndash; ' + scoreHigh;
   document.getElementById('credit-score').style.color = ratingColor;
@@ -1717,7 +1799,6 @@ function calcBudget() {
   var remaining = income - totalExp;
   var pct = income > 0 ? Math.round((totalExp / income) * 100) : 0;
 
-  animatedFmt('budget-remaining', remaining >= 0 ? remaining : -Math.abs(remaining));
   document.getElementById('budget-remaining').style.color = remaining >= 0 ? 'var(--gold)' : '#E74C3C';
   document.getElementById('budget-remaining').textContent = (remaining >= 0 ? '' : '-') + fmt(Math.abs(remaining));
   document.getElementById('budget-total-income').textContent = fmt(income);
@@ -1793,21 +1874,43 @@ function calcBudget() {
 function toggleInfo(btn) {
   const wasActive = btn.classList.contains('active');
   // Close all other tooltips first
-  document.querySelectorAll('.info-btn.active').forEach(b => b.classList.remove('active'));
-  if (!wasActive) btn.classList.add('active');
+  document.querySelectorAll('.info-btn.active').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-expanded', 'false');
+  });
+  if (!wasActive) {
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+  }
 }
 // Close tooltips when clicking elsewhere
 document.addEventListener('click', function(e) {
   if (!e.target.closest('.info-btn')) {
-    document.querySelectorAll('.info-btn.active').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.info-btn.active').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+// Close tooltips on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.info-btn.active').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+    });
   }
 });
 
 function switchCalc(id, el) {
   document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.calc-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
   document.getElementById('calc-' + id).classList.add('active');
   el.classList.add('active');
+  el.setAttribute('aria-selected', 'true');
   // Redraw chart after panel becomes visible (needs a frame for layout)
   requestAnimationFrame(function() {
     if (id === 'auto') calcAuto();
@@ -1836,7 +1939,49 @@ window.addEventListener('resize', function() {
   }
 });
 
-function downloadBudgetExcel() {
+// Lazy-load the SheetJS (xlsx) library only when the user requests a download.
+let xlsxLoadPromise = null;
+function loadXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  if (xlsxLoadPromise) return xlsxLoadPromise;
+  xlsxLoadPromise = new Promise(function(resolve, reject) {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    script.integrity = 'sha384-sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
+    script.crossOrigin = 'anonymous';
+    script.onload = resolve;
+    script.onerror = function() { xlsxLoadPromise = null; reject(new Error('Failed to load XLSX')); };
+    document.head.appendChild(script);
+  });
+  return xlsxLoadPromise;
+}
+
+async function downloadBudgetExcel(btn) {
+  const trigger = btn || null;
+  let originalHTML = null;
+  if (trigger) {
+    originalHTML = trigger.innerHTML;
+    trigger.disabled = true;
+    trigger.innerHTML = '<span>⏳</span> Preparing…';
+  }
+  try {
+    await loadXLSX();
+    buildBudgetWorkbook();
+  } catch (err) {
+    console.error(err);
+    if (trigger) {
+      trigger.innerHTML = '<span>⚠️</span> Try again';
+      setTimeout(function() { trigger.innerHTML = originalHTML; trigger.disabled = false; }, 2000);
+    }
+    return;
+  }
+  if (trigger) {
+    trigger.innerHTML = originalHTML;
+    trigger.disabled = false;
+  }
+}
+
+function buildBudgetWorkbook() {
   const income = +document.getElementById('budget-income').value || 0;
   const expenses = {
     'Rent / Housing': +document.getElementById('budget-rent').value || 0,
@@ -1896,20 +2041,33 @@ function downloadBudgetExcel() {
 }
 
 // LEGAL OVERLAY FUNCTIONS
+let legalTrigger = null;
 function openLegal(type) {
-  document.getElementById('legal-' + type).classList.add('active');
+  legalTrigger = document.activeElement;
+  const overlay = document.getElementById('legal-' + type);
+  overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
+  const closeBtn = overlay.querySelector('.legal-close');
+  if (closeBtn) closeBtn.focus();
 }
 function closeLegal(type) {
   document.getElementById('legal-' + type).classList.remove('active');
   document.body.style.overflow = '';
+  if (legalTrigger && typeof legalTrigger.focus === 'function') legalTrigger.focus();
+  legalTrigger = null;
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
+    let closedAny = false;
     document.querySelectorAll('.legal-overlay.active').forEach(el => {
       el.classList.remove('active');
       document.body.style.overflow = '';
+      closedAny = true;
     });
+    if (closedAny && legalTrigger && typeof legalTrigger.focus === 'function') {
+      legalTrigger.focus();
+      legalTrigger = null;
+    }
   }
 });
 </script>
