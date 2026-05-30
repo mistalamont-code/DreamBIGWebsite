@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGYNWJQC7G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JGYNWJQC7G');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Calculators — DREAM/BIG by Corey L. Cook</title>
+<meta name="description" content="Free financial calculators from DREAM/BIG — see what auto loans, home loans, and retirement savings really cost. Plug in your numbers and make smarter decisions.">
+<meta property="og:title" content="Financial Calculators — DREAM/BIG">
+<meta property="og:description" content="Free financial calculators — see what auto loans, home loans, and retirement savings really cost. Make smarter decisions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lifeafterhighschoolbook.com/calculators.html">
+<meta property="og:image" content="https://lifeafterhighschoolbook.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="DREAM/BIG — Life After High School">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Financial Calculators — DREAM/BIG">
+<meta name="twitter:description" content="Free financial calculators — see what auto loans, home loans, and retirement savings really cost. Make smarter decisions.">
+<meta name="twitter:image" content="https://lifeafterhighschoolbook.com/images/og-image.png">
+<link rel="canonical" href="https://lifeafterhighschoolbook.com/calculators.html">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/favicon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --purple-deep: #0F0620;
+    --purple-dark: #1A0A2E;
+    --purple-mid: #2D1B4E;
+    --purple-card: #231340;
+    --purple-surface: #2E1A50;
+    --purple-light: #3D2766;
+    --text: #F5F5F5;
+    --text-muted: #B8A8D0;
+    --accent: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  /* SKIP LINK */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 1000;
+    background: var(--gold); color: var(--purple-deep);
+    padding: .6rem 1rem; font-weight: 700; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--purple-deep);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0 2rem; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; white-space: nowrap; }
+  .nav-subtitle { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; font-style: italic; letter-spacing: 0.3px; white-space: nowrap; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 1rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { cursor: pointer; }
+  .nav-dropdown > a::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    padding-top: 12px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(15,6,32,0.98); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 0.5rem 0; min-width: 180px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown > button {
+    background: none; border: none; cursor: pointer; font: inherit;
+    color: var(--gold); padding: 0; letter-spacing: 0.5px; text-transform: uppercase;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .nav-dropdown > button::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu a {
+    display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
+    letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold) !important; }
+
+  .btn {
+    display: inline-block; padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; transition: all 0.3s; cursor: pointer; border: none;
+  }
+  .btn-gold { background: var(--gold); color: var(--purple-deep); }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
+  .nav-links .btn-gold:hover { color: var(--purple-deep); }
+  .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .section-text { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; line-height: 1.8; }
+
+  /* DIVIDER */
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+
+  /* CALCULATORS */
+  .calculators {
+    padding-top: 140px;
+    background: var(--purple-deep);
+    min-height: 100vh;
+  }
+  .calc-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .calc-tab {
+    padding: 10px 24px; border: 1px solid rgba(201,168,76,0.3); background: transparent;
+    color: var(--text-muted); border-radius: 4px; cursor: pointer; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; font-family: 'Inter', sans-serif;
+  }
+  .calc-tab.active { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .calc-tab:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .calc-panel { display: none; }
+  .calc-panel.active { display: block; }
+  .calc-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px; padding: 2.5rem;
+  }
+  .calc-intro { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; font-style: italic; }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
+  }
+  /* INFO TOOLTIP */
+  .label-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .label-row label { margin-bottom: 0; }
+  .info-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.1); color: var(--gold); font-size: 11px; font-weight: 700;
+    cursor: pointer; flex-shrink: 0; font-family: 'Inter', sans-serif;
+    transition: all 0.2s; line-height: 1; position: relative; padding: 0;
+  }
+  .info-btn:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .info-tooltip {
+    display: none; position: absolute; left: 50%; transform: translateX(-50%);
+    top: calc(100% + 8px); width: 260px; padding: 12px 14px;
+    background: var(--purple-mid); border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 50; font-size: 0.82rem; font-weight: 400; color: var(--text);
+    line-height: 1.6; letter-spacing: 0; text-transform: none; text-align: left;
+  }
+  .info-tooltip::before {
+    content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; background: var(--purple-mid);
+    border-left: 1px solid rgba(201,168,76,0.25); border-top: 1px solid rgba(201,168,76,0.25);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .info-btn.active .info-tooltip { display: block; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 12px 16px; background: var(--purple-surface); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px; color: var(--text); font-size: 1rem; font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+  }
+  .form-group input:focus, .form-group select:focus { outline: 2px solid var(--gold-light); outline-offset: 2px; border-color: var(--gold); }
+  .result-box {
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 2rem; text-align: center;
+  }
+  .result-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .result-value { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); font-weight: 700; }
+  .result-sub { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .result-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-label { color: var(--text-muted); font-size: 0.9rem; }
+  .result-row-value { font-weight: 600; }
+  .compare-box {
+    margin-top: 1.5rem; padding: 1.5rem; background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.2); border-radius: 8px;
+  }
+  .compare-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: #E74C3C; }
+  .compare-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+  .compare-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #E74C3C; font-weight: 700; }
+
+  /* CREDIT SCORE SLIDER */
+  .credit-slider-box {
+    margin-top: 2rem; padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, rgba(15,6,32,0.9), rgba(45,27,78,0.9));
+    border: 2px solid rgba(201,168,76,0.25); border-radius: 12px;
+    position: relative; overflow: hidden;
+  }
+  .credit-slider-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, #E74C3C, #E67E22, #F1C40F, #27AE60, #1ABC9C);
+  }
+  .credit-slider-header { text-align: center; margin-bottom: 1.5rem; }
+  .credit-slider-title {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .credit-slider-subtitle {
+    font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; margin: 0 auto;
+  }
+  .slider-main-layout {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .slider-control-area { text-align: center; }
+  .slider-score-display {
+    text-align: center; margin-bottom: 0.5rem;
+  }
+  .slider-score-num {
+    font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700;
+    line-height: 1; transition: color 0.3s;
+  }
+  .slider-score-label {
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-top: 0.25rem; transition: color 0.3s;
+  }
+  .credit-range-slider {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 12px;
+    border-radius: 6px; outline: none; margin: 1rem 0 0.5rem; cursor: pointer;
+    background: linear-gradient(to right, #E74C3C 0%, #E67E22 25%, #F1C40F 50%, #27AE60 75%, #1ABC9C 100%);
+  }
+  .credit-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 32px; height: 32px;
+    border-radius: 50%; background: white; cursor: grab;
+    border: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 3px rgba(201,168,76,0.3);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .credit-range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.6), 0 0 0 5px rgba(201,168,76,0.4);
+  }
+  .credit-range-slider::-webkit-slider-thumb:active { cursor: grabbing; }
+  .credit-range-slider::-moz-range-thumb {
+    width: 32px; height: 32px; border-radius: 50%; background: white;
+    cursor: grab; border: 4px solid var(--gold);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 3px rgba(201,168,76,0.3);
+  }
+  .slider-range-labels {
+    display: flex; justify-content: space-between; font-size: 0.72rem;
+    color: var(--text-muted); margin-top: 0.25rem; text-align: center;
+  }
+  .slider-range-labels em { display: block; font-style: normal; font-size: 0.65rem; opacity: 0.6; margin-top: 1px; }
+  .slider-results {
+    display: flex; align-items: stretch; justify-content: center; gap: 0; margin-top: 0.5rem;
+  }
+  .slider-vs {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--gold); opacity: 0.6; padding: 0 1rem; flex-shrink: 0;
+  }
+  .slider-result-card {
+    flex: 1; max-width: 240px; padding: 1.25rem 1rem; border-radius: 10px; text-align: center;
+  }
+  .slider-result-card.yours {
+    background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3);
+  }
+  .slider-result-card.slider {
+    background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .slider-result-card.slider.good {
+    background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.3);
+  }
+  .slider-card-emoji { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .slider-card-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .slider-card-label.yours { color: #27AE60; }
+  .slider-card-label.slider { color: #E74C3C; }
+  .slider-card-label.slider.good { color: #27AE60; }
+  .slider-card-rate {
+    font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.35rem;
+  }
+  .slider-card-total {
+    font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text);
+  }
+  .slider-card-monthly {
+    font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;
+  }
+  .slider-diff-bar {
+    margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 8px;
+    text-align: center; font-size: 1rem; line-height: 1.6;
+    background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.2);
+    transition: all 0.3s;
+  }
+  .slider-diff-bar.savings {
+    background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.2);
+  }
+  .slider-diff-amount {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
+    display: inline-block; transition: color 0.3s;
+  }
+  .slider-diff-amount.cost { color: #E74C3C; }
+  .slider-diff-amount.save { color: #27AE60; }
+
+  /* DONUT CHART */
+  .donut-wrapper { display: flex; align-items: center; gap: 1.5rem; margin: 1.5rem 0; }
+  .donut-canvas { flex-shrink: 0; }
+  .donut-legend { font-size: 0.85rem; color: var(--text-muted); line-height: 2; }
+  .donut-legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+  /* COMPARISON BARS */
+  .compare-visual { margin-top: 1rem; }
+  .compare-bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; font-size: 0.82rem; }
+  .compare-bar-label { width: 80px; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+  .compare-bar-track { flex: 1; height: 24px; background: var(--purple-surface); border-radius: 4px; overflow: hidden; position: relative; }
+  .compare-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease-out; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 0.75rem; font-weight: 700; color: var(--purple-deep); min-width: 60px; }
+
+  /* CREDIT GAUGE */
+  .gauge-wrapper { text-align: center; margin: 1rem 0; }
+
+  /* BUDGET DONUT */
+  .budget-donut-wrapper { display: flex; align-items: flex-start; gap: 1.5rem; margin: 1rem 0; }
+  .budget-donut-legend { font-size: 0.8rem; color: var(--text-muted); line-height: 2.2; }
+
+  .calc-disclaimer {
+    margin-top: 2rem; padding: 1.25rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+  }
+  .calc-disclaimer p { color: var(--text-muted); font-size: 0.78rem; line-height: 1.6; opacity: 0.8; }
+  .calc-disclaimer strong { color: var(--text-muted); }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--gold); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    margin-top: 3rem; transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  /* DOWNLOAD BUTTONS */
+  .download-btns { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 10px 20px; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; cursor: pointer; border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.1); color: var(--gold);
+    font-family: 'Inter', sans-serif; transition: all 0.3s;
+  }
+  .btn-download:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);
+    background: var(--purple-deep);
+  }
+  footer p { color: var(--text-muted); font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-legal { margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.78rem; color: var(--text-muted); text-decoration: underline; opacity: 0.7; transition: opacity 0.3s; }
+  .footer-legal a:hover { opacity: 1; color: var(--gold); }
+
+  /* LEGAL PAGES (modal overlay) */
+  .legal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(10px);
+    overflow-y: auto; padding: 100px 2rem 3rem;
+  }
+  .legal-overlay.active { display: block; }
+  .legal-content { max-width: 700px; margin: 0 auto; }
+  .legal-content h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1.5rem; }
+  .legal-content h3 { font-size: 1rem; color: var(--gold); margin: 1.5rem 0 0.5rem; letter-spacing: 0.5px; }
+  .legal-content p, .legal-content li { font-size: 0.9rem; color: var(--text); line-height: 1.8; opacity: 0.85; }
+  .legal-content ul { padding-left: 1.5rem; margin: 0.75rem 0; }
+  .legal-close { position: fixed; top: 2rem; right: 2rem; background: none; border: none; color: var(--gold); font-size: 2rem; cursor: pointer; z-index: 201; }
+
+  /* RESPONSIVE — MOBILE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute;
+      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
+      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-dropdown > a::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+    section { padding: 60px 1.25rem; }
+    .calculators { padding-top: 100px; }
+
+    /* Calculator cards */
+    .calc-grid { grid-template-columns: 1fr; }
+    .calc-card { padding: 1.5rem; }
+    .calc-intro { font-size: 0.9rem; line-height: 1.7; }
+    .calc-tabs { gap: 0.4rem; }
+    .calc-tab { padding: 8px 16px; font-size: 0.78rem; }
+    .result-value { font-size: 1.8rem; }
+    .compare-amount { font-size: 1.3rem; }
+    .result-box { padding: 1.5rem 1rem; }
+    .result-row { flex-wrap: wrap; gap: 0.25rem; }
+    .result-row-label { font-size: 0.82rem; }
+    .result-row-value { font-size: 0.9rem; }
+
+    /* Download buttons */
+    .download-btns { justify-content: center; }
+
+    /* Donut charts */
+    .donut-wrapper { flex-direction: column; align-items: center; text-align: center; }
+    .budget-donut-wrapper { flex-direction: column; align-items: center; text-align: center; }
+    .compare-bar-label { width: 65px; font-size: 0.75rem; }
+    .compare-bar-fill { font-size: 0.7rem; min-width: 50px; }
+    .gauge-wrapper canvas { width: 240px !important; height: 150px !important; }
+
+    /* Info tooltips */
+    .info-tooltip { width: 220px; left: auto; right: -10px; transform: none; }
+    .info-tooltip::before { left: auto; right: 14px; transform: rotate(45deg); }
+
+    /* Charts */
+    .amort-chart-wrapper canvas { height: 220px !important; }
+
+    /* Credit slider */
+    .credit-slider-box { padding: 1.5rem 1.25rem; }
+    .credit-slider-title { font-size: 1.1rem; }
+    .credit-slider-subtitle { font-size: 0.85rem; }
+    .slider-score-num { font-size: 2.5rem; }
+    .slider-results { flex-direction: column; align-items: center; gap: 0.5rem; }
+    .slider-result-card { max-width: 100%; width: 100%; }
+    .slider-vs { padding: 0.25rem 0; font-size: 0.9rem; }
+    .slider-card-total { font-size: 1.3rem; }
+    .slider-diff-amount { font-size: 1.4rem; }
+    .slider-diff-bar { font-size: 0.9rem; }
+    .credit-range-slider { height: 10px; }
+    .credit-range-slider::-webkit-slider-thumb { width: 28px; height: 28px; }
+  }
+
+  /* RESPONSIVE — SMALL PHONE */
+  @media (max-width: 380px) {
+    nav { padding: 0 1rem; }
+    .nav-logo { font-size: 1.2rem; }
+    .calculators { padding-top: 90px; }
+    .calc-card { padding: 1.25rem; }
+    .calc-tab { padding: 7px 12px; font-size: 0.72rem; }
+    .result-value { font-size: 1.5rem; }
+    .section-text { font-size: 0.95rem; }
+    .btn { padding: 12px 28px; font-size: 0.85rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      transition-duration: .001ms !important;
+    }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DREAM/BIG Financial Calculators",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "url": "https://lifeafterhighschoolbook.com/calculators.html",
+  "description": "Five free financial calculators from DREAM/BIG: an auto loan calculator, a home loan calculator, a retirement savings calculator, a credit score estimator, and a budget calculator. See what loans really cost and how your money can grow over time.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Corey L. Cook"
+  }
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-logo">DREAM/BIG</span>
+    <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
+  </a>
+  <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#book">The Book</a></li>
+    <li class="nav-dropdown">
+      <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
+      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="calculators.html" style="color:var(--gold);">Calculators</a>
+        <a href="glossary.html">Glossary</a>
+      </div></div>
+    </li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#book" class="btn btn-gold btn-nav">Coming Soon</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+<!-- CALCULATORS -->
+<section class="calculators">
+  <div class="container">
+    <span class="section-label">Companion Tools</span>
+    <h1 class="section-title">See the Numbers for Yourself</h1>
+    <div class="divider"></div>
+    <p class="section-text" style="margin-bottom:2.5rem;">In the book, I break down exactly what bad credit costs you&mdash;and what good financial decisions can build over time. These calculators let you plug in your own numbers and see it for yourself. Because the decisions you make about money right now will echo for decades. Make them count.</p>
+
+    <div class="calc-tabs">
+      <button class="calc-tab active" aria-selected="true" onclick="switchCalc('auto', this)">Auto Loan</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('home', this)">Home Loan</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('retirement', this)">Retirement</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('credit', this)">Credit Score</button>
+      <button class="calc-tab" aria-selected="false" onclick="switchCalc('budget', this)">Budget</button>
+    </div>
+
+    <!-- AUTO LOAN -->
+    <div class="calc-panel active" id="calc-auto">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;When I went to buy my first real car&mdash;a 1998 Buick Park Avenue, $6,500&mdash;the interest rate was 13%. I remember sitting in that dealership, signing those papers, and doing the math in my head. I was paying so much money in interest.&rdquo; Do the math: 13% interest on that $6,500 loan over five years meant roughly $2,374 in interest alone&mdash;paying nearly $8,874 total for a $6,500 car.</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="auto-price">Vehicle Price ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The sticker price of the car. Remember, a brand-new car loses 20% of its value the moment you drive it off the lot. A two- or three-year-old car with low miles can save you thousands and still feel new.</span></button>
+              </div>
+              <input type="number" id="auto-price" value="25000" oninput="calcAuto()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="auto-down">Down Payment ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you pay upfront. The more you put down, the less you borrow, and the less interest you pay over the life of the loan. Even an extra $500 down can save you hundreds in interest.</span></button>
+              </div>
+              <input type="number" id="auto-down" value="0" oninput="calcAuto()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="auto-rate">Interest Rate (%)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is based on your credit score. Good credit (700+) might get you 4&ndash;6%. Bad credit can mean 15&ndash;20% or higher. That&rsquo;s the difference between paying $28K and $40K for the same car. Your credit score is money.</span></button>
+              </div>
+              <input type="number" id="auto-rate" value="4" step="0.1" oninput="calcAuto()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="auto-term">Loan Term (Years)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">How long you take to pay it off. Longer terms mean lower monthly payments, but way more interest. A 6-year loan costs thousands more than a 4-year loan on the same car. Keep it as short as you can afford.</span></button>
+              </div>
+              <select id="auto-term" onchange="calcAuto()">
+                <option value="3">3 Years</option><option value="4">4 Years</option>
+                <option value="5" selected>5 Years</option><option value="6">6 Years</option><option value="7">7 Years</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly" aria-live="polite">$460</div></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$25,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$2,625</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$27,625</span></div>
+            <div class="donut-wrapper">
+              <canvas id="auto-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
+              <div class="donut-legend">
+                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="auto-donut-prin">$25,000</strong></div>
+                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="auto-donut-int">$2,625</strong></div>
+                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="auto-donut-pct">10% of your payments go to the bank</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CREDIT SCORE SLIDER — FULL WIDTH -->
+        <div class="credit-slider-box" id="auto-slider-box">
+          <div class="credit-slider-header">
+            <div class="credit-slider-title">What Does Your Credit Score Really Cost You?</div>
+            <div class="credit-slider-subtitle">Slide to any credit score. Watch what happens to the price of this car. Same car. Same loan. The only thing that changes is your credit.</div>
+          </div>
+          <div class="slider-main-layout">
+            <div class="slider-control-area">
+              <div class="slider-score-display">
+                <div class="slider-score-num" id="auto-slider-score">550</div>
+                <div class="slider-score-label" id="auto-slider-rating" style="color:#E74C3C;">Poor</div>
+              </div>
+              <input type="range" class="credit-range-slider" id="auto-credit-slider" min="300" max="850" value="550" oninput="updateAutoSlider()">
+              <div class="slider-range-labels">
+                <span>300<br><em>Worst</em></span>
+                <span>580<br><em>Poor</em></span>
+                <span>670<br><em>Fair</em></span>
+                <span>740<br><em>Good</em></span>
+                <span>850<br><em>Best</em></span>
+              </div>
+            </div>
+            <div class="slider-results">
+              <div class="slider-result-card yours">
+                <div class="slider-card-emoji">&#x2705;</div>
+                <div class="slider-card-label yours">With Your Rate</div>
+                <div class="slider-card-rate" id="auto-yours-rate">4.0% interest</div>
+                <div class="slider-card-total" id="auto-yours-total">$27,625</div>
+                <div class="slider-card-monthly" id="auto-yours-monthly">$460/mo</div>
+              </div>
+              <div class="slider-vs">VS</div>
+              <div class="slider-result-card slider" id="auto-slider-card">
+                <div class="slider-card-emoji" id="auto-slider-emoji">&#x274C;</div>
+                <div class="slider-card-label slider" id="auto-slider-label">Score of <span id="auto-slider-card-score">550</span></div>
+                <div class="slider-card-rate" id="auto-slider-rate">18.0% interest</div>
+                <div class="slider-card-total" id="auto-slider-total">$38,961</div>
+                <div class="slider-card-monthly" id="auto-slider-monthly">$464/mo</div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-diff-bar" id="auto-slider-diff">
+            <span id="auto-slider-diff-text">Bad credit would cost you </span><span class="slider-diff-amount cost" id="auto-slider-diff-amt">$10,737</span><span id="auto-slider-diff-suffix"> extra&mdash;for the exact same car.</span>
+          </div>
+        </div>
+        <div class="amort-chart-wrapper" style="margin-top:2rem;">
+          <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem; color:var(--gold);">Where Your Money Goes Each Month</div>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">This is amortization. Early in your loan, most of your payment goes to interest&mdash;not the car. You&rsquo;re paying the bank before you&rsquo;re paying yourself.</p>
+          <div class="chart-legend" style="display:flex; gap:1.5rem; margin-bottom:0.75rem; font-size:0.8rem;">
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:#E74C3C;border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Interest</span></span>
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Principal</span></span>
+          </div>
+          <canvas id="auto-amort-chart" width="740" height="300" style="width:100%;height:300px;border-radius:8px;background:var(--purple-surface);"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOME LOAN -->
+    <div class="calc-panel" id="calc-home">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;Good credit at 5%: your total cost is $289,800. Bad credit at 8.5%: your total cost is $415,080. That&rsquo;s $125,280 more over the life of the loan. Read that number again.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="home-price">Home Price ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The purchase price of the home. In Erie, a solid starter home can run $100K&ndash;$200K. Focus on what you can actually afford, not what a bank will approve you for. Those are two very different numbers.</span></button>
+              </div>
+              <input type="number" id="home-price" value="150000" oninput="calcHome()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="home-down">Down Payment ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you bring to closing. 20% down avoids PMI (private mortgage insurance)&mdash;an extra monthly fee that protects the bank, not you. Even if you can&rsquo;t hit 20%, every dollar you put down reduces what you borrow and what you pay in interest.</span></button>
+              </div>
+              <input type="number" id="home-down" value="15000" oninput="calcHome()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="home-rate">Interest Rate (%)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Your mortgage rate depends on your credit score, the market, and your down payment. Even half a percent difference on a 30-year mortgage can mean tens of thousands of dollars. Shop around&mdash;don&rsquo;t just take the first offer.</span></button>
+              </div>
+              <input type="number" id="home-rate" value="6.5" step="0.1" oninput="calcHome()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="home-term">Loan Term (Years)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">15-year loans have higher monthly payments but save you a massive amount in interest. 30-year loans are easier month to month, but you&rsquo;ll pay for the house nearly twice over. Run both options here and see the difference.</span></button>
+              </div>
+              <select id="home-term" onchange="calcHome()">
+                <option value="15">15 Years</option><option value="20">20 Years</option><option value="30" selected>30 Years</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly" aria-live="polite">$853</div></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$135,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$172,185</span></div>
+            <div class="result-row"><span class="result-row-label">Total Cost of Home</span><span class="result-row-value" id="home-total">$307,185</span></div>
+            <div class="donut-wrapper">
+              <canvas id="home-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
+              <div class="donut-legend">
+                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="home-donut-prin">$135,000</strong></div>
+                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="home-donut-int">$172,185</strong></div>
+                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="home-donut-pct">56% of your payments go to the bank</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CREDIT SCORE SLIDER — FULL WIDTH -->
+        <div class="credit-slider-box" id="home-slider-box">
+          <div class="credit-slider-header">
+            <div class="credit-slider-title">What Does Your Credit Score Really Cost You?</div>
+            <div class="credit-slider-subtitle">This is where it gets serious. On a 30-year mortgage, bad credit doesn&rsquo;t just cost you thousands&mdash;it costs you a house worth of money. Slide and see.</div>
+          </div>
+          <div class="slider-main-layout">
+            <div class="slider-control-area">
+              <div class="slider-score-display">
+                <div class="slider-score-num" id="home-slider-score">550</div>
+                <div class="slider-score-label" id="home-slider-rating" style="color:#E74C3C;">Poor</div>
+              </div>
+              <input type="range" class="credit-range-slider" id="home-credit-slider" min="300" max="850" value="550" oninput="updateHomeSlider()">
+              <div class="slider-range-labels">
+                <span>300<br><em>Worst</em></span>
+                <span>580<br><em>Poor</em></span>
+                <span>670<br><em>Fair</em></span>
+                <span>740<br><em>Good</em></span>
+                <span>850<br><em>Best</em></span>
+              </div>
+            </div>
+            <div class="slider-results">
+              <div class="slider-result-card yours">
+                <div class="slider-card-emoji">&#x2705;</div>
+                <div class="slider-card-label yours">With Your Rate</div>
+                <div class="slider-card-rate" id="home-yours-rate">6.5% interest</div>
+                <div class="slider-card-total" id="home-yours-total">$307,185</div>
+                <div class="slider-card-monthly" id="home-yours-monthly">$853/mo</div>
+              </div>
+              <div class="slider-vs">VS</div>
+              <div class="slider-result-card slider" id="home-slider-card">
+                <div class="slider-card-emoji" id="home-slider-emoji">&#x274C;</div>
+                <div class="slider-card-label slider" id="home-slider-label">Score of <span id="home-slider-card-score">550</span></div>
+                <div class="slider-card-rate" id="home-slider-rate">9.8% interest</div>
+                <div class="slider-card-total" id="home-slider-total">$444,290</div>
+                <div class="slider-card-monthly" id="home-slider-monthly">$1,165/mo</div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-diff-bar" id="home-slider-diff">
+            <span id="home-slider-diff-text">Bad credit would cost you </span><span class="slider-diff-amount cost" id="home-slider-diff-amt">$137,105</span><span id="home-slider-diff-suffix"> extra&mdash;for the exact same house.</span>
+          </div>
+        </div>
+        <div class="amort-chart-wrapper" style="margin-top:2rem;">
+          <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem; color:var(--gold);">Where Your Money Goes Each Month</div>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">On a 30-year mortgage, you can pay more in interest than the house itself. Look at how much of your early payments go straight to the bank. This is why credit score matters so much.</p>
+          <div class="chart-legend" style="display:flex; gap:1.5rem; margin-bottom:0.75rem; font-size:0.8rem;">
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:#E74C3C;border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Interest</span></span>
+            <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Principal</span></span>
+          </div>
+          <canvas id="home-amort-chart" width="740" height="300" style="width:100%;height:300px;border-radius:8px;background:var(--purple-surface);"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- RETIREMENT -->
+    <div class="calc-panel" id="calc-retirement">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;The power of compound interest is real. Money you invest in your 20s is worth exponentially more than money you invest in your 40s. Small decisions. Compounded over time. Big impact.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group">
+              <label for="ret-age">Your Current Age</label>
+              <input type="number" id="ret-age" value="22" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="ret-retire">When Do You Want to Retire?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Most people retire between 62 and 67. The longer you work, the more time your money has to grow. Even a few extra years makes a big difference.</span></button>
+              </div>
+              <input type="number" id="ret-retire" value="65" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="ret-monthly">How Much Can You Save Per Month?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is money you put into a retirement account like a 401(k) through your job or an IRA you open yourself. Even $50/month matters. If your job matches contributions, that&rsquo;s free money&mdash;always take it.</span></button>
+              </div>
+              <input type="number" id="ret-monthly" value="200" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="ret-return">Average Yearly Growth (%)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is how much your investments grow each year on average. The stock market has historically returned about 7% per year over long periods. You don&rsquo;t need to pick stocks&mdash;a simple index fund does this for you. Leave this at 7% if you&rsquo;re not sure.</span></button>
+              </div>
+              <input type="number" id="ret-return" value="7" step="0.5" oninput="calcRetirement()">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="ret-current">Money You&rsquo;ve Already Saved ($)</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">If you already have money in a savings account, 401(k), or any investment, put that number here. Starting from zero? That&rsquo;s fine&mdash;most people your age are. The point is to start now.</span></button>
+              </div>
+              <input type="number" id="ret-current" value="0" oninput="calcRetirement()">
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">What You Could Retire With</div><div class="result-value" id="ret-total" aria-live="polite">$578,326</div></div>
+            <div class="result-row"><span class="result-row-label">Years of Growth</span><span class="result-row-value" id="ret-years">43 years</span></div>
+            <div class="result-row"><span class="result-row-label">What You Put In</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
+            <div class="result-row"><span class="result-row-label">What Your Money Earned on Its Own</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
+            <div class="result-row"><span class="result-row-label">Growth vs. Your Contributions</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">82%</span></div>
+            <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">What Waiting 10 Years Costs You</div>
+              <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
+              <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$264,012</div>
+              <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$314,314</strong> less. Time is the most powerful ingredient. Start now.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREDIT SCORE ESTIMATOR -->
+    <div class="calc-panel" id="calc-credit">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;Your credit score is your financial reputation. It follows you everywhere&mdash;apartments, car lots, job applications. Nobody teaches you this in school, but it&rsquo;s one of the most important numbers in your life.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="credit-payment">Do You Pay Bills on Time?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is the single biggest factor in your credit score&mdash;35% of it. Every late payment hurts. Every on-time payment builds trust. Set up autopay if you can.</span></button>
+              </div>
+              <select id="credit-payment" onchange="calcCredit()">
+                <option value="5">Always &mdash; never missed one</option>
+                <option value="4" selected>Mostly &mdash; slipped once or twice</option>
+                <option value="3">Sometimes &mdash; been late a few times</option>
+                <option value="2">Not great &mdash; missed several</option>
+                <option value="1">Defaulted &mdash; went to collections</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="credit-util">How Much of Your Credit Do You Use?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">If your credit card limit is $1,000 and your balance is $300, you&rsquo;re using 30%. Lenders like to see you use less than 30% of what&rsquo;s available. Under 10% is even better. This is 30% of your score.</span></button>
+              </div>
+              <input type="number" id="credit-util" value="30" min="0" max="100" step="1" oninput="calcCredit()" placeholder="e.g. 30 means 30%">
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="credit-length">How Long Have You Had Credit?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The longer your credit history, the better. This is why you should keep your first credit card open even if you don&rsquo;t use it much. Closing old accounts shortens your history and can drop your score.</span></button>
+              </div>
+              <select id="credit-length" onchange="calcCredit()">
+                <option value="1">Just started &mdash; less than a year</option>
+                <option value="2" selected>1&ndash;3 years</option>
+                <option value="3">3&ndash;7 years</option>
+                <option value="4">7&ndash;15 years</option>
+                <option value="5">15+ years</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="credit-mix">Types of Credit You Have</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Lenders like to see you can handle different kinds of credit&mdash;like a credit card plus a car loan. You don&rsquo;t need to go get a loan just for this, but having more than one type helps. This is 10% of your score.</span></button>
+              </div>
+              <select id="credit-mix" onchange="calcCredit()">
+                <option value="1">Just one &mdash; like a credit card only</option>
+                <option value="2" selected>Two types &mdash; card + a loan</option>
+                <option value="3">Three or more types</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="credit-inquiries">How Often Have You Applied for Credit?</label>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Every time you apply for a credit card, car loan, or apartment, the lender checks your credit. That&rsquo;s a &ldquo;hard inquiry&rdquo; and it stays on your report for 2 years. Too many in a short time looks desperate to lenders.</span></button>
+              </div>
+              <select id="credit-inquiries" onchange="calcCredit()">
+                <option value="0" selected>Haven&rsquo;t applied recently</option>
+                <option value="1">Applied once or twice</option>
+                <option value="3">Applied 3&ndash;5 times</option>
+                <option value="6">Applied 6+ times</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;">
+              <div class="result-label">Estimated Credit Score Range</div>
+              <div class="result-value" id="credit-score" aria-live="polite">650 &ndash; 700</div>
+              <div class="result-sub" id="credit-rating" style="font-weight:600;">Good</div>
+            </div>
+            <div class="gauge-wrapper">
+              <canvas id="credit-gauge" width="280" height="170" style="width:280px;height:170px;"></canvas>
+            </div>
+            <div class="result-row"><span class="result-row-label">Payment History (35%)</span><span class="result-row-value" id="credit-detail-payment">Good</span></div>
+            <div class="result-row"><span class="result-row-label">Credit Utilization (30%)</span><span class="result-row-value" id="credit-detail-util">30%</span></div>
+            <div class="result-row"><span class="result-row-label">Length of History (15%)</span><span class="result-row-value" id="credit-detail-length">1&ndash;3 years</span></div>
+            <div class="result-row"><span class="result-row-label">Credit Mix (10%)</span><span class="result-row-value" id="credit-detail-mix">Two types</span></div>
+            <div class="result-row"><span class="result-row-label">New Inquiries (10%)</span><span class="result-row-value" id="credit-detail-inq">None</span></div>
+            <div id="credit-tips" style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">How to Improve Your Score</div>
+              <div id="credit-tips-list" style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUDGET CALCULATOR -->
+    <div class="calc-panel" id="calc-budget">
+      <div class="calc-card">
+        <p class="calc-intro">&ldquo;Nobody sits you down after graduation and says, &lsquo;Here&rsquo;s how to manage a paycheck.&rsquo; You get that first real check and it feels like a lot&mdash;until rent, food, a car payment, and a phone bill eat it alive. A budget isn&rsquo;t about restricting yourself. It&rsquo;s about knowing where your money goes so you can make it work for you.&rdquo;</p>
+        <div class="calc-grid">
+          <div>
+            <div class="form-group"><label for="budget-income">Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" oninput="calcBudget()"></div>
+            <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.5rem; margin-top:0.5rem;">
+              <div style="font-weight:600; font-size:0.85rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Your Monthly Expenses</div>
+              <div class="form-group"><label for="budget-rent">Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-utilities">Utilities &mdash; Electric, Water, Gas ($)</label><input type="number" id="budget-utilities" value="120" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-car">Car Payment ($)</label><input type="number" id="budget-car" value="280" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-insurance">Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-gas">Gas / Transportation ($)</label><input type="number" id="budget-gas" value="120" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-phone">Cell Phone ($)</label><input type="number" id="budget-phone" value="65" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-food">Groceries / Food ($)</label><input type="number" id="budget-food" value="300" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-streaming">Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-personal">Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-other">Other Expenses ($)</label><input type="number" id="budget-other" value="50" oninput="calcBudget()"></div>
+            </div>
+          </div>
+          <div>
+            <div class="result-box" style="margin-bottom:1rem;">
+              <div class="result-label">Money Left Over</div>
+              <div class="result-value" id="budget-remaining" aria-live="polite">$670</div>
+              <div class="result-sub" id="budget-status" aria-live="polite">You have room to save and invest</div>
+            </div>
+            <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,800</span></div>
+            <div class="result-row"><span class="result-row-label">Total Expenses</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$2,130</span></div>
+            <div class="result-row"><span class="result-row-label">Expenses as % of Income</span><span class="result-row-value" id="budget-pct">76%</span></div>
+
+            <div style="margin-top:1.5rem;">
+              <div style="font-weight:600; font-size:0.9rem; margin-bottom:0.75rem; color:var(--gold);">Where Your Money Goes</div>
+              <div class="budget-donut-wrapper">
+                <canvas id="budget-donut" class="donut-canvas" width="160" height="160" style="width:160px;height:160px;"></canvas>
+                <div id="budget-donut-legend" class="budget-donut-legend"></div>
+              </div>
+              <div id="budget-bars"></div>
+            </div>
+
+            <div id="budget-advice" style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
+              <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">The 50/30/20 Guideline</div>
+              <div style="color:var(--text-muted); font-size:0.82rem; line-height:1.6; margin-bottom:0.75rem;">A lot of financial experts recommend this framework as a starting point. It&rsquo;s not a strict rule&mdash;do what works for your situation. The goal is to be intentional about where your money goes.</div>
+              <div style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">
+                <div class="result-row"><span class="result-row-label">Needs (50% = <span id="budget-50">$1,200</span>)</span><span class="result-row-value" id="budget-needs-actual">$1,370</span></div>
+                <div class="result-row"><span class="result-row-label">Wants (30% = <span id="budget-30">$720</span>)</span><span class="result-row-value" id="budget-wants-actual">$190</span></div>
+                <div class="result-row"><span class="result-row-label">Savings (20% = <span id="budget-20">$480</span>)</span><span class="result-row-value" id="budget-savings-actual">$490</span></div>
+              </div>
+              <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
+            </div>
+            <div class="download-btns">
+              <button class="btn-download" onclick="downloadBudgetExcel(this)" title="Download results as Excel">
+                <span>📊</span> Download Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCIAL CALCULATOR DISCLAIMER -->
+    <div class="calc-disclaimer">
+      <p><strong>Disclaimer:</strong> These calculators are provided for educational and illustrative purposes only and do not constitute financial, investment, tax, or legal advice. All results are estimates based on the information you enter and standard mathematical formulas. Actual loan terms, interest rates, and investment returns will vary based on your creditworthiness, lender, market conditions, and other factors. Consult a qualified financial advisor, tax professional, or licensed lender before making any financial decisions. Corey L. Cook and Cook Media LLC are not responsible for any financial decisions made based on these calculators.</p>
+    </div>
+
+    <a href="index.html" class="back-link">&larr; Back to DREAM/BIG</a>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
+  <p>&copy; 2026 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
+  <div class="footer-legal">
+    <a href="#" onclick="event.preventDefault(); openLegal('privacy');">Privacy Policy</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('terms');">Terms of Use</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('accessibility');">Accessibility</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('dmca');">DMCA Notice</a>
+  </div>
+</footer>
+
+<!-- PRIVACY POLICY OVERLAY -->
+<div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
+  <button class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-privacy-title">Privacy Policy</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Who We Are</h3>
+    <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit lifeafterhighschoolbook.com.</p>
+    <h3>What We Collect</h3>
+    <p>We collect only the information you voluntarily provide:</p>
+    <ul>
+      <li><strong>Email address</strong> &mdash; when you subscribe to our newsletter</li>
+      <li><strong>Name and contact information</strong> &mdash; when you submit a speaking engagement inquiry</li>
+    </ul>
+    <p>The financial calculators on this site run entirely in your browser. We do not collect, store, or transmit any data you enter into the calculators.</p>
+    <h3>How We Use Your Information</h3>
+    <p>Your email address is used solely to send you newsletter updates about new content, speaking events, financial tips, and DREAM/BIG community news. We will never sell, rent, or share your email address with third parties for marketing purposes.</p>
+    <h3>Email Communications</h3>
+    <p>By subscribing to our newsletter, you consent to receiving periodic emails. Every email will include an option to unsubscribe. We comply with the CAN-SPAM Act and all applicable email marketing regulations. Our physical mailing address is:</p>
+    <p>Cook Media LLC<br>Erie, PA 16501</p>
+    <h3>Cookies &amp; Tracking</h3>
+    <p>This website uses Google Analytics, a web analytics service provided by Google LLC, to help us understand how visitors use the site. Google Analytics uses cookies &mdash; small text files stored on your device &mdash; to collect standard internet log information and visitor behavior data. This information is processed in a way that does not directly identify anyone.</p>
+    <p>The data collected by Google Analytics includes pages visited, time spent on the site, approximate geographic location, device type, and referring website. You can opt out of Google Analytics tracking by installing the <a href="https://tools.google.com/dlpage/gaoptout" style="color:var(--gold);" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</p>
+    <p>Our newsletter subscription form is powered by Mailchimp (Intuit Inc.). When you subscribe, your email address is stored and processed by Mailchimp in accordance with their <a href="https://www.intuit.com/privacy/statement/" style="color:var(--gold);" target="_blank" rel="noopener">privacy policy</a>.</p>
+    <h3>Data Security</h3>
+    <p>We take reasonable measures to protect your personal information. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
+    <h3>Your Rights</h3>
+    <p>You may request access to, correction of, or deletion of your personal information at any time by contacting us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+    <h3>California Privacy Rights (CCPA)</h3>
+    <p>If you are a California resident, the California Consumer Privacy Act (CCPA) provides you with the following rights regarding your personal information:</p>
+    <ul>
+      <li><strong>Right to Know</strong> &mdash; You may request that we disclose what personal information we collect, use, and share about you.</li>
+      <li><strong>Right to Delete</strong> &mdash; You may request that we delete personal information we have collected from you.</li>
+      <li><strong>Right to Opt-Out</strong> &mdash; You have the right to opt out of the sale of your personal information. We do not sell your personal information.</li>
+      <li><strong>Right to Non-Discrimination</strong> &mdash; We will not discriminate against you for exercising any of these rights.</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>. We will respond to verifiable requests within 45 days.</p>
+    <h3>Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+    <h3>Contact</h3>
+    <p>Questions about this policy? Email us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<!-- TERMS OF USE OVERLAY -->
+<div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
+  <button class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-terms-title">Terms of Use</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Acceptance of Terms</h3>
+    <p>By accessing and using this website (lifeafterhighschoolbook.com), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use this site.</p>
+    <h3>Educational Purpose</h3>
+    <p>The content on this website, including the book excerpts, financial calculators, and glossary, is provided for general educational and informational purposes only. Nothing on this site constitutes professional financial, investment, tax, or legal advice.</p>
+    <h3>Financial Calculator Disclaimer</h3>
+    <p>The financial calculators provided on this site are tools for illustration and education. Results are estimates based on the inputs you provide and standard mathematical formulas. They do not account for all factors that affect actual loan terms or investment returns, including but not limited to: fees, taxes, insurance, market volatility, or individual lender requirements. Always consult a licensed financial professional before making financial decisions.</p>
+    <h3>Intellectual Property</h3>
+    <p>All content on this website &mdash; including text, graphics, logos, images, and the DREAM/BIG name and framework &mdash; is the property of Corey L. Cook and Cook Media LLC and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
+    <h3>Third-Party Links</h3>
+    <p>This website may contain links to external websites. We are not responsible for the content, privacy practices, or availability of those sites.</p>
+    <h3>Limitation of Liability</h3>
+    <p>Corey L. Cook and Cook Media LLC shall not be liable for any damages arising from the use of this website, including but not limited to financial losses resulting from reliance on calculator results or other content provided on the site.</p>
+    <h3>Governing Law</h3>
+    <p>These terms are governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, without regard to its conflict of law provisions.</p>
+    <h3>Changes to These Terms</h3>
+    <p>We reserve the right to update these Terms of Use at any time. Continued use of the site after changes are posted constitutes acceptance of the revised terms.</p>
+    <h3>Contact</h3>
+    <p>Questions about these terms? Email us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<!-- ACCESSIBILITY STATEMENT OVERLAY -->
+<div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
+  <button class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-accessibility-title">Accessibility Statement</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Our Commitment</h3>
+    <p>Corey L. Cook and Cook Media LLC are committed to ensuring that lifeafterhighschoolbook.com is accessible to people with disabilities. We strive to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at the AA level and continuously work to improve the accessibility of our site.</p>
+    <h3>Accessibility Features</h3>
+    <p>This website includes the following accessibility features:</p>
+    <ul>
+      <li>Semantic HTML structure with proper heading hierarchy</li>
+      <li>Alt text on images</li>
+      <li>Sufficient color contrast between text and backgrounds</li>
+      <li>Keyboard-navigable interface elements</li>
+      <li>Responsive design that supports browser zoom up to 200%</li>
+      <li>Clearly labeled form inputs</li>
+    </ul>
+    <h3>Financial Calculators</h3>
+    <p>Our financial calculators are interactive tools that update results in real time as you change inputs. All form fields are labeled, and results are presented as text that can be read by assistive technologies.</p>
+    <h3>Known Limitations</h3>
+    <p>While we strive for full accessibility, some areas of the site may not yet be fully optimized for all assistive technologies. We are actively working to identify and address any remaining barriers.</p>
+    <h3>Feedback</h3>
+    <p>If you encounter any accessibility barriers on this site, or have suggestions for improvement, please contact us at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>. We take accessibility feedback seriously and will work to address your concerns promptly.</p>
+  </div>
+</div>
+
+<!-- DMCA NOTICE OVERLAY -->
+<div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
+  <button class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-dmca-title">DMCA Notice</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Copyright Protection</h3>
+    <p>All original content on this website &mdash; including written text, the DREAM/BIG framework, book excerpts, financial calculator designs, and associated graphics &mdash; is the copyrighted property of Corey L. Cook and Cook Media LLC. This content is protected under the Digital Millennium Copyright Act (DMCA) and applicable copyright laws.</p>
+    <h3>Reporting Copyright Infringement</h3>
+    <p>If you believe that content on this website infringes upon your copyright, please send a written notification to our designated DMCA agent with the following information:</p>
+    <ul>
+      <li>A description of the copyrighted work you claim has been infringed</li>
+      <li>A description of the material you claim is infringing, including the URL or location on the site</li>
+      <li>Your name, address, telephone number, and email address</li>
+      <li>A statement that you have a good faith belief that the use of the material is not authorized by the copyright owner, its agent, or the law</li>
+      <li>A statement, made under penalty of perjury, that the information in your notification is accurate and that you are the copyright owner or are authorized to act on behalf of the owner</li>
+      <li>Your physical or electronic signature</li>
+    </ul>
+    <h3>DMCA Agent</h3>
+    <p>Corey L. Cook<br>Cook Media LLC<br>Erie, PA 16501<br><a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a></p>
+    <h3>Counter-Notification</h3>
+    <p>If you believe that material you posted was removed or disabled by mistake or misidentification, you may submit a counter-notification to the DMCA agent listed above with the required information under 17 U.S.C. &sect; 512(g).</p>
+    <h3>Repeat Infringers</h3>
+    <p>In accordance with the DMCA, we will terminate access for users who are repeat infringers of copyright in appropriate circumstances.</p>
+  </div>
+</div>
+
+<script>
+// MOBILE NAV: toggle menu + ARIA state
+function toggleNav(btn) {
+  const open = document.querySelector('.nav-links').classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+// MOBILE NAV: close menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('open');
+    const t = document.querySelector('.nav-toggle');
+    if (t) t.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// TOOLS DROPDOWN: click toggle (hover still works via CSS)
+function toggleToolsMenu(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  const menu = btn.nextElementSibling;
+  if (menu) menu.style.display = expanded ? '' : 'block';
+}
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.nav-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    const btn = dd.querySelector('button[aria-haspopup]');
+    const menu = dd.querySelector('.nav-dropdown-menu');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (menu) menu.style.display = '';
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const dd = document.querySelector('.nav-dropdown');
+    if (dd) {
+      const btn = dd.querySelector('button[aria-haspopup]');
+      const menu = dd.querySelector('.nav-dropdown-menu');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+      if (menu) menu.style.display = '';
+    }
+  }
+});
+
+// AMORTIZATION CHART
+function drawAmortChart(canvasId, principal, annualRate, years) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const cssW = canvas.clientWidth || 740;
+  const cssH = 300;
+  // Skip drawing if canvas is in a hidden panel (will redraw on tab switch)
+  if (canvas.clientWidth < 10) return;
+  canvas.width = cssW * dpr;
+  canvas.height = cssH * dpr;
+  canvas.style.height = cssH + 'px';
+  ctx.scale(dpr, dpr);
+
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--purple-surface').trim() || '#2E1A50';
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, cssW, cssH);
+
+  if (principal <= 0 || annualRate <= 0 || years <= 0) return;
+
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+  let balance = principal;
+  const yearData = [];
+  for (let yr = 1; yr <= years; yr++) {
+    let yearInterest = 0, yearPrincipal = 0;
+    for (let m = 0; m < 12; m++) {
+      if (balance <= 0) break;
+      const intPmt = balance * r;
+      const prinPmt = Math.min(monthly - intPmt, balance);
+      yearInterest += intPmt;
+      yearPrincipal += prinPmt;
+      balance -= prinPmt;
+    }
+    yearData.push({ year: yr, interest: yearInterest, principal: yearPrincipal, total: yearInterest + yearPrincipal });
+  }
+
+  const pad = { top: 50, right: 20, bottom: 45, left: 75 };
+  const chartW = cssW - pad.left - pad.right;
+  const chartH = cssH - pad.top - pad.bottom;
+  const maxVal = Math.max(...yearData.map(d => d.total)) * 1.1;
+  const barW = Math.max(4, Math.min(30, (chartW / yearData.length) - (yearData.length > 15 ? 2 : 4)));
+  const gap = (chartW - barW * yearData.length) / (yearData.length + 1);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  const gridLines = 4;
+  ctx.font = '12px Inter, sans-serif';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + chartH - (chartH * i / gridLines);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(cssW - pad.right, y); ctx.stroke();
+    const val = Math.round(maxVal * i / gridLines);
+    const label = val >= 1000 ? '$' + (val / 1000).toFixed(val >= 10000 ? 0 : 1) + 'k' : '$' + val.toLocaleString();
+    ctx.fillText(label, pad.left - 8, y + 4);
+  }
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.font = '11px Inter, sans-serif';
+  const labelEvery = years <= 7 ? 1 : years <= 15 ? 2 : 5;
+  yearData.forEach((d, i) => {
+    const x = pad.left + gap + i * (barW + gap) + barW / 2;
+    if (d.year % labelEvery === 0 || d.year === 1) ctx.fillText('Yr ' + d.year, x, cssH - pad.bottom + 18);
+  });
+
+  ctx.save();
+  ctx.translate(14, pad.top + chartH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.font = '11px Inter, sans-serif';
+  ctx.fillText('Annual Payment', 0, 0);
+  ctx.restore();
+  ctx.fillStyle = '#B8A8D0';
+  ctx.textAlign = 'center';
+  ctx.font = '11px Inter, sans-serif';
+  ctx.fillText('Loan Year', pad.left + chartW / 2, cssH - 5);
+
+  yearData.forEach((d, i) => {
+    const x = pad.left + gap + i * (barW + gap);
+    const intH = (d.interest / maxVal) * chartH;
+    const prinH = (d.principal / maxVal) * chartH;
+    const baseY = pad.top + chartH;
+    const rad = Math.min(3, barW / 3);
+
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath(); roundRect(ctx, x, baseY - prinH, barW, prinH, { bl: rad, br: rad, tl: 0, tr: 0 }); ctx.fill();
+    ctx.fillStyle = '#E74C3C';
+    ctx.beginPath(); roundRect(ctx, x, baseY - prinH - intH, barW, intH, { bl: 0, br: 0, tl: rad, tr: rad }); ctx.fill();
+  });
+
+  const crossIdx = yearData.findIndex(d => d.principal >= d.interest);
+  if (crossIdx > 0) {
+    const x = pad.left + gap + crossIdx * (barW + gap) + barW / 2;
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, pad.top + chartH); ctx.stroke();
+    ctx.setLineDash([]);
+    // Small crossover label at top of dashed line
+    ctx.fillStyle = '#1A0A2E';
+    const labelW = 64;
+    const labelH = 16;
+    roundRect(ctx, x - labelW / 2, pad.top - 18, labelW, labelH, { tl: 3, tr: 3, bl: 3, br: 3 });
+    ctx.fill();
+    ctx.fillStyle = '#B8A8D0';
+    ctx.font = '9px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Yr ' + yearData[crossIdx].year + ' crossover', x, pad.top - 5);
+  }
+
+  if (yearData.length > 0) {
+    const d = yearData[0];
+    const pct = Math.round((d.interest / d.total) * 100);
+    // Small callout pinned to top-right, above the bars
+    const calloutW = Math.min(170, chartW * 0.35);
+    const calloutH = 36;
+    const calloutX = cssW - pad.right - calloutW - 6;
+    const calloutY = 4;
+    ctx.fillStyle = '#1A0A2E';
+    roundRect(ctx, calloutX, calloutY, calloutW, calloutH, { tl: 4, tr: 4, bl: 4, br: 4 });
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(231,76,60,0.5)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, calloutX, calloutY, calloutW, calloutH, { tl: 4, tr: 4, bl: 4, br: 4 });
+    ctx.stroke();
+    ctx.fillStyle = '#E74C3C';
+    ctx.font = 'bold 10px Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Yr 1: ' + pct + '% to interest', calloutX + 8, calloutY + 15);
+    ctx.fillStyle = '#B8A8D0';
+    ctx.font = '9px Inter, sans-serif';
+    ctx.fillText('$' + Math.round(d.interest).toLocaleString() + ' int / $' + Math.round(d.principal).toLocaleString() + ' prin', calloutX + 8, calloutY + 28);
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  if (typeof r === 'number') r = { tl: r, tr: r, bl: r, br: r };
+  ctx.beginPath();
+  ctx.moveTo(x + r.tl, y);
+  ctx.lineTo(x + w - r.tr, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+  ctx.lineTo(x + w, y + h - r.br);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+  ctx.lineTo(x + r.bl, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+  ctx.lineTo(x, y + r.tl);
+  ctx.quadraticCurveTo(x, y, x + r.tl, y);
+  ctx.closePath();
+}
+
+// ANIMATED NUMBER COUNTER
+function animateValue(el, start, end, duration) {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    el.textContent = fmt(end); return;
+  }
+  if (Math.abs(end - start) < 2) { el.textContent = fmt(end); return; }
+  const startTime = performance.now();
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const current = Math.round(start + (end - start) * eased);
+    el.textContent = fmt(current);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// Store previous values for animation
+const prevValues = {};
+function animatedFmt(elId, newVal) {
+  const el = document.getElementById(elId);
+  const prev = prevValues[elId] || 0;
+  prevValues[elId] = newVal;
+  animateValue(el, prev, newVal, 400);
+}
+
+// DONUT CHART DRAWING
+function drawDonut(canvasId, segments, centerText) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const size = canvas.clientWidth || 140;
+  canvas.width = size * dpr;
+  canvas.height = size * dpr;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, size, size);
+
+  const cx = size / 2, cy = size / 2;
+  const outerR = size / 2 - 4;
+  const innerR = outerR * 0.62;
+  const total = segments.reduce((a, s) => a + s.value, 0);
+  if (total <= 0) return;
+
+  let angle = -Math.PI / 2;
+  segments.forEach(seg => {
+    const sweep = (seg.value / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, outerR, angle, angle + sweep);
+    ctx.arc(cx, cy, innerR, angle + sweep, angle, true);
+    ctx.closePath();
+    ctx.fillStyle = seg.color;
+    ctx.fill();
+    angle += sweep;
+  });
+
+  // Center text
+  if (centerText) {
+    ctx.fillStyle = '#F5F5F5';
+    ctx.font = 'bold 16px Playfair Display, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(centerText, cx, cy);
+  }
+}
+
+// SEMICIRCLE GAUGE
+function drawCreditGauge(scoreMid, ratingColor) {
+  const canvas = document.getElementById('credit-gauge');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || 280;
+  const h = canvas.clientHeight || 170;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const cx = w / 2, cy = h - 15;
+  const radius = Math.min(w / 2, h) - 25;
+  const lineW = 18;
+  const startAngle = Math.PI;
+  const endAngle = 2 * Math.PI;
+
+  // Background arc segments
+  const colors = ['#E74C3C', '#E67E22', '#F1C40F', '#27AE60', '#1ABC9C'];
+  const ranges = [300, 500, 600, 700, 780, 850]; // 5 segments
+  for (let i = 0; i < 5; i++) {
+    const segStart = startAngle + ((ranges[i] - 300) / 550) * Math.PI;
+    const segEnd = startAngle + ((ranges[i + 1] - 300) / 550) * Math.PI;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, segStart, segEnd);
+    ctx.lineWidth = lineW;
+    ctx.strokeStyle = colors[i];
+    ctx.globalAlpha = 0.25;
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  // Active arc (filled up to score)
+  const scorePct = Math.max(0, Math.min(1, (scoreMid - 300) / 550));
+  const scoreAngle = startAngle + scorePct * Math.PI;
+  for (let i = 0; i < 5; i++) {
+    const segStart = startAngle + ((ranges[i] - 300) / 550) * Math.PI;
+    const segEnd = Math.min(scoreAngle, startAngle + ((ranges[i + 1] - 300) / 550) * Math.PI);
+    if (segEnd <= segStart) continue;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, segStart, segEnd);
+    ctx.lineWidth = lineW;
+    ctx.strokeStyle = colors[i];
+    ctx.lineCap = 'butt';
+    ctx.stroke();
+  }
+
+  // Needle
+  const needleAngle = scoreAngle;
+  const needleLen = radius - lineW / 2 - 8;
+  const nx = cx + Math.cos(needleAngle) * needleLen;
+  const ny = cy + Math.sin(needleAngle) * needleLen;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(nx, ny);
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = '#F5F5F5';
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+  ctx.fillStyle = ratingColor;
+  ctx.fill();
+
+  // Score text
+  ctx.fillStyle = ratingColor;
+  ctx.font = 'bold 28px Playfair Display, serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText(Math.round(scoreMid), cx, cy - 12);
+
+  // Range labels
+  ctx.font = '10px Inter, sans-serif';
+  ctx.fillStyle = '#B8A8D0';
+  ctx.textAlign = 'center';
+  const labelR = radius + lineW / 2 + 12;
+  ['300', '500', '600', '700', '780', '850'].forEach((label, i) => {
+    const a = startAngle + ((ranges[i] - 300) / 550) * Math.PI;
+    const lx = cx + Math.cos(a) * labelR;
+    const ly = cy + Math.sin(a) * labelR;
+    ctx.fillText(label, lx, ly);
+  });
+}
+
+// BUDGET DONUT
+function drawBudgetDonut(expenses, income) {
+  const colors = ['#9B59B6','#8E44AD','#E74C3C','#E67E22','#F39C12','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
+  const segments = [];
+  const legendItems = [];
+  let i = 0;
+  for (const label in expenses) {
+    if (expenses[label] > 0) {
+      segments.push({ value: expenses[label], color: colors[i % colors.length] });
+      const pct = income > 0 ? Math.round((expenses[label] / income) * 100) : 0;
+      legendItems.push('<div><span class="donut-legend-dot" style="background:' + colors[i % colors.length] + ';"></span>' + label + ' <strong>' + pct + '%</strong></div>');
+    }
+    i++;
+  }
+  // Add remaining as savings
+  const totalExp = Object.values(expenses).reduce((a, b) => a + b, 0);
+  const remaining = income - totalExp;
+  if (remaining > 0) {
+    segments.push({ value: remaining, color: 'rgba(212,175,55,0.4)' });
+    const savPct = income > 0 ? Math.round((remaining / income) * 100) : 0;
+    legendItems.push('<div><span class="donut-legend-dot" style="background:rgba(212,175,55,0.4);"></span>Savings <strong>' + savPct + '%</strong></div>');
+  }
+  drawDonut('budget-donut', segments, income > 0 ? Math.round((totalExp / income) * 100) + '%' : '0%');
+  document.getElementById('budget-donut-legend').innerHTML = legendItems.join('');
+}
+
+// CALCULATOR FUNCTIONS
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+function calcLoan(principal, annualRate, years) {
+  if (annualRate === 0) return { monthly: principal / (years * 12), totalInterest: 0, total: principal };
+  const r = annualRate / 100 / 12;
+  const n = years * 12;
+  const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  const total = monthly * n;
+  return { monthly, totalInterest: total - principal, total };
+}
+
+function calcAuto() {
+  const price = +document.getElementById('auto-price').value || 0;
+  const down = +document.getElementById('auto-down').value || 0;
+  const rate = +document.getElementById('auto-rate').value || 0;
+  const term = +document.getElementById('auto-term').value || 5;
+  const loan = Math.max(0, price - down);
+  const good = calcLoan(loan, rate, term);
+  animatedFmt('auto-monthly', good.monthly);
+  document.getElementById('auto-loan').textContent = fmt(loan);
+  document.getElementById('auto-interest').textContent = fmt(good.totalInterest);
+  animatedFmt('auto-total', good.total + down);
+  // Donut chart
+  const intPct = good.total > 0 ? Math.round((good.totalInterest / good.total) * 100) : 0;
+  drawDonut('auto-donut', [
+    { value: loan, color: '#C9A84C' },
+    { value: good.totalInterest, color: '#E74C3C' }
+  ], intPct + '%');
+  document.getElementById('auto-donut-prin').textContent = fmt(loan);
+  document.getElementById('auto-donut-int').textContent = fmt(good.totalInterest);
+  document.getElementById('auto-donut-pct').textContent = intPct + '% of your payments go to the bank';
+
+  // Update "Your Rate" side of slider
+  document.getElementById('auto-yours-rate').textContent = rate.toFixed(1) + '% interest';
+  document.getElementById('auto-yours-total').textContent = fmt(good.total + down);
+  document.getElementById('auto-yours-monthly').textContent = fmt(good.monthly) + '/mo';
+  updateAutoSlider();
+
+  drawAmortChart('auto-amort-chart', loan, rate, term);
+}
+
+function calcHome() {
+  const price = +document.getElementById('home-price').value || 0;
+  const down = +document.getElementById('home-down').value || 0;
+  const rate = +document.getElementById('home-rate').value || 0;
+  const term = +document.getElementById('home-term').value || 30;
+  const loan = Math.max(0, price - down);
+  const good = calcLoan(loan, rate, term);
+  animatedFmt('home-monthly', good.monthly);
+  document.getElementById('home-loan').textContent = fmt(loan);
+  document.getElementById('home-interest').textContent = fmt(good.totalInterest);
+  animatedFmt('home-total', good.total + down);
+  // Donut chart
+  const intPct = good.total > 0 ? Math.round((good.totalInterest / good.total) * 100) : 0;
+  drawDonut('home-donut', [
+    { value: loan, color: '#C9A84C' },
+    { value: good.totalInterest, color: '#E74C3C' }
+  ], intPct + '%');
+  document.getElementById('home-donut-prin').textContent = fmt(loan);
+  document.getElementById('home-donut-int').textContent = fmt(good.totalInterest);
+  document.getElementById('home-donut-pct').textContent = intPct + '% of your payments go to the bank';
+
+  // Update "Your Rate" side of slider
+  document.getElementById('home-yours-rate').textContent = rate.toFixed(1) + '% interest';
+  document.getElementById('home-yours-total').textContent = fmt(good.total + down);
+  document.getElementById('home-yours-monthly').textContent = fmt(good.monthly) + '/mo';
+  updateHomeSlider();
+
+  drawAmortChart('home-amort-chart', loan, rate, term);
+}
+
+// === CREDIT SCORE SLIDER SYSTEM ===
+// Real-world rate tiers based on credit score ranges
+function autoRateFromScore(score) {
+  if (score >= 780) return 4.5;
+  if (score >= 740) return 5.2;
+  if (score >= 700) return 6.5;
+  if (score >= 670) return 8.5;
+  if (score >= 620) return 11.5;
+  if (score >= 560) return 14.5;
+  if (score >= 500) return 18.0;
+  return 22.0;
+}
+function homeRateFromScore(score) {
+  if (score >= 780) return 5.8;
+  if (score >= 740) return 6.2;
+  if (score >= 700) return 6.8;
+  if (score >= 670) return 7.5;
+  if (score >= 620) return 8.5;
+  if (score >= 560) return 9.8;
+  if (score >= 500) return 11.5;
+  return 13.5;
+}
+function creditRating(score) {
+  if (score >= 750) return { label: 'Excellent', color: '#1ABC9C' };
+  if (score >= 700) return { label: 'Good', color: '#27AE60' };
+  if (score >= 650) return { label: 'Fair', color: '#F1C40F' };
+  if (score >= 580) return { label: 'Poor', color: '#E67E22' };
+  return { label: 'Very Poor', color: '#E74C3C' };
+}
+
+function updateCreditSlider(prefix, rateFunc, suffix) {
+  const score = +document.getElementById(prefix + '-credit-slider').value;
+  const rating = creditRating(score);
+  const sliderRate = rateFunc(score);
+
+  // Read current loan params
+  const priceId = prefix === 'auto' ? 'auto-price' : 'home-price';
+  const downId = prefix === 'auto' ? 'auto-down' : 'home-down';
+  const rateId = prefix === 'auto' ? 'auto-rate' : 'home-rate';
+  const termId = prefix === 'auto' ? 'auto-term' : 'home-term';
+
+  const price = +document.getElementById(priceId).value || 0;
+  const down = +document.getElementById(downId).value || 0;
+  const userRate = +document.getElementById(rateId).value || 0;
+  const term = +document.getElementById(termId).value || (prefix === 'auto' ? 5 : 30);
+  const loan = Math.max(0, price - down);
+
+  const userCalc = calcLoan(loan, userRate, term);
+  const sliderCalc = calcLoan(loan, sliderRate, term);
+  const userTotal = userCalc.total + down;
+  const sliderTotal = sliderCalc.total + down;
+  const diff = sliderTotal - userTotal;
+
+  // Score display — color the number to match rating
+  const scoreEl = document.getElementById(prefix + '-slider-score');
+  scoreEl.textContent = score;
+  scoreEl.style.color = rating.color;
+  document.getElementById(prefix + '-slider-rating').textContent = rating.label;
+  document.getElementById(prefix + '-slider-rating').style.color = rating.color;
+
+  // Slider card
+  document.getElementById(prefix + '-slider-rate').textContent = sliderRate.toFixed(1) + '% interest';
+  document.getElementById(prefix + '-slider-total').textContent = fmt(sliderTotal);
+  document.getElementById(prefix + '-slider-monthly').textContent = fmt(sliderCalc.monthly) + '/mo';
+  document.getElementById(prefix + '-slider-card-score').textContent = score;
+
+  // Emoji + card color
+  const card = document.getElementById(prefix + '-slider-card');
+  const label = document.getElementById(prefix + '-slider-label');
+  const emoji = document.getElementById(prefix + '-slider-emoji');
+  if (diff <= 0) {
+    card.classList.add('good'); label.classList.add('good');
+    emoji.textContent = '\u2705';
+  } else {
+    card.classList.remove('good'); label.classList.remove('good');
+    emoji.textContent = '\u274C';
+  }
+
+  // Diff bar — three states: same, costs more, saves money
+  const diffBar = document.getElementById(prefix + '-slider-diff');
+  const diffAmt = document.getElementById(prefix + '-slider-diff-amt');
+  const diffText = document.getElementById(prefix + '-slider-diff-text');
+  const diffSuffix = document.getElementById(prefix + '-slider-diff-suffix');
+
+  const threshold = prefix === 'auto' ? 50 : 100;
+
+  if (Math.abs(diff) < threshold) {
+    diffAmt.textContent = 'about the same';
+    diffAmt.className = 'slider-diff-amount';
+    diffText.textContent = 'At this score, you\u2019d pay ';
+    diffSuffix.textContent = ' as your current rate.';
+    diffBar.classList.remove('savings');
+  } else if (diff > 0) {
+    diffAmt.textContent = fmt(diff);
+    diffAmt.className = 'slider-diff-amount cost';
+    diffText.textContent = 'Bad credit would cost you ';
+    diffSuffix.textContent = ' extra\u2014for the exact same ' + suffix + '.';
+    diffBar.classList.remove('savings');
+  } else {
+    diffAmt.textContent = fmt(Math.abs(diff));
+    diffAmt.className = 'slider-diff-amount save';
+    diffText.textContent = 'Better credit would save you ';
+    diffSuffix.textContent = ' on this ' + suffix + '. That\u2019s real money.';
+    diffBar.classList.add('savings');
+  }
+}
+
+function updateAutoSlider() { updateCreditSlider('auto', autoRateFromScore, 'car'); }
+function updateHomeSlider() { updateCreditSlider('home', homeRateFromScore, 'house'); }
+
+function calcRetirement() {
+  const age = +document.getElementById('ret-age').value || 22;
+  const retire = +document.getElementById('ret-retire').value || 65;
+  const monthly = +document.getElementById('ret-monthly').value || 0;
+  const ret = +document.getElementById('ret-return').value || 7;
+  const current = +document.getElementById('ret-current').value || 0;
+  const years = Math.max(retire - age, 0);
+  const r = ret / 100 / 12;
+  const n = years * 12;
+  let total = current * Math.pow(1 + r, n);
+  if (r > 0) total += monthly * ((Math.pow(1 + r, n) - 1) / r);
+  else total += monthly * n;
+  const contributed = current + (monthly * n);
+  const growth = total - contributed;
+  const lateYears = Math.max(years - 10, 0);
+  const lateN = lateYears * 12;
+  let lateTotal = current * Math.pow(1 + r, lateN);
+  if (r > 0) lateTotal += monthly * ((Math.pow(1 + r, lateN) - 1) / r);
+  else lateTotal += monthly * lateN;
+  animatedFmt('ret-total', total);
+  document.getElementById('ret-years').textContent = years + ' years';
+  document.getElementById('ret-contributed').textContent = fmt(contributed);
+  animatedFmt('ret-growth', growth);
+  document.getElementById('ret-pct').textContent = total > 0 ? Math.round(growth / total * 100) + '%' : '0%';
+  document.getElementById('ret-late-age').textContent = age + 10;
+  document.getElementById('ret-start-age').textContent = age;
+  animatedFmt('ret-late-total', lateTotal);
+  animatedFmt('ret-lost', total - lateTotal);
+}
+
+// CREDIT SCORE ESTIMATOR
+function calcCredit() {
+  var payment = +document.getElementById('credit-payment').value;
+  var util = +document.getElementById('credit-util').value;
+  var length = +document.getElementById('credit-length').value;
+  var mix = +document.getElementById('credit-mix').value;
+  var inquiries = +document.getElementById('credit-inquiries').value;
+
+  // FICO-like weighted score: Payment 35%, Utilization 30%, Length 15%, Mix 10%, Inquiries 10%
+  // Each factor scores 0-100, then weighted and mapped to 300-850 range
+  var paymentScore = [0, 15, 35, 60, 85, 100][payment]; // index 1-5
+  var utilScore;
+  if (util <= 10) utilScore = 100;
+  else if (util <= 20) utilScore = 90;
+  else if (util <= 30) utilScore = 75;
+  else if (util <= 50) utilScore = 50;
+  else if (util <= 75) utilScore = 25;
+  else utilScore = 10;
+
+  var lengthScore = [0, 20, 40, 65, 85, 100][length];
+  var mixScore = [0, 40, 70, 100][mix];
+  var inqScore;
+  if (inquiries === 0) inqScore = 100;
+  else if (inquiries <= 2) inqScore = 70;
+  else if (inquiries <= 5) inqScore = 40;
+  else inqScore = 15;
+
+  var weighted = paymentScore * 0.35 + utilScore * 0.30 + lengthScore * 0.15 + mixScore * 0.10 + inqScore * 0.10;
+  var scoreLow = Math.max(300, Math.round(300 + weighted * 5.0));
+  var scoreHigh = Math.min(850, scoreLow + 50);
+  var scoreMid = (scoreLow + scoreHigh) / 2;
+
+  // Unified rating: same thresholds the credit-score slider uses
+  var ratingInfo = creditRating(scoreMid);
+  var rating = ratingInfo.label;
+  var ratingColor = ratingInfo.color;
+
+  document.getElementById('credit-score').innerHTML = scoreLow + ' &ndash; ' + scoreHigh;
+  document.getElementById('credit-score').style.color = ratingColor;
+  document.getElementById('credit-rating').textContent = rating;
+  document.getElementById('credit-rating').style.color = ratingColor;
+
+  // Draw semicircle gauge
+  drawCreditGauge(scoreMid, ratingColor);
+
+  // Detail labels
+  var paymentLabels = ['', 'Very Poor', 'Poor', 'Fair', 'Good', 'Excellent'];
+  document.getElementById('credit-detail-payment').textContent = paymentLabels[payment];
+  document.getElementById('credit-detail-util').textContent = util + '%';
+  document.getElementById('credit-detail-util').style.color = util <= 30 ? '#27AE60' : util <= 50 ? '#F1C40F' : '#E74C3C';
+  var lengthLabels = ['', '<1 year', '1\u20133 years', '3\u20137 years', '7\u201315 years', '15+ years'];
+  document.getElementById('credit-detail-length').textContent = lengthLabels[length];
+  var mixLabels = ['', 'One type', 'Two types', 'Three+ types'];
+  document.getElementById('credit-detail-mix').textContent = mixLabels[mix];
+  var inqLabels = { 0: 'None', 1: '1\u20132', 3: '3\u20135', 6: '6+' };
+  document.getElementById('credit-detail-inq').textContent = inqLabels[inquiries] || inquiries;
+
+  // Tips
+  var tips = [];
+  if (payment < 5) tips.push('\u2022 Pay every bill on time. Payment history is 35% of your score\u2014the biggest factor.');
+  if (util > 30) tips.push('\u2022 Get your credit utilization below 30%. You\u2019re at ' + util + '%. Pay down balances or request a credit limit increase.');
+  if (util > 10 && util <= 30) tips.push('\u2022 Your utilization is decent at ' + util + '%, but under 10% is ideal for the best scores.');
+  if (length <= 2) tips.push('\u2022 Keep your oldest accounts open. Time is your friend\u2014credit history length builds slowly.');
+  if (mix < 3) tips.push('\u2022 A healthy mix of credit types (cards, auto loan, etc.) helps. Only take on what you can handle.');
+  if (inquiries >= 3) tips.push('\u2022 Slow down on new credit applications. Each hard inquiry stays on your report for 2 years.');
+  if (tips.length === 0) tips.push('\u2022 You\u2019re doing great. Keep paying on time, keep utilization low, and let time work for you.');
+  document.getElementById('credit-tips-list').innerHTML = tips.join('<br>');
+}
+
+// BUDGET CALCULATOR
+function calcBudget() {
+  var income = +document.getElementById('budget-income').value || 0;
+  var expenses = {
+    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Utilities': +document.getElementById('budget-utilities').value || 0,
+    'Car Payment': +document.getElementById('budget-car').value || 0,
+    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
+    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
+    'Cell Phone': +document.getElementById('budget-phone').value || 0,
+    'Groceries / Food': +document.getElementById('budget-food').value || 0,
+    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
+    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
+    'Other': +document.getElementById('budget-other').value || 0
+  };
+
+  var totalExp = 0;
+  for (var k in expenses) totalExp += expenses[k];
+  var remaining = income - totalExp;
+  var pct = income > 0 ? Math.round((totalExp / income) * 100) : 0;
+
+  document.getElementById('budget-remaining').style.color = remaining >= 0 ? 'var(--gold)' : '#E74C3C';
+  document.getElementById('budget-remaining').textContent = (remaining >= 0 ? '' : '-') + fmt(Math.abs(remaining));
+  document.getElementById('budget-total-income').textContent = fmt(income);
+  document.getElementById('budget-total-expenses').textContent = fmt(totalExp);
+  document.getElementById('budget-pct').textContent = pct + '%';
+
+  // Budget donut
+  drawBudgetDonut(expenses, income);
+  document.getElementById('budget-pct').style.color = pct > 90 ? '#E74C3C' : pct > 75 ? '#F1C40F' : 'var(--gold)';
+
+  if (remaining < 0) {
+    document.getElementById('budget-status').textContent = 'You\u2019re spending more than you make';
+    document.getElementById('budget-status').style.color = '#E74C3C';
+  } else if (remaining < income * 0.1) {
+    document.getElementById('budget-status').textContent = 'Tight\u2014not much room to save';
+    document.getElementById('budget-status').style.color = '#E67E22';
+  } else if (remaining < income * 0.2) {
+    document.getElementById('budget-status').textContent = 'Decent\u2014try to save more if you can';
+    document.getElementById('budget-status').style.color = '#F1C40F';
+  } else {
+    document.getElementById('budget-status').textContent = 'You have room to save and invest';
+    document.getElementById('budget-status').style.color = '#27AE60';
+  }
+
+  // Budget bars
+  var colors = ['#9B59B6','#8E44AD','#E74C3C','#E67E22','#F39C12','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
+  var barsHTML = '';
+  var i = 0;
+  for (var label in expenses) {
+    var val = expenses[label];
+    if (val <= 0) { i++; continue; }
+    var barPct = income > 0 ? Math.min((val / income) * 100, 100) : 0;
+    barsHTML += '<div style="margin-bottom:0.6rem;">';
+    barsHTML += '<div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.2rem;">';
+    barsHTML += '<span style="color:var(--text-muted);">' + label + '</span>';
+    barsHTML += '<span style="font-weight:600;">' + fmt(val) + ' (' + Math.round(barPct) + '%)</span>';
+    barsHTML += '</div>';
+    barsHTML += '<div style="height:8px; background:var(--purple-surface); border-radius:4px; overflow:hidden;">';
+    barsHTML += '<div style="height:100%; width:' + barPct + '%; background:' + colors[i % colors.length] + '; border-radius:4px; transition:width 0.3s;"></div>';
+    barsHTML += '</div></div>';
+    i++;
+  }
+  document.getElementById('budget-bars').innerHTML = barsHTML;
+
+  // 50/30/20 rule
+  var needs50 = Math.round(income * 0.50);
+  var wants30 = Math.round(income * 0.30);
+  var save20 = Math.round(income * 0.20);
+  document.getElementById('budget-50').textContent = fmt(needs50);
+  document.getElementById('budget-30').textContent = fmt(wants30);
+  document.getElementById('budget-20').textContent = fmt(save20);
+
+  // Categorize: Needs = rent, utilities, car, insurance, gas, food, phone. Wants = streaming, personal, other.
+  var needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
+  var wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
+  var savingsActual = Math.max(0, remaining);
+  document.getElementById('budget-needs-actual').textContent = fmt(needsActual);
+  document.getElementById('budget-needs-actual').style.color = needsActual > needs50 ? '#E74C3C' : '#27AE60';
+  document.getElementById('budget-wants-actual').textContent = fmt(wantsActual);
+  document.getElementById('budget-wants-actual').style.color = wantsActual > wants30 ? '#E74C3C' : '#27AE60';
+  document.getElementById('budget-savings-actual').textContent = fmt(savingsActual);
+  document.getElementById('budget-savings-actual').style.color = savingsActual >= save20 ? '#27AE60' : '#E74C3C';
+
+  var rec = '';
+  if (remaining < 0) rec = 'You\u2019re spending more than you bring in. That\u2019s not sustainable. Look at your biggest expenses and find one thing to cut or reduce. Even $50 a month changes the trajectory.';
+  else if (savingsActual < save20) rec = 'You\u2019re saving ' + fmt(savingsActual) + ' \u2014 the guideline suggests ' + fmt(save20) + '. That\u2019s okay if you\u2019re just starting out. The important thing is you\u2019re saving something. Look for places to trim if you can \u2014 streaming services and eating out are usually the easiest wins.';
+  else if (needsActual > needs50) rec = 'Your needs are above 50% of income. That\u2019s common when you\u2019re young and building your life. As your income grows, work to get this ratio down. The fact that you\u2019re tracking it means you\u2019re already ahead of most people.';
+  else rec = 'You\u2019re in solid shape. Consider putting that extra ' + fmt(savingsActual) + ' into an emergency fund first (aim for 3 months of expenses), then start investing. Even small amounts invested early grow into big numbers over time.';
+  document.getElementById('budget-recommendation').textContent = rec;
+}
+
+// INFO TOOLTIP TOGGLE
+function toggleInfo(btn) {
+  const wasActive = btn.classList.contains('active');
+  // Close all other tooltips first
+  document.querySelectorAll('.info-btn.active').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-expanded', 'false');
+  });
+  if (!wasActive) {
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+// Close tooltips when clicking elsewhere
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.info-btn')) {
+    document.querySelectorAll('.info-btn.active').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+// Close tooltips on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.info-btn.active').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+
+function switchCalc(id, el) {
+  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.calc-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  document.getElementById('calc-' + id).classList.add('active');
+  el.classList.add('active');
+  el.setAttribute('aria-selected', 'true');
+  // Redraw chart after panel becomes visible (needs a frame for layout)
+  requestAnimationFrame(function() {
+    if (id === 'auto') calcAuto();
+    else if (id === 'home') calcHome();
+    else if (id === 'retirement') calcRetirement();
+    else if (id === 'credit') calcCredit();
+    else if (id === 'budget') calcBudget();
+  });
+}
+
+// INIT — run auto first (visible), defer others until their tab is shown
+calcAuto();
+calcRetirement();
+calcCredit();
+calcBudget();
+// Redraw active calculator on resize
+window.addEventListener('resize', function() {
+  const activePanel = document.querySelector('.calc-panel.active');
+  if (activePanel) {
+    const id = activePanel.id.replace('calc-', '');
+    if (id === 'auto') calcAuto();
+    else if (id === 'home') calcHome();
+    else if (id === 'retirement') calcRetirement();
+    else if (id === 'credit') calcCredit();
+    else if (id === 'budget') calcBudget();
+  }
+});
+
+// Lazy-load the SheetJS (xlsx) library only when the user requests a download.
+let xlsxLoadPromise = null;
+function loadXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  if (xlsxLoadPromise) return xlsxLoadPromise;
+  xlsxLoadPromise = new Promise(function(resolve, reject) {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    script.integrity = 'sha384-sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
+    script.crossOrigin = 'anonymous';
+    script.onload = resolve;
+    script.onerror = function() { xlsxLoadPromise = null; reject(new Error('Failed to load XLSX')); };
+    document.head.appendChild(script);
+  });
+  return xlsxLoadPromise;
+}
+
+async function downloadBudgetExcel(btn) {
+  const trigger = btn || null;
+  let originalHTML = null;
+  if (trigger) {
+    originalHTML = trigger.innerHTML;
+    trigger.disabled = true;
+    trigger.innerHTML = '<span>⏳</span> Preparing…';
+  }
+  try {
+    await loadXLSX();
+    buildBudgetWorkbook();
+  } catch (err) {
+    console.error(err);
+    if (trigger) {
+      trigger.innerHTML = '<span>⚠️</span> Try again';
+      setTimeout(function() { trigger.innerHTML = originalHTML; trigger.disabled = false; }, 2000);
+    }
+    return;
+  }
+  if (trigger) {
+    trigger.innerHTML = originalHTML;
+    trigger.disabled = false;
+  }
+}
+
+function buildBudgetWorkbook() {
+  const income = +document.getElementById('budget-income').value || 0;
+  const expenses = {
+    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
+    'Utilities': +document.getElementById('budget-utilities').value || 0,
+    'Car Payment': +document.getElementById('budget-car').value || 0,
+    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
+    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
+    'Cell Phone': +document.getElementById('budget-phone').value || 0,
+    'Groceries / Food': +document.getElementById('budget-food').value || 0,
+    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
+    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
+    'Other': +document.getElementById('budget-other').value || 0
+  };
+
+  // Build data
+  const totalExp = Object.values(expenses).reduce((a, b) => a + b, 0);
+  const remaining = income - totalExp;
+  const needs50 = Math.round(income * 0.50);
+  const wants30 = Math.round(income * 0.30);
+  const save20 = Math.round(income * 0.20);
+
+  const data = [
+    ['DREAM/BIG Monthly Budget'],
+    [''],
+    ['INCOME'],
+    ['Monthly Take-Home Pay', income],
+    [''],
+    ['EXPENSES'],
+  ];
+
+  for (const label in expenses) {
+    data.push([label, expenses[label]]);
+  }
+
+  data.push(['Total Expenses', totalExp]);
+  data.push(['Money Left Over', remaining]);
+  data.push(['']);
+  data.push(['THE 50/30/20 GUIDELINE']);
+  data.push(['', 'Target (% of Income)', 'Your Target ($)', 'Actual ($)', 'Status']);
+
+  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
+  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
+  const savingsActual = Math.max(0, remaining);
+
+  data.push(['Needs', '50%', needs50, needsActual, needsActual <= needs50 ? 'On Track' : 'Over']);
+  data.push(['Wants', '30%', wants30, wantsActual, wantsActual <= wants30 ? 'On Track' : 'Over']);
+  data.push(['Savings', '20%', save20, savingsActual, savingsActual >= save20 ? 'On Track' : 'Under']);
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Budget');
+
+  // Set column widths
+  ws['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 12 }];
+
+  XLSX.writeFile(wb, 'Budget-Results.xlsx');
+}
+
+// LEGAL OVERLAY FUNCTIONS
+let legalTrigger = null;
+function openLegal(type) {
+  legalTrigger = document.activeElement;
+  const overlay = document.getElementById('legal-' + type);
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const closeBtn = overlay.querySelector('.legal-close');
+  if (closeBtn) closeBtn.focus();
+}
+function closeLegal(type) {
+  document.getElementById('legal-' + type).classList.remove('active');
+  document.body.style.overflow = '';
+  if (legalTrigger && typeof legalTrigger.focus === 'function') legalTrigger.focus();
+  legalTrigger = null;
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    let closedAny = false;
+    document.querySelectorAll('.legal-overlay.active').forEach(el => {
+      el.classList.remove('active');
+      document.body.style.overflow = '';
+      closedAny = true;
+    });
+    if (closedAny && legalTrigger && typeof legalTrigger.focus === 'function') {
+      legalTrigger.focus();
+      legalTrigger = null;
+    }
+  }
+});
+</script>
+</body>
+</html>
