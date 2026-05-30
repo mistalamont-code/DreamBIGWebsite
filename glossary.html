@@ -148,6 +148,11 @@
     border-radius: 8px; padding: 1.5rem; transition: border-color 0.3s;
   }
   .glossary-item:hover { border-color: rgba(201,168,76,0.25); }
+  .glossary-empty {
+    grid-column: 1 / -1; background: var(--purple-card);
+    border: 1px solid rgba(201,168,76,0.08); border-radius: 8px;
+    padding: 1.5rem; color: var(--text-muted); font-size: 0.95rem;
+  }
   .glossary-term { font-weight: 600; font-size: 1rem; color: var(--gold); margin-bottom: 0.4rem; }
   .glossary-def { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 
@@ -444,7 +449,7 @@
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
   <ul class="nav-links" id="nav-links">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#book">The Book</a></li>
@@ -492,7 +497,7 @@
 
 <!-- PRIVACY POLICY OVERLAY -->
 <div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
-  <button class="legal-close" onclick="closeLegal('privacy')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-privacy-title">Privacy Policy</h2>
     <p><em>Last updated: 2026</em></p>
@@ -546,7 +551,7 @@
 
 <!-- TERMS OF USE OVERLAY -->
 <div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
-  <button class="legal-close" onclick="closeLegal('terms')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-terms-title">Terms of Use</h2>
     <p><em>Last updated: 2026</em></p>
@@ -582,7 +587,7 @@
 
 <!-- ACCESSIBILITY STATEMENT OVERLAY -->
 <div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
-  <button class="legal-close" onclick="closeLegal('accessibility')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-accessibility-title">Accessibility Statement</h2>
     <p><em>Last updated: 2026</em></p>
@@ -614,7 +619,7 @@
 
 <!-- DMCA NOTICE OVERLAY -->
 <div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
-  <button class="legal-close" onclick="closeLegal('dmca')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-dmca-title">DMCA Notice</h2>
     <p><em>Last updated: 2026</em></p>
@@ -675,6 +680,11 @@ function closeTools() {
 
 // LEGAL OVERLAY FUNCTIONS
 var legalTrigger = null;
+function getLegalFocusable(overlay) {
+  return Array.prototype.slice.call(overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(function(el) {
+    return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+  });
+}
 function openLegal(type) {
   legalTrigger = document.activeElement;
   var overlay = document.getElementById('legal-' + type);
@@ -684,21 +694,36 @@ function openLegal(type) {
   if (closeBtn) closeBtn.focus();
 }
 function closeLegal(type) {
-  document.getElementById('legal-' + type).classList.remove('active');
-  document.body.style.overflow = '';
+  var overlay = document.getElementById('legal-' + type);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  if (!document.querySelector('.legal-overlay.active')) document.body.style.overflow = '';
   if (legalTrigger) { legalTrigger.focus(); legalTrigger = null; }
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeTools();
-    var anyOpen = false;
-    document.querySelectorAll('.legal-overlay.active').forEach(el => {
-      el.classList.remove('active');
-      anyOpen = true;
+    document.querySelectorAll('.legal-overlay.active').forEach(function(el) {
+      closeLegal(el.id.replace('legal-', ''));
     });
-    if (anyOpen) {
-      document.body.style.overflow = '';
-      if (legalTrigger) { legalTrigger.focus(); legalTrigger = null; }
+  }
+  if (e.key === 'Tab') {
+    var activeOverlay = document.querySelector('.legal-overlay.active');
+    if (!activeOverlay) return;
+    var focusable = getLegalFocusable(activeOverlay);
+    if (!focusable.length) {
+      e.preventDefault();
+      activeOverlay.focus();
+      return;
+    }
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   }
 });
@@ -760,6 +785,10 @@ function renderGlossary(filter = '') {
   var filtered = glossaryTerms.filter(function(t) {
     return t.term.toLowerCase().includes(q) || t.def.toLowerCase().includes(q);
   });
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="glossary-empty">No matching terms. Try a different search.</div>';
+    return;
+  }
   grid.innerHTML = filtered.map(function(t) {
     return '<div class="glossary-item"><div class="glossary-term">' + escapeHtml(t.term) + '</div><div class="glossary-def">' + escapeHtml(t.def) + '</div></div>';
   }).join('');
