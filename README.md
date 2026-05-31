@@ -7,7 +7,8 @@ Official website for the DREAM/BIG book by Corey L. Cook.
 - **index.html** — Homepage with about, book overview, newsletter signup
 - **calculators.html** — Interactive financial calculators (auto loan, home loan, retirement)
 - **glossary.html** — 32-term financial literacy glossary with search
-- **chatbot-worker.js** — Cloudflare Worker for AI-powered financial coach (deploy separately)
+- **assistant.js / assistant.css** — Floating DREAM/BIG Coach widget
+- **api/assistant.js** — Vercel API Function for AI-powered financial coaching
 - **images/** — Site assets (favicon, book cover, photos)
 
 ## Deployment
@@ -23,9 +24,14 @@ This is a static site. Deploy with any static hosting provider.
 **Custom Domain**
 After deploying on Vercel, add your domain (dreambigbook.com) under Project Settings → Domains.
 
-## AI Chatbot (Optional — Future Setup)
+## AI Coach Setup
 
-The `chatbot-worker.js` file is a ready-to-deploy Cloudflare Worker that powers an AI financial coach. See the comments at the top of that file for deployment instructions.
+The calculator and glossary pages include an optional DREAM/BIG Coach widget. It calls the Vercel API Function at `/api/assistant`, so the Anthropic API key stays server-side and is never exposed to the browser.
+
+In Vercel, add these environment variables:
+
+- `ANTHROPIC_API_KEY` — required
+- `ANTHROPIC_MODEL` — optional, defaults to `claude-haiku-4-5-20251001`
 
 ## Contact
 

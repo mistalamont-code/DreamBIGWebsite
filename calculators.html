@@ -32,6 +32,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assistant.css">
+<script src="assistant.js" defer></script>
 <style>
 
   :root {
@@ -516,7 +518,7 @@
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
   <ul class="nav-links" id="nav-links">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#book">The Book</a></li>
@@ -543,11 +545,11 @@
     <p class="section-text" style="margin-bottom:2.5rem;">In the book, I break down exactly what bad credit costs you&mdash;and what good financial decisions can build over time. These calculators let you plug in your own numbers and see it for yourself. Because the decisions you make about money right now will echo for decades. Make them count.</p>
 
     <div class="calc-tabs">
-      <button class="calc-tab active" aria-selected="true" onclick="switchCalc('auto', this)">Auto Loan</button>
-      <button class="calc-tab" aria-selected="false" onclick="switchCalc('home', this)">Home Loan</button>
-      <button class="calc-tab" aria-selected="false" onclick="switchCalc('retirement', this)">Retirement</button>
-      <button class="calc-tab" aria-selected="false" onclick="switchCalc('credit', this)">Credit Score</button>
-      <button class="calc-tab" aria-selected="false" onclick="switchCalc('budget', this)">Budget</button>
+      <button type="button" class="calc-tab active" aria-selected="true" onclick="switchCalc('auto', this)">Auto Loan</button>
+      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('home', this)">Home Loan</button>
+      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('retirement', this)">Retirement</button>
+      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('credit', this)">Credit Score</button>
+      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('budget', this)">Budget</button>
     </div>
 
     <!-- AUTO LOAN -->
@@ -561,21 +563,21 @@
                 <label for="auto-price">Vehicle Price ($)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The sticker price of the car. Remember, a brand-new car loses 20% of its value the moment you drive it off the lot. A two- or three-year-old car with low miles can save you thousands and still feel new.</span></button>
               </div>
-              <input type="number" id="auto-price" value="25000" oninput="calcAuto()">
+              <input type="number" id="auto-price" value="25000" min="0" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="auto-down">Down Payment ($)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you pay upfront. The more you put down, the less you borrow, and the less interest you pay over the life of the loan. Even an extra $500 down can save you hundreds in interest.</span></button>
               </div>
-              <input type="number" id="auto-down" value="0" oninput="calcAuto()">
+              <input type="number" id="auto-down" value="0" min="0" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="auto-rate">Interest Rate (%)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is based on your credit score. Good credit (700+) might get you 4&ndash;6%. Bad credit can mean 15&ndash;20% or higher. That&rsquo;s the difference between paying $28K and $40K for the same car. Your credit score is money.</span></button>
               </div>
-              <input type="number" id="auto-rate" value="4" step="0.1" oninput="calcAuto()">
+              <input type="number" id="auto-rate" value="4" min="0" step="0.1" oninput="calcAuto()">
             </div>
             <div class="form-group">
               <div class="label-row">
@@ -669,21 +671,21 @@
                 <label for="home-price">Home Price ($)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The purchase price of the home. In Erie, a solid starter home can run $100K&ndash;$200K. Focus on what you can actually afford, not what a bank will approve you for. Those are two very different numbers.</span></button>
               </div>
-              <input type="number" id="home-price" value="150000" oninput="calcHome()">
+              <input type="number" id="home-price" value="150000" min="0" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="home-down">Down Payment ($)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you bring to closing. 20% down avoids PMI (private mortgage insurance)&mdash;an extra monthly fee that protects the bank, not you. Even if you can&rsquo;t hit 20%, every dollar you put down reduces what you borrow and what you pay in interest.</span></button>
               </div>
-              <input type="number" id="home-down" value="15000" oninput="calcHome()">
+              <input type="number" id="home-down" value="15000" min="0" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="home-rate">Interest Rate (%)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Your mortgage rate depends on your credit score, the market, and your down payment. Even half a percent difference on a 30-year mortgage can mean tens of thousands of dollars. Shop around&mdash;don&rsquo;t just take the first offer.</span></button>
               </div>
-              <input type="number" id="home-rate" value="6.5" step="0.1" oninput="calcHome()">
+              <input type="number" id="home-rate" value="6.5" min="0" step="0.1" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
@@ -773,35 +775,35 @@
           <div>
             <div class="form-group">
               <label for="ret-age">Your Current Age</label>
-              <input type="number" id="ret-age" value="22" oninput="calcRetirement()">
+              <input type="number" id="ret-age" value="22" min="0" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="ret-retire">When Do You Want to Retire?</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Most people retire between 62 and 67. The longer you work, the more time your money has to grow. Even a few extra years makes a big difference.</span></button>
               </div>
-              <input type="number" id="ret-retire" value="65" oninput="calcRetirement()">
+              <input type="number" id="ret-retire" value="65" min="0" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="ret-monthly">How Much Can You Save Per Month?</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is money you put into a retirement account like a 401(k) through your job or an IRA you open yourself. Even $50/month matters. If your job matches contributions, that&rsquo;s free money&mdash;always take it.</span></button>
               </div>
-              <input type="number" id="ret-monthly" value="200" oninput="calcRetirement()">
+              <input type="number" id="ret-monthly" value="200" min="0" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="ret-return">Average Yearly Growth (%)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is how much your investments grow each year on average. The stock market has historically returned about 7% per year over long periods. You don&rsquo;t need to pick stocks&mdash;a simple index fund does this for you. Leave this at 7% if you&rsquo;re not sure.</span></button>
               </div>
-              <input type="number" id="ret-return" value="7" step="0.5" oninput="calcRetirement()">
+              <input type="number" id="ret-return" value="7" min="0" step="0.5" oninput="calcRetirement()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="ret-current">Money You&rsquo;ve Already Saved ($)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">If you already have money in a savings account, 401(k), or any investment, put that number here. Starting from zero? That&rsquo;s fine&mdash;most people your age are. The point is to start now.</span></button>
               </div>
-              <input type="number" id="ret-current" value="0" oninput="calcRetirement()">
+              <input type="number" id="ret-current" value="0" min="0" oninput="calcRetirement()">
             </div>
           </div>
           <div>
@@ -915,19 +917,19 @@
         <p class="calc-intro">&ldquo;Nobody sits you down after graduation and says, &lsquo;Here&rsquo;s how to manage a paycheck.&rsquo; You get that first real check and it feels like a lot&mdash;until rent, food, a car payment, and a phone bill eat it alive. A budget isn&rsquo;t about restricting yourself. It&rsquo;s about knowing where your money goes so you can make it work for you.&rdquo;</p>
         <div class="calc-grid">
           <div>
-            <div class="form-group"><label for="budget-income">Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" oninput="calcBudget()"></div>
+            <div class="form-group"><label for="budget-income">Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" min="0" oninput="calcBudget()"></div>
             <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.5rem; margin-top:0.5rem;">
               <div style="font-weight:600; font-size:0.85rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Your Monthly Expenses</div>
-              <div class="form-group"><label for="budget-rent">Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-utilities">Utilities &mdash; Electric, Water, Gas ($)</label><input type="number" id="budget-utilities" value="120" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-car">Car Payment ($)</label><input type="number" id="budget-car" value="280" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-insurance">Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-gas">Gas / Transportation ($)</label><input type="number" id="budget-gas" value="120" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-phone">Cell Phone ($)</label><input type="number" id="budget-phone" value="65" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-food">Groceries / Food ($)</label><input type="number" id="budget-food" value="300" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-streaming">Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-personal">Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-other">Other Expenses ($)</label><input type="number" id="budget-other" value="50" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-rent">Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-utilities">Utilities &mdash; Electric, Water, Gas ($)</label><input type="number" id="budget-utilities" value="120" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-car">Car Payment ($)</label><input type="number" id="budget-car" value="280" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-insurance">Car Insurance ($)</label><input type="number" id="budget-insurance" value="150" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-gas">Gas / Transportation ($)</label><input type="number" id="budget-gas" value="120" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-phone">Cell Phone ($)</label><input type="number" id="budget-phone" value="65" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-food">Groceries / Food ($)</label><input type="number" id="budget-food" value="300" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-streaming">Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-personal">Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-other">Other Expenses ($)</label><input type="number" id="budget-other" value="50" min="0" oninput="calcBudget()"></div>
             </div>
           </div>
           <div>
@@ -960,7 +962,7 @@
               <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
             </div>
             <div class="download-btns">
-              <button class="btn-download" onclick="downloadBudgetExcel(this)" title="Download results as Excel">
+              <button type="button" class="btn-download" onclick="downloadBudgetExcel(this)" title="Download results as Excel">
                 <span>📊</span> Download Excel
               </button>
             </div>
@@ -994,7 +996,7 @@
 
 <!-- PRIVACY POLICY OVERLAY -->
 <div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
-  <button class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-privacy-title">Privacy Policy</h2>
     <p><em>Last updated: 2026</em></p>
@@ -1007,6 +1009,7 @@
       <li><strong>Name and contact information</strong> &mdash; when you submit a speaking engagement inquiry</li>
     </ul>
     <p>The financial calculators on this site run entirely in your browser. We do not collect, store, or transmit any data you enter into the calculators.</p>
+    <p>If you use the optional DREAM/BIG AI Coach, the question you type and recent chat context are sent through our secure server endpoint to an AI service provider so a response can be generated. Do not enter Social Security numbers, account numbers, passwords, bank logins, or other sensitive personal data.</p>
     <h3>How We Use Your Information</h3>
     <p>Your email address is used solely to send you newsletter updates about new content, speaking events, financial tips, and DREAM/BIG community news. We will never sell, rent, or share your email address with third parties for marketing purposes.</p>
     <h3>Email Communications</h3>
@@ -1038,7 +1041,7 @@
 
 <!-- TERMS OF USE OVERLAY -->
 <div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
-  <button class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-terms-title">Terms of Use</h2>
     <p><em>Last updated: 2026</em></p>
@@ -1048,6 +1051,8 @@
     <p>The content on this website, including the book excerpts, financial calculators, and glossary, is provided for general educational and informational purposes only. Nothing on this site constitutes professional financial, investment, tax, or legal advice.</p>
     <h3>Financial Calculator Disclaimer</h3>
     <p>The financial calculators provided on this site are tools for illustration and education. Results are estimates based on the inputs you provide and standard mathematical formulas. They do not account for all factors that affect actual loan terms or investment returns, including but not limited to: fees, taxes, insurance, market volatility, or individual lender requirements. Always consult a licensed financial professional before making financial decisions.</p>
+    <h3>AI Assistant Disclaimer</h3>
+    <p>The optional DREAM/BIG AI Coach is an educational tool for general financial literacy. It may provide incomplete or inaccurate information and does not provide professional financial, investment, tax, legal, or credit counseling advice. Do not share sensitive personal or account information with the assistant.</p>
     <h3>Intellectual Property</h3>
     <p>All content on this website &mdash; including text, graphics, logos, images, and the DREAM/BIG name and framework &mdash; is the property of Corey L. Cook and Cook Media LLC and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
     <h3>Third-Party Links</h3>
@@ -1065,7 +1070,7 @@
 
 <!-- ACCESSIBILITY STATEMENT OVERLAY -->
 <div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
-  <button class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-accessibility-title">Accessibility Statement</h2>
     <p><em>Last updated: 2026</em></p>
@@ -1092,7 +1097,7 @@
 
 <!-- DMCA NOTICE OVERLAY -->
 <div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
-  <button class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-dmca-title">DMCA Notice</h2>
     <p><em>Last updated: 2026</em></p>
@@ -1500,8 +1505,38 @@ function drawBudgetDonut(expenses, income) {
 // CALCULATOR FUNCTIONS
 function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
 
+function numberFromInput(id, fallback) {
+  const input = document.getElementById(id);
+  if (!input) return fallback || 0;
+  let value = Number(input.value);
+  if (!Number.isFinite(value)) value = fallback || 0;
+  if (input.min !== '') {
+    const min = Number(input.min);
+    if (Number.isFinite(min) && value < min) value = min;
+  }
+  if (input.max !== '') {
+    const max = Number(input.max);
+    if (Number.isFinite(max) && value > max) value = max;
+  }
+  if (String(input.value) !== String(value)) input.value = value;
+  return value;
+}
+
+function loanInputs(prefix, defaultTerm) {
+  const price = numberFromInput(prefix + '-price', 0);
+  let down = numberFromInput(prefix + '-down', 0);
+  const rate = numberFromInput(prefix + '-rate', 0);
+  const term = numberFromInput(prefix + '-term', defaultTerm);
+  if (down > price) {
+    down = price;
+    document.getElementById(prefix + '-down').value = down;
+  }
+  return { price, down, rate, term, loan: Math.max(0, price - down) };
+}
+
 function calcLoan(principal, annualRate, years) {
-  if (annualRate === 0) return { monthly: principal / (years * 12), totalInterest: 0, total: principal };
+  if (principal <= 0 || years <= 0) return { monthly: 0, totalInterest: 0, total: 0 };
+  if (annualRate <= 0) return { monthly: principal / (years * 12), totalInterest: 0, total: principal };
   const r = annualRate / 100 / 12;
   const n = years * 12;
   const monthly = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
@@ -1510,11 +1545,7 @@ function calcLoan(principal, annualRate, years) {
 }
 
 function calcAuto() {
-  const price = +document.getElementById('auto-price').value || 0;
-  const down = +document.getElementById('auto-down').value || 0;
-  const rate = +document.getElementById('auto-rate').value || 0;
-  const term = +document.getElementById('auto-term').value || 5;
-  const loan = Math.max(0, price - down);
+  const { down, rate, term, loan } = loanInputs('auto', 5);
   const good = calcLoan(loan, rate, term);
   animatedFmt('auto-monthly', good.monthly);
   document.getElementById('auto-loan').textContent = fmt(loan);
@@ -1540,11 +1571,7 @@ function calcAuto() {
 }
 
 function calcHome() {
-  const price = +document.getElementById('home-price').value || 0;
-  const down = +document.getElementById('home-down').value || 0;
-  const rate = +document.getElementById('home-rate').value || 0;
-  const term = +document.getElementById('home-term').value || 30;
-  const loan = Math.max(0, price - down);
+  const { down, rate, term, loan } = loanInputs('home', 30);
   const good = calcLoan(loan, rate, term);
   animatedFmt('home-monthly', good.monthly);
   document.getElementById('home-loan').textContent = fmt(loan);
@@ -1610,10 +1637,14 @@ function updateCreditSlider(prefix, rateFunc, suffix) {
   const rateId = prefix === 'auto' ? 'auto-rate' : 'home-rate';
   const termId = prefix === 'auto' ? 'auto-term' : 'home-term';
 
-  const price = +document.getElementById(priceId).value || 0;
-  const down = +document.getElementById(downId).value || 0;
-  const userRate = +document.getElementById(rateId).value || 0;
-  const term = +document.getElementById(termId).value || (prefix === 'auto' ? 5 : 30);
+  const price = numberFromInput(priceId, 0);
+  let down = numberFromInput(downId, 0);
+  const userRate = numberFromInput(rateId, 0);
+  const term = numberFromInput(termId, prefix === 'auto' ? 5 : 30);
+  if (down > price) {
+    down = price;
+    document.getElementById(downId).value = down;
+  }
   const loan = Math.max(0, price - down);
 
   const userCalc = calcLoan(loan, userRate, term);
@@ -1680,11 +1711,15 @@ function updateAutoSlider() { updateCreditSlider('auto', autoRateFromScore, 'car
 function updateHomeSlider() { updateCreditSlider('home', homeRateFromScore, 'house'); }
 
 function calcRetirement() {
-  const age = +document.getElementById('ret-age').value || 22;
-  const retire = +document.getElementById('ret-retire').value || 65;
-  const monthly = +document.getElementById('ret-monthly').value || 0;
-  const ret = +document.getElementById('ret-return').value || 7;
-  const current = +document.getElementById('ret-current').value || 0;
+  const age = numberFromInput('ret-age', 22);
+  let retire = numberFromInput('ret-retire', 65);
+  const monthly = numberFromInput('ret-monthly', 0);
+  const ret = numberFromInput('ret-return', 7);
+  const current = numberFromInput('ret-current', 0);
+  if (retire < age) {
+    retire = age;
+    document.getElementById('ret-retire').value = retire;
+  }
   const years = Math.max(retire - age, 0);
   const r = ret / 100 / 12;
   const n = years * 12;
@@ -1712,7 +1747,7 @@ function calcRetirement() {
 // CREDIT SCORE ESTIMATOR
 function calcCredit() {
   var payment = +document.getElementById('credit-payment').value;
-  var util = +document.getElementById('credit-util').value;
+  var util = numberFromInput('credit-util', 30);
   var length = +document.getElementById('credit-length').value;
   var mix = +document.getElementById('credit-mix').value;
   var inquiries = +document.getElementById('credit-inquiries').value;
@@ -1780,18 +1815,18 @@ function calcCredit() {
 
 // BUDGET CALCULATOR
 function calcBudget() {
-  var income = +document.getElementById('budget-income').value || 0;
+  var income = numberFromInput('budget-income', 0);
   var expenses = {
-    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
-    'Utilities': +document.getElementById('budget-utilities').value || 0,
-    'Car Payment': +document.getElementById('budget-car').value || 0,
-    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
-    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
-    'Cell Phone': +document.getElementById('budget-phone').value || 0,
-    'Groceries / Food': +document.getElementById('budget-food').value || 0,
-    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
-    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
-    'Other': +document.getElementById('budget-other').value || 0
+    'Rent / Housing': numberFromInput('budget-rent', 0),
+    'Utilities': numberFromInput('budget-utilities', 0),
+    'Car Payment': numberFromInput('budget-car', 0),
+    'Car Insurance': numberFromInput('budget-insurance', 0),
+    'Gas / Transport': numberFromInput('budget-gas', 0),
+    'Cell Phone': numberFromInput('budget-phone', 0),
+    'Groceries / Food': numberFromInput('budget-food', 0),
+    'Streaming / Subs': numberFromInput('budget-streaming', 0),
+    'Personal / Fun': numberFromInput('budget-personal', 0),
+    'Other': numberFromInput('budget-other', 0)
   };
 
   var totalExp = 0;
@@ -1947,7 +1982,7 @@ function loadXLSX() {
   xlsxLoadPromise = new Promise(function(resolve, reject) {
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-    script.integrity = 'sha384-sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
+    script.integrity = 'sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
     script.crossOrigin = 'anonymous';
     script.onload = resolve;
     script.onerror = function() { xlsxLoadPromise = null; reject(new Error('Failed to load XLSX')); };
@@ -1982,18 +2017,18 @@ async function downloadBudgetExcel(btn) {
 }
 
 function buildBudgetWorkbook() {
-  const income = +document.getElementById('budget-income').value || 0;
+  const income = numberFromInput('budget-income', 0);
   const expenses = {
-    'Rent / Housing': +document.getElementById('budget-rent').value || 0,
-    'Utilities': +document.getElementById('budget-utilities').value || 0,
-    'Car Payment': +document.getElementById('budget-car').value || 0,
-    'Car Insurance': +document.getElementById('budget-insurance').value || 0,
-    'Gas / Transport': +document.getElementById('budget-gas').value || 0,
-    'Cell Phone': +document.getElementById('budget-phone').value || 0,
-    'Groceries / Food': +document.getElementById('budget-food').value || 0,
-    'Streaming / Subs': +document.getElementById('budget-streaming').value || 0,
-    'Personal / Fun': +document.getElementById('budget-personal').value || 0,
-    'Other': +document.getElementById('budget-other').value || 0
+    'Rent / Housing': numberFromInput('budget-rent', 0),
+    'Utilities': numberFromInput('budget-utilities', 0),
+    'Car Payment': numberFromInput('budget-car', 0),
+    'Car Insurance': numberFromInput('budget-insurance', 0),
+    'Gas / Transport': numberFromInput('budget-gas', 0),
+    'Cell Phone': numberFromInput('budget-phone', 0),
+    'Groceries / Food': numberFromInput('budget-food', 0),
+    'Streaming / Subs': numberFromInput('budget-streaming', 0),
+    'Personal / Fun': numberFromInput('budget-personal', 0),
+    'Other': numberFromInput('budget-other', 0)
   };
 
   // Build data
@@ -2042,6 +2077,11 @@ function buildBudgetWorkbook() {
 
 // LEGAL OVERLAY FUNCTIONS
 let legalTrigger = null;
+function getLegalFocusable(overlay) {
+  return Array.from(overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(el => {
+    return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+  });
+}
 function openLegal(type) {
   legalTrigger = document.activeElement;
   const overlay = document.getElementById('legal-' + type);
@@ -2051,22 +2091,36 @@ function openLegal(type) {
   if (closeBtn) closeBtn.focus();
 }
 function closeLegal(type) {
-  document.getElementById('legal-' + type).classList.remove('active');
-  document.body.style.overflow = '';
+  const overlay = document.getElementById('legal-' + type);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  if (!document.querySelector('.legal-overlay.active')) document.body.style.overflow = '';
   if (legalTrigger && typeof legalTrigger.focus === 'function') legalTrigger.focus();
   legalTrigger = null;
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
-    let closedAny = false;
     document.querySelectorAll('.legal-overlay.active').forEach(el => {
-      el.classList.remove('active');
-      document.body.style.overflow = '';
-      closedAny = true;
+      closeLegal(el.id.replace('legal-', ''));
     });
-    if (closedAny && legalTrigger && typeof legalTrigger.focus === 'function') {
-      legalTrigger.focus();
-      legalTrigger = null;
+  }
+  if (e.key === 'Tab') {
+    const activeOverlay = document.querySelector('.legal-overlay.active');
+    if (!activeOverlay) return;
+    const focusable = getLegalFocusable(activeOverlay);
+    if (!focusable.length) {
+      e.preventDefault();
+      activeOverlay.focus();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   }
 });

@@ -27,3 +27,4 @@ build/
 
 # Cloudflare Worker (contains API config — deploy separately)
 chatbot-worker.js
+.vercel

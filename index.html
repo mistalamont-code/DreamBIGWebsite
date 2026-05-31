@@ -565,7 +565,7 @@
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
-  <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
   <ul class="nav-links" id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#book">The Book</a></li>
@@ -751,7 +751,7 @@
 
 <!-- PRIVACY POLICY OVERLAY -->
 <div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
-  <button class="legal-close" onclick="closeLegal('privacy')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-privacy-title">Privacy Policy</h2>
     <p><em>Last updated: 2026</em></p>
@@ -766,6 +766,7 @@
       <li><strong>Name and contact information</strong> &mdash; when you submit a speaking engagement inquiry</li>
     </ul>
     <p>The financial calculators on this site run entirely in your browser. We do not collect, store, or transmit any data you enter into the calculators.</p>
+    <p>If you use the optional DREAM/BIG AI Coach, the question you type and recent chat context are sent through our secure server endpoint to an AI service provider so a response can be generated. Do not enter Social Security numbers, account numbers, passwords, bank logins, or other sensitive personal data.</p>
 
     <h3>How We Use Your Information</h3>
     <p>Your email address is used solely to send you newsletter updates about new content, speaking events, financial tips, and DREAM/BIG community news. We will never sell, rent, or share your email address with third parties for marketing purposes.</p>
@@ -805,7 +806,7 @@
 
 <!-- TERMS OF USE OVERLAY -->
 <div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
-  <button class="legal-close" onclick="closeLegal('terms')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-terms-title">Terms of Use</h2>
     <p><em>Last updated: 2026</em></p>
@@ -818,6 +819,9 @@
 
     <h3>Financial Calculator Disclaimer</h3>
     <p>The financial calculators provided on this site are tools for illustration and education. Results are estimates based on the inputs you provide and standard mathematical formulas. They do not account for all factors that affect actual loan terms or investment returns, including but not limited to: fees, taxes, insurance, market volatility, or individual lender requirements. Always consult a licensed financial professional before making financial decisions.</p>
+
+    <h3>AI Assistant Disclaimer</h3>
+    <p>The optional DREAM/BIG AI Coach is an educational tool for general financial literacy. It may provide incomplete or inaccurate information and does not provide professional financial, investment, tax, legal, or credit counseling advice. Do not share sensitive personal or account information with the assistant.</p>
 
     <h3>Intellectual Property</h3>
     <p>All content on this website &mdash; including text, graphics, logos, images, and the DREAM/BIG name and framework &mdash; is the property of Corey L. Cook and Cook Media LLC and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
@@ -841,7 +845,7 @@
 
 <!-- ACCESSIBILITY STATEMENT OVERLAY -->
 <div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
-  <button class="legal-close" onclick="closeLegal('accessibility')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-accessibility-title">Accessibility Statement</h2>
     <p><em>Last updated: 2026</em></p>
@@ -873,7 +877,7 @@
 
 <!-- DMCA NOTICE OVERLAY -->
 <div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
-  <button class="legal-close" onclick="closeLegal('dmca')">&times;</button>
+  <button type="button" class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
   <div class="legal-content">
     <h2 id="legal-dmca-title">DMCA Notice</h2>
     <p><em>Last updated: 2026</em></p>
@@ -934,6 +938,11 @@ function closeTools() {
 
 // LEGAL OVERLAY FUNCTIONS
 var legalTrigger = null;
+function getLegalFocusable(overlay) {
+  return Array.prototype.slice.call(overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(function(el) {
+    return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+  });
+}
 function openLegal(type) {
   legalTrigger = document.activeElement;
   var overlay = document.getElementById('legal-' + type);
@@ -943,21 +952,36 @@ function openLegal(type) {
   if (closeBtn) closeBtn.focus();
 }
 function closeLegal(type) {
-  document.getElementById('legal-' + type).classList.remove('active');
-  document.body.style.overflow = '';
+  var overlay = document.getElementById('legal-' + type);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  if (!document.querySelector('.legal-overlay.active')) document.body.style.overflow = '';
   if (legalTrigger) { legalTrigger.focus(); legalTrigger = null; }
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeTools();
-    var anyOpen = false;
-    document.querySelectorAll('.legal-overlay.active').forEach(el => {
-      el.classList.remove('active');
-      anyOpen = true;
+    document.querySelectorAll('.legal-overlay.active').forEach(function(el) {
+      closeLegal(el.id.replace('legal-', ''));
     });
-    if (anyOpen) {
-      document.body.style.overflow = '';
-      if (legalTrigger) { legalTrigger.focus(); legalTrigger = null; }
+  }
+  if (e.key === 'Tab') {
+    var activeOverlay = document.querySelector('.legal-overlay.active');
+    if (!activeOverlay) return;
+    var focusable = getLegalFocusable(activeOverlay);
+    if (!focusable.length) {
+      e.preventDefault();
+      activeOverlay.focus();
+      return;
+    }
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   }
 });
@@ -967,14 +991,27 @@ document.addEventListener('keydown', function(e) {
   if (sessionStorage.getItem('calcBannerDismissed')) return;
   var banner = document.createElement('div');
   banner.id = 'calc-banner';
-  banner.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;"><span style="font-size:0.9rem;color:#F5F5F5;"><strong style="color:#D4AF37;">Free Financial Calculators</strong> — See what your decisions really cost before you sign.</span><a href="calculators.html" style="display:inline-block;padding:7px 20px;background:#D4AF37;color:#0F0620;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;border-radius:3px;text-decoration:none;">Try Them</a><button onclick="dismissCalcBanner()" style="background:none;border:none;color:#B8A8D0;font-size:1.3rem;cursor:pointer;padding:0 0 0 0.5rem;line-height:1;" aria-label="Dismiss">&times;</button></div>';
+  banner.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;"><span style="font-size:0.9rem;color:#F5F5F5;"><strong style="color:#D4AF37;">Free Financial Calculators</strong> — See what your decisions really cost before you sign.</span><a href="calculators.html" style="display:inline-block;padding:7px 20px;background:#D4AF37;color:#0F0620;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;border-radius:3px;text-decoration:none;">Try Them</a><button type="button" onclick="dismissCalcBanner()" style="background:none;border:none;color:#B8A8D0;font-size:1.3rem;cursor:pointer;padding:0 0 0 0.5rem;line-height:1;" aria-label="Dismiss">&times;</button></div>';
   banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(26,10,46,0.97);backdrop-filter:blur(12px);border-top:1px solid rgba(212,175,55,0.25);padding:12px 2rem;transform:translateY(100%);transition:transform 0.4s ease;';
   document.body.appendChild(banner);
-  setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 5000);
+  function showBanner() {
+    if (!document.getElementById('calc-banner')) return;
+    banner.style.transform = 'translateY(0)';
+    document.body.style.paddingBottom = banner.offsetHeight + 'px';
+    window.removeEventListener('scroll', maybeShowBanner);
+  }
+  function maybeShowBanner() {
+    if (window.scrollY > window.innerHeight * 0.65) showBanner();
+  }
+  setTimeout(function() {
+    maybeShowBanner();
+    window.addEventListener('scroll', maybeShowBanner, { passive: true });
+  }, 5000);
 })();
 function dismissCalcBanner() {
   var b = document.getElementById('calc-banner');
   b.style.transform = 'translateY(100%)';
+  document.body.style.paddingBottom = '';
   sessionStorage.setItem('calcBannerDismissed', '1');
   setTimeout(function() { b.remove(); }, 400);
 }
