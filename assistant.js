@@ -168,6 +168,7 @@
   function requestReply() {
     setBusy(true);
     setStatus('Thinking...');
+    var conversationBeforeRequest = conversation.slice(0, -1);
 
     var controller = new AbortController();
     var timeout = window.setTimeout(function() {
@@ -188,7 +189,14 @@
     })
       .then(function(response) {
         if (!response.ok) {
-          throw new Error('Assistant request failed');
+          return response.json()
+            .catch(function() {
+              return {};
+            })
+            .then(function(data) {
+              var message = messageForStatus(response.status, data && data.error);
+              throw new Error(message);
+            });
         }
         return response.json();
       })
@@ -200,8 +208,9 @@
         conversation = conversation.slice(-maxHistory);
         setStatus('');
       })
-      .catch(function() {
-        addMessage('assistant', 'I could not reach the coach right now. Try again in a minute.');
+      .catch(function(error) {
+        conversation = conversationBeforeRequest;
+        addMessage('assistant', error && error.message ? error.message : 'I could not reach the coach right now. Try again in a minute.');
         setStatus('');
       })
       .finally(function() {
@@ -209,6 +218,22 @@
         setBusy(false);
         if (!refs.panel.hidden) refs.input.focus();
       });
+  }
+
+  function messageForStatus(status, serverMessage) {
+    if (status === 429) {
+      return 'The coach is getting a lot of questions right now. Try again in a minute.';
+    }
+    if (status === 403) {
+      return 'This page is not allowed to use the coach. Refresh the official site and try again.';
+    }
+    if (status === 503) {
+      return 'The coach is still being set up. Try again later.';
+    }
+    if (status >= 500) {
+      return 'The coach service hit a temporary issue. Try again in a minute.';
+    }
+    return serverMessage || 'I could not reach the coach right now. Try again in a minute.';
   }
 
   function bindEvents() {

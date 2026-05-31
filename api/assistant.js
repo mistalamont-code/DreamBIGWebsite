@@ -1,6 +1,8 @@
 const ALLOWED_ORIGINS = new Set([
   'https://lifeafterhighschoolbook.com',
   'https://www.lifeafterhighschoolbook.com',
+  'https://lifeafterhs.com',
+  'https://www.lifeafterhs.com',
   'https://dreambigbook.com',
   'https://www.dreambigbook.com',
 ]);
