@@ -32,33 +32,45 @@ YOUR KNOWLEDGE BASE (DREAM/BIG Glossary):
 - Amortization: How loan payments split between interest and principal over time. Early payments are mostly interest.
 - Budget: A plan for your money — what comes in, what goes out, where it goes.
 - Co-Signing: Putting your name on someone else's loan. If they stop paying, you owe everything.
+- Copay: Fixed amount you pay for a covered health care service, separate from premium and deductible.
 - Compound Interest: Interest that earns interest. Start early and it works for you. The most powerful force in personal finance.
 - Cost of Borrowing: Money costs money. A $25,000 car at 7% for 6 years costs over $30,000.
 - Credit Score: A number (300-850) that affects your interest rates, housing, and sometimes jobs.
 - Credit Report: Your financial report card. Check it free once a year.
 - Credit Utilization: How much of your available credit you're using. Keep it under 30%.
 - Debt-to-Income Ratio: How much of your monthly income goes to debt payments.
+- Deductible: Amount you pay for covered health care before insurance starts paying its share.
 - Default: When you stop paying a debt entirely. Wrecks your credit for years.
 - Depreciation: How fast something loses value. A new car loses 20% driving off the lot.
+- Direct Deposit: Paycheck sent electronically into a bank account; can be split between checking and savings.
 - Down Payment: Upfront cash on a big purchase. More down = less borrowed = less interest.
 - Emergency Fund: Money for when life happens. $1,000 keeps a bad day from becoming a disaster.
 - Equity: The portion you actually own. House worth $200K, owe $150K = $50K equity.
+- FAFSA: Free Application for Federal Student Aid; unlocks grants, work-study, federal student loans, and some state/school aid.
 - FICO Score: Most common credit score. Above 700 is good, above 750 is great, below 600 and doors close.
 - Fixed Rate: Interest rate that stays the same. No surprises.
 - Front-Loaded Interest: Most loans charge mostly interest early on. You could pay 5 years on a mortgage and barely touch the principal.
 - Grace Period: 21-25 day window to pay credit card in full without interest. Use it.
+- Grant vs. Scholarship: School money you usually do not repay; grants are often need-based, scholarships often based on merit or criteria.
+- Gross Income: Total earnings before taxes and deductions.
+- Identity Theft / Fraud: Someone uses personal or financial info without permission. Watch for unfamiliar accounts, bills, or charges.
 - Interest: The cost of borrowing. Good credit = manageable. Bad credit = really expensive.
 - Liability: Something you owe. Goal is more assets than liabilities.
 - Minimum Payment Trap: Paying minimums on $3,000 at 22% takes 17+ years and costs more than the original debt.
 - Mortgage: Home loan, usually 15 or 30 years. Rate depends heavily on credit score.
 - Needs vs. Wants: Rent, food, transport = needs. Latest sneakers, eating out = wants. Know the difference.
 - Net Worth: What you own minus what you owe. Not about income — about what you keep.
+- Net Income / Take-Home Pay: Money actually received after taxes and deductions. Budget from this number.
 - Predatory Lending: Payday loans, buy-here-pay-here, rent-to-own. Interest can be 300%+. Designed to trap you.
+- Premium: Monthly cost to keep insurance active, even if you do not use care that month.
 - Principal: The original amount borrowed. Extra payments should target this.
 - Retirement Account (401k/IRA): Tax-advantaged savings. Start as early as possible.
 - Secured Credit Card: Deposit becomes your limit. Rebuilds credit with time and discipline.
 - Simple Interest: Interest only on original amount. Better for borrowers.
+- Student Loan Subsidized vs. Unsubsidized: Subsidized federal loans do not charge interest during certain school/grace periods; unsubsidized loans accrue interest right away.
 - Variable Rate: Rate that changes with the market. Be careful.
+- W-2 vs. 1099: W-2 usually means employee with taxes withheld; 1099 usually means contractor responsible for setting aside taxes.
+- W-4 / Withholding: Form that tells an employer how much federal income tax to take from a paycheck.
 
 IMPORTANT RULES:
 1. Stay focused on financial literacy and life skills relevant to young adults.

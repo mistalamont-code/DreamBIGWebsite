@@ -6,7 +6,7 @@ Official website for the DREAM/BIG book by Corey L. Cook.
 
 - **index.html** — Homepage with about, book overview, newsletter signup
 - **calculators.html** — Interactive financial calculators (auto loan, home loan, retirement)
-- **glossary.html** — 32-term financial literacy glossary with search
+- **glossary.html** — 51-term financial literacy glossary with search
 - **assistant.js / assistant.css** — Floating DREAM/BIG Coach widget
 - **api/assistant.js** — Vercel API Function for AI-powered financial coaching
 - **images/** — Site assets (favicon, book cover, photos)
