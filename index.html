@@ -224,15 +224,32 @@
     background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
   }
   .book-cover-display {
-    margin: 3rem auto; text-align: center;
+    margin: 3rem auto; text-align: center; perspective: 1200px;
+    --book-cover-y: 48px;
+    --book-cover-rx: 7deg;
+    --book-cover-rz: -2deg;
+    --book-cover-scale: 0.94;
+    --book-cover-opacity: 0.72;
+    --book-cover-glow: 0.1;
+  }
+  .book-cover-display picture {
+    display: inline-block;
+    opacity: var(--book-cover-opacity);
+    transform:
+      translate3d(0, var(--book-cover-y), 0)
+      rotateX(var(--book-cover-rx))
+      rotateZ(var(--book-cover-rz))
+      scale(var(--book-cover-scale));
+    transform-origin: center 72%;
+    will-change: transform, opacity;
   }
   .book-cover-display img {
     width: 100%; max-width: 400px; height: auto; border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 44px rgba(201,168,76,var(--book-cover-glow));
+    transition: filter 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .book-cover-display img:hover {
-    transform: scale(1.02);
+    filter: brightness(1.04) contrast(1.02);
   }
   .book-features {
     display: flex; flex-direction: column; gap: 1.25rem; margin-top: 3rem;
@@ -503,7 +520,11 @@
   :focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
   .nav-dropdown:focus-within .nav-dropdown-menu{display:block}
 
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .book-cover-display picture{opacity:1!important;transform:none!important;will-change:auto}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -985,6 +1006,63 @@ document.addEventListener('keydown', function(e) {
     }
   }
 });
+
+// BOOK COVER SCROLL MOTION
+(function() {
+  var display = document.querySelector('.book-cover-display');
+  if (!display) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    display.style.setProperty('--book-cover-y', '0px');
+    display.style.setProperty('--book-cover-rx', '0deg');
+    display.style.setProperty('--book-cover-rz', '0deg');
+    display.style.setProperty('--book-cover-scale', '1');
+    display.style.setProperty('--book-cover-opacity', '1');
+    display.style.setProperty('--book-cover-glow', '0.18');
+    return;
+  }
+
+  var ticking = false;
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function easeOutQuart(value) {
+    return 1 - Math.pow(1 - value, 4);
+  }
+
+  function updateCoverMotion() {
+    ticking = false;
+    var rect = display.getBoundingClientRect();
+    var viewport = window.innerHeight || document.documentElement.clientHeight;
+    var progress = clamp((viewport - rect.top) / (viewport + rect.height * 0.45), 0, 1);
+    var eased = easeOutQuart(progress);
+    var y = 48 - eased * 58;
+    var rx = 7 - eased * 8.5;
+    var rz = -2 + eased * 2.5;
+    var scale = 0.94 + eased * 0.06;
+    var opacity = 0.72 + eased * 0.28;
+    var glow = 0.1 + eased * 0.16;
+
+    display.style.setProperty('--book-cover-y', y.toFixed(2) + 'px');
+    display.style.setProperty('--book-cover-rx', rx.toFixed(2) + 'deg');
+    display.style.setProperty('--book-cover-rz', rz.toFixed(2) + 'deg');
+    display.style.setProperty('--book-cover-scale', scale.toFixed(3));
+    display.style.setProperty('--book-cover-opacity', opacity.toFixed(3));
+    display.style.setProperty('--book-cover-glow', glow.toFixed(3));
+  }
+
+  function requestCoverMotion() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateCoverMotion);
+  }
+
+  updateCoverMotion();
+  window.addEventListener('scroll', requestCoverMotion, { passive: true });
+  window.addEventListener('resize', requestCoverMotion);
+})();
 
 // CALCULATOR BANNER
 (function() {
