@@ -168,6 +168,11 @@
   .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
   .nav-links .btn-gold:hover { color: var(--purple-deep); }
   .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+  .purchase-note {
+    margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); text-align: center;
+  }
+  .purchase-note a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.45); }
+  .purchase-note a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
 
   /* SECTIONS */
   section { padding: 100px 2rem; }
@@ -549,21 +554,21 @@
       "about": "financial literacy and life after high school",
       "workExample": {
         "@type": "Book",
-        "bookFormat": "https://schema.org/EBook",
+        "bookFormat": "https://schema.org/Paperback",
         "isbn": "9798234036643",
         "potentialAction": {
-          "@type": "ReadAction",
-          "target": "https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643"
+          "@type": "BuyAction",
+          "target": "https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y"
         },
         "offers": {
           "@type": "Offer",
           "price": "14.99",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",
-          "url": "https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643",
+          "url": "https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y",
           "seller": {
             "@type": "Organization",
-            "name": "Barnes & Noble"
+            "name": "IngramSpark"
           }
         }
       }
@@ -603,7 +608,7 @@
       </div></div>
     </li>
     <li><a href="#newsletter">Newsletter</a></li>
-    <li><a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-gold btn-nav" target="_blank" rel="noopener">Buy the Book</a></li>
+    <li><a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold btn-nav" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="nav">Buy Direct</a></li>
   </ul>
 </nav>
 
@@ -612,15 +617,16 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">Now Available on Barnes &amp; Noble</div>
+    <div class="hero-badge">Now Available Direct</div>
     <h1>DREAM/BIG</h1>
     <p class="hero-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</p>
     <p class="hero-author">By Corey L. Cook</p>
     <p class="hero-quote">&ldquo;I was 20 years old when I graduated from high school. I&rsquo;d been held back twice&mdash;once in first grade, then again in fifth. I made a decision to stop letting that embarrassment define me and start letting it drive me. Twenty-one years later, I am the Chief Operating Officer of a major development corporation. Every chapter of this book is built from the decisions that got me here. This is your roadmap.&rdquo;</p>
     <div class="hero-cta">
-      <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-gold" target="_blank" rel="noopener">Buy on Barnes &amp; Noble</a>
+      <a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="hero">Buy Direct</a>
       <a href="calculators.html" class="btn btn-outline">Try the Calculators</a>
     </div>
+    <p class="purchase-note">Best way to support the author. Ships through IngramSpark. <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="hero-note">Also available at Barnes &amp; Noble.</a></p>
   </div>
 </section>
 
@@ -723,8 +729,8 @@
     </div>
 
     <div style="text-align:center; margin-top:3rem;">
-      <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-gold" target="_blank" rel="noopener">Buy on Barnes &amp; Noble</a>
-      <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-muted);">eBook &middot; $14.99 &middot; Read on any NOOK device or the free NOOK app</p>
+      <a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="book-section">Buy Direct</a>
+      <p class="purchase-note">Best way to support the author. Ships through IngramSpark. <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="book-section-note">Also available at Barnes &amp; Noble.</a></p>
     </div>
   </div>
 </section>
@@ -1011,6 +1017,31 @@ document.addEventListener('keydown', function(e) {
     }
   }
 });
+
+// PURCHASE LINK TRACKING
+(function() {
+  function trackBuyClick(link) {
+    var retailer = link.getAttribute('data-buy-link') || 'unknown';
+    var location = link.getAttribute('data-buy-location') || 'unknown';
+    var eventName = retailer === 'ingram' ? 'Buy Direct Click' : 'Buy Retailer Click';
+    var eventData = { retailer: retailer, location: location };
+    try {
+      if (window.va) window.va('event', { name: eventName, data: eventData });
+      if (window.gtag) {
+        window.gtag('event', eventName.toLowerCase().replace(/\s+/g, '_'), {
+          event_category: 'purchase',
+          event_label: retailer + ':' + location
+        });
+      }
+    } catch (err) {}
+  }
+
+  document.querySelectorAll('[data-buy-link]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      trackBuyClick(link);
+    });
+  });
+})();
 
 // BOOK COVER SCROLL MOTION
 (function() {

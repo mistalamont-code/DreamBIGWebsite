@@ -535,7 +535,7 @@
       </div></div>
     </li>
     <li><a href="index.html#newsletter">Newsletter</a></li>
-    <li><a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-gold btn-nav" target="_blank" rel="noopener">Buy the Book</a></li>
+    <li><a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold btn-nav" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="nav-calculators">Buy Direct</a></li>
   </ul>
 </nav>
 
@@ -1169,6 +1169,31 @@ document.addEventListener('keydown', function(e) {
     }
   }
 });
+
+// PURCHASE LINK TRACKING
+(function() {
+  function trackBuyClick(link) {
+    var retailer = link.getAttribute('data-buy-link') || 'unknown';
+    var location = link.getAttribute('data-buy-location') || 'unknown';
+    var eventName = retailer === 'ingram' ? 'Buy Direct Click' : 'Buy Retailer Click';
+    var eventData = { retailer: retailer, location: location };
+    try {
+      if (window.va) window.va('event', { name: eventName, data: eventData });
+      if (window.gtag) {
+        window.gtag('event', eventName.toLowerCase().replace(/\s+/g, '_'), {
+          event_category: 'purchase',
+          event_label: retailer + ':' + location
+        });
+      }
+    } catch (err) {}
+  }
+
+  document.querySelectorAll('[data-buy-link]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      trackBuyClick(link);
+    });
+  });
+})();
 
 // AMORTIZATION CHART
 function drawAmortChart(canvasId, principal, annualRate, years) {
