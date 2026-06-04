@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0F0620"/>
-  <rect x="1" y="1" width="30" height="30" rx="5" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
-  <text x="16" y="22.5" font-family="Georgia,serif" font-weight="900" font-size="16" fill="#D4AF37" text-anchor="middle">D/B</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DREAM/BIG monogram">
+  <circle cx="32" cy="32" r="31" fill="#D4AF37"/>
+  <circle cx="32" cy="32" r="27.4" fill="#241137"/>
+  <g transform="translate(3.2 3.2) scale(0.9)">
+    <path fill="#D4AF37" fill-rule="evenodd" d="M7 18h14.5C31.1 18 37 23.4 37 32s-5.9 14-15.5 14H7V18Zm8 7v14h6.1c5.1 0 8.3-2.8 8.3-7s-3.2-7-8.3-7H15Z"/>
+    <path fill="#D4AF37" fill-rule="evenodd" d="M35 18h13.5c6.6 0 10.1 3.2 10.1 8.1 0 3.1-1.7 5.3-4.5 6.4 3.4 1 5.4 3.7 5.4 7.2 0 5.4-4 8.3-10.9 8.3H35V18Zm7.5 6.3v6.6h5.4c2.7 0 4.1-1.2 4.1-3.3s-1.4-3.3-4.1-3.3h-5.4Zm0 12.6v7h6.4c2.9 0 4.4-1.3 4.4-3.5 0-2.1-1.5-3.5-4.4-3.5h-6.4Z"/>
+  </g>
 </svg>

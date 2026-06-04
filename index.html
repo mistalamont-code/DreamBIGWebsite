@@ -35,9 +35,10 @@
 <meta name="twitter:image" content="https://lifeafterhighschoolbook.com/images/og-image.png">
 <meta name="twitter:image:alt" content="DREAM/BIG by Corey L. Cook — Book Cover">
 <link rel="canonical" href="https://lifeafterhighschoolbook.com/">
-<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-<link rel="apple-touch-icon" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
@@ -227,6 +228,7 @@
   .about-stats { display: flex; gap: 2rem; margin-top: 2rem; justify-content: center; align-items: flex-end; }
   .stat { text-align: center; }
   .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-weight: 700; min-height: 2.5rem; display: flex; align-items: flex-end; justify-content: center; }
+  .stat-number[data-stat-value] { min-width: 4.2ch; font-variant-numeric: lining-nums tabular-nums; }
   .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
   /* BOOK SECTION */
@@ -648,8 +650,8 @@
         <p class="section-text" style="margin-top:1rem;">Corey is also the founder and CEO of Cook Media LLC, a media production company specializing in wedding photography and videography, live sound, and recently, book publishing. He serves on multiple boards, including the Greater Erie Economic Development Corporation, United Way of Erie County, and the Pennsylvania Council on Inclusive Procurement, to name a few. He is a drummer, pianist, and the creator of the DREAM/BIG book series&mdash;of which this is the first volume, followed by GROW/, LAUNCH/, and LEGACY/.</p>
         <p class="section-text" style="margin-top:1rem;">This book started as a graduation gift for his children&mdash;a way to pass down the lessons, mistakes, and hard-won wisdom he wished someone had laid out for him when he walked across the stage at 20 years old. But as he wrote, it became clear the message was bigger than his own family. DREAM/BIG is for every young person standing at the edge of adulthood, especially those from communities where the roadmap isn&rsquo;t always clear.</p>
         <div class="about-stats">
-          <div class="stat"><div class="stat-number">$150M</div><div class="stat-label">Development Portfolio</div></div>
-          <div class="stat"><div class="stat-number">16+</div><div class="stat-label">Years at UPS</div></div>
+          <div class="stat"><div class="stat-number" data-stat-prefix="$" data-stat-value="150" data-stat-suffix="M" aria-label="$150 million">$150M</div><div class="stat-label">Development Portfolio</div></div>
+          <div class="stat"><div class="stat-number" data-stat-value="16" data-stat-suffix="+" aria-label="16 plus years">16+</div><div class="stat-label">Years at UPS</div></div>
           <div class="stat"><div class="stat-number" style="font-size:1.25rem; line-height:1.2;">Good Morning<br>America</div><div class="stat-label">Featured On</div></div>
         </div>
       </div>
@@ -1040,6 +1042,74 @@ document.addEventListener('keydown', function(e) {
     link.addEventListener('click', function() {
       trackBuyClick(link);
     });
+  });
+})();
+
+// ABOUT STAT COUNTERS
+(function() {
+  var counters = Array.prototype.slice.call(document.querySelectorAll('.stat-number[data-stat-value]'));
+  if (!counters.length) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function easeOutQuart(value) {
+    return 1 - Math.pow(1 - value, 4);
+  }
+
+  function renderCounter(counter, value) {
+    var prefix = counter.getAttribute('data-stat-prefix') || '';
+    var suffix = counter.getAttribute('data-stat-suffix') || '';
+    counter.textContent = prefix + Math.round(value).toLocaleString() + suffix;
+  }
+
+  function finishCounter(counter) {
+    renderCounter(counter, Number(counter.getAttribute('data-stat-value')) || 0);
+    counter.setAttribute('data-stat-complete', 'true');
+  }
+
+  function animateCounter(counter) {
+    if (counter.getAttribute('data-stat-complete') === 'true') return;
+
+    var target = Number(counter.getAttribute('data-stat-value')) || 0;
+    var duration = Number(counter.getAttribute('data-stat-duration')) || 1500;
+    var start = window.performance ? window.performance.now() : Date.now();
+    renderCounter(counter, 0);
+
+    function tick(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      renderCounter(counter, target * easeOutQuart(progress));
+
+      if (progress < 1) {
+        window.requestAnimationFrame(tick);
+      } else {
+        finishCounter(counter);
+      }
+    }
+
+    window.requestAnimationFrame(tick);
+  }
+
+  if (reduceMotion) {
+    counters.forEach(finishCounter);
+    return;
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    counters.forEach(animateCounter);
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      animateCounter(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.45 });
+
+  counters.forEach(function(counter) {
+    observer.observe(counter);
   });
 })();
 
