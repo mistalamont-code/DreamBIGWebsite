@@ -16,25 +16,25 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DREAM/BIG — By Corey L. Cook</title>
-<meta name="description" content="DREAM/BIG by Corey L. Cook — A father and mentor's guide to life after high school. Real decisions, real lessons, and a practical roadmap for the next generation.">
-<meta property="og:title" content="DREAM/BIG — By Corey L. Cook">
-<meta property="og:description" content="A father and mentor's guide to life after high school. Real decisions, real lessons, and a practical roadmap for the next generation.">
+<title>DREAM/BIG Book — Life After High School Guide by Corey L. Cook</title>
+<meta name="description" content="DREAM/BIG by Corey L. Cook is a life after high school book and graduation gift for young adults, with practical guidance on money, career, relationships, and purpose.">
+<meta property="og:title" content="DREAM/BIG Book — Life After High School Guide by Corey L. Cook">
+<meta property="og:description" content="A father and mentor's practical guide for graduates and young adults navigating life after high school.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://lifeafterhighschoolbook.com">
-<meta property="og:image" content="https://lifeafterhighschoolbook.com/images/og-image.png">
-<meta property="og:image:secure_url" content="https://lifeafterhighschoolbook.com/images/og-image.png">
+<meta property="og:url" content="https://www.lifeafterhighschoolbook.com">
+<meta property="og:image" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
+<meta property="og:image:secure_url" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="DREAM/BIG by Corey L. Cook — A Father and Mentor's Guide to Life After High School — Book Cover">
 <meta property="og:site_name" content="DREAM/BIG — Life After High School">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DREAM/BIG — By Corey L. Cook">
-<meta name="twitter:description" content="A father and mentor's guide to life after high school. Real decisions, real lessons, and a practical roadmap for the next generation.">
-<meta name="twitter:image" content="https://lifeafterhighschoolbook.com/images/og-image.png">
+<meta name="twitter:title" content="DREAM/BIG Book — Life After High School Guide by Corey L. Cook">
+<meta name="twitter:description" content="A father and mentor's practical guide for graduates and young adults navigating life after high school.">
+<meta name="twitter:image" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
 <meta name="twitter:image:alt" content="DREAM/BIG by Corey L. Cook — Book Cover">
-<link rel="canonical" href="https://lifeafterhighschoolbook.com/">
+<link rel="canonical" href="https://www.lifeafterhighschoolbook.com/">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
@@ -400,6 +400,33 @@
     font-size: 0.9rem; font-weight: 600; color: var(--gold); letter-spacing: 0.5px;
   }
 
+  /* FAQ */
+  .faq {
+    background: var(--purple-deep);
+  }
+  .faq .container { max-width: 820px; }
+  .faq-list {
+    display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem;
+  }
+  .faq-item {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.14);
+    border-radius: 8px; padding: 0; overflow: hidden;
+  }
+  .faq-item summary {
+    cursor: pointer; list-style: none; padding: 1.25rem 1.5rem;
+    color: var(--gold); font-weight: 700; letter-spacing: 0.2px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; float: right; color: var(--text-muted); font-size: 1.15rem;
+    line-height: 1;
+  }
+  .faq-item[open] summary::after { content: '-'; }
+  .faq-item p {
+    padding: 0 1.5rem 1.35rem; color: var(--text-muted);
+    font-size: 0.95rem; line-height: 1.8;
+  }
+
   /* NEWSLETTER */
   .newsletter {
     background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
@@ -544,46 +571,130 @@
   "@graph": [
     {
       "@type": "Book",
-      "name": "DREAM/BIG",
+      "@id": "https://www.lifeafterhighschoolbook.com/#dream-big-book",
+      "name": "DREAM/BIG: A Father & Mentor's Guide to Life After High School",
       "alternateName": "DREAM/BIG: A Father & Mentor's Guide to Life After High School",
+      "headline": "DREAM/BIG: A Father & Mentor's Guide to Life After High School",
+      "description": "A practical life after high school book and graduation gift for young adults, with guidance on financial literacy, career building, relationships, resilience, purpose, and giving back.",
+      "isbn": "9798234036643",
+      "bookFormat": "https://schema.org/Paperback",
+      "datePublished": "2026-04-03",
+      "inLanguage": "en",
+      "genre": [
+        "Self-help",
+        "Personal development",
+        "Financial literacy"
+      ],
+      "keywords": "life after high school book, graduation gift for young adults, financial literacy for teens, mentor guide for graduates, father and mentor guide",
       "author": {
         "@type": "Person",
-        "name": "Corey L. Cook"
+        "@id": "https://www.lifeafterhighschoolbook.com/#corey-cook"
       },
-      "inLanguage": "en",
-      "image": "https://lifeafterhighschoolbook.com/images/book-cover.jpg",
-      "url": "https://lifeafterhighschoolbook.com/",
+      "publisher": {
+        "@id": "https://www.lifeafterhighschoolbook.com/#cook-media"
+      },
+      "image": "https://www.lifeafterhighschoolbook.com/images/book-cover.jpg",
+      "url": "https://www.lifeafterhighschoolbook.com/",
+      "sameAs": [
+        "https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643"
+      ],
       "about": "financial literacy and life after high school",
-      "workExample": {
-        "@type": "Book",
-        "bookFormat": "https://schema.org/Paperback",
-        "isbn": "9798234036643",
-        "potentialAction": {
-          "@type": "BuyAction",
-          "target": "https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "14.99",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "url": "https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y",
-          "seller": {
-            "@type": "Organization",
-            "name": "IngramSpark"
-          }
+      "offers": {
+        "@type": "Offer",
+        "price": "14.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y",
+        "seller": {
+          "@type": "Organization",
+          "name": "IngramSpark"
         }
       }
     },
     {
+      "@type": "Organization",
+      "@id": "https://www.lifeafterhighschoolbook.com/#cook-media",
+      "name": "Cook Media LLC",
+      "url": "https://www.lifeafterhighschoolbook.com/"
+    },
+    {
       "@type": "Person",
+      "@id": "https://www.lifeafterhighschoolbook.com/#corey-cook",
       "name": "Corey L. Cook",
       "description": "Chief Operating Officer of the Erie Downtown Development Corporation, founder of LifeThruMusic, and creator of the DREAM/BIG book series."
     },
     {
       "@type": "WebSite",
-      "url": "https://lifeafterhighschoolbook.com/",
-      "name": "DREAM/BIG — Life After High School"
+      "@id": "https://www.lifeafterhighschoolbook.com/#website",
+      "url": "https://www.lifeafterhighschoolbook.com/",
+      "name": "DREAM/BIG — Life After High School",
+      "publisher": {
+        "@id": "https://www.lifeafterhighschoolbook.com/#cook-media"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.lifeafterhighschoolbook.com/#webpage",
+      "url": "https://www.lifeafterhighschoolbook.com/",
+      "name": "DREAM/BIG Book — Life After High School Guide by Corey L. Cook",
+      "description": "DREAM/BIG by Corey L. Cook is a life after high school book and graduation gift for young adults, with practical guidance on money, career, relationships, and purpose.",
+      "isPartOf": {
+        "@id": "https://www.lifeafterhighschoolbook.com/#website"
+      },
+      "about": {
+        "@id": "https://www.lifeafterhighschoolbook.com/#dream-big-book"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.lifeafterhighschoolbook.com/images/og-image.png"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.lifeafterhighschoolbook.com/#faq",
+      "url": "https://www.lifeafterhighschoolbook.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is DREAM/BIG for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DREAM/BIG is for young adults stepping into life after high school, whether they are headed to college, the workforce, entrepreneurship, service, or still figuring out what comes next. It is also written for parents, mentors, educators, and community leaders who want a practical guide to share."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is DREAM/BIG a good graduation gift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The book started as a graduation gift for Corey's children and grew into a roadmap for graduates and young adults. It is built around real decisions, financial literacy, relationships, career growth, resilience, and purpose."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I buy the book?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The best way to support the author is to buy direct through IngramSpark. DREAM/BIG is also available through major outlets, including Barnes & Noble."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What free tools are included on the website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The site includes free financial calculators and a plain-language financial literacy glossary. These tools help readers understand auto loans, mortgages, retirement savings, budgeting, credit, paychecks, FAFSA, insurance terms, and other real-world money decisions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this book only for students going to college?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. DREAM/BIG is for life after high school in every direction. College is one path, but the book also speaks to work, entrepreneurship, trades, service, family responsibility, community leadership, and personal growth."
+          }
+        }
+      ]
     }
   ]
 }
@@ -609,6 +720,7 @@
         <a href="glossary.html">Glossary</a>
       </div></div>
     </li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#newsletter">Newsletter</a></li>
     <li><a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold btn-nav" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="nav">Buy Direct</a></li>
   </ul>
@@ -747,6 +859,39 @@
     <div class="testimonial-card">
       <p class="testimonial-text">&ldquo;Finished the book today and I really enjoyed it. I liked how you talked about all the different lanes you were in and how they mixed together to get you where you are now &mdash; and speaking on where you come from. Can&rsquo;t wait for it to come out. Definitely going to recommend it to a bunch of people.&rdquo;</p>
       <p class="testimonial-author">&mdash; Billy Lucas</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <span class="section-label">Quick Answers</span>
+    <h2 class="section-title">Questions Before You Buy</h2>
+    <div class="divider"></div>
+    <p class="section-text">DREAM/BIG is a life after high school book for graduates, young adults, parents, mentors, and anyone helping the next generation make real decisions with more confidence.</p>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Who is DREAM/BIG for?</summary>
+        <p>DREAM/BIG is for young adults stepping into life after high school, whether they are headed to college, the workforce, entrepreneurship, service, or still figuring out what comes next. It is also written for parents, mentors, educators, and community leaders who want a practical guide to share.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is DREAM/BIG a good graduation gift?</summary>
+        <p>Yes. The book started as a graduation gift for Corey&rsquo;s children and grew into a roadmap for graduates and young adults. It is built around real decisions, financial literacy, relationships, career growth, resilience, and purpose.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Where can I buy the book?</summary>
+        <p>The best way to support the author is to buy direct through IngramSpark. DREAM/BIG is also available through major outlets, including Barnes &amp; Noble.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What free tools are included on the website?</summary>
+        <p>The site includes free financial calculators and a plain-language financial literacy glossary. These tools help readers understand auto loans, mortgages, retirement savings, budgeting, credit, paychecks, FAFSA, insurance terms, and other real-world money decisions.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is this book only for students going to college?</summary>
+        <p>No. DREAM/BIG is for life after high school in every direction. College is one path, but the book also speaks to work, entrepreneurship, trades, service, family responsibility, community leadership, and personal growth.</p>
+      </details>
     </div>
   </div>
 </section>
