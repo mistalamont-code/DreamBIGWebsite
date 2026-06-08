@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGYNWJQC7G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JGYNWJQC7G');
+</script>
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Visualizer — DREAM/BIG Financial Literacy Tool</title>
+<meta name="description" content="Use the DREAM/BIG Money Visualizer to see how saving early, building good credit, and avoiding minimum payments can change your financial future over time.">
+<meta property="og:title" content="Money Visualizer — DREAM/BIG">
+<meta property="og:description" content="Move the sliders and watch financial decisions change over time. A free DREAM/BIG tool for life after high school.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lifeafterhighschoolbook.com/visualizer.html">
+<meta property="og:image" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DREAM/BIG Money Visualizer for life after high school">
+<meta property="og:site_name" content="DREAM/BIG — Life After High School">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Money Visualizer — DREAM/BIG">
+<meta name="twitter:description" content="Move the sliders and watch financial decisions change over time.">
+<meta name="twitter:image" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
+<meta name="twitter:image:alt" content="DREAM/BIG Money Visualizer for life after high school">
+<link rel="canonical" href="https://www.lifeafterhighschoolbook.com/visualizer.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assistant.css">
+<script src="assistant.js" defer></script>
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --purple-deep: #0F0620;
+    --purple-dark: #1A0A2E;
+    --purple-mid: #2D1B4E;
+    --purple-card: #231340;
+    --purple-surface: #2E1A50;
+    --purple-light: #3D2766;
+    --text: #F5F5F5;
+    --text-muted: #B8A8D0;
+    --danger: #E65F5C;
+    --success: #62D2A2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--purple-deep);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 1000;
+    background: var(--gold); color: var(--purple-deep);
+    padding: .6rem 1rem; font-weight: 700; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0 2rem; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; white-space: nowrap; }
+  .nav-subtitle { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; font-style: italic; letter-spacing: 0.3px; white-space: nowrap; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 1rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > button {
+    background: none; border: none; cursor: pointer; font: inherit;
+    color: var(--gold); padding: 0; letter-spacing: 0.5px; text-transform: uppercase;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .nav-dropdown > button::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    padding-top: 12px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(15,6,32,0.98); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 0.5rem 0; min-width: 180px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
+    letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold) !important; }
+
+  .btn {
+    display: inline-block; padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; transition: all 0.3s; cursor: pointer; border: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-gold { background: var(--gold); color: var(--purple-deep); }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+  .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+  .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
+
+  section { padding: 100px 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.35rem, 5vw, 4.5rem);
+    font-weight: 900; margin-bottom: 1.5rem; line-height: 1.05;
+  }
+  .section-text { color: var(--text-muted); font-size: 1.05rem; max-width: 780px; line-height: 1.8; }
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+
+  .visualizer-hero {
+    padding-top: 145px;
+    background:
+      linear-gradient(180deg, rgba(15,6,32,0.9), rgba(15,6,32,1)),
+      url('images/erie-sunset.jpg') center center / cover no-repeat;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+  .hero-proof {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem;
+    margin-top: 3rem;
+  }
+  .proof-card {
+    background: rgba(35,19,64,0.72); border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 8px; padding: 1.25rem;
+  }
+  .proof-card strong {
+    display: block; font-family: 'Playfair Display', serif; color: var(--gold);
+    font-size: 1.7rem; line-height: 1.1; margin-bottom: 0.35rem;
+  }
+  .proof-card span { color: var(--text-muted); font-size: 0.88rem; }
+
+  .tool-shell { background: var(--purple-deep); padding-top: 70px; }
+  .tool-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.16); padding-bottom: 1rem;
+  }
+  .tool-tab {
+    padding: 11px 18px; border: 1px solid rgba(201,168,76,0.3);
+    background: transparent; color: var(--text-muted); border-radius: 4px;
+    cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 0.82rem; letter-spacing: 0.7px; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .tool-tab.active { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .tool-tab:hover:not(.active) { color: var(--gold); border-color: var(--gold); }
+  .scenario { display: none; }
+  .scenario.active { display: block; }
+  .scenario-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.16);
+    border-radius: 8px; overflow: hidden;
+  }
+  .scenario-header {
+    padding: 2rem 2.25rem; border-bottom: 1px solid rgba(201,168,76,0.12);
+    background: linear-gradient(135deg, rgba(45,27,78,0.72), rgba(15,6,32,0.86));
+  }
+  .scenario-header h2 {
+    font-family: 'Playfair Display', serif; color: var(--gold); font-size: clamp(1.75rem, 3vw, 2.6rem);
+    line-height: 1.15; margin-bottom: 0.75rem;
+  }
+  .scenario-header p { color: var(--text-muted); max-width: 780px; }
+  .scenario-body {
+    display: grid; grid-template-columns: minmax(280px, 360px) 1fr; gap: 2rem;
+    padding: 2rem 2.25rem 2.25rem; align-items: start;
+  }
+  .controls {
+    background: rgba(15,6,32,0.45); border: 1px solid rgba(201,168,76,0.13);
+    border-radius: 8px; padding: 1.25rem;
+  }
+  .control { margin-bottom: 1.35rem; }
+  .control:last-child { margin-bottom: 0; }
+  .control-row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; margin-bottom: 0.55rem; }
+  .control label {
+    color: var(--text-muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+  .control output {
+    color: var(--gold); font-weight: 800; font-size: 0.94rem; white-space: nowrap;
+  }
+  input[type="range"] {
+    width: 100%; accent-color: var(--gold); cursor: pointer;
+  }
+  .range-note { color: rgba(184,168,208,0.78); font-size: 0.78rem; margin-top: 0.35rem; }
+
+  .visual-area { min-width: 0; }
+  .metric-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+  .metric {
+    background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.16);
+    border-radius: 8px; padding: 1rem;
+  }
+  .metric-label { color: var(--text-muted); font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .metric-value {
+    font-family: 'Playfair Display', serif; color: var(--gold); font-size: clamp(1.45rem, 2.8vw, 2.2rem);
+    line-height: 1.05; font-weight: 900;
+  }
+  .metric-sub { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.35rem; }
+  .chart-card {
+    background: var(--purple-surface); border: 1px solid rgba(201,168,76,0.13);
+    border-radius: 8px; padding: 1rem;
+  }
+  .chart-title {
+    display: flex; justify-content: space-between; gap: 1rem; align-items: center;
+    color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.75rem;
+  }
+  .legend { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 999px; }
+  svg.money-chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .axis { stroke: rgba(255,255,255,0.13); stroke-width: 1; }
+  .grid-line { stroke: rgba(255,255,255,0.07); stroke-width: 1; }
+  .chart-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .chart-fill { opacity: 0.16; }
+  .chart-point { transition: transform 0.3s ease; }
+  .chart-label { fill: var(--text-muted); font-size: 12px; font-family: 'Inter', sans-serif; }
+
+  .bar-compare { display: grid; gap: 0.8rem; margin-top: 1rem; }
+  .bar-row { display: grid; grid-template-columns: 115px 1fr 105px; gap: 0.75rem; align-items: center; }
+  .bar-label { color: var(--text-muted); font-size: 0.82rem; }
+  .bar-track { height: 18px; background: rgba(15,6,32,0.65); border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); }
+  .bar-fill { height: 100%; border-radius: 999px; width: 0; transition: width 0.35s ease; }
+  .bar-value { color: var(--text); font-weight: 800; font-size: 0.88rem; text-align: right; }
+
+  .takeaway {
+    margin-top: 1.25rem; padding: 1.2rem 1.3rem;
+    background: rgba(15,6,32,0.55); border-left: 3px solid var(--gold);
+    border-radius: 6px; color: var(--text);
+  }
+  .takeaway strong { color: var(--gold); }
+  .takeaway a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid rgba(240,208,96,0.45); }
+  .takeaway a:hover { border-bottom-color: var(--gold-light); }
+
+  .path-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .path-step {
+    padding: 0.95rem; border: 1px solid rgba(201,168,76,0.14);
+    border-radius: 8px; background: rgba(15,6,32,0.35);
+  }
+  .path-step span {
+    display: block; color: var(--gold); font-weight: 900; letter-spacing: 1px;
+    margin-bottom: 0.35rem;
+  }
+  .path-step p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.55; }
+
+  footer { padding: 3rem 2rem; text-align: center; background: var(--purple-deep); border-top: 1px solid rgba(201,168,76,0.1); color: var(--text-muted); font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-legal { margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.78rem; color: var(--text-muted); text-decoration: underline; opacity: 0.7; transition: opacity 0.3s; }
+  .footer-legal a:hover { opacity: 1; color: var(--gold); }
+
+  .legal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(10px);
+    overflow-y: auto; padding: 100px 2rem 3rem;
+  }
+  .legal-overlay.active { display: block; }
+  .legal-content { max-width: 700px; margin: 0 auto; }
+  .legal-content h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1.5rem; }
+  .legal-content h3 { font-size: 1rem; color: var(--gold); margin: 1.5rem 0 0.5rem; letter-spacing: 0.5px; }
+  .legal-content p, .legal-content li { font-size: 0.9rem; color: var(--text); line-height: 1.8; opacity: 0.85; }
+  .legal-content ul { padding-left: 1.5rem; margin: 0.75rem 0; }
+  .legal-close { position: fixed; top: 2rem; right: 2rem; background: none; border: none; color: var(--gold); font-size: 2rem; cursor: pointer; z-index: 201; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
+
+  @media (max-width: 900px) {
+    .scenario-body { grid-template-columns: 1fr; }
+    .hero-proof { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr; }
+    .path-strip { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
+      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
+      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-dropdown > button::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+    section { padding: 60px 1.25rem; }
+    .visualizer-hero { padding-top: 115px; }
+    .scenario-header, .scenario-body { padding: 1.5rem; }
+    .tool-tabs { display: grid; grid-template-columns: 1fr; }
+    .bar-row { grid-template-columns: 1fr; gap: 0.35rem; }
+    .bar-value { text-align: left; }
+    .path-strip { grid-template-columns: 1fr; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DREAM/BIG Money Visualizer",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "url": "https://www.lifeafterhighschoolbook.com/visualizer.html",
+  "description": "An interactive financial literacy visualizer with sliders that show how saving early, building good credit, and avoiding minimum payments can change financial outcomes over time.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Corey L. Cook"
+  }
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-logo">DREAM/BIG</span>
+    <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#book">The Book</a></li>
+    <li class="nav-dropdown">
+      <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
+      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="calculators.html">Calculators</a>
+        <a href="visualizer.html" style="color:var(--gold);">Visualizer</a>
+        <a href="glossary.html">Glossary</a>
+      </div></div>
+    </li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold btn-nav" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="nav-visualizer">Buy Direct</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+<section class="visualizer-hero">
+  <div class="container">
+    <span class="section-label">Companion Tools</span>
+    <h1 class="section-title">See What Your Decisions Become</h1>
+    <div class="divider"></div>
+    <p class="section-text">The DREAM/BIG Money Visualizer turns financial literacy into something you can see. Move the sliders and watch how time, credit, interest, and payment choices change the future.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="#visualizer">Start Visualizing</a>
+      <a class="btn btn-outline" href="glossary.html">Look Up Money Terms</a>
+    </div>
+    <div class="hero-proof" aria-label="What this tool shows">
+      <div class="proof-card"><strong>Time</strong><span>Small savings can grow when you start early.</span></div>
+      <div class="proof-card"><strong>Credit</strong><span>The same loan can cost more with a lower score.</span></div>
+      <div class="proof-card"><strong>Debt</strong><span>Minimum payments can keep a balance alive for years.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="tool-shell" id="visualizer">
+  <div class="container">
+    <div class="tool-tabs" role="tablist" aria-label="Money visualizer scenarios">
+      <button type="button" class="tool-tab active" role="tab" aria-selected="true" aria-controls="scenario-saving" onclick="switchScenario('saving', this)">Start Early</button>
+      <button type="button" class="tool-tab" role="tab" aria-selected="false" aria-controls="scenario-credit" onclick="switchScenario('credit', this)">Credit Cost</button>
+      <button type="button" class="tool-tab" role="tab" aria-selected="false" aria-controls="scenario-debt" onclick="switchScenario('debt', this)">Debt Trap</button>
+    </div>
+
+    <article class="scenario active" id="scenario-saving">
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <h2>Start Early vs. Wait</h2>
+          <p>Saving is not only about how much you put away. It is about how long your money has to work before you need it.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="controls" aria-label="Start early controls">
+            <div class="control">
+              <div class="control-row"><label for="save-monthly">Monthly savings</label><output id="save-monthly-out">$100</output></div>
+              <input type="range" id="save-monthly" min="25" max="500" step="25" value="100" oninput="updateSaving()">
+              <p class="range-note">Even a small monthly habit has time to grow.</p>
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="save-start">Start age</label><output id="save-start-out">18</output></div>
+              <input type="range" id="save-start" min="16" max="35" step="1" value="18" oninput="updateSaving()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="save-wait">Years waited</label><output id="save-wait-out">7 years</output></div>
+              <input type="range" id="save-wait" min="1" max="20" step="1" value="7" oninput="updateSaving()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="save-growth">Annual growth</label><output id="save-growth-out">7%</output></div>
+              <input type="range" id="save-growth" min="0" max="10" step="0.5" value="7" oninput="updateSaving()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="save-end">Compare at age</label><output id="save-end-out">65</output></div>
+              <input type="range" id="save-end" min="40" max="70" step="1" value="65" oninput="updateSaving()">
+            </div>
+          </div>
+          <div class="visual-area">
+            <div class="metric-grid">
+              <div class="metric"><div class="metric-label">Start now</div><div class="metric-value" id="save-now-total" aria-live="polite">$0</div><div class="metric-sub" id="save-now-sub">By age 65</div></div>
+              <div class="metric"><div class="metric-label">Wait path</div><div class="metric-value" id="save-wait-total" aria-live="polite">$0</div><div class="metric-sub" id="save-wait-sub">Starting at age 25</div></div>
+              <div class="metric"><div class="metric-label">Time advantage</div><div class="metric-value" id="save-diff" aria-live="polite">$0</div><div class="metric-sub">Money time helped build</div></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title">
+                <span>Projected growth over time</span>
+                <div class="legend"><span><i style="background:var(--gold);"></i>Start now</span><span><i style="background:var(--danger);"></i>Wait</span></div>
+              </div>
+              <svg class="money-chart" viewBox="0 0 640 300" role="img" aria-labelledby="saving-chart-title">
+                <title id="saving-chart-title">Savings growth comparison chart</title>
+                <line class="grid-line" x1="52" y1="55" x2="610" y2="55"></line>
+                <line class="grid-line" x1="52" y1="120" x2="610" y2="120"></line>
+                <line class="grid-line" x1="52" y1="185" x2="610" y2="185"></line>
+                <line class="axis" x1="52" y1="250" x2="610" y2="250"></line>
+                <line class="axis" x1="52" y1="40" x2="52" y2="250"></line>
+                <polyline id="save-wait-line" class="chart-line" points="" stroke="var(--danger)"></polyline>
+                <polyline id="save-now-line" class="chart-line" points="" stroke="var(--gold)"></polyline>
+                <circle id="save-now-dot" class="chart-point" r="6" fill="var(--gold)" cx="52" cy="250"></circle>
+                <circle id="save-wait-dot" class="chart-point" r="6" fill="var(--danger)" cx="52" cy="250"></circle>
+                <text class="chart-label" id="save-axis-left" x="52" y="278" text-anchor="middle">18</text>
+                <text class="chart-label" id="save-axis-right" x="610" y="278" text-anchor="middle">65</text>
+                <text class="chart-label" id="save-axis-top" x="8" y="48">$0</text>
+              </svg>
+            </div>
+            <div class="takeaway" id="save-takeaway"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scenario" id="scenario-credit">
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <h2>Good Credit vs. Expensive Credit</h2>
+          <p>Your credit score is not just a report card. It changes the interest rate, the monthly payment, and the real price of the same purchase.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="controls" aria-label="Credit cost controls">
+            <div class="control">
+              <div class="control-row"><label for="credit-loan">Loan amount</label><output id="credit-loan-out">$25,000</output></div>
+              <input type="range" id="credit-loan" min="5000" max="60000" step="1000" value="25000" oninput="updateCredit()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="credit-term">Loan term</label><output id="credit-term-out">5 years</output></div>
+              <input type="range" id="credit-term" min="2" max="7" step="1" value="5" oninput="updateCredit()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="credit-score">Credit score</label><output id="credit-score-out">620</output></div>
+              <input type="range" id="credit-score" min="520" max="820" step="10" value="620" oninput="updateCredit()">
+              <p class="range-note">This compares your selected score to a strong 760 score.</p>
+            </div>
+          </div>
+          <div class="visual-area">
+            <div class="metric-grid">
+              <div class="metric"><div class="metric-label">Selected score rate</div><div class="metric-value" id="credit-rate">0%</div><div class="metric-sub" id="credit-rating">Fair</div></div>
+              <div class="metric"><div class="metric-label">Extra interest</div><div class="metric-value" id="credit-extra" aria-live="polite">$0</div><div class="metric-sub">Compared with strong credit</div></div>
+              <div class="metric"><div class="metric-label">Monthly difference</div><div class="metric-value" id="credit-monthly-diff" aria-live="polite">$0</div><div class="metric-sub">Same purchase, different score</div></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title"><span>Total interest paid</span><div class="legend"><span><i style="background:var(--gold);"></i>Strong credit</span><span><i style="background:var(--danger);"></i>Selected score</span></div></div>
+              <div class="bar-compare">
+                <div class="bar-row">
+                  <div class="bar-label">Strong credit</div>
+                  <div class="bar-track"><div class="bar-fill" id="credit-good-bar" style="background:var(--gold);"></div></div>
+                  <div class="bar-value" id="credit-good-interest">$0</div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-label">Selected score</div>
+                  <div class="bar-track"><div class="bar-fill" id="credit-selected-bar" style="background:var(--danger);"></div></div>
+                  <div class="bar-value" id="credit-selected-interest">$0</div>
+                </div>
+              </div>
+            </div>
+            <div class="path-strip">
+              <div class="path-step"><span id="credit-good-monthly">$0/mo</span><p>Payment with a 760 score.</p></div>
+              <div class="path-step"><span id="credit-selected-monthly">$0/mo</span><p>Payment with your selected score.</p></div>
+              <div class="path-step"><span id="credit-good-total">$0</span><p>Total paid with strong credit.</p></div>
+              <div class="path-step"><span id="credit-selected-total">$0</span><p>Total paid with selected score.</p></div>
+            </div>
+            <div class="takeaway" id="credit-takeaway"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scenario" id="scenario-debt">
+      <div class="scenario-card">
+        <div class="scenario-header">
+          <h2>The Minimum Payment Trap</h2>
+          <p>Credit card debt gets dangerous when the payment barely beats the interest. This shows how long a balance can follow you.</p>
+        </div>
+        <div class="scenario-body">
+          <div class="controls" aria-label="Debt trap controls">
+            <div class="control">
+              <div class="control-row"><label for="debt-balance">Card balance</label><output id="debt-balance-out">$3,000</output></div>
+              <input type="range" id="debt-balance" min="500" max="10000" step="250" value="3000" oninput="updateDebt()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="debt-apr">APR</label><output id="debt-apr-out">22%</output></div>
+              <input type="range" id="debt-apr" min="10" max="35" step="0.5" value="22" oninput="updateDebt()">
+            </div>
+            <div class="control">
+              <div class="control-row"><label for="debt-payment">Monthly payment</label><output id="debt-payment-out">$75</output></div>
+              <input type="range" id="debt-payment" min="25" max="500" step="25" value="75" oninput="updateDebt()">
+              <p class="range-note">Try raising this by $50 and watch the years change.</p>
+            </div>
+          </div>
+          <div class="visual-area">
+            <div class="metric-grid">
+              <div class="metric"><div class="metric-label">Payoff time</div><div class="metric-value" id="debt-time" aria-live="polite">0 mo</div><div class="metric-sub">If you keep this payment</div></div>
+              <div class="metric"><div class="metric-label">Interest paid</div><div class="metric-value" id="debt-interest" aria-live="polite">$0</div><div class="metric-sub">Money that does not lower the balance</div></div>
+              <div class="metric"><div class="metric-label">Add $50/month</div><div class="metric-value" id="debt-fifty" aria-live="polite">$0</div><div class="metric-sub">Interest you could avoid</div></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-title"><span>Balance falling over time</span><div class="legend"><span><i style="background:var(--gold);"></i>Remaining balance</span></div></div>
+              <svg class="money-chart" viewBox="0 0 640 300" role="img" aria-labelledby="debt-chart-title">
+                <title id="debt-chart-title">Credit card balance payoff chart</title>
+                <line class="grid-line" x1="52" y1="55" x2="610" y2="55"></line>
+                <line class="grid-line" x1="52" y1="120" x2="610" y2="120"></line>
+                <line class="grid-line" x1="52" y1="185" x2="610" y2="185"></line>
+                <line class="axis" x1="52" y1="250" x2="610" y2="250"></line>
+                <line class="axis" x1="52" y1="40" x2="52" y2="250"></line>
+                <polygon id="debt-fill" class="chart-fill" points="" fill="var(--gold)"></polygon>
+                <polyline id="debt-line" class="chart-line" points="" stroke="var(--gold)"></polyline>
+                <circle id="debt-dot" class="chart-point" r="6" fill="var(--gold)" cx="52" cy="250"></circle>
+                <text class="chart-label" id="debt-axis-left" x="52" y="278" text-anchor="middle">Now</text>
+                <text class="chart-label" id="debt-axis-right" x="610" y="278" text-anchor="middle">Paid off</text>
+                <text class="chart-label" id="debt-axis-top" x="8" y="48">$0</text>
+              </svg>
+            </div>
+            <div class="takeaway" id="debt-takeaway"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
+  <p>&copy; 2026 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
+  <p style="margin-top:0.5rem;"><a href="mailto:corey@cook-media.com">Contact</a></p>
+  <div class="footer-legal">
+    <a href="#" onclick="event.preventDefault(); openLegal('privacy');">Privacy Policy</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('terms');">Terms of Use</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('accessibility');">Accessibility</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('dmca');">DMCA Notice</a>
+  </div>
+</footer>
+
+<div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
+  <button type="button" class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-privacy-title">Privacy Policy</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Who We Are</h3>
+    <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit lifeafterhighschoolbook.com.</p>
+    <h3>What We Collect</h3>
+    <p>The Money Visualizer and financial calculators run in your browser. We do not collect, store, or transmit the numbers you enter into these tools. Newsletter subscriptions are processed by Kit.</p>
+    <h3>Analytics</h3>
+    <p>This site uses Google Analytics and Vercel Web Analytics to understand site traffic and improve the experience. Analytics data may include pages visited, device type, browser, approximate location, and referring website.</p>
+    <h3>Contact</h3>
+    <p>Questions about this policy? Email <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
+  <button type="button" class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-terms-title">Terms of Use</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Educational Purpose</h3>
+    <p>The Money Visualizer is for general education only. It shows estimates based on the values you enter and simplified formulas. It is not professional financial, investment, tax, credit, or legal advice.</p>
+    <h3>Financial Tool Disclaimer</h3>
+    <p>Actual loan terms, investment returns, credit offers, taxes, fees, insurance, and repayment outcomes can vary. Always review real offers carefully and talk with a qualified professional before making major financial decisions.</p>
+    <h3>Intellectual Property</h3>
+    <p>All original content on this site, including the DREAM/BIG framework and tool design, belongs to Corey L. Cook and Cook Media LLC.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
+  <button type="button" class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-accessibility-title">Accessibility Statement</h2>
+    <p><em>Last updated: 2026</em></p>
+    <p>Corey L. Cook and Cook Media LLC are committed to making this website accessible. The Money Visualizer uses labeled sliders, text-based results, keyboard-accessible controls, and responsive layouts.</p>
+    <p>If you encounter an accessibility barrier, email <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
+  <button type="button" class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-dmca-title">DMCA Notice</h2>
+    <p><em>Last updated: 2026</em></p>
+    <p>All original content on this website is protected by copyright. To report a copyright concern, contact Corey L. Cook at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<script>
+function toggleNav(btn) {
+  const links = document.querySelector('.nav-links');
+  const open = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+function toggleToolsMenu(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  const menu = btn.nextElementSibling;
+  if (menu) menu.style.display = expanded ? '' : 'block';
+}
+
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.nav-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    const btn = dd.querySelector('button[aria-haspopup]');
+    const menu = dd.querySelector('.nav-dropdown-menu');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (menu) menu.style.display = '';
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.legal-overlay.active').forEach(function(modal) { modal.classList.remove('active'); });
+    const btn = document.querySelector('.nav-dropdown button[aria-haspopup]');
+    const menu = document.querySelector('.nav-dropdown-menu');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (menu) menu.style.display = '';
+  }
+});
+
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('open');
+    const toggle = document.querySelector('.nav-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+function openLegal(type) {
+  const overlay = document.getElementById('legal-' + type);
+  if (overlay) overlay.classList.add('active');
+}
+function closeLegal(type) {
+  const overlay = document.getElementById('legal-' + type);
+  if (overlay) overlay.classList.remove('active');
+}
+
+(function() {
+  document.querySelectorAll('[data-buy-link]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      try {
+        var retailer = link.getAttribute('data-buy-link') || 'unknown';
+        var location = link.getAttribute('data-buy-location') || 'unknown';
+        if (window.va) window.va('event', { name: 'Buy Direct Click', data: { retailer: retailer, location: location } });
+        if (window.gtag) window.gtag('event', 'buy_direct_click', { event_category: 'purchase', event_label: retailer + ':' + location });
+      } catch (err) {}
+    });
+  });
+})();
+
+const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+function fmtMoney(value) { return currency.format(Math.round(value || 0)); }
+function fmtPercent(value) { return Number(value).toFixed(value % 1 === 0 ? 0 : 1) + '%'; }
+function getNumber(id) { return Number(document.getElementById(id).value); }
+function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+
+function switchScenario(name, btn) {
+  document.querySelectorAll('.scenario').forEach(function(panel) { panel.classList.remove('active'); });
+  document.querySelectorAll('.tool-tab').forEach(function(tab) { tab.classList.remove('active'); tab.setAttribute('aria-selected', 'false'); });
+  document.getElementById('scenario-' + name).classList.add('active');
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+}
+
+function futureValueMonthly(monthly, annualRate, months) {
+  const rate = annualRate / 100 / 12;
+  if (months <= 0) return 0;
+  if (rate === 0) return monthly * months;
+  return monthly * ((Math.pow(1 + rate, months) - 1) / rate);
+}
+
+function savingsSeries(monthly, annualRate, startAge, waitStartAge, endAge) {
+  const values = [];
+  let now = 0;
+  let wait = 0;
+  const monthlyRate = annualRate / 100 / 12;
+  for (let age = startAge; age <= endAge; age++) {
+    if (age > startAge) {
+      for (let m = 0; m < 12; m++) {
+        now = now * (1 + monthlyRate) + monthly;
+        wait = wait * (1 + monthlyRate) + (age - 1 >= waitStartAge ? monthly : 0);
+      }
+    }
+    values.push({ age: age, now: now, wait: wait });
+  }
+  return values;
+}
+
+function makePoints(values, key, maxValue) {
+  const left = 52, right = 610, top = 40, bottom = 250;
+  const width = right - left;
+  const height = bottom - top;
+  const count = Math.max(values.length - 1, 1);
+  return values.map(function(item, index) {
+    const x = left + (index / count) * width;
+    const y = bottom - ((item[key] || 0) / maxValue) * height;
+    return x.toFixed(1) + ',' + Math.max(top, Math.min(bottom, y)).toFixed(1);
+  }).join(' ');
+}
+
+function updateSaving() {
+  const monthly = getNumber('save-monthly');
+  const startAge = getNumber('save-start');
+  const waitYears = getNumber('save-wait');
+  const growth = getNumber('save-growth');
+  const endAge = Math.max(getNumber('save-end'), startAge + 1);
+  const waitStartAge = Math.min(startAge + waitYears, endAge);
+  const monthsNow = Math.max((endAge - startAge) * 12, 0);
+  const monthsWait = Math.max((endAge - waitStartAge) * 12, 0);
+  const nowTotal = futureValueMonthly(monthly, growth, monthsNow);
+  const waitTotal = futureValueMonthly(monthly, growth, monthsWait);
+  const diff = nowTotal - waitTotal;
+  const series = savingsSeries(monthly, growth, startAge, waitStartAge, endAge);
+  const maxValue = Math.max(nowTotal, waitTotal, 1);
+
+  setText('save-monthly-out', fmtMoney(monthly));
+  setText('save-start-out', startAge);
+  setText('save-wait-out', waitYears + (waitYears === 1 ? ' year' : ' years'));
+  setText('save-growth-out', fmtPercent(growth));
+  setText('save-end-out', endAge);
+  setText('save-now-total', fmtMoney(nowTotal));
+  setText('save-wait-total', fmtMoney(waitTotal));
+  setText('save-diff', fmtMoney(diff));
+  setText('save-now-sub', 'By age ' + endAge);
+  setText('save-wait-sub', 'Starting at age ' + waitStartAge);
+  setText('save-axis-left', startAge);
+  setText('save-axis-right', endAge);
+  setText('save-axis-top', fmtMoney(maxValue));
+
+  const nowPoints = makePoints(series, 'now', maxValue);
+  const waitPoints = makePoints(series, 'wait', maxValue);
+  document.getElementById('save-now-line').setAttribute('points', nowPoints);
+  document.getElementById('save-wait-line').setAttribute('points', waitPoints);
+  const nowLast = nowPoints.split(' ').pop().split(',');
+  const waitLast = waitPoints.split(' ').pop().split(',');
+  document.getElementById('save-now-dot').setAttribute('cx', nowLast[0]);
+  document.getElementById('save-now-dot').setAttribute('cy', nowLast[1]);
+  document.getElementById('save-wait-dot').setAttribute('cx', waitLast[0]);
+  document.getElementById('save-wait-dot').setAttribute('cy', waitLast[1]);
+  setText('save-takeaway', '');
+  document.getElementById('save-takeaway').innerHTML = '<strong>Takeaway:</strong> Starting ' + waitYears + ' years earlier adds about <strong>' + fmtMoney(diff) + '</strong> by age ' + endAge + '. That is <a href="glossary.html">compound interest</a> doing work you do not have to do later.';
+}
+
+function rateFromScore(score) {
+  if (score >= 780) return 5.2;
+  if (score >= 740) return 6.1;
+  if (score >= 700) return 7.4;
+  if (score >= 660) return 9.9;
+  if (score >= 620) return 13.5;
+  if (score >= 580) return 17.8;
+  return 22.5;
+}
+
+function creditRating(score) {
+  if (score >= 740) return 'Strong';
+  if (score >= 700) return 'Good';
+  if (score >= 660) return 'Fair';
+  if (score >= 620) return 'Needs work';
+  return 'Expensive';
+}
+
+function loanPayment(principal, annualRate, years) {
+  const months = years * 12;
+  const r = annualRate / 100 / 12;
+  if (r === 0) return principal / months;
+  return principal * (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+}
+
+function updateCredit() {
+  const amount = getNumber('credit-loan');
+  const years = getNumber('credit-term');
+  const score = getNumber('credit-score');
+  const selectedRate = rateFromScore(score);
+  const strongRate = rateFromScore(760);
+  const selectedMonthly = loanPayment(amount, selectedRate, years);
+  const strongMonthly = loanPayment(amount, strongRate, years);
+  const selectedTotal = selectedMonthly * years * 12;
+  const strongTotal = strongMonthly * years * 12;
+  const selectedInterest = selectedTotal - amount;
+  const strongInterest = strongTotal - amount;
+  const extraInterest = selectedInterest - strongInterest;
+  const monthlyDiff = selectedMonthly - strongMonthly;
+  const maxInterest = Math.max(selectedInterest, strongInterest, 1);
+
+  setText('credit-loan-out', fmtMoney(amount));
+  setText('credit-term-out', years + (years === 1 ? ' year' : ' years'));
+  setText('credit-score-out', score);
+  setText('credit-rate', fmtPercent(selectedRate));
+  setText('credit-rating', creditRating(score) + ' credit');
+  setText('credit-extra', fmtMoney(Math.abs(extraInterest)));
+  setText('credit-monthly-diff', fmtMoney(Math.abs(monthlyDiff)));
+  setText('credit-good-interest', fmtMoney(strongInterest));
+  setText('credit-selected-interest', fmtMoney(selectedInterest));
+  setText('credit-good-monthly', fmtMoney(strongMonthly) + '/mo');
+  setText('credit-selected-monthly', fmtMoney(selectedMonthly) + '/mo');
+  setText('credit-good-total', fmtMoney(strongTotal));
+  setText('credit-selected-total', fmtMoney(selectedTotal));
+  document.getElementById('credit-good-bar').style.width = Math.max(5, (strongInterest / maxInterest) * 100) + '%';
+  document.getElementById('credit-selected-bar').style.width = Math.max(5, (selectedInterest / maxInterest) * 100) + '%';
+
+  const phrase = extraInterest >= 0
+    ? 'This selected score would add about <strong>' + fmtMoney(extraInterest) + '</strong> in interest compared with strong credit.'
+    : 'This selected score is already strong enough to save about <strong>' + fmtMoney(Math.abs(extraInterest)) + '</strong> compared with the 760 baseline.';
+  document.getElementById('credit-takeaway').innerHTML = '<strong>Takeaway:</strong> ' + phrase + ' A <a href="glossary.html">credit score</a> changes the real price of the same thing.';
+}
+
+function payoff(balance, apr, payment) {
+  const monthlyRate = apr / 100 / 12;
+  let current = balance;
+  let totalPaid = 0;
+  const values = [{ month: 0, balance: current }];
+  for (let month = 1; month <= 600; month++) {
+    const interest = current * monthlyRate;
+    if (payment <= interest && current > 1) return { stuck: true, months: Infinity, totalPaid: Infinity, interestPaid: Infinity, values: values };
+    current += interest;
+    const paid = Math.min(payment, current);
+    current -= paid;
+    totalPaid += paid;
+    if (month % 3 === 0 || current <= 0) values.push({ month: month, balance: Math.max(current, 0) });
+    if (current <= 0.01) return { stuck: false, months: month, totalPaid: totalPaid, interestPaid: totalPaid - balance, values: values };
+  }
+  return { stuck: true, months: Infinity, totalPaid: Infinity, interestPaid: Infinity, values: values };
+}
+
+function formatMonths(months) {
+  if (!Number.isFinite(months)) return 'Stuck';
+  if (months < 12) return months + ' mo';
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  return years + ' yr' + (years === 1 ? '' : 's') + (rem ? ' ' + rem + ' mo' : '');
+}
+
+function updateDebtChart(values, maxBalance) {
+  const left = 52, right = 610, top = 40, bottom = 250;
+  const width = right - left;
+  const height = bottom - top;
+  const count = Math.max(values.length - 1, 1);
+  const points = values.map(function(item, index) {
+    const x = left + (index / count) * width;
+    const y = bottom - ((item.balance || 0) / maxBalance) * height;
+    return x.toFixed(1) + ',' + Math.max(top, Math.min(bottom, y)).toFixed(1);
+  });
+  document.getElementById('debt-line').setAttribute('points', points.join(' '));
+  document.getElementById('debt-fill').setAttribute('points', points.join(' ') + ' ' + right + ',' + bottom + ' ' + left + ',' + bottom);
+  const last = points[points.length - 1].split(',');
+  document.getElementById('debt-dot').setAttribute('cx', last[0]);
+  document.getElementById('debt-dot').setAttribute('cy', last[1]);
+}
+
+function updateDebt() {
+  const balance = getNumber('debt-balance');
+  const apr = getNumber('debt-apr');
+  const payment = getNumber('debt-payment');
+  const result = payoff(balance, apr, payment);
+  const better = payoff(balance, apr, payment + 50);
+  const saved = result.stuck || better.stuck ? 0 : result.interestPaid - better.interestPaid;
+
+  setText('debt-balance-out', fmtMoney(balance));
+  setText('debt-apr-out', fmtPercent(apr));
+  setText('debt-payment-out', fmtMoney(payment));
+  setText('debt-time', formatMonths(result.months));
+  setText('debt-interest', result.stuck ? 'Still growing' : fmtMoney(result.interestPaid));
+  setText('debt-fifty', result.stuck ? 'Try more' : fmtMoney(Math.max(saved, 0)));
+  setText('debt-axis-top', fmtMoney(balance));
+  setText('debt-axis-right', result.stuck ? '600+ mo' : formatMonths(result.months));
+  updateDebtChart(result.values, balance);
+
+  if (result.stuck) {
+    document.getElementById('debt-takeaway').innerHTML = '<strong>Takeaway:</strong> This payment is too low for this APR. The balance barely moves because interest keeps catching up. Raise the payment or lower the <a href="glossary.html">APR</a>.';
+  } else {
+    document.getElementById('debt-takeaway').innerHTML = '<strong>Takeaway:</strong> At this pace, the card takes <strong>' + formatMonths(result.months) + '</strong> and costs about <strong>' + fmtMoney(result.interestPaid) + '</strong> in interest. Adding $50/month could avoid about <strong>' + fmtMoney(Math.max(saved, 0)) + '</strong>.';
+  }
+}
+
+function updateAll() {
+  updateSaving();
+  updateCredit();
+  updateDebt();
+}
+
+updateAll();
+</script>
+</body>
+</html>

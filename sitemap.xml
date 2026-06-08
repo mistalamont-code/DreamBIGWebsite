@@ -2,17 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.lifeafterhighschoolbook.com/</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.lifeafterhighschoolbook.com/calculators.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.lifeafterhighschoolbook.com/visualizer.html</loc>
+    <lastmod>2026-06-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.lifeafterhighschoolbook.com/glossary.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>
