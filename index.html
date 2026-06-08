@@ -223,7 +223,7 @@
   }
   .about-content { text-align: center; }
   .about-content .section-label, .about-content .section-title { text-align: center; }
-  .about-content .divider { margin: 1.5rem auto; }
+  .about-content .divider { margin: 1.25rem auto 2rem; }
   .about-content .section-text { margin: 0 auto 1.5rem; text-align: center; }
   .about-stats {
     display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem;
@@ -501,7 +501,8 @@
   .legal-close:hover { background: var(--purple-light); }
 
   /* DIVIDER */
-  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+  .divider { width: 112px; height: 3px; background: var(--gold); margin: 1.25rem 0 2rem; }
+  .testimonials .divider, .newsletter .divider { margin-left: auto; margin-right: auto; }
 
   /* RESPONSIVE — TABLET */
   @media (max-width: 1024px) {
@@ -525,6 +526,7 @@
     .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
     .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
     section { padding: 60px 1.25rem; }
+    .divider { width: 86px; height: 3px; margin-top: 1rem; margin-bottom: 1.75rem; }
 
     /* Hero */
     .hero { padding: 130px 1.25rem 50px; min-height: auto; }
@@ -872,7 +874,7 @@
   <div class="container">
     <span class="section-label">Early Readers</span>
     <h2 class="section-title">What People Are Saying</h2>
-    <div class="divider" style="margin:1.5rem auto;"></div>
+    <div class="divider"></div>
     <div class="testimonial-card">
       <p class="testimonial-text">&ldquo;Finished the book today and I really enjoyed it. I liked how you talked about all the different lanes you were in and how they mixed together to get you where you are now &mdash; and speaking on where you come from. Can&rsquo;t wait for it to come out. Definitely going to recommend it to a bunch of people.&rdquo;</p>
       <p class="testimonial-author">&mdash; Billy Lucas</p>
@@ -918,7 +920,7 @@
   <div class="container" style="max-width:700px;">
     <span class="section-label">Stay Connected</span>
     <h2 class="section-title">Small Steps. Big Updates.</h2>
-    <div class="divider" style="margin:1.5rem auto;"></div>
+    <div class="divider"></div>
     <p class="section-text" style="margin:0 auto; text-align:center;">I&rsquo;m still on this journey, and I want to bring you along. Sign up for the newsletter and you&rsquo;ll get updates on new content, speaking events, financial tips, and stories from the DREAM/BIG community. No spam. No fluff. Just real talk delivered to your inbox.</p>
     <form class="newsletter-form" action="https://app.kit.com/forms/9524836/subscriptions" method="post" target="_blank" data-sv-form="9524836" data-uid="f072ec22ce" data-format="inline" data-version="5">
       <input type="email" name="email_address" placeholder="Your email address" aria-label="Your email address" required>
