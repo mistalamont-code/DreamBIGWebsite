@@ -225,11 +225,23 @@
   .about-content .section-label, .about-content .section-title { text-align: center; }
   .about-content .divider { margin: 1.5rem auto; }
   .about-content .section-text { margin: 0 auto 1.5rem; text-align: center; }
-  .about-stats { display: flex; flex-wrap: wrap; gap: 1.75rem; margin-top: 2rem; justify-content: center; align-items: flex-end; }
-  .stat { text-align: center; flex: 1 1 130px; max-width: 170px; }
-  .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-weight: 700; min-height: 2.5rem; display: flex; align-items: flex-end; justify-content: center; }
-  .stat-number[data-stat-value] { min-width: 4.2ch; font-variant-numeric: lining-nums tabular-nums; }
-  .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem;
+    max-width: 1000px; margin: 2rem auto 0; align-items: start;
+  }
+  .stat { text-align: center; min-width: 0; }
+  .stat-number {
+    font-family: 'Playfair Display', serif; font-size: 2.15rem; color: var(--gold); font-weight: 700;
+    min-height: 4.75rem; display: flex; align-items: center; justify-content: center;
+    line-height: 1; text-align: center;
+  }
+  .stat-number[data-stat-value] { font-variant-numeric: lining-nums tabular-nums; }
+  .stat-number.stat-wordmark { font-size: 1.35rem; line-height: 1.16; }
+  .stat-label {
+    min-height: 3.2rem; display: flex; align-items: flex-start; justify-content: center;
+    font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
+    line-height: 1.5; text-wrap: balance;
+  }
 
   /* BOOK SECTION */
   .book-section {
@@ -523,8 +535,10 @@
     /* About */
     .about-headshot { width: 160px; height: 160px; }
     .about-headline { font-size: 1.3rem; }
-    .about-stats { flex-wrap: wrap; gap: 1.5rem; }
-    .stat-number { font-size: 1.5rem; }
+    .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
+    .stat-number { min-height: 3.9rem; font-size: 1.55rem; }
+    .stat-number.stat-wordmark { font-size: 1.1rem; }
+    .stat-label { min-height: 2.8rem; font-size: 0.68rem; }
 
     /* Book */
     .feature-card { flex-direction: column; gap: 0.75rem; }
@@ -546,7 +560,8 @@
     section { padding: 50px 1rem; }
     .hero { padding: 115px 1rem 45px; }
     .hero-quote { font-size: 0.9rem; }
-    .stat-number { font-size: 1.3rem; }
+    .stat-number { font-size: 1.35rem; }
+    .stat-number.stat-wordmark { font-size: 1rem; }
     .about-headshot { width: 130px; height: 130px; }
     .section-text { font-size: 0.95rem; }
     .testimonial-card { padding: 1.5rem 1.25rem; }
@@ -766,7 +781,7 @@
           <div class="stat"><div class="stat-number" data-stat-prefix="$" data-stat-value="150" data-stat-suffix="M" aria-label="$150 million">$150M</div><div class="stat-label">Development Portfolio</div></div>
           <div class="stat"><div class="stat-number" data-stat-value="16" data-stat-suffix="+" aria-label="16 plus years">16+</div><div class="stat-label">Years at UPS</div></div>
           <div class="stat"><div class="stat-number" data-stat-value="20" data-stat-suffix="+" aria-label="20 plus years mentoring young people">20+</div><div class="stat-label">Years Mentoring Young People</div></div>
-          <div class="stat"><div class="stat-number" style="font-size:1.25rem; line-height:1.2;">Good Morning<br>America</div><div class="stat-label">Featured On</div></div>
+          <div class="stat"><div class="stat-number stat-wordmark">Good Morning<br>America</div><div class="stat-label">Featured On</div></div>
         </div>
       </div>
     </div>
