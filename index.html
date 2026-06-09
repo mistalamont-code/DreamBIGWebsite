@@ -243,6 +243,36 @@
     line-height: 1.5; text-wrap: balance;
   }
 
+  /* ORIGIN SECTION */
+  .origin-section {
+    min-height: 560px; display: flex; align-items: center; position: relative; overflow: hidden;
+    padding: 120px 2rem;
+    background-color: var(--purple-deep);
+    background-image:
+      linear-gradient(90deg, rgba(15,6,32,0.96) 0%, rgba(15,6,32,0.82) 43%, rgba(15,6,32,0.34) 100%),
+      linear-gradient(180deg, rgba(15,6,32,0.18) 0%, rgba(15,6,32,0.08) 52%, rgba(15,6,32,0.88) 100%),
+      url('images/reed-e6-street.jpg');
+    background-image:
+      linear-gradient(90deg, rgba(15,6,32,0.96) 0%, rgba(15,6,32,0.82) 43%, rgba(15,6,32,0.34) 100%),
+      linear-gradient(180deg, rgba(15,6,32,0.18) 0%, rgba(15,6,32,0.08) 52%, rgba(15,6,32,0.88) 100%),
+      image-set(url('images/reed-e6-street.webp') type('image/webp'), url('images/reed-e6-street.jpg') type('image/jpeg'));
+    background-size: cover;
+    background-position: center 44%;
+    background-repeat: no-repeat;
+  }
+  .origin-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, var(--purple-deep) 0%, transparent 18%, transparent 72%, var(--purple-deep) 100%);
+    pointer-events: none;
+  }
+  .origin-content { max-width: 660px; position: relative; z-index: 1; }
+  .origin-content .section-title { max-width: 650px; }
+  .origin-content .section-text { max-width: 610px; color: rgba(245,245,245,0.86); }
+  .origin-photo-caption {
+    margin-top: 2rem; color: var(--gold); font-size: 0.78rem; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 700;
+  }
+
   /* BOOK SECTION */
   .book-section {
     background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
@@ -542,6 +572,19 @@
     .stat-number.stat-wordmark { font-size: 1.1rem; }
     .stat-label { min-height: 2.8rem; font-size: 0.68rem; }
 
+    /* Origin */
+    .origin-section {
+      min-height: 560px; padding: 90px 1.25rem;
+      background-image:
+        linear-gradient(180deg, rgba(15,6,32,0.9) 0%, rgba(15,6,32,0.7) 44%, rgba(15,6,32,0.94) 100%),
+        url('images/reed-e6-street.jpg');
+      background-image:
+        linear-gradient(180deg, rgba(15,6,32,0.9) 0%, rgba(15,6,32,0.7) 44%, rgba(15,6,32,0.94) 100%),
+        image-set(url('images/reed-e6-street.webp') type('image/webp'), url('images/reed-e6-street.jpg') type('image/jpeg'));
+      background-position: center center;
+    }
+    .origin-content .section-text { color: rgba(245,245,245,0.88); }
+
     /* Book */
     .feature-card { flex-direction: column; gap: 0.75rem; }
     .feature-letter { font-size: 2rem; }
@@ -786,6 +829,19 @@
           <div class="stat"><div class="stat-number stat-wordmark">Good Morning<br>America</div><div class="stat-label">Featured On</div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section class="origin-section" id="origin" aria-label="Street signs at East 6th and Reed Street in Erie, Pennsylvania">
+  <div class="container">
+    <div class="origin-content">
+      <span class="section-label">Where It Started</span>
+      <h2 class="section-title">The roadmap started here.</h2>
+      <div class="divider"></div>
+      <p class="section-text">East 6th and Reed Street, on Erie&rsquo;s Lower East Side, is part of my story. DREAM/BIG carries the lessons I learned growing up there, then turns them into a roadmap for the next young person trying to see what is possible.</p>
+      <p class="origin-photo-caption">Lower East Side, Erie, PA</p>
     </div>
   </div>
 </section>
