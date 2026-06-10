@@ -59,17 +59,25 @@
   }
 
   function suggestionsForPage() {
-    if (pageKind() === 'glossary') {
+    var kind = pageKind();
+    if (kind === 'glossary') {
       return [
         'Explain APR in plain English',
         'What is compound interest?',
         'How do I start building credit?'
       ];
     }
+    if (kind === 'calculators') {
+      return [
+        'Explain my calculator result',
+        'How can I lower interest?',
+        'What does credit utilization mean?'
+      ];
+    }
     return [
-      'Explain my calculator result',
-      'How can I lower interest?',
-      'What does credit utilization mean?'
+      'What is the DREAM/BIG framework?',
+      'What should I do with my first paycheck?',
+      'How do I start building credit?'
     ];
   }
 
