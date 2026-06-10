@@ -1,7 +1,8 @@
 .ai-assistant-toggle {
   position: fixed;
   right: 1.25rem;
-  bottom: 1.25rem;
+  /* --calc-banner-offset lifts the toggle above the homepage calculator banner */
+  bottom: calc(1.25rem + var(--calc-banner-offset, 0px));
   z-index: 141;
   display: inline-flex;
   align-items: center;
@@ -16,7 +17,7 @@
   font: 700 0.78rem/1 'Inter', sans-serif;
   letter-spacing: 0.7px;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, bottom 0.4s ease;
 }
 
 .ai-assistant-toggle:hover {
@@ -39,7 +40,7 @@
 .ai-assistant-panel {
   position: fixed;
   right: 1.25rem;
-  bottom: 5rem;
+  bottom: calc(5rem + var(--calc-banner-offset, 0px));
   z-index: 140;
   width: min(390px, calc(100vw - 2rem));
   max-height: min(640px, calc(100vh - 7rem));
@@ -202,13 +203,13 @@
 @media (max-width: 560px) {
   .ai-assistant-toggle {
     right: 1rem;
-    bottom: 1rem;
+    bottom: calc(1rem + var(--calc-banner-offset, 0px));
     padding: 0.78rem 0.9rem;
   }
 
   .ai-assistant-panel {
     right: 1rem;
-    bottom: 4.65rem;
+    bottom: calc(4.65rem + var(--calc-banner-offset, 0px));
     width: calc(100vw - 2rem);
     max-height: calc(100vh - 6rem);
   }

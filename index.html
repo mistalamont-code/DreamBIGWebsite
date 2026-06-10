@@ -1402,6 +1402,7 @@ document.addEventListener('keydown', function(e) {
     if (!document.getElementById('calc-banner')) return;
     banner.style.transform = 'translateY(0)';
     document.body.style.paddingBottom = banner.offsetHeight + 'px';
+    document.documentElement.style.setProperty('--calc-banner-offset', banner.offsetHeight + 'px');
     window.removeEventListener('scroll', maybeShowBanner);
   }
   function maybeShowBanner() {
@@ -1416,6 +1417,7 @@ function dismissCalcBanner() {
   var b = document.getElementById('calc-banner');
   b.style.transform = 'translateY(100%)';
   document.body.style.paddingBottom = '';
+  document.documentElement.style.setProperty('--calc-banner-offset', '0px');
   sessionStorage.setItem('calcBannerDismissed', '1');
   setTimeout(function() { b.remove(); }, 400);
 }
