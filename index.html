@@ -168,7 +168,19 @@
   .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
   .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
   .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
-  .btn-retailer { padding: 12px 24px; font-size: 0.78rem; min-width: 170px; text-align: center; }
+  .btn-retailer {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+    padding: 12px 24px; font-size: 0.78rem; min-width: 170px; text-align: center;
+  }
+  .retailer-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.45rem; height: 1.45rem; flex: 0 0 1.45rem;
+    border-radius: 999px; background: var(--gold); color: var(--purple-deep);
+    font-weight: 900; line-height: 1; letter-spacing: 0; text-transform: none;
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.35);
+  }
+  .retailer-mark-amazon { font-family: Arial, Helvetica, sans-serif; font-size: 1rem; padding-bottom: 1px; }
+  .retailer-mark-bn { font-family: 'Inter', sans-serif; font-size: 0.58rem; }
   .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
   .nav-links .btn-gold:hover { color: var(--purple-deep); }
   .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
@@ -573,6 +585,7 @@
     .hero-cta .btn { width: 100%; max-width: 280px; text-align: center; }
     .retailer-actions { flex-direction: column; align-items: center; }
     .retailer-actions .btn { width: 100%; max-width: 280px; text-align: center; }
+    .btn-retailer { min-width: 0; }
 
     /* About */
     .about-headshot { width: 160px; height: 160px; }
@@ -815,8 +828,8 @@
     </div>
     <p class="purchase-note">Best way to support the author. Ships through IngramSpark. Also available through major retailers.</p>
     <div class="retailer-actions" aria-label="Retailer purchase options">
-      <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="hero-retailer">Amazon</a>
-      <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="hero-retailer">Barnes &amp; Noble</a>
+      <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="hero-retailer"><span class="retailer-mark retailer-mark-amazon" aria-hidden="true">a</span><span>Amazon</span></a>
+      <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="hero-retailer"><span class="retailer-mark retailer-mark-bn" aria-hidden="true">B&amp;N</span><span>Barnes &amp; Noble</span></a>
     </div>
   </div>
 </section>
@@ -937,8 +950,8 @@
       <a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="book-section">Buy Direct</a>
       <p class="purchase-note">Best way to support the author. Ships through IngramSpark. Also available through major retailers.</p>
       <div class="retailer-actions" aria-label="Retailer purchase options">
-        <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="book-section-retailer">Amazon</a>
-        <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="book-section-retailer">Barnes &amp; Noble</a>
+        <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="book-section-retailer"><span class="retailer-mark retailer-mark-amazon" aria-hidden="true">a</span><span>Amazon</span></a>
+        <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="book-section-retailer"><span class="retailer-mark retailer-mark-bn" aria-hidden="true">B&amp;N</span><span>Barnes &amp; Noble</span></a>
       </div>
     </div>
   </div>
