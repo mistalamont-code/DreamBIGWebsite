@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGYNWJQC7G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JGYNWJQC7G');
+</script>
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Money Moves &mdash; DREAM/BIG Financial Literacy Tools</title>
+<meta name="description" content="Three local, browser-based DREAM/BIG tools for high school graduates: decode a paycheck, build an emergency fund, and estimate student loan repayment.">
+<meta property="og:title" content="First Money Moves &mdash; DREAM/BIG">
+<meta property="og:description" content="Paycheck Decoder, Emergency Fund Builder, and Student Loan Reality Check for life after high school.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.lifeafterhighschoolbook.com/first-money-moves.html">
+<meta property="og:image" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DREAM/BIG first money moves financial literacy tools">
+<meta property="og:site_name" content="DREAM/BIG &mdash; Life After High School">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="First Money Moves &mdash; DREAM/BIG">
+<meta name="twitter:description" content="Local, browser-based money tools for high school graduates.">
+<meta name="twitter:image" content="https://www.lifeafterhighschoolbook.com/images/og-image.png">
+<meta name="twitter:image:alt" content="DREAM/BIG first money moves financial literacy tools">
+<link rel="canonical" href="https://www.lifeafterhighschoolbook.com/first-money-moves.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="assistant.css">
+<script src="assistant.js" defer></script>
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F0D060;
+    --purple-deep: #0F0620;
+    --purple-dark: #1A0A2E;
+    --purple-mid: #2D1B4E;
+    --purple-card: #231340;
+    --purple-surface: #2E1A50;
+    --purple-light: #3D2766;
+    --text: #F5F5F5;
+    --text-muted: #B8A8D0;
+    --accent: #C9A84C;
+    --success: #2ECC71;
+    --warning: #F1C40F;
+    --danger: #E74C3C;
+    --teal: #4FC3B1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--purple-deep);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 1000;
+    background: var(--gold); color: var(--purple-deep);
+    padding: .6rem 1rem; font-weight: 700; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0 2rem; height: 70px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; white-space: nowrap; }
+  .nav-subtitle { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; font-style: italic; letter-spacing: 0.3px; white-space: nowrap; border-left: 1px solid rgba(201,168,76,0.3); padding-left: 1rem; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > button {
+    background: none; border: none; cursor: pointer; font: inherit;
+    color: var(--gold); padding: 0; letter-spacing: 0.5px; text-transform: uppercase;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .nav-dropdown > button::after { content: ' \25BE'; font-size: 0.65rem; opacity: 0.6; }
+  .nav-dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    padding-top: 12px;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(15,6,32,0.98); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 0.5rem 0; min-width: 190px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px);
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block; padding: 0.6rem 1.25rem; font-size: 0.8rem !important;
+    letter-spacing: 0.5px; white-space: nowrap; transition: background 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold) !important; }
+
+  .btn {
+    display: inline-block; padding: 14px 36px; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    border-radius: 4px; transition: all 0.3s; cursor: pointer; border: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-gold { background: var(--gold); color: var(--purple-deep); }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+  .btn-nav { padding: 10px 24px; font-size: 0.8rem; letter-spacing: 0.8px; }
+  .nav-links .btn-gold { color: var(--purple-deep); font-size: 0.8rem; font-weight: 700; }
+  .nav-links .btn-gold:hover { color: var(--purple-deep); }
+
+  section { padding: 90px 2rem; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .narrow { max-width: 800px; }
+  .section-label {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.35rem, 5vw, 4.9rem);
+    font-weight: 900; line-height: 1.05; margin-bottom: 1.4rem;
+  }
+  .section-text { color: var(--text-muted); font-size: 1.05rem; max-width: 780px; line-height: 1.8; }
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 1.5rem 0; }
+
+  .first-money-hero {
+    min-height: 78vh; display: flex; align-items: center;
+    padding: 150px 2rem 70px;
+    background: url('images/erie-sunset.jpg') center center / cover no-repeat;
+    position: relative; overflow: hidden;
+  }
+  .first-money-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg,
+      rgba(15,6,32,0.95) 0%,
+      rgba(15,6,32,0.88) 38%,
+      rgba(26,10,46,0.72) 68%,
+      rgba(15,6,32,0.88) 100%);
+  }
+  .first-money-hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+    background: linear-gradient(0deg, var(--purple-deep) 0%, transparent 100%);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 900px; }
+  .hero-kicker {
+    display: inline-block; padding: 6px 18px; border: 1px solid rgba(212,175,55,0.75);
+    border-radius: 30px; font-size: 0.74rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.4rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .hero-note {
+    margin-top: 1.2rem; color: rgba(245,245,245,0.8); font-size: 0.86rem;
+  }
+  .hero-note strong { color: var(--gold); }
+
+  .quick-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    margin-top: 3rem; max-width: 960px;
+  }
+  .quick-card {
+    background: rgba(35,19,64,0.78);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 8px; padding: 1.2rem;
+    backdrop-filter: blur(16px);
+  }
+  .quick-card strong { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.2rem; display: block; margin-bottom: 0.35rem; }
+  .quick-card span { color: var(--text-muted); font-size: 0.9rem; display: block; line-height: 1.55; }
+
+  .tools-section {
+    background:
+      linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 45%, var(--purple-deep) 100%);
+    padding-top: 80px;
+  }
+  .tool-intro {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .privacy-chip {
+    flex: 0 0 auto; color: var(--teal); border: 1px solid rgba(79,195,177,0.35);
+    background: rgba(79,195,177,0.08); border-radius: 4px; padding: 0.75rem 0.9rem;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .tool-tabs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.25rem;
+  }
+  .tool-tab {
+    min-height: 58px; padding: 0.85rem 1rem; border: 1px solid rgba(201,168,76,0.28);
+    background: rgba(255,255,255,0.03); color: var(--text-muted); border-radius: 8px;
+    cursor: pointer; font: 700 0.82rem/1.2 'Inter', sans-serif; letter-spacing: 0.6px;
+    text-transform: uppercase; transition: background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .tool-tab.active {
+    background: var(--gold); color: var(--purple-deep); border-color: var(--gold);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.24);
+  }
+  .tool-tab:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+
+  .tool-panel[hidden] { display: none; }
+  .tool-card {
+    background: var(--purple-card); border: 1px solid rgba(201,168,76,0.16);
+    border-radius: 8px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+  }
+  .tool-header {
+    padding: 2rem 2.5rem; border-bottom: 1px solid rgba(201,168,76,0.12);
+    background: linear-gradient(135deg, rgba(45,27,78,0.78), rgba(15,6,32,0.45));
+  }
+  .tool-header h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.65rem, 3vw, 2.35rem);
+    line-height: 1.18; margin-bottom: 0.65rem; color: var(--text);
+  }
+  .tool-header p { color: var(--text-muted); max-width: 800px; }
+  .tool-grid {
+    display: grid; grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+    gap: 2.25rem; padding: 2.5rem;
+  }
+  .input-panel, .result-panel { min-width: 0; }
+  fieldset { border: 0; margin: 0; padding: 0; }
+  legend {
+    color: var(--gold); font-size: 0.84rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1.15rem; }
+  .form-group label {
+    display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.45px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.45rem;
+  }
+  .field-help { color: rgba(184,168,208,0.82); font-size: 0.78rem; line-height: 1.55; margin-top: 0.35rem; }
+  .form-group input, .form-group select {
+    width: 100%; min-height: 46px; padding: 12px 14px; background: var(--purple-surface);
+    border: 1px solid rgba(201,168,76,0.22); border-radius: 4px; color: var(--text);
+    font-size: 1rem; font-family: 'Inter', sans-serif; transition: border-color 0.25s, background 0.25s;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: 2px solid var(--gold-light); outline-offset: 2px; border-color: var(--gold);
+  }
+  .form-group input[type="range"] {
+    min-height: 26px; padding: 0; border: 0; background: transparent; accent-color: var(--gold);
+  }
+  .input-divider {
+    margin: 1.35rem 0; border: 0; border-top: 1px solid rgba(201,168,76,0.14);
+  }
+
+  .result-box {
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; padding: 1.65rem; text-align: center; margin-bottom: 1rem;
+  }
+  .result-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .result-value { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--gold); font-weight: 700; line-height: 1.05; }
+  .result-sub { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.4rem; }
+  .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1rem; }
+  .mini-card {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 1rem;
+  }
+  .mini-label { color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.25rem; }
+  .mini-value { color: var(--text); font-weight: 700; font-size: 1.1rem; }
+  .result-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    padding: 0.78rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-label { color: var(--text-muted); font-size: 0.9rem; }
+  .result-row-value { color: var(--text); font-weight: 700; text-align: right; }
+  .result-row-value.danger { color: var(--danger); }
+  .result-row-value.success { color: var(--success); }
+
+  .stacked-bar {
+    height: 18px; border-radius: 999px; overflow: hidden; display: flex;
+    background: rgba(255,255,255,0.06); margin: 1.3rem 0 0.85rem;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .stacked-segment { height: 100%; min-width: 0; transition: width 0.25s; }
+  .bar-legend { display: flex; flex-wrap: wrap; gap: 0.8rem; color: var(--text-muted); font-size: 0.76rem; }
+  .bar-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  .progress-shell {
+    margin: 1.25rem 0 0.85rem; height: 18px; border-radius: 999px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 0%; border-radius: 999px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    transition: width 0.35s ease;
+  }
+  .timeline-note {
+    margin-top: 1rem; padding: 1rem 1.1rem; border-radius: 8px;
+    background: rgba(79,195,177,0.08); border: 1px solid rgba(79,195,177,0.22);
+    color: var(--text-muted); font-size: 0.9rem; line-height: 1.65;
+  }
+  .timeline-note strong { color: var(--teal); }
+
+  .ratio-meter {
+    margin: 1.2rem 0 0.8rem; padding: 1rem; border-radius: 8px;
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08);
+  }
+  .meter-track {
+    height: 14px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--success) 0 45%, var(--warning) 45% 70%, var(--danger) 70% 100%);
+    position: relative; margin: 1.1rem 0 0.5rem;
+  }
+  .meter-pin {
+    position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%);
+    width: 22px; height: 22px; border-radius: 50%; background: var(--text);
+    border: 4px solid var(--gold); box-shadow: 0 2px 14px rgba(0,0,0,0.5);
+    transition: left 0.25s ease;
+  }
+  .meter-labels { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.72rem; }
+
+  details.formula-box {
+    margin-top: 1.25rem; background: rgba(15,6,32,0.42);
+    border: 1px solid rgba(201,168,76,0.14); border-radius: 8px; padding: 1rem 1.1rem;
+  }
+  details.formula-box summary {
+    color: var(--gold); cursor: pointer; font-size: 0.84rem; font-weight: 700;
+    letter-spacing: 0.6px; text-transform: uppercase;
+  }
+  details.formula-box p, details.formula-box li {
+    color: var(--text-muted); font-size: 0.84rem; line-height: 1.65; margin-top: 0.7rem;
+  }
+  details.formula-box ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+
+  .calc-disclaimer {
+    margin-top: 1.25rem; padding: 1.15rem 1.25rem;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+  }
+  .calc-disclaimer p { color: var(--text-muted); font-size: 0.8rem; line-height: 1.65; opacity: 0.88; }
+  .calc-disclaimer strong { color: var(--gold); }
+  .resource-links {
+    margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem 1rem;
+  }
+  .resource-links a {
+    color: var(--gold); font-size: 0.8rem; text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--gold); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    margin-top: 2rem; transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  footer {
+    padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.1);
+    background: var(--purple-deep);
+  }
+  footer p { color: var(--text-muted); font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-legal { margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.78rem; color: var(--text-muted); text-decoration: underline; opacity: 0.7; transition: opacity 0.3s; }
+  .footer-legal a:hover { opacity: 1; color: var(--gold); }
+
+  .legal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,6,32,0.95); backdrop-filter: blur(10px);
+    overflow-y: auto; padding: 100px 2rem 3rem;
+  }
+  .legal-overlay.active { display: block; }
+  .legal-content { max-width: 700px; margin: 0 auto; }
+  .legal-content h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 1.5rem; }
+  .legal-content h3 { font-size: 1rem; color: var(--gold); margin: 1.5rem 0 0.5rem; letter-spacing: 0.5px; }
+  .legal-content p, .legal-content li { font-size: 0.9rem; color: var(--text); line-height: 1.8; opacity: 0.85; }
+  .legal-content ul { padding-left: 1.5rem; margin: 0.75rem 0; }
+  .legal-close { position: fixed; top: 2rem; right: 2rem; background: none; border: none; color: var(--gold); font-size: 2rem; cursor: pointer; z-index: 201; }
+
+  @media (max-width: 980px) {
+    .quick-cards { grid-template-columns: 1fr; }
+    .tool-intro { display: block; }
+    .privacy-chip { display: inline-block; margin-top: 1.25rem; }
+    .tool-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
+      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
+      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-dropdown > button::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+    section { padding: 60px 1.25rem; }
+    .first-money-hero { min-height: 0; padding: 118px 1.25rem 58px; }
+    .hero-actions { display: grid; grid-template-columns: 1fr; }
+    .btn { text-align: center; }
+    .tool-tabs { grid-template-columns: 1fr; }
+    .tool-header, .tool-grid { padding: 1.5rem; }
+    .form-grid, .mini-grid { grid-template-columns: 1fr; }
+    .result-row { flex-wrap: wrap; }
+    .result-row-value { text-align: left; }
+    .legal-overlay { padding: 90px 1.25rem 2.5rem; }
+  }
+
+  @media (max-width: 390px) {
+    nav { padding: 0 1rem; }
+    .nav-logo { font-size: 1.2rem; }
+    .tool-header, .tool-grid { padding: 1.25rem; }
+    .result-box { padding: 1.25rem 1rem; }
+    .section-text { font-size: 0.96rem; }
+    .btn { padding: 12px 24px; font-size: 0.82rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      transition-duration: .001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DREAM/BIG First Money Moves",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "url": "https://www.lifeafterhighschoolbook.com/first-money-moves.html",
+  "description": "Three educational financial literacy tools for high school graduates: Paycheck Decoder, Emergency Fund Builder, and Student Loan Reality Check.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Corey L. Cook"
+  }
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav aria-label="Main">
+  <a href="index.html" class="nav-brand">
+    <span class="nav-logo">DREAM/BIG</span>
+    <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
+  </a>
+  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#book">The Book</a></li>
+    <li class="nav-dropdown">
+      <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
+      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="first-money-moves.html" style="color:var(--gold);">First Money Moves</a>
+        <a href="calculators.html">Calculators</a>
+        <a href="visualizer.html">Visualizer</a>
+        <a href="glossary.html">Glossary</a>
+      </div></div>
+    </li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold btn-nav" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="nav-first-money-moves">Buy Direct</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+  <section class="first-money-hero" aria-labelledby="page-title">
+    <div class="container">
+      <div class="hero-inner">
+        <span class="hero-kicker">First Money Moves</span>
+        <h1 class="section-title" id="page-title">The first three money checks after graduation</h1>
+        <div class="divider"></div>
+        <p class="section-text">A first job, first savings goal, and first student loan bill can arrive fast. These three calculators turn those moments into numbers you can understand before the decisions get loud.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#money-tools">Start With Your Numbers</a>
+          <a class="btn btn-outline" href="glossary.html">Look Up Money Terms</a>
+        </div>
+        <p class="hero-note"><strong>Privacy note:</strong> the numbers you enter are calculated in this browser and are not sent to a server.</p>
+
+        <div class="quick-cards" aria-label="Tools on this page">
+          <div class="quick-card">
+            <strong>Paycheck Decoder</strong>
+            <span>Estimate gross pay, deductions, and the amount that actually lands in your account.</span>
+          </div>
+          <div class="quick-card">
+            <strong>Emergency Fund Builder</strong>
+            <span>Turn monthly essentials into a starter safety net and a realistic savings timeline.</span>
+          </div>
+          <div class="quick-card">
+            <strong>Student Loan Reality Check</strong>
+            <span>Translate loan balance, interest, and term length into a monthly payment and total cost.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools-section" id="money-tools">
+    <div class="container">
+      <div class="tool-intro">
+        <div>
+          <span class="section-label">Companion Tools</span>
+          <h2 class="section-title" style="font-size:clamp(2rem,4vw,3.2rem);">Practice the math before it is real</h2>
+          <p class="section-text">These estimates are simplified on purpose. They are built for learning, comparison, and better questions, not for replacing tax, legal, lending, or financial advice.</p>
+        </div>
+        <div class="privacy-chip">Local-only calculations</div>
+      </div>
+
+      <div class="tool-tabs" role="tablist" aria-label="First money moves tools">
+        <button type="button" class="tool-tab active" id="tab-paycheck" role="tab" aria-selected="true" aria-controls="panel-paycheck" onclick="switchTool('paycheck', this)">Paycheck Decoder</button>
+        <button type="button" class="tool-tab" id="tab-emergency" role="tab" aria-selected="false" aria-controls="panel-emergency" onclick="switchTool('emergency', this)">Emergency Fund Builder</button>
+        <button type="button" class="tool-tab" id="tab-loans" role="tab" aria-selected="false" aria-controls="panel-loans" onclick="switchTool('loans', this)">Student Loan Reality Check</button>
+      </div>
+
+      <article class="tool-panel active" id="panel-paycheck" role="tabpanel" aria-labelledby="tab-paycheck">
+        <div class="tool-card">
+          <div class="tool-header">
+            <h2>Paycheck Decoder</h2>
+            <p>Your offer might say one number, your schedule might say another, and your deposit is usually smaller than both. Decode the path from hourly pay to take-home pay.</p>
+          </div>
+          <div class="tool-grid">
+            <div class="input-panel">
+              <fieldset>
+                <legend>Job and withholding</legend>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="pay-hourly">Hourly wage</label>
+                    <input type="number" id="pay-hourly" min="0" step="0.25" value="18" inputmode="decimal" oninput="calcPaycheck()">
+                  </div>
+                  <div class="form-group">
+                    <label for="pay-hours">Hours per week</label>
+                    <input type="number" id="pay-hours" min="0" max="90" step="0.5" value="35" inputmode="decimal" oninput="calcPaycheck()">
+                    <p class="field-help">Hours above 40 are estimated at time-and-a-half.</p>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="pay-frequency">Pay frequency</label>
+                    <select id="pay-frequency" onchange="calcPaycheck()">
+                      <option value="52">Weekly</option>
+                      <option value="26" selected>Every two weeks</option>
+                      <option value="24">Twice a month</option>
+                      <option value="12">Monthly</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="pay-pretax">Pre-tax deductions (%)</label>
+                    <input type="number" id="pay-pretax" min="0" max="40" step="0.5" value="0" inputmode="decimal" oninput="calcPaycheck()">
+                    <p class="field-help">Use this for benefits or retirement deductions that lower taxable pay.</p>
+                  </div>
+                </div>
+                <hr class="input-divider">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="pay-federal">Federal withholding (%)</label>
+                    <input type="number" id="pay-federal" min="0" max="40" step="0.5" value="10" inputmode="decimal" oninput="calcPaycheck()">
+                  </div>
+                  <div class="form-group">
+                    <label for="pay-state">State/local withholding (%)</label>
+                    <input type="number" id="pay-state" min="0" max="20" step="0.5" value="3" inputmode="decimal" oninput="calcPaycheck()">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="pay-posttax">Post-tax deductions per check</label>
+                  <input type="number" id="pay-posttax" min="0" step="1" value="0" inputmode="decimal" oninput="calcPaycheck()">
+                </div>
+              </fieldset>
+            </div>
+            <div class="result-panel">
+              <div class="result-box">
+                <div class="result-label">Estimated take-home pay</div>
+                <div class="result-value" id="pay-net" aria-live="polite">$0</div>
+                <div class="result-sub" id="pay-net-sub">per paycheck</div>
+              </div>
+              <div class="mini-grid">
+                <div class="mini-card"><div class="mini-label">Gross per check</div><div class="mini-value" id="pay-gross">$0</div></div>
+                <div class="mini-card"><div class="mini-label">Annual take-home</div><div class="mini-value" id="pay-annual">$0</div></div>
+              </div>
+              <div class="stacked-bar" aria-hidden="true">
+                <div class="stacked-segment" id="pay-net-bar" style="background:var(--success);"></div>
+                <div class="stacked-segment" id="pay-fica-bar" style="background:var(--teal);"></div>
+                <div class="stacked-segment" id="pay-tax-bar" style="background:var(--danger);"></div>
+                <div class="stacked-segment" id="pay-deduction-bar" style="background:var(--warning);"></div>
+              </div>
+              <div class="bar-legend" aria-hidden="true">
+                <span><i class="legend-dot" style="background:var(--success);"></i>Take-home</span>
+                <span><i class="legend-dot" style="background:var(--teal);"></i>FICA</span>
+                <span><i class="legend-dot" style="background:var(--danger);"></i>Withholding</span>
+                <span><i class="legend-dot" style="background:var(--warning);"></i>Deductions</span>
+              </div>
+              <div style="margin-top:1.2rem;">
+                <div class="result-row"><span class="result-row-label">Estimated FICA payroll tax</span><span class="result-row-value" id="pay-fica">$0</span></div>
+                <div class="result-row"><span class="result-row-label">Estimated federal withholding</span><span class="result-row-value" id="pay-fed-tax">$0</span></div>
+                <div class="result-row"><span class="result-row-label">Estimated state/local withholding</span><span class="result-row-value" id="pay-state-tax">$0</span></div>
+                <div class="result-row"><span class="result-row-label">Total deductions and withholding</span><span class="result-row-value danger" id="pay-total-deductions">$0</span></div>
+              </div>
+              <details class="formula-box">
+                <summary>Formula used</summary>
+                <ul>
+                  <li>Weekly gross pay = regular hours up to 40 + overtime hours at 1.5x.</li>
+                  <li>Gross per check = weekly gross pay x 52 / pay periods per year.</li>
+                  <li>FICA estimate = gross pay x 7.65% for Social Security and Medicare.</li>
+                  <li>Federal and state/local withholding use the percentages entered here, after the pre-tax deduction estimate.</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-panel" id="panel-emergency" role="tabpanel" aria-labelledby="tab-emergency" hidden>
+        <div class="tool-card">
+          <div class="tool-header">
+            <h2>Emergency Fund Builder</h2>
+            <p>The first savings goal is not a mansion. It is breathing room: a car repair, a missed shift, a phone replacement, or a deposit that does not have to become debt.</p>
+          </div>
+          <div class="tool-grid">
+            <div class="input-panel">
+              <fieldset>
+                <legend>Monthly essentials</legend>
+                <div class="form-grid">
+                  <div class="form-group"><label for="ef-housing">Housing</label><input type="number" id="ef-housing" min="0" step="10" value="700" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-utilities">Utilities</label><input type="number" id="ef-utilities" min="0" step="10" value="130" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-food">Food</label><input type="number" id="ef-food" min="0" step="10" value="320" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-transport">Transportation</label><input type="number" id="ef-transport" min="0" step="10" value="180" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-phone">Phone and internet</label><input type="number" id="ef-phone" min="0" step="5" value="75" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-insurance">Insurance and medical</label><input type="number" id="ef-insurance" min="0" step="10" value="120" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-debt">Minimum debt payments</label><input type="number" id="ef-debt" min="0" step="10" value="80" inputmode="decimal" oninput="calcEmergency()"></div>
+                  <div class="form-group"><label for="ef-other">Other essentials</label><input type="number" id="ef-other" min="0" step="10" value="75" inputmode="decimal" oninput="calcEmergency()"></div>
+                </div>
+                <hr class="input-divider">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="ef-months">Target months</label>
+                    <input type="range" id="ef-months" min="1" max="6" step="1" value="3" oninput="calcEmergency()" aria-describedby="ef-months-out">
+                    <p class="field-help"><span id="ef-months-out">3 months</span> of essentials</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="ef-frequency">Savings frequency</label>
+                    <select id="ef-frequency" onchange="calcEmergency()">
+                      <option value="52">Weekly</option>
+                      <option value="26" selected>Every two weeks</option>
+                      <option value="24">Twice a month</option>
+                      <option value="12">Monthly</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="ef-current">Current emergency savings</label>
+                    <input type="number" id="ef-current" min="0" step="25" value="250" inputmode="decimal" oninput="calcEmergency()">
+                  </div>
+                  <div class="form-group">
+                    <label for="ef-contribution">Contribution each payday</label>
+                    <input type="number" id="ef-contribution" min="0" step="5" value="50" inputmode="decimal" oninput="calcEmergency()">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="result-panel">
+              <div class="result-box">
+                <div class="result-label">Emergency fund target</div>
+                <div class="result-value" id="ef-target" aria-live="polite">$0</div>
+                <div class="result-sub" id="ef-target-sub">3 months of essentials</div>
+              </div>
+              <div class="mini-grid">
+                <div class="mini-card"><div class="mini-label">Monthly essentials</div><div class="mini-value" id="ef-monthly">$0</div></div>
+                <div class="mini-card"><div class="mini-label">Still to save</div><div class="mini-value" id="ef-gap">$0</div></div>
+              </div>
+              <div class="progress-shell" aria-hidden="true"><div class="progress-fill" id="ef-progress"></div></div>
+              <div class="result-row"><span class="result-row-label">Progress toward target</span><span class="result-row-value success" id="ef-progress-text">0%</span></div>
+              <div class="result-row"><span class="result-row-label">Monthly savings pace</span><span class="result-row-value" id="ef-monthly-contribution">$0</span></div>
+              <div class="result-row"><span class="result-row-label">First starter milestone</span><span class="result-row-value" id="ef-starter">$500</span></div>
+              <div class="timeline-note" id="ef-timeline" aria-live="polite"></div>
+              <details class="formula-box">
+                <summary>Formula used</summary>
+                <ul>
+                  <li>Monthly essentials = the essential expense fields added together.</li>
+                  <li>Emergency target = monthly essentials x target months.</li>
+                  <li>Monthly savings pace = payday contribution x paydays per year / 12.</li>
+                  <li>Timeline = remaining target gap / monthly savings pace.</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="tool-panel" id="panel-loans" role="tabpanel" aria-labelledby="tab-loans" hidden>
+        <div class="tool-card">
+          <div class="tool-header">
+            <h2>Student Loan Reality Check</h2>
+            <p>A loan balance is only the beginning. Interest, time, and starting income decide how heavy the payment feels after school.</p>
+          </div>
+          <div class="tool-grid">
+            <div class="input-panel">
+              <fieldset>
+                <legend>Loan estimate</legend>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="loan-principal">Total borrowed</label>
+                    <input type="number" id="loan-principal" min="0" step="500" value="25000" inputmode="decimal" oninput="calcLoans()">
+                  </div>
+                  <div class="form-group">
+                    <label for="loan-apr">Interest rate APR (%)</label>
+                    <input type="number" id="loan-apr" min="0" max="30" step="0.1" value="6.5" inputmode="decimal" oninput="calcLoans()">
+                  </div>
+                  <div class="form-group">
+                    <label for="loan-term">Repayment term</label>
+                    <select id="loan-term" onchange="calcLoans()">
+                      <option value="5">5 years</option>
+                      <option value="10" selected>10 years</option>
+                      <option value="15">15 years</option>
+                      <option value="20">20 years</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="loan-type">Loan type estimate</label>
+                    <select id="loan-type" onchange="calcLoans()">
+                      <option value="unsubsidized" selected>Unsubsidized / private</option>
+                      <option value="subsidized">Subsidized federal</option>
+                    </select>
+                    <p class="field-help">Subsidized federal loans usually do not add interest while you are in school at least half time.</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="loan-grace">Months before repayment</label>
+                    <input type="number" id="loan-grace" min="0" max="48" step="1" value="6" inputmode="numeric" oninput="calcLoans()">
+                  </div>
+                  <div class="form-group">
+                    <label for="loan-salary">Expected starting salary</label>
+                    <input type="number" id="loan-salary" min="0" step="1000" value="42000" inputmode="decimal" oninput="calcLoans()">
+                  </div>
+                  <div class="form-group">
+                    <label for="loan-extra">Extra monthly payment</label>
+                    <input type="number" id="loan-extra" min="0" step="10" value="0" inputmode="decimal" oninput="calcLoans()">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="result-panel">
+              <div class="result-box">
+                <div class="result-label">Estimated monthly payment</div>
+                <div class="result-value" id="loan-payment" aria-live="polite">$0</div>
+                <div class="result-sub" id="loan-payment-sub">standard repayment estimate</div>
+              </div>
+              <div class="mini-grid">
+                <div class="mini-card"><div class="mini-label">Total repaid</div><div class="mini-value" id="loan-total">$0</div></div>
+                <div class="mini-card"><div class="mini-label">Interest cost</div><div class="mini-value" id="loan-interest">$0</div></div>
+              </div>
+              <div class="ratio-meter" aria-label="Payment compared with gross monthly income">
+                <div class="result-row" style="border-bottom:0; padding:0;">
+                  <span class="result-row-label">Payment share of gross monthly income</span>
+                  <span class="result-row-value" id="loan-income-share">0%</span>
+                </div>
+                <div class="meter-track" aria-hidden="true"><span class="meter-pin" id="loan-meter-pin"></span></div>
+                <div class="meter-labels" aria-hidden="true"><span>Roomier</span><span>Tight</span><span>Heavy</span></div>
+              </div>
+                <div class="result-row"><span class="result-row-label">Estimated pre-repayment interest</span><span class="result-row-value" id="loan-grace-interest">$0</span></div>
+              <div class="result-row"><span class="result-row-label">Balance used for repayment</span><span class="result-row-value" id="loan-repay-balance">$0</span></div>
+              <div class="result-row"><span class="result-row-label">With extra payment</span><span class="result-row-value success" id="loan-extra-result">$0 saved</span></div>
+              <div class="timeline-note" id="loan-note" aria-live="polite"></div>
+              <details class="formula-box">
+                <summary>Formula used</summary>
+                <ul>
+                  <li>Monthly rate = APR / 12.</li>
+                  <li>Unsubsidized/private pre-repayment interest is a simple estimate: borrowed amount x monthly rate x months before repayment.</li>
+                  <li>Subsidized federal mode sets pre-repayment interest to $0 for this simplified estimate.</li>
+                  <li>Monthly payment uses a standard amortization formula over the selected repayment term.</li>
+                  <li>Extra payment results are simulated month by month until payoff.</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="calc-disclaimer">
+        <p><strong>Educational disclaimer:</strong> These tools use simplified formulas for learning and comparison. They do not provide professional financial, tax, investment, legal, lending, or student aid advice. Actual paycheck withholding, benefits, tax rules, loan terms, fees, subsidies, repayment plans, and lender calculations can vary. Review real documents and consult qualified professionals before making major financial decisions.</p>
+        <div class="resource-links" aria-label="Official resources">
+          <a href="https://www.irs.gov/individuals/tax-withholding-estimator" target="_blank" rel="noopener">IRS Tax Withholding Estimator</a>
+          <a href="https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/" target="_blank" rel="noopener">CFPB Emergency Fund Guide</a>
+          <a href="https://studentaid.gov/loan-simulator/" target="_blank" rel="noopener">Federal Student Aid Loan Simulator</a>
+        </div>
+      </div>
+
+      <a href="index.html" class="back-link">&larr; Back to DREAM/BIG</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">DREAM/BIG.</p>
+  <p>&copy; 2026 Corey L. Cook &middot; Cook Media LLC &middot; Erie, Pennsylvania</p>
+  <p style="margin-top:0.5rem;"><a href="mailto:corey@cook-media.com">Contact</a></p>
+  <div class="footer-legal">
+    <a href="#" onclick="event.preventDefault(); openLegal('privacy');">Privacy Policy</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('terms');">Terms of Use</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('accessibility');">Accessibility</a>
+    <a href="#" onclick="event.preventDefault(); openLegal('dmca');">DMCA Notice</a>
+  </div>
+</footer>
+
+<div class="legal-overlay" id="legal-privacy" role="dialog" aria-modal="true" aria-labelledby="legal-privacy-title">
+  <button type="button" class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-privacy-title">Privacy Policy</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Who We Are</h3>
+    <p>This website is operated by Corey L. Cook / Cook Media LLC, located in Erie, Pennsylvania. This policy explains how we collect, use, and protect your personal information when you visit lifeafterhighschoolbook.com.</p>
+    <h3>What This Page Collects</h3>
+    <p>The First Money Moves tools run in your browser. We do not collect, store, or transmit the numbers you enter into these tools.</p>
+    <h3>Analytics</h3>
+    <p>This website uses Google Analytics and Vercel Web Analytics to understand site traffic and improve the experience. Analytics data may include pages visited, device type, browser, approximate location, and referring website.</p>
+    <h3>Contact</h3>
+    <p>Questions about this policy? Email <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-terms" role="dialog" aria-modal="true" aria-labelledby="legal-terms-title">
+  <button type="button" class="legal-close" onclick="closeLegal('terms')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-terms-title">Terms of Use</h2>
+    <p><em>Last updated: 2026</em></p>
+    <h3>Educational Purpose</h3>
+    <p>The First Money Moves tools are for general education only. They show estimates based on the values you enter and simplified formulas. They are not professional financial, tax, investment, legal, lending, credit, or student aid advice.</p>
+    <h3>Financial Tool Disclaimer</h3>
+    <p>Actual paychecks, withholding, benefits, emergency expenses, loan interest, repayment options, fees, and financial outcomes can vary. Always review real documents carefully and talk with a qualified professional before making major financial decisions.</p>
+    <h3>Intellectual Property</h3>
+    <p>All original content on this site, including the DREAM/BIG framework and tool design, belongs to Corey L. Cook and Cook Media LLC.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-accessibility" role="dialog" aria-modal="true" aria-labelledby="legal-accessibility-title">
+  <button type="button" class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-accessibility-title">Accessibility Statement</h2>
+    <p><em>Last updated: 2026</em></p>
+    <p>Corey L. Cook and Cook Media LLC are committed to making this website accessible. This page uses semantic HTML, labeled fields, keyboard-accessible tabs, text-based results, responsive layouts, and visible focus states.</p>
+    <p>If you encounter an accessibility barrier, email <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="legal-dmca" role="dialog" aria-modal="true" aria-labelledby="legal-dmca-title">
+  <button type="button" class="legal-close" onclick="closeLegal('dmca')" aria-label="Close">&times;</button>
+  <div class="legal-content">
+    <h2 id="legal-dmca-title">DMCA Notice</h2>
+    <p><em>Last updated: 2026</em></p>
+    <p>All original content on this website is protected by copyright. To report a copyright concern, contact Corey L. Cook at <a href="mailto:corey@cook-media.com" style="color:var(--gold);">corey@cook-media.com</a>.</p>
+  </div>
+</div>
+
+<script>
+let lastFocusedElement = null;
+
+function toggleNav(btn) {
+  const links = document.querySelector('.nav-links');
+  const open = links.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+function toggleToolsMenu(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  const menu = btn.nextElementSibling;
+  if (menu) menu.style.display = expanded ? '' : 'block';
+}
+
+document.addEventListener('click', function(e) {
+  const dd = document.querySelector('.nav-dropdown');
+  if (dd && !dd.contains(e.target)) {
+    const btn = dd.querySelector('button[aria-haspopup]');
+    const menu = dd.querySelector('.nav-dropdown-menu');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (menu) menu.style.display = '';
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.legal-overlay.active').forEach(function(modal) {
+      closeLegal(modal.id.replace('legal-', ''));
+    });
+    const btn = document.querySelector('.nav-dropdown button[aria-haspopup]');
+    const menu = document.querySelector('.nav-dropdown-menu');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (menu) menu.style.display = '';
+  }
+});
+
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('open');
+    const toggle = document.querySelector('.nav-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+function openLegal(type) {
+  const overlay = document.getElementById('legal-' + type);
+  if (!overlay) return;
+  lastFocusedElement = document.activeElement;
+  overlay.classList.add('active');
+  const close = overlay.querySelector('.legal-close');
+  if (close) close.focus();
+}
+
+function closeLegal(type) {
+  const overlay = document.getElementById('legal-' + type);
+  if (!overlay) return;
+  overlay.classList.remove('active');
+  if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+    lastFocusedElement.focus();
+  }
+}
+
+document.querySelectorAll('.legal-overlay').forEach(function(overlay) {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeLegal(overlay.id.replace('legal-', ''));
+  });
+});
+
+(function() {
+  document.querySelectorAll('[data-buy-link]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      try {
+        var retailer = link.getAttribute('data-buy-link') || 'unknown';
+        var location = link.getAttribute('data-buy-location') || 'unknown';
+        if (window.va) window.va('event', { name: 'Buy Direct Click', data: { retailer: retailer, location: location } });
+        if (window.gtag) window.gtag('event', 'buy_direct_click', { event_category: 'purchase', event_label: retailer + ':' + location });
+      } catch (err) {}
+    });
+  });
+})();
+
+const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const moneyCents = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+function fmtMoney(value, cents) {
+  const amount = Number.isFinite(value) ? value : 0;
+  return (cents ? moneyCents : money).format(amount);
+}
+
+function fmtPercent(value, digits) {
+  const amount = Number.isFinite(value) ? value : 0;
+  return amount.toFixed(digits == null ? 0 : digits) + '%';
+}
+
+function plural(value, singular, pluralWord) {
+  return Number(value) === 1 ? singular : (pluralWord || singular + 's');
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function readNumber(id, fallback) {
+  const input = document.getElementById(id);
+  if (!input) return fallback || 0;
+  let value = Number(input.value);
+  if (!Number.isFinite(value)) value = fallback || 0;
+  if (input.hasAttribute && input.hasAttribute('min')) value = Math.max(Number(input.getAttribute('min')), value);
+  if (input.hasAttribute && input.hasAttribute('max')) value = Math.min(Number(input.getAttribute('max')), value);
+  if (String(input.value) !== String(value) && document.activeElement !== input) input.value = value;
+  return value;
+}
+
+function payFrequencyLabel(periods) {
+  if (periods === 52) return 'weekly';
+  if (periods === 26) return 'every two weeks';
+  if (periods === 24) return 'twice a month';
+  return 'monthly';
+}
+
+function switchTool(name, btn) {
+  document.querySelectorAll('.tool-panel').forEach(function(panel) {
+    panel.hidden = true;
+    panel.classList.remove('active');
+  });
+  document.querySelectorAll('.tool-tab').forEach(function(tab) {
+    tab.classList.remove('active');
+    tab.setAttribute('aria-selected', 'false');
+  });
+  const panel = document.getElementById('panel-' + name);
+  if (panel) {
+    panel.hidden = false;
+    panel.classList.add('active');
+  }
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+}
+
+function setBarWidth(id, part, total) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const pct = total > 0 ? Math.max(0, Math.min(100, (part / total) * 100)) : 0;
+  el.style.width = pct + '%';
+}
+
+function calcPaycheck() {
+  const hourly = readNumber('pay-hourly', 0);
+  const hours = readNumber('pay-hours', 0);
+  const periods = readNumber('pay-frequency', 26);
+  const pretaxPct = readNumber('pay-pretax', 0) / 100;
+  const federalPct = readNumber('pay-federal', 0) / 100;
+  const statePct = readNumber('pay-state', 0) / 100;
+  const posttax = readNumber('pay-posttax', 0);
+  const regularHours = Math.min(hours, 40);
+  const overtimeHours = Math.max(0, hours - 40);
+  const weeklyGross = (regularHours * hourly) + (overtimeHours * hourly * 1.5);
+  const gross = weeklyGross * 52 / periods;
+  const pretax = gross * pretaxPct;
+  const taxable = Math.max(0, gross - pretax);
+  const fica = gross * 0.0765;
+  const federal = taxable * federalPct;
+  const state = taxable * statePct;
+  const totalDeductions = pretax + fica + federal + state + posttax;
+  const net = Math.max(0, gross - totalDeductions);
+  const annualNet = net * periods;
+
+  setText('pay-net', fmtMoney(net, true));
+  setText('pay-net-sub', payFrequencyLabel(periods) + ' estimate');
+  setText('pay-gross', fmtMoney(gross, true));
+  setText('pay-annual', fmtMoney(annualNet));
+  setText('pay-fica', fmtMoney(fica, true));
+  setText('pay-fed-tax', fmtMoney(federal, true));
+  setText('pay-state-tax', fmtMoney(state, true));
+  setText('pay-total-deductions', fmtMoney(totalDeductions, true));
+
+  setBarWidth('pay-net-bar', net, gross);
+  setBarWidth('pay-fica-bar', fica, gross);
+  setBarWidth('pay-tax-bar', federal + state, gross);
+  setBarWidth('pay-deduction-bar', pretax + posttax, gross);
+}
+
+function calcEmergency() {
+  const essentials = [
+    'ef-housing', 'ef-utilities', 'ef-food', 'ef-transport',
+    'ef-phone', 'ef-insurance', 'ef-debt', 'ef-other'
+  ].reduce(function(sum, id) { return sum + readNumber(id, 0); }, 0);
+  const months = readNumber('ef-months', 3);
+  const current = readNumber('ef-current', 0);
+  const contribution = readNumber('ef-contribution', 0);
+  const periods = readNumber('ef-frequency', 26);
+  const target = essentials * months;
+  const gap = Math.max(0, target - current);
+  const monthlyContribution = contribution * periods / 12;
+  const progress = target > 0 ? Math.min(100, (current / target) * 100) : 100;
+  const starterTarget = Math.min(target || 500, 500);
+  const starterGap = Math.max(0, starterTarget - current);
+
+  setText('ef-months-out', months + ' ' + plural(months, 'month'));
+  setText('ef-target', fmtMoney(target));
+  setText('ef-target-sub', months + ' ' + plural(months, 'month') + ' of essentials');
+  setText('ef-monthly', fmtMoney(essentials));
+  setText('ef-gap', fmtMoney(gap));
+  setText('ef-progress-text', fmtPercent(progress));
+  setText('ef-monthly-contribution', fmtMoney(monthlyContribution) + '/mo');
+  setText('ef-starter', fmtMoney(starterTarget));
+  const fill = document.getElementById('ef-progress');
+  if (fill) fill.style.width = progress + '%';
+
+  const timeline = document.getElementById('ef-timeline');
+  if (!timeline) return;
+  if (target <= 0) {
+    timeline.innerHTML = '<strong>Add your essentials</strong> to see a target.';
+  } else if (gap <= 0) {
+    timeline.innerHTML = '<strong>You are at or above this target.</strong> Keep the money separate from everyday spending so it is ready when life happens.';
+  } else if (monthlyContribution <= 0) {
+    timeline.innerHTML = '<strong>' + fmtMoney(gap) + ' to go.</strong> Add a payday contribution to see how long the target could take.';
+  } else {
+    const monthsToTarget = gap / monthlyContribution;
+    const targetDate = projectedDate(monthsToTarget);
+    const starterMonths = starterGap > 0 ? starterGap / monthlyContribution : 0;
+    const starterText = starterGap > 0
+      ? ' Your ' + fmtMoney(starterTarget) + ' starter milestone could take about <strong>' + formatDuration(starterMonths) + '</strong>.'
+      : ' Your starter milestone is already covered.';
+    timeline.innerHTML = '<strong>' + formatDuration(monthsToTarget) + '</strong> to reach the full target at this pace, around <strong>' + targetDate + '</strong>.' + starterText;
+  }
+}
+
+function projectedDate(monthsAhead) {
+  const date = new Date();
+  date.setMonth(date.getMonth() + Math.ceil(Math.max(0, monthsAhead)));
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+
+function formatDuration(months) {
+  if (!Number.isFinite(months) || months < 0) return 'not available';
+  if (months < 1) return 'under 1 month';
+  const rounded = Math.ceil(months);
+  const years = Math.floor(rounded / 12);
+  const rem = rounded % 12;
+  if (years === 0) return rounded + ' ' + plural(rounded, 'month');
+  if (rem === 0) return years + ' ' + plural(years, 'year');
+  return years + ' ' + plural(years, 'year') + ', ' + rem + ' ' + plural(rem, 'month');
+}
+
+function amortizedPayment(principal, annualRate, months) {
+  if (principal <= 0 || months <= 0) return 0;
+  const rate = annualRate / 100 / 12;
+  if (rate === 0) return principal / months;
+  return principal * rate / (1 - Math.pow(1 + rate, -months));
+}
+
+function simulatePayoff(principal, annualRate, payment, maxMonths) {
+  const rate = annualRate / 100 / 12;
+  let balance = principal;
+  let interest = 0;
+  let months = 0;
+  const cap = maxMonths || 1200;
+  if (payment <= 0) return { months: Infinity, interest: Infinity, paidOff: false };
+  while (balance > 0.01 && months < cap) {
+    const monthlyInterest = balance * rate;
+    if (payment <= monthlyInterest && rate > 0) {
+      return { months: Infinity, interest: Infinity, paidOff: false };
+    }
+    interest += monthlyInterest;
+    balance = Math.max(0, balance + monthlyInterest - payment);
+    months += 1;
+  }
+  return { months: months, interest: interest, paidOff: balance <= 0.01 };
+}
+
+function calcLoans() {
+  const borrowed = readNumber('loan-principal', 0);
+  const apr = readNumber('loan-apr', 0);
+  const termYears = readNumber('loan-term', 10);
+  const loanType = document.getElementById('loan-type') ? document.getElementById('loan-type').value : 'unsubsidized';
+  const graceMonths = readNumber('loan-grace', 0);
+  const salary = readNumber('loan-salary', 0);
+  const extra = readNumber('loan-extra', 0);
+  const monthlyRate = apr / 100 / 12;
+  const graceInterest = loanType === 'subsidized' ? 0 : borrowed * monthlyRate * graceMonths;
+  const repaymentBalance = borrowed + graceInterest;
+  const months = termYears * 12;
+  const payment = amortizedPayment(repaymentBalance, apr, months);
+  const totalRepaid = payment * months;
+  const interestCost = Math.max(0, totalRepaid - borrowed);
+  const monthlyIncome = salary / 12;
+  const incomeShare = monthlyIncome > 0 ? (payment / monthlyIncome) * 100 : 0;
+  const standard = simulatePayoff(repaymentBalance, apr, payment, months + 2);
+  const withExtra = simulatePayoff(repaymentBalance, apr, payment + extra, months + 600);
+  const saved = extra > 0 && withExtra.paidOff ? Math.max(0, standard.interest - withExtra.interest) : 0;
+
+  setText('loan-payment', fmtMoney(payment, true));
+  setText('loan-total', fmtMoney(totalRepaid));
+  setText('loan-interest', fmtMoney(interestCost));
+  setText('loan-income-share', fmtPercent(incomeShare, incomeShare < 10 ? 1 : 0));
+  setText('loan-grace-interest', fmtMoney(graceInterest));
+  setText('loan-repay-balance', fmtMoney(repaymentBalance));
+  setText('loan-extra-result', extra > 0 && withExtra.paidOff ? fmtMoney(saved) + ' saved' : 'Add extra to compare');
+
+  const pin = document.getElementById('loan-meter-pin');
+  if (pin) pin.style.left = Math.max(0, Math.min(100, (incomeShare / 20) * 100)) + '%';
+
+  const note = document.getElementById('loan-note');
+  if (!note) return;
+  let pressure = 'roomier';
+  if (incomeShare > 12) pressure = 'heavy';
+  else if (incomeShare > 8) pressure = 'tight';
+  let message = '<strong>' + fmtPercent(incomeShare, incomeShare < 10 ? 1 : 0) + ' of gross monthly income</strong> goes to the estimated payment, before rent, food, transportation, taxes, and savings. That can feel ' + pressure + ' depending on the rest of the budget.';
+  if (loanType === 'subsidized') {
+    message += ' This uses subsidized mode, so it does not add interest before repayment in this simplified estimate.';
+  } else if (graceInterest > 0) {
+    message += ' Because this is set to unsubsidized/private, it adds estimated interest before repayment begins.';
+  }
+  if (extra > 0 && withExtra.paidOff) {
+    message += ' Paying an extra ' + fmtMoney(extra) + '/mo could shorten payoff to about <strong>' + formatDuration(withExtra.months) + '</strong>.';
+  }
+  note.innerHTML = message;
+}
+
+function initTools() {
+  calcPaycheck();
+  calcEmergency();
+  calcLoans();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTools);
+} else {
+  initTools();
+}
+</script>
+</body>
+</html>

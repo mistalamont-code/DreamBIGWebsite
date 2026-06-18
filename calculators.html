@@ -533,6 +533,7 @@
     <li class="nav-dropdown">
       <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="first-money-moves.html">First Money Moves</a>
         <a href="calculators.html" style="color:var(--gold);">Calculators</a>
         <a href="visualizer.html">Visualizer</a>
         <a href="glossary.html">Glossary</a>
@@ -2008,15 +2009,15 @@ window.addEventListener('resize', function() {
   }
 });
 
-// Lazy-load the SheetJS (xlsx) library only when the user requests a download.
+// Lazy-load a SheetJS-compatible build with cell styling only when the user requests a download.
 let xlsxLoadPromise = null;
 function loadXLSX() {
   if (window.XLSX) return Promise.resolve();
   if (xlsxLoadPromise) return xlsxLoadPromise;
   xlsxLoadPromise = new Promise(function(resolve, reject) {
     const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-    script.integrity = 'sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
+    script.src = 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js';
+    script.integrity = 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb';
     script.crossOrigin = 'anonymous';
     script.onload = resolve;
     script.onerror = function() { xlsxLoadPromise = null; reject(new Error('Failed to load XLSX')); };
@@ -2071,42 +2072,295 @@ function buildBudgetWorkbook() {
   const needs50 = Math.round(income * 0.50);
   const wants30 = Math.round(income * 0.30);
   const save20 = Math.round(income * 0.20);
+  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
+  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
+  const savingsActual = Math.max(0, remaining);
+  const recommendation = remaining < 0
+    ? 'Your expenses are higher than your income. Look for one bill to reduce before adding new spending.'
+    : remaining < income * 0.10
+      ? 'You have a little room left. Try to protect at least a small emergency fund contribution.'
+      : 'You have room to save. Give every leftover dollar a job before it disappears.';
 
   const data = [
-    ['DREAM/BIG Monthly Budget'],
+    ['DREAM/BIG'],
+    ['LIFE AFTER HIGH SCHOOL'],
+    ['Monthly Budget Workbook'],
+    ['Built for real-life money decisions after graduation.'],
+    [''],
+    ['MONTHLY SNAPSHOT'],
+    ['Total Income', null, 'Total Expenses', null, 'Money Left Over', null],
     [''],
     ['INCOME'],
     ['Monthly Take-Home Pay', income],
     [''],
     ['EXPENSES'],
+    ['Category', 'Amount', '% of Income', 'Type', '', ''],
   ];
 
   for (const label in expenses) {
-    data.push([label, expenses[label]]);
+    const type = ['Streaming / Subs', 'Personal / Fun', 'Other'].includes(label) ? 'Want' : 'Need';
+    data.push([label, expenses[label], null, type, '', '']);
   }
 
-  data.push(['Total Expenses', totalExp]);
-  data.push(['Money Left Over', remaining]);
+  data.push(['Total Expenses', null, null, '', '', '']);
+  data.push(['Money Left Over', null, null, '', '', '']);
   data.push(['']);
   data.push(['THE 50/30/20 GUIDELINE']);
   data.push(['', 'Target (% of Income)', 'Your Target ($)', 'Actual ($)', 'Status']);
 
-  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
-  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
-  const savingsActual = Math.max(0, remaining);
-
   data.push(['Needs', '50%', needs50, needsActual, needsActual <= needs50 ? 'On Track' : 'Over']);
   data.push(['Wants', '30%', wants30, wantsActual, wantsActual <= wants30 ? 'On Track' : 'Over']);
   data.push(['Savings', '20%', save20, savingsActual, savingsActual >= save20 ? 'On Track' : 'Under']);
+  data.push(['']);
+  data.push(['NEXT STEP']);
+  data.push([recommendation]);
+  data.push(['']);
+  data.push(['Education only. This workbook is a planning tool, not financial, tax, lending, legal, or investment advice.']);
 
   const ws = XLSX.utils.aoa_to_sheet(data);
   const wb = XLSX.utils.book_new();
+  wb.Props = {
+    Title: 'DREAM/BIG Monthly Budget Workbook',
+    Subject: 'Budget planning worksheet',
+    Author: 'DREAM/BIG',
+    Company: 'Cook Media LLC'
+  };
   XLSX.utils.book_append_sheet(wb, ws, 'Budget');
 
-  // Set column widths
-  ws['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 12 }];
+  ws['!cols'] = [
+    { wch: 26 },
+    { wch: 16 },
+    { wch: 17 },
+    { wch: 16 },
+    { wch: 17 },
+    { wch: 16 }
+  ];
+  ws['!rows'] = [
+    { hpt: 34 },
+    { hpt: 20 },
+    { hpt: 26 },
+    { hpt: 22 },
+    { hpt: 10 },
+    { hpt: 24 },
+    { hpt: 34 },
+    { hpt: 10 },
+    { hpt: 24 },
+    { hpt: 22 },
+    { hpt: 10 },
+    { hpt: 24 }
+  ];
+  ws['!merges'] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: 5 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },
+    { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } },
+    { s: { r: 3, c: 0 }, e: { r: 3, c: 5 } },
+    { s: { r: 5, c: 0 }, e: { r: 5, c: 5 } },
+    { s: { r: 8, c: 0 }, e: { r: 8, c: 5 } },
+    { s: { r: 11, c: 0 }, e: { r: 11, c: 5 } },
+    { s: { r: 26, c: 0 }, e: { r: 26, c: 5 } },
+    { s: { r: 32, c: 0 }, e: { r: 32, c: 5 } },
+    { s: { r: 33, c: 0 }, e: { r: 33, c: 5 } },
+    { s: { r: 35, c: 0 }, e: { r: 35, c: 5 } }
+  ];
 
-  XLSX.writeFile(wb, 'Budget-Results.xlsx');
+  ws.B7 = { t: 'n', f: 'B10', v: income };
+  ws.D7 = { t: 'n', f: 'B24', v: totalExp };
+  ws.F7 = { t: 'n', f: 'B25', v: remaining };
+  for (let row = 14; row <= 23; row++) {
+    const amount = Number(ws['B' + row]?.v || 0);
+    ws['C' + row] = { t: 'n', f: 'IF($B$10=0,0,B' + row + '/$B$10)', v: income > 0 ? amount / income : 0 };
+  }
+  ws.B24 = { t: 'n', f: 'SUM(B14:B23)', v: totalExp };
+  ws.C24 = { t: 'n', f: 'IF($B$10=0,0,B24/$B$10)', v: income > 0 ? totalExp / income : 0 };
+  ws.B25 = { t: 'n', f: 'B10-B24', v: remaining };
+  ws.C25 = { t: 'n', f: 'IF($B$10=0,0,B25/$B$10)', v: income > 0 ? remaining / income : 0 };
+  ws.C29 = { t: 'n', f: '$B$10*50%', v: needs50 };
+  ws.C30 = { t: 'n', f: '$B$10*30%', v: wants30 };
+  ws.C31 = { t: 'n', f: '$B$10*20%', v: save20 };
+  ws.D29 = { t: 'n', f: 'SUM(B14:B20)', v: needsActual };
+  ws.D30 = { t: 'n', f: 'SUM(B21:B23)', v: wantsActual };
+  ws.D31 = { t: 'n', f: 'MAX(0,B25)', v: savingsActual };
+  ws.E29 = { t: 's', f: 'IF(D29<=C29,"On Track","Over")', v: needsActual <= needs50 ? 'On Track' : 'Over' };
+  ws.E30 = { t: 's', f: 'IF(D30<=C30,"On Track","Over")', v: wantsActual <= wants30 ? 'On Track' : 'Over' };
+  ws.E31 = { t: 's', f: 'IF(D31>=C31,"On Track","Under")', v: savingsActual >= save20 ? 'On Track' : 'Under' };
+
+  const brand = {
+    purpleDeep: '12001F',
+    purple: '24113F',
+    purpleSoft: '322052',
+    gold: 'D8B832',
+    goldDark: '7A6316',
+    lavender: 'D8C8EF',
+    lavenderSoft: 'F2EAFB',
+    ink: '2B2338',
+    white: 'FFFFFF',
+    red: 'C0392B',
+    green: '2E7D55',
+    border: '6C4E8A'
+  };
+  const borderSoft = {
+    top: { style: 'thin', color: { rgb: brand.border } },
+    bottom: { style: 'thin', color: { rgb: brand.border } },
+    left: { style: 'thin', color: { rgb: brand.border } },
+    right: { style: 'thin', color: { rgb: brand.border } }
+  };
+  const titleFont = { name: 'Playfair Display', bold: true, color: { rgb: brand.gold } };
+  const bodyFont = { name: 'Inter', color: { rgb: brand.ink } };
+  const sectionStyle = {
+    fill: { fgColor: { rgb: brand.purple } },
+    font: { name: 'Inter', bold: true, color: { rgb: brand.gold }, sz: 12 },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: borderSoft
+  };
+  const headerStyle = {
+    fill: { fgColor: { rgb: brand.gold } },
+    font: { name: 'Inter', bold: true, color: { rgb: brand.purpleDeep }, sz: 11 },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: borderSoft
+  };
+  const bodyStyle = {
+    fill: { fgColor: { rgb: 'FFFFFF' } },
+    font: { ...bodyFont, sz: 11 },
+    alignment: { vertical: 'center' },
+    border: {
+      bottom: { style: 'thin', color: { rgb: 'E4D9F0' } }
+    }
+  };
+  const moneyStyle = {
+    ...bodyStyle,
+    numFmt: '$#,##0;[Red]-$#,##0',
+    alignment: { horizontal: 'right', vertical: 'center' }
+  };
+  const percentStyle = {
+    ...bodyStyle,
+    numFmt: '0%',
+    alignment: { horizontal: 'right', vertical: 'center' }
+  };
+
+  function setCellStyle(address, style) {
+    if (!ws[address]) ws[address] = { t: 's', v: '' };
+    ws[address].s = style;
+  }
+  function styleRange(range, style) {
+    const decoded = XLSX.utils.decode_range(range);
+    for (let r = decoded.s.r; r <= decoded.e.r; r++) {
+      for (let c = decoded.s.c; c <= decoded.e.c; c++) {
+        setCellStyle(XLSX.utils.encode_cell({ r, c }), style);
+      }
+    }
+  }
+  function styleRow(row, style, startCol = 0, endCol = 5) {
+    for (let c = startCol; c <= endCol; c++) {
+      setCellStyle(XLSX.utils.encode_cell({ r: row - 1, c }), style);
+    }
+  }
+
+  styleRange('A1:F35', {
+    fill: { fgColor: { rgb: brand.lavenderSoft } },
+    font: { ...bodyFont, sz: 11 },
+    alignment: { vertical: 'center' }
+  });
+  styleRange('A1:F4', {
+    fill: { fgColor: { rgb: brand.purpleDeep } },
+    font: { ...bodyFont, color: { rgb: brand.white } },
+    alignment: { horizontal: 'center', vertical: 'center' }
+  });
+  setCellStyle('A1', {
+    fill: { fgColor: { rgb: brand.purpleDeep } },
+    font: { ...titleFont, sz: 30 },
+    alignment: { horizontal: 'center', vertical: 'center' }
+  });
+  setCellStyle('A2', {
+    fill: { fgColor: { rgb: brand.purpleDeep } },
+    font: { name: 'Inter', bold: true, color: { rgb: brand.lavender }, sz: 11 },
+    alignment: { horizontal: 'center', vertical: 'center' }
+  });
+  setCellStyle('A3', {
+    fill: { fgColor: { rgb: brand.purpleDeep } },
+    font: { name: 'Playfair Display', italic: true, color: { rgb: brand.white }, sz: 17 },
+    alignment: { horizontal: 'center', vertical: 'center' }
+  });
+  setCellStyle('A4', {
+    fill: { fgColor: { rgb: brand.purpleDeep } },
+    font: { name: 'Inter', color: { rgb: brand.lavender }, sz: 10 },
+    alignment: { horizontal: 'center', vertical: 'center' }
+  });
+  [6, 9, 12, 27, 33].forEach(row => styleRow(row, sectionStyle));
+  styleRow(7, {
+    fill: { fgColor: { rgb: brand.purpleSoft } },
+    font: { name: 'Inter', bold: true, color: { rgb: brand.white }, sz: 11 },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: borderSoft
+  });
+  ['B7', 'D7', 'F7'].forEach(address => setCellStyle(address, {
+    fill: { fgColor: { rgb: brand.purpleSoft } },
+    font: { ...titleFont, sz: 16 },
+    numFmt: '$#,##0;[Red]-$#,##0',
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: borderSoft
+  }));
+  styleRow(13, headerStyle, 0, 3);
+  styleRow(28, headerStyle, 0, 4);
+  for (let row = 14; row <= 23; row++) {
+    styleRow(row, bodyStyle, 0, 3);
+    setCellStyle('B' + row, moneyStyle);
+    setCellStyle('C' + row, percentStyle);
+  }
+  styleRow(10, bodyStyle, 0, 1);
+  setCellStyle('B10', moneyStyle);
+  [24, 25].forEach(row => {
+    styleRow(row, {
+      fill: { fgColor: { rgb: row === 25 ? brand.lavender : 'EFE6FA' } },
+      font: { name: 'Inter', bold: true, color: { rgb: brand.ink }, sz: 11 },
+      border: borderSoft
+    }, 0, 2);
+    setCellStyle('B' + row, {
+      fill: { fgColor: { rgb: row === 25 ? brand.lavender : 'EFE6FA' } },
+      font: { name: 'Inter', bold: true, color: { rgb: row === 25 && remaining < 0 ? brand.red : brand.ink }, sz: 11 },
+      numFmt: '$#,##0;[Red]-$#,##0',
+      alignment: { horizontal: 'right', vertical: 'center' },
+      border: borderSoft
+    });
+    setCellStyle('C' + row, {
+      fill: { fgColor: { rgb: row === 25 ? brand.lavender : 'EFE6FA' } },
+      font: { name: 'Inter', bold: true, color: { rgb: brand.ink }, sz: 11 },
+      numFmt: '0%',
+      alignment: { horizontal: 'right', vertical: 'center' },
+      border: borderSoft
+    });
+  });
+  for (let row = 29; row <= 31; row++) {
+    styleRow(row, bodyStyle, 0, 4);
+    setCellStyle('B' + row, {
+      ...bodyStyle,
+      alignment: { horizontal: 'right', vertical: 'center' }
+    });
+    setCellStyle('C' + row, moneyStyle);
+    setCellStyle('D' + row, moneyStyle);
+    const statusCell = 'E' + row;
+    const status = ws[statusCell].v;
+    setCellStyle(statusCell, {
+      fill: { fgColor: { rgb: status === 'On Track' ? 'EAF5EF' : 'FBEAE8' } },
+      font: { name: 'Inter', bold: true, color: { rgb: status === 'On Track' ? brand.green : brand.red }, sz: 11 },
+      alignment: { horizontal: 'center', vertical: 'center' },
+      border: borderSoft
+    });
+  }
+  styleRange('A34:F34', {
+    fill: { fgColor: { rgb: 'FFFFFF' } },
+    font: { name: 'Inter', color: { rgb: brand.ink }, sz: 11 },
+    alignment: { wrapText: true, vertical: 'center' },
+    border: borderSoft
+  });
+  styleRange('A36:F36', {
+    fill: { fgColor: { rgb: brand.purpleDeep } },
+    font: { name: 'Inter', color: { rgb: brand.lavender }, sz: 9 },
+    alignment: { wrapText: true, vertical: 'center' }
+  });
+  ws['!rows'][33] = { hpt: 42 };
+  ws['!rows'][35] = { hpt: 34 };
+
+  XLSX.writeFile(wb, 'DREAM-BIG-Budget-Workbook.xlsx', { cellStyles: true });
 }
 
 // LEGAL OVERLAY FUNCTIONS

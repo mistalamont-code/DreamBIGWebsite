@@ -280,23 +280,26 @@
     background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple-dark) 50%, var(--purple-deep) 100%);
   }
   .book-cover-display {
-    margin: 3rem auto; text-align: center; perspective: 1200px;
-    --book-cover-y: 48px;
-    --book-cover-rx: 7deg;
-    --book-cover-rz: -2deg;
-    --book-cover-scale: 0.94;
-    --book-cover-opacity: 0.72;
-    --book-cover-glow: 0.1;
+    margin: 3rem auto; text-align: center; perspective: 1500px;
+    --book-cover-x: -28px;
+    --book-cover-y: 96px;
+    --book-cover-rx: 16deg;
+    --book-cover-ry: -11deg;
+    --book-cover-rz: -6deg;
+    --book-cover-scale: 0.84;
+    --book-cover-opacity: 0.58;
+    --book-cover-glow: 0.06;
   }
   .book-cover-display picture {
     display: inline-block;
     opacity: var(--book-cover-opacity);
     transform:
-      translate3d(0, var(--book-cover-y), 0)
+      translate3d(var(--book-cover-x), var(--book-cover-y), 0)
       rotateX(var(--book-cover-rx))
+      rotateY(var(--book-cover-ry))
       rotateZ(var(--book-cover-rz))
       scale(var(--book-cover-scale));
-    transform-origin: center 72%;
+    transform-origin: center 76%;
     will-change: transform, opacity;
   }
   .book-cover-display img {
@@ -746,7 +749,7 @@
           "name": "What free tools are included on the website?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The site includes free financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. These tools help readers understand auto loans, mortgages, retirement savings, budgeting, credit, paychecks, FAFSA, insurance terms, and other real-world money decisions."
+            "text": "The site includes a First Money Moves guide, free financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. These tools help readers understand paychecks, emergency savings, student loans, auto loans, mortgages, retirement savings, budgeting, credit, FAFSA, insurance terms, and other real-world money decisions."
           }
         },
         {
@@ -779,6 +782,7 @@
     <li class="nav-dropdown">
       <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" onclick="toggleTools(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="first-money-moves.html">First Money Moves</a>
         <a href="calculators.html">Calculators</a>
         <a href="visualizer.html">Visualizer</a>
         <a href="glossary.html">Glossary</a>
@@ -964,7 +968,7 @@
       </details>
       <details class="faq-item">
         <summary>What free tools are included on the website?</summary>
-        <p>The site includes free financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. These tools help readers understand auto loans, mortgages, retirement savings, budgeting, credit, paychecks, FAFSA, insurance terms, and other real-world money decisions.</p>
+        <p>The site includes a <a href="first-money-moves.html">First Money Moves guide</a>, free financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. These tools help readers understand paychecks, emergency savings, student loans, auto loans, mortgages, retirement savings, budgeting, credit, FAFSA, insurance terms, and other real-world money decisions.</p>
       </details>
       <details class="faq-item">
         <summary>Is this book only for students going to college?</summary>
@@ -1341,8 +1345,10 @@ document.addEventListener('keydown', function(e) {
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) {
+    display.style.setProperty('--book-cover-x', '0px');
     display.style.setProperty('--book-cover-y', '0px');
     display.style.setProperty('--book-cover-rx', '0deg');
+    display.style.setProperty('--book-cover-ry', '0deg');
     display.style.setProperty('--book-cover-rz', '0deg');
     display.style.setProperty('--book-cover-scale', '1');
     display.style.setProperty('--book-cover-opacity', '1');
@@ -1363,17 +1369,22 @@ document.addEventListener('keydown', function(e) {
     ticking = false;
     var rect = display.getBoundingClientRect();
     var viewport = window.innerHeight || document.documentElement.clientHeight;
-    var progress = clamp((viewport - rect.top) / (viewport + rect.height * 0.45), 0, 1);
+    var progress = clamp((viewport - rect.top) / (viewport + rect.height * 0.3), 0, 1);
     var eased = easeOutQuart(progress);
-    var y = 48 - eased * 58;
-    var rx = 7 - eased * 8.5;
-    var rz = -2 + eased * 2.5;
-    var scale = 0.94 + eased * 0.06;
-    var opacity = 0.72 + eased * 0.28;
-    var glow = 0.1 + eased * 0.16;
+    var swing = Math.sin(eased * Math.PI);
+    var x = -28 + eased * 28 + swing * 10;
+    var y = 96 - eased * 112;
+    var rx = 16 - eased * 19;
+    var ry = -11 + eased * 13;
+    var rz = -6 + eased * 7;
+    var scale = 0.84 + eased * 0.2;
+    var opacity = 0.58 + eased * 0.42;
+    var glow = 0.06 + eased * 0.28;
 
+    display.style.setProperty('--book-cover-x', x.toFixed(2) + 'px');
     display.style.setProperty('--book-cover-y', y.toFixed(2) + 'px');
     display.style.setProperty('--book-cover-rx', rx.toFixed(2) + 'deg');
+    display.style.setProperty('--book-cover-ry', ry.toFixed(2) + 'deg');
     display.style.setProperty('--book-cover-rz', rz.toFixed(2) + 'deg');
     display.style.setProperty('--book-cover-scale', scale.toFixed(3));
     display.style.setProperty('--book-cover-opacity', opacity.toFixed(3));
