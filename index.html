@@ -281,25 +281,24 @@
   }
   .book-cover-display {
     margin: 3rem auto; text-align: center; perspective: 1500px;
-    --book-cover-x: -28px;
-    --book-cover-y: 96px;
-    --book-cover-rx: 16deg;
-    --book-cover-ry: -11deg;
-    --book-cover-rz: -6deg;
-    --book-cover-scale: 0.84;
-    --book-cover-opacity: 0.58;
-    --book-cover-glow: 0.06;
+    --book-cover-y: 52px;
+    --book-cover-rx: 3deg;
+    --book-cover-ry: -3deg;
+    --book-cover-rz: -1deg;
+    --book-cover-scale: 0.94;
+    --book-cover-opacity: 0.82;
+    --book-cover-glow: 0.08;
   }
   .book-cover-display picture {
     display: inline-block;
     opacity: var(--book-cover-opacity);
     transform:
-      translate3d(var(--book-cover-x), var(--book-cover-y), 0)
+      translate3d(0, var(--book-cover-y), 0)
       rotateX(var(--book-cover-rx))
       rotateY(var(--book-cover-ry))
       rotateZ(var(--book-cover-rz))
       scale(var(--book-cover-scale));
-    transform-origin: center 76%;
+    transform-origin: center 80%;
     will-change: transform, opacity;
   }
   .book-cover-display img {
@@ -1345,7 +1344,6 @@ document.addEventListener('keydown', function(e) {
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) {
-    display.style.setProperty('--book-cover-x', '0px');
     display.style.setProperty('--book-cover-y', '0px');
     display.style.setProperty('--book-cover-rx', '0deg');
     display.style.setProperty('--book-cover-ry', '0deg');
@@ -1369,19 +1367,17 @@ document.addEventListener('keydown', function(e) {
     ticking = false;
     var rect = display.getBoundingClientRect();
     var viewport = window.innerHeight || document.documentElement.clientHeight;
-    var progress = clamp((viewport - rect.top) / (viewport + rect.height * 0.3), 0, 1);
+    var progress = clamp((viewport - rect.top) / (viewport * 0.82), 0, 1);
     var eased = easeOutQuart(progress);
-    var swing = Math.sin(eased * Math.PI);
-    var x = -28 + eased * 28 + swing * 10;
-    var y = 96 - eased * 112;
-    var rx = 16 - eased * 19;
-    var ry = -11 + eased * 13;
-    var rz = -6 + eased * 7;
-    var scale = 0.84 + eased * 0.2;
-    var opacity = 0.58 + eased * 0.42;
-    var glow = 0.06 + eased * 0.28;
+    var remaining = 1 - eased;
+    var y = 52 * remaining;
+    var rx = 3 * remaining;
+    var ry = -3 * remaining;
+    var rz = -1 * remaining;
+    var scale = 0.94 + eased * 0.06;
+    var opacity = 0.82 + eased * 0.18;
+    var glow = 0.08 + eased * 0.12;
 
-    display.style.setProperty('--book-cover-x', x.toFixed(2) + 'px');
     display.style.setProperty('--book-cover-y', y.toFixed(2) + 'px');
     display.style.setProperty('--book-cover-rx', rx.toFixed(2) + 'deg');
     display.style.setProperty('--book-cover-ry', ry.toFixed(2) + 'deg');
