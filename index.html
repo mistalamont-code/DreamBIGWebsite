@@ -263,16 +263,16 @@
 
   /* ORIGIN SECTION */
   .origin-section {
-    min-height: 560px; display: flex; align-items: center; position: relative; overflow: hidden;
-    padding: 120px 2rem;
+    min-height: 660px; display: flex; align-items: center; position: relative; overflow: hidden;
+    padding: 130px 2rem 170px;
     background-color: var(--purple-deep);
     background-image:
       linear-gradient(90deg, rgba(15,6,32,0.96) 0%, rgba(15,6,32,0.82) 43%, rgba(15,6,32,0.34) 100%),
-      linear-gradient(180deg, rgba(15,6,32,0.18) 0%, rgba(15,6,32,0.08) 52%, rgba(15,6,32,0.88) 100%),
+      linear-gradient(180deg, rgba(15,6,32,0.18) 0%, rgba(15,6,32,0.08) 66%, rgba(15,6,32,0.58) 90%, rgba(15,6,32,0.9) 100%),
       url('images/reed-e6-street.jpg');
     background-image:
       linear-gradient(90deg, rgba(15,6,32,0.96) 0%, rgba(15,6,32,0.82) 43%, rgba(15,6,32,0.34) 100%),
-      linear-gradient(180deg, rgba(15,6,32,0.18) 0%, rgba(15,6,32,0.08) 52%, rgba(15,6,32,0.88) 100%),
+      linear-gradient(180deg, rgba(15,6,32,0.18) 0%, rgba(15,6,32,0.08) 66%, rgba(15,6,32,0.58) 90%, rgba(15,6,32,0.9) 100%),
       image-set(url('images/reed-e6-street.webp') type('image/webp'), url('images/reed-e6-street.jpg') type('image/jpeg'));
     background-size: cover;
     background-position: center 44%;
@@ -280,7 +280,7 @@
   }
   .origin-section::before {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, var(--purple-deep) 0%, transparent 18%, transparent 72%, var(--purple-deep) 100%);
+    background: linear-gradient(180deg, var(--purple-deep) 0%, transparent 16%, transparent 82%, rgba(15,6,32,0.72) 94%, var(--purple-deep) 100%);
     pointer-events: none;
   }
   .origin-content { max-width: 660px; position: relative; z-index: 1; }
@@ -597,12 +597,12 @@
 
     /* Origin */
     .origin-section {
-      min-height: 560px; padding: 90px 1.25rem;
+      min-height: 620px; padding: 100px 1.25rem 145px;
       background-image:
-        linear-gradient(180deg, rgba(15,6,32,0.9) 0%, rgba(15,6,32,0.7) 44%, rgba(15,6,32,0.94) 100%),
+        linear-gradient(180deg, rgba(15,6,32,0.9) 0%, rgba(15,6,32,0.66) 48%, rgba(15,6,32,0.64) 74%, rgba(15,6,32,0.94) 100%),
         url('images/reed-e6-street.jpg');
       background-image:
-        linear-gradient(180deg, rgba(15,6,32,0.9) 0%, rgba(15,6,32,0.7) 44%, rgba(15,6,32,0.94) 100%),
+        linear-gradient(180deg, rgba(15,6,32,0.9) 0%, rgba(15,6,32,0.66) 48%, rgba(15,6,32,0.64) 74%, rgba(15,6,32,0.94) 100%),
         image-set(url('images/reed-e6-street.webp') type('image/webp'), url('images/reed-e6-street.jpg') type('image/jpeg'));
       background-position: center center;
     }
