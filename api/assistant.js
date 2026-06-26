@@ -7,6 +7,9 @@ const ALLOWED_ORIGINS = new Set([
   'https://www.dreambigbook.com',
 ]);
 
+const ALLOWED_ORIGIN_HOSTS = new Set(
+  Array.from(ALLOWED_ORIGINS, (origin) => new URL(origin).host)
+);
 const DEV_ORIGIN_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
 const MAX_CONTENT_LENGTH = 12000;
 const MAX_MESSAGES = 12;
@@ -168,10 +171,22 @@ module.exports = async function handler(req, res) {
 
 function getAllowedOrigin(req) {
   const origin = req.headers.origin || '';
-  if (!origin) return '';
   if (ALLOWED_ORIGINS.has(origin)) return origin;
 
   try {
+    if (!origin) {
+      const host = getRequestHost(req);
+      if (!host) return '';
+
+      const hostname = host.split(':')[0];
+      if (ALLOWED_ORIGIN_HOSTS.has(host) || DEV_ORIGIN_HOSTS.has(hostname)) {
+        const protocol = getRequestProtocol(req);
+        return `${protocol}://${host}`;
+      }
+
+      return '';
+    }
+
     const url = new URL(origin);
     if ((url.protocol === 'http:' || url.protocol === 'https:') && DEV_ORIGIN_HOSTS.has(url.hostname)) {
       return origin;
@@ -181,6 +196,26 @@ function getAllowedOrigin(req) {
   }
 
   return '';
+}
+
+function getRequestHost(req) {
+  return String(req.headers['x-forwarded-host'] || req.headers.host || '')
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+}
+
+function getRequestProtocol(req) {
+  const forwardedProto = String(req.headers['x-forwarded-proto'] || '')
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+
+  if (forwardedProto === 'http' || forwardedProto === 'https') {
+    return forwardedProto;
+  }
+
+  return 'https';
 }
 
 function setCorsHeaders(res, origin) {
