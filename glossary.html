@@ -39,7 +39,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -218,6 +218,25 @@
   .legal-close:hover { background: var(--purple-light); }
 
   /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
+      top: 70px; left: 0; right: 0; max-height: calc(100vh - 70px);
+      max-height: calc(100dvh - 70px); overflow-y: auto;
+      background: rgba(15,6,32,0.98); padding: 1.25rem 2rem;
+      gap: 0.35rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-links.open > li { width: 100%; }
+    .nav-links.open a, .nav-links.open .nav-dropdown-trigger { display: flex; align-items: center; width: 100%; min-height: 44px; }
+    .nav-dropdown > a::after, .nav-dropdown-trigger::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0 0 0 1rem; font-size: 0.85rem !important; }
+  }
+
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .nav-toggle { display: block; }
@@ -269,7 +288,7 @@
     {
       "@type": "DefinedTerm",
       "name": "Amortization",
-      "description": "How your loan payments are split between interest and principal over time. Early payments are mostly interest. Later payments go toward what you actually owe. Knowing this changes how you think about paying extra."
+      "description": "The schedule showing how each loan payment is divided between interest and principal. The interest share is highest early because the remaining balance is highest; it may or may not be most of the payment."
     },
     {
       "@type": "DefinedTerm",
@@ -304,12 +323,12 @@
     {
       "@type": "DefinedTerm",
       "name": "Credit Score",
-      "description": "A number (usually 300–850) that tells lenders how responsible you are with money. It affects your interest rates, housing options, and sometimes even job opportunities. Protect it."
+      "description": "A three-digit number, usually 300–850, calculated from information in your credit reports. Lenders may use it with income, debt, and other details when deciding whether to approve credit and what rate to offer."
     },
     {
       "@type": "DefinedTerm",
       "name": "Credit Report",
-      "description": "Your financial report card. It lists every account, every payment, and every mistake. You can check it for free once a year. Do it."
+      "description": "A record of credit accounts and payment information reported to a credit bureau. Not every bill appears. You can review free reports from each nationwide bureau every week at AnnualCreditReport.com."
     },
     {
       "@type": "DefinedTerm",
@@ -374,22 +393,22 @@
     {
       "@type": "DefinedTerm",
       "name": "FICO Score",
-      "description": "The most commonly used credit score. Ranges from 300 to 850. Above 700 is good. Above 750 is great. Below 600 and doors start closing."
+      "description": "A widely used credit score ranging from 300 to 850. Standard ranges are Poor below 580, Fair 580–669, Good 670–739, Very Good 740–799, and Exceptional 800 or higher."
     },
     {
       "@type": "DefinedTerm",
       "name": "Fixed Rate",
-      "description": "An interest rate that stays the same for the life of the loan. No surprises. You know exactly what you're paying every month."
+      "description": "An interest rate that stays the same for the agreed fixed-rate period. The principal-and-interest payment is predictable, but a mortgage's total payment can still change when taxes, insurance, or other escrow costs change."
     },
     {
       "@type": "DefinedTerm",
       "name": "Front-Loaded Interest",
-      "description": "The way most loans are structured so that your early payments go mostly toward interest—not what you actually owe. On a 30-year mortgage, you could pay for 5 years and barely touch the principal. The bank gets paid first. Know this before you sign."
+      "description": "A common name for how amortized loans charge the most interest early, when the balance is highest. Each payment still reduces principal; the exact split depends on the rate and term."
     },
     {
       "@type": "DefinedTerm",
       "name": "Hard Inquiry",
-      "description": "When a lender checks your credit because you're applying for a loan, credit card, or apartment. Each one can drop your score a few points. One or two won't hurt much, but applying for five credit cards in a month? That tells lenders you might be desperate for money. Space them out."
+      "description": "A credit check tied to an application. It may affect a score for a while. For mortgage, auto, or student-loan rate shopping, scoring models often group inquiries made within a short shopping window, so compare offers close together."
     },
     {
       "@type": "DefinedTerm",
@@ -434,12 +453,12 @@
     {
       "@type": "DefinedTerm",
       "name": "Minimum Payment Trap",
-      "description": "Credit card companies let you pay a small minimum each month—usually $25 or 2% of your balance. Sounds easy, right? That's the trap. A $3,000 balance at 22% interest, paying only the minimum, takes over 17 years to pay off. And you'll pay more in interest than the original debt."
+      "description": "A credit card's required minimum can change as the balance changes. Paying only that amount can stretch repayment for years and add substantial interest. Check the minimum-payment warning on your statement and pay more when you safely can."
     },
     {
       "@type": "DefinedTerm",
       "name": "Mortgage",
-      "description": "A loan specifically for buying a home. Usually 15 or 30 years. The interest rate you get depends heavily on your credit score."
+      "description": "A loan used to buy or refinance a home, often repaid over 15 or 30 years. Rate and approval can depend on credit, income, debt, down payment, loan type, property, and market conditions."
     },
     {
       "@type": "DefinedTerm",
@@ -479,12 +498,12 @@
     {
       "@type": "DefinedTerm",
       "name": "Secured Credit Card",
-      "description": "A credit card where you put down a deposit that becomes your limit. It's how I rebuilt my credit after that $600 default. It works. It just takes time and discipline."
+      "description": "A credit card backed by a refundable security deposit, which often helps set the limit. It can help build credit when the issuer reports payments to the credit bureaus and you pay on time."
     },
     {
       "@type": "DefinedTerm",
       "name": "Simple Interest",
-      "description": "Interest calculated only on the original amount borrowed, not on accumulated interest. Less common than compound interest, but better for the borrower."
+      "description": "Interest calculated without charging interest on previously added interest. The total cost still depends on the rate, fees, balance, payment timing, and term, so compare the full loan offer."
     },
     {
       "@type": "DefinedTerm",
@@ -526,6 +545,7 @@
     <li class="nav-dropdown">
       <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" onclick="toggleTools(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="companion.html">Chapter Companion</a>
         <a href="first-money-moves.html">First Money Moves</a>
         <a href="calculators.html">Calculators</a>
         <a href="visualizer.html">Visualizer</a>
@@ -834,15 +854,15 @@ const glossaryTerms = [
   { term: "APR (Annual Percentage Rate)", def: "The yearly cost of borrowing money, including fees and interest. The higher the APR, the more you pay. This is the number that really matters when comparing loans." },
   { term: "Asset", def: "Something you own that has value—a house, a car, money in the bank, investments. Building assets is how you build wealth over time." },
   { term: "Autopay", def: "A setting that automatically pays your bills from your bank account or card on the due date. It's the easiest way to never miss a payment—and payment history is 35% of your credit score. Set it and forget it, but make sure the money's in your account." },
-  { term: "Amortization", def: "How your loan payments are split between interest and principal over time. Early payments are mostly interest. Later payments go toward what you actually owe. Knowing this changes how you think about paying extra." },
+  { term: "Amortization", def: "The schedule showing how each loan payment is divided between interest and principal. The interest share is highest early because the remaining balance is highest; it may or may not be most of the payment." },
   { term: "Budget", def: "A plan for your money. What comes in, what goes out, and where it goes. If you don't tell your money where to go, it disappears. Simple as that." },
   { term: "Co-Signing", def: "Putting your name on someone else's loan. If they stop paying, you owe every penny. It can wreck your credit and your relationship. Think long and hard before you sign—or ask someone else to sign—for a debt that isn't yours." },
   { term: "Collections", def: "When you stop paying a debt, the lender eventually sends it to a collections agency. That agency calls, sends letters, and reports it to the credit bureaus. A collection on your record tanks your score and stays there for up to seven years. Don't let a small bill turn into a big problem." },
   { term: "Copay", def: "A fixed amount you pay for a covered health care service, like $25 for a doctor visit or prescription. It is separate from your monthly premium and may still apply after your deductible." },
   { term: "Compound Interest", def: "Interest that earns interest. When you invest, your money grows on top of its own growth. Start early and it works for you. Start late and you're chasing what you missed. This is the most powerful force in personal finance." },
   { term: "Cost of Borrowing", def: "Money costs money. A $25,000 car at 7% interest for 6 years costs you over $30,000 by the time you're done. That extra $5,000+ is the real price of not paying cash. Always ask yourself: what is this really going to cost me?" },
-  { term: "Credit Score", def: "A number (usually 300–850) that tells lenders how responsible you are with money. It affects your interest rates, housing options, and sometimes even job opportunities. Protect it." },
-  { term: "Credit Report", def: "Your financial report card. It lists every account, every payment, and every mistake. You can check it for free once a year. Do it." },
+  { term: "Credit Score", def: "A three-digit number, usually 300–850, calculated from information in your credit reports. Lenders may use it with income, debt, and other details when deciding whether to approve credit and what rate to offer." },
+  { term: "Credit Report", def: "A record of credit accounts and payment information reported to a credit bureau. Not every bill appears. You can review free reports from each nationwide bureau every week at AnnualCreditReport.com." },
   { term: "Credit Utilization", def: "How much of your available credit you're using. If you have a $1,000 limit, try to keep your balance under $300. Lenders like to see you can borrow without maxing out." },
   { term: "Credit Mix", def: "The variety of credit accounts you have—credit cards, car loans, student loans, a mortgage. Lenders like to see you can handle different types of debt responsibly. You don't need to go open accounts just to have a mix, but it helps when it happens naturally over time." },
   { term: "Debt-to-Income Ratio", def: "How much of your monthly income goes to debt payments. Lenders use this to decide if you can afford more borrowing. Lower is better." },
@@ -855,10 +875,10 @@ const glossaryTerms = [
   { term: "Employer Match", def: "Free money from your job. Many employers will match what you put into your 401(k)—dollar for dollar up to a certain percentage. If your employer matches 3% and you contribute 3%, that's like getting a 3% raise you never have to negotiate for. If you're not contributing at least enough to get the full match, you're leaving money on the table." },
   { term: "Equity", def: "The portion of something you actually own. If your house is worth $200,000 and you owe $150,000, you have $50,000 in equity. Equity is wealth." },
   { term: "FAFSA", def: "The Free Application for Federal Student Aid. It is the form that opens the door to federal grants, work-study, and student loans, and many states and schools use it for their own aid too. Fill it out every year you are in school." },
-  { term: "FICO Score", def: "The most commonly used credit score. Ranges from 300 to 850. Above 700 is good. Above 750 is great. Below 600 and doors start closing." },
-  { term: "Fixed Rate", def: "An interest rate that stays the same for the life of the loan. No surprises. You know exactly what you're paying every month." },
-  { term: "Front-Loaded Interest", def: "The way most loans are structured so that your early payments go mostly toward interest—not what you actually owe. On a 30-year mortgage, you could pay for 5 years and barely touch the principal. The bank gets paid first. Know this before you sign." },
-  { term: "Hard Inquiry", def: "When a lender checks your credit because you're applying for a loan, credit card, or apartment. Each one can drop your score a few points. One or two won't hurt much, but applying for five credit cards in a month? That tells lenders you might be desperate for money. Space them out." },
+  { term: "FICO Score", def: "A widely used credit score ranging from 300 to 850. Standard ranges are Poor below 580, Fair 580–669, Good 670–739, Very Good 740–799, and Exceptional 800 or higher." },
+  { term: "Fixed Rate", def: "An interest rate that stays the same for the agreed fixed-rate period. The principal-and-interest payment is predictable, but a mortgage's total payment can still change when taxes, insurance, or other escrow costs change." },
+  { term: "Front-Loaded Interest", def: "A common name for how amortized loans charge the most interest early, when the balance is highest. Each payment still reduces principal; the exact split depends on the rate and term." },
+  { term: "Hard Inquiry", def: "A credit check tied to an application. It may affect a score for a while. For mortgage, auto, or student-loan rate shopping, scoring models often group inquiries made within a short shopping window, so compare offers close together." },
   { term: "Grace Period", def: "The window of time—usually 21 to 25 days—where you can pay your credit card balance in full without being charged interest. If you pay within the grace period, borrowing that money was free. Miss it, and interest kicks in on everything." },
   { term: "Grant vs. Scholarship", def: "Both are money for school that you usually do not have to pay back. Grants are often based on financial need, while scholarships are often based on grades, talent, community service, or a specific application." },
   { term: "Gross Income", def: "The total money you earn before taxes and deductions come out. A job offer might sound like $40,000 a year, but that is gross income, not what actually lands in your account." },
@@ -867,8 +887,8 @@ const glossaryTerms = [
   { term: "Inflation", def: "The slow rise in prices over time. A dollar today buys less than a dollar ten years ago. That's why money sitting in a regular savings account is actually losing value. Your savings need to grow faster than inflation—that's why investing matters." },
   { term: "Interest", def: "The cost of borrowing money. It's what the lender charges you for using their money. With good credit, it's manageable. With bad credit, it's expensive. Really expensive." },
   { term: "Liability", def: "Something you owe. Credit card debt, car loans, student loans—these are liabilities. The goal is to have more assets than liabilities." },
-  { term: "Minimum Payment Trap", def: "Credit card companies let you pay a small minimum each month—usually $25 or 2% of your balance. Sounds easy, right? That's the trap. A $3,000 balance at 22% interest, paying only the minimum, takes over 17 years to pay off. And you'll pay more in interest than the original debt." },
-  { term: "Mortgage", def: "A loan specifically for buying a home. Usually 15 or 30 years. The interest rate you get depends heavily on your credit score." },
+  { term: "Minimum Payment Trap", def: "A credit card's required minimum can change as the balance changes. Paying only that amount can stretch repayment for years and add substantial interest. Check the minimum-payment warning on your statement and pay more when you safely can." },
+  { term: "Mortgage", def: "A loan used to buy or refinance a home, often repaid over 15 or 30 years. Rate and approval can depend on credit, income, debt, down payment, loan type, property, and market conditions." },
   { term: "Needs vs. Wants", def: "Rent, food, transportation—those are needs. The latest sneakers, a new gaming setup, eating out every day—those are wants. The line between them gets blurry fast, and that's where money disappears. Get honest about the difference early. It's one of the most important financial habits you can build." },
   { term: "Net Worth", def: "What you own minus what you owe. That's your real financial picture. It's not about how much you make—it's about how much you keep and grow." },
   { term: "Net Income / Take-Home Pay", def: "The money you actually receive after taxes, insurance, retirement contributions, and other deductions. Build your budget on take-home pay, not gross income." },
@@ -876,8 +896,8 @@ const glossaryTerms = [
   { term: "Premium", def: "The amount you pay every month to keep insurance active. You pay the premium whether you use the insurance that month or not." },
   { term: "Principal", def: "The original amount you borrowed, not counting interest. When you make extra payments, you want them going toward the principal." },
   { term: "Retirement Account (401k/IRA)", def: "Accounts designed for long-term savings with tax benefits. A 401k comes through your employer. An IRA you open yourself. Start contributing as early as you can—compound interest does the heavy lifting." },
-  { term: "Secured Credit Card", def: "A credit card where you put down a deposit that becomes your limit. It's how I rebuilt my credit after that $600 default. It works. It just takes time and discipline." },
-  { term: "Simple Interest", def: "Interest calculated only on the original amount borrowed, not on accumulated interest. Less common than compound interest, but better for the borrower." },
+  { term: "Secured Credit Card", def: "A credit card backed by a refundable security deposit, which often helps set the limit. It can help build credit when the issuer reports payments to the credit bureaus and you pay on time." },
+  { term: "Simple Interest", def: "Interest calculated without charging interest on previously added interest. The total cost still depends on the rate, fees, balance, payment timing, and term, so compare the full loan offer." },
   { term: "Student Loan: Subsidized vs. Unsubsidized", def: "Both are federal student loans, but subsidized loans are better when you qualify because the government covers interest during certain school and grace periods. Unsubsidized loans start building interest as soon as the money is sent to your school." },
   { term: "Variable Rate", def: "An interest rate that can change over time based on market conditions. Your payment could go up or down. Predictability matters—be careful with these." },
   { term: "W-2 vs. 1099", def: "A W-2 usually means you are an employee and taxes are withheld from your paycheck. A 1099 usually means you are treated as a contractor, so you may need to set aside money for your own taxes and benefits." },

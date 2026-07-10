@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Financial Calculators — DREAM/BIG by Corey L. Cook</title>
-<meta name="description" content="Free financial calculators from DREAM/BIG — see what auto loans, home loans, and retirement savings really cost. Plug in your numbers and make smarter decisions.">
+<meta name="description" content="Free DREAM/BIG learning tools for auto loans, home loans, retirement savings, credit habits, and budgeting. Practice with numbers before making a real financial decision.">
 <meta property="og:title" content="Financial Calculators — DREAM/BIG">
 <meta property="og:description" content="Free financial calculators — see what auto loans, home loans, and retirement savings really cost. Make smarter decisions.">
 <meta property="og:type" content="website">
@@ -39,7 +39,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -158,10 +158,11 @@
   .calc-tab {
     padding: 10px 24px; border: 1px solid rgba(201,168,76,0.3); background: transparent;
     color: var(--text-muted); border-radius: 4px; cursor: pointer; font-size: 0.85rem;
-    font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; font-family: 'Inter', sans-serif;
+    min-height: 44px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s; font-family: 'Inter', sans-serif;
   }
   .calc-tab.active { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
   .calc-tab:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .calc-tab:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
   .calc-panel { display: none; }
   .calc-panel.active { display: block; }
   .calc-card {
@@ -180,12 +181,17 @@
   .label-row label { margin-bottom: 0; }
   .info-btn {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.4);
-    background: rgba(201,168,76,0.1); color: var(--gold); font-size: 11px; font-weight: 700;
+    width: 44px; height: 44px; border: 0;
+    background: transparent; color: transparent; font-size: 0; font-weight: 700;
     cursor: pointer; flex-shrink: 0; font-family: 'Inter', sans-serif;
     transition: all 0.2s; line-height: 1; position: relative; padding: 0;
   }
-  .info-btn:hover { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
+  .info-btn::before {
+    content: '?'; display: inline-grid; place-items: center; width: 20px; height: 20px;
+    border-radius: 50%; border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.1); color: var(--gold); font-size: 11px;
+  }
+  .info-btn:hover::before, .info-btn.active::before { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
   .info-tooltip {
     display: none; position: absolute; left: 50%; transform: translateX(-50%);
     top: calc(100% + 8px); width: 260px; padding: 12px 14px;
@@ -218,6 +224,13 @@
   .result-row:last-child { border-bottom: none; }
   .result-row-label { color: var(--text-muted); font-size: 0.9rem; }
   .result-row-value { font-weight: 600; }
+  .loan-scope-note {
+    margin-top: 1rem; padding: 0.85rem 1rem; border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 6px; color: var(--text-muted); background: rgba(15,6,32,0.3);
+    font-size: 0.78rem; line-height: 1.6;
+  }
+  .loan-scope-note strong { color: var(--gold-light); }
+  .credit-slider-note { margin-top: 0.55rem; color: var(--text-muted); font-size: 0.74rem; line-height: 1.5; }
   .compare-box {
     margin-top: 1.5rem; padding: 1.5rem; background: rgba(192,57,43,0.08);
     border: 1px solid rgba(192,57,43,0.2); border-radius: 8px;
@@ -417,7 +430,7 @@
   /* RESPONSIVE — MOBILE */
   @media (max-width: 768px) {
     .nav-links { display: none; }
-    .nav-toggle { display: block; }
+    .nav-toggle { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
     .nav-subtitle { display: none; }
     .nav-links.open {
       display: flex; flex-direction: column; position: absolute;
@@ -436,7 +449,7 @@
     .calc-card { padding: 1.5rem; }
     .calc-intro { font-size: 0.9rem; line-height: 1.7; }
     .calc-tabs { gap: 0.4rem; }
-    .calc-tab { padding: 8px 16px; font-size: 0.78rem; }
+    .calc-tab { padding: 8px 16px; min-height: 44px; font-size: 0.78rem; }
     .result-value { font-size: 1.8rem; }
     .compare-amount { font-size: 1.3rem; }
     .result-box { padding: 1.5rem 1rem; }
@@ -476,6 +489,27 @@
     .credit-range-slider::-webkit-slider-thumb { width: 28px; height: 28px; }
   }
 
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
+      top: 70px; left: 0; right: 0; max-height: calc(100vh - 70px);
+      max-height: calc(100dvh - 70px); overflow-y: auto;
+      background: rgba(15,6,32,0.98); padding: 1.25rem 2rem;
+      gap: 0.35rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-links.open > li { width: 100%; }
+    .nav-links.open a, .nav-links.open .nav-dropdown > button {
+      display: flex; align-items: center; width: 100%; min-height: 44px;
+    }
+    .nav-dropdown > button::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0 0 0 1rem; font-size: 0.85rem !important; }
+  }
+
   /* RESPONSIVE — SMALL PHONE */
   @media (max-width: 380px) {
     nav { padding: 0 1rem; }
@@ -504,7 +538,7 @@
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
   "url": "https://www.lifeafterhighschoolbook.com/calculators.html",
-  "description": "Five free financial calculators from DREAM/BIG: an auto loan calculator, a home loan calculator, a retirement savings calculator, a credit score estimator, and a budget calculator. See what loans really cost and how your money can grow over time.",
+  "description": "Five free DREAM/BIG learning tools: auto and home loan comparisons, retirement savings, a credit habits checkup, and a budget calculator.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -533,6 +567,7 @@
     <li class="nav-dropdown">
       <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="companion.html">Chapter Companion</a>
         <a href="first-money-moves.html">First Money Moves</a>
         <a href="calculators.html" style="color:var(--gold);">Calculators</a>
         <a href="visualizer.html">Visualizer</a>
@@ -554,18 +589,18 @@
     <div class="divider"></div>
     <p class="section-text" style="margin-bottom:2.5rem;">In the book, I break down exactly what bad credit costs you&mdash;and what good financial decisions can build over time. These calculators let you plug in your own numbers and see it for yourself. Because the decisions you make about money right now will echo for decades. Make them count.</p>
 
-    <div class="calc-tabs">
-      <button type="button" class="calc-tab active" aria-selected="true" onclick="switchCalc('auto', this)">Auto Loan</button>
-      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('home', this)">Home Loan</button>
-      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('retirement', this)">Retirement</button>
-      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('credit', this)">Credit Score</button>
-      <button type="button" class="calc-tab" aria-selected="false" onclick="switchCalc('budget', this)">Budget</button>
+    <div class="calc-tabs" role="tablist" aria-label="Financial learning tools">
+      <button type="button" class="calc-tab active" id="tab-auto" role="tab" aria-controls="calc-auto" aria-selected="true" tabindex="0" onclick="switchCalc('auto', this)">Auto Loan</button>
+      <button type="button" class="calc-tab" id="tab-home" role="tab" aria-controls="calc-home" aria-selected="false" tabindex="-1" onclick="switchCalc('home', this)">Home Loan</button>
+      <button type="button" class="calc-tab" id="tab-retirement" role="tab" aria-controls="calc-retirement" aria-selected="false" tabindex="-1" onclick="switchCalc('retirement', this)">Retirement</button>
+      <button type="button" class="calc-tab" id="tab-credit" role="tab" aria-controls="calc-credit" aria-selected="false" tabindex="-1" onclick="switchCalc('credit', this)">Credit Habits</button>
+      <button type="button" class="calc-tab" id="tab-budget" role="tab" aria-controls="calc-budget" aria-selected="false" tabindex="-1" onclick="switchCalc('budget', this)">Budget</button>
     </div>
 
     <!-- AUTO LOAN -->
-    <div class="calc-panel active" id="calc-auto">
+    <div class="calc-panel active" id="calc-auto" role="tabpanel" aria-labelledby="tab-auto">
       <div class="calc-card">
-        <p class="calc-intro">&ldquo;When I went to buy my first real car&mdash;a 1998 Buick Park Avenue, $6,500&mdash;the interest rate was 13%. I remember sitting in that dealership, signing those papers, and doing the math in my head. I was paying so much money in interest.&rdquo; Do the math: 13% interest on that $6,500 loan over five years meant roughly $2,374 in interest alone&mdash;paying nearly $8,874 total for a $6,500 car.</p>
+        <p class="calc-intro"><strong>Book example:</strong> The Monetary Success chapter compares a $25,000 car loan over five years at 4% and 13%. Start with those numbers, then replace them with a real offer you are considering.</p>
         <div class="calc-grid">
           <div>
             <div class="form-group">
@@ -601,10 +636,11 @@
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="auto-monthly" aria-live="polite">$460</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Loan Payment</div><div class="result-value" id="auto-monthly" aria-live="polite">$460</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$25,000</span></div>
             <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$2,625</span></div>
-            <div class="result-row"><span class="result-row-label">Total Cost of Vehicle</span><span class="result-row-value" id="auto-total">$27,625</span></div>
+            <div class="result-row"><span class="result-row-label">Vehicle Price + Loan Interest</span><span class="result-row-value" id="auto-total">$27,625</span></div>
+            <p class="loan-scope-note"><strong>What this includes:</strong> vehicle price, down payment, principal, and loan interest. It does not include sales tax, title or dealer fees, insurance, fuel, maintenance, or repairs.</p>
             <div class="donut-wrapper">
               <canvas id="auto-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
               <div class="donut-legend">
@@ -618,22 +654,18 @@
         <!-- CREDIT SCORE SLIDER — FULL WIDTH -->
         <div class="credit-slider-box" id="auto-slider-box">
           <div class="credit-slider-header">
-            <div class="credit-slider-title">What Does Your Credit Score Really Cost You?</div>
-            <div class="credit-slider-subtitle">Slide to any credit score. Watch what happens to the price of this car. Same car. Same loan. The only thing that changes is your credit.</div>
+            <div class="credit-slider-title">What Can a Different APR Cost You?</div>
+            <div class="credit-slider-subtitle">Compare your entered APR with another possible offer. The book&rsquo;s high-cost car example uses 13%.</div>
           </div>
           <div class="slider-main-layout">
             <div class="slider-control-area">
               <div class="slider-score-display">
-                <div class="slider-score-num" id="auto-slider-score">550</div>
-                <div class="slider-score-label" id="auto-slider-rating" style="color:#E74C3C;">Poor</div>
+                <div class="slider-score-num" id="auto-slider-score">13.0%</div>
+                <div class="slider-score-label" id="auto-slider-rating">Comparison APR</div>
               </div>
-              <input type="range" class="credit-range-slider" id="auto-credit-slider" min="300" max="850" value="550" oninput="updateAutoSlider()">
+              <input type="range" class="credit-range-slider" id="auto-credit-slider" min="0" max="25" step="0.1" value="13" aria-label="Comparison auto loan APR" oninput="updateAutoSlider()">
               <div class="slider-range-labels">
-                <span>300<br><em>Worst</em></span>
-                <span>580<br><em>Poor</em></span>
-                <span>670<br><em>Fair</em></span>
-                <span>740<br><em>Good</em></span>
-                <span>850<br><em>Best</em></span>
+                <span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>25%</span>
               </div>
             </div>
             <div class="slider-results">
@@ -646,21 +678,22 @@
               </div>
               <div class="slider-vs">VS</div>
               <div class="slider-result-card slider" id="auto-slider-card">
-                <div class="slider-card-emoji" id="auto-slider-emoji">&#x274C;</div>
-                <div class="slider-card-label slider" id="auto-slider-label">Score of <span id="auto-slider-card-score">550</span></div>
-                <div class="slider-card-rate" id="auto-slider-rate">18.0% interest</div>
+                <div class="slider-card-emoji" id="auto-slider-emoji" aria-hidden="true">&#x274C;</div>
+                <div class="slider-card-label slider" id="auto-slider-label">Comparison Offer</div>
+                <div class="slider-card-rate" id="auto-slider-rate">13.0% APR</div>
                 <div class="slider-card-total" id="auto-slider-total">$38,961</div>
                 <div class="slider-card-monthly" id="auto-slider-monthly">$464/mo</div>
               </div>
             </div>
           </div>
           <div class="slider-diff-bar" id="auto-slider-diff">
-            <span id="auto-slider-diff-text">Bad credit would cost you </span><span class="slider-diff-amount cost" id="auto-slider-diff-amt">$10,737</span><span id="auto-slider-diff-suffix"> extra&mdash;for the exact same car.</span>
+            <span id="auto-slider-diff-text">The comparison rate would cost </span><span class="slider-diff-amount cost" id="auto-slider-diff-amt">$6,497</span><span id="auto-slider-diff-suffix"> more for the same car.</span>
           </div>
+          <p class="credit-slider-note">APR examples are for learning, not current offers or approval predictions. Lenders may also consider income, existing debt, term, down payment, collateral, and other information.</p>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
           <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem; color:var(--gold);">Where Your Money Goes Each Month</div>
-          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">This is amortization. Early in your loan, most of your payment goes to interest&mdash;not the car. You&rsquo;re paying the bank before you&rsquo;re paying yourself.</p>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">This is amortization. The interest share is highest early because the amount you still owe is highest. As the balance falls, more of each payment goes to principal.</p>
           <div class="chart-legend" style="display:flex; gap:1.5rem; margin-bottom:0.75rem; font-size:0.8rem;">
             <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:#E74C3C;border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Interest</span></span>
             <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Principal</span></span>
@@ -671,9 +704,9 @@
     </div>
 
     <!-- HOME LOAN -->
-    <div class="calc-panel" id="calc-home">
+    <div class="calc-panel" id="calc-home" role="tabpanel" aria-labelledby="tab-home" hidden>
       <div class="calc-card">
-        <p class="calc-intro">&ldquo;Good credit at 5%: your total cost is $289,800. Bad credit at 8.5%: your total cost is $415,080. That&rsquo;s $125,280 more over the life of the loan. Read that number again.&rdquo;</p>
+        <p class="calc-intro"><strong>Book example:</strong> The Monetary Success chapter compares a $150,000, 30-year home loan at 5% and 8.5%. Use the same starting numbers here, then replace them with an actual Loan Estimate.</p>
         <div class="calc-grid">
           <div>
             <div class="form-group">
@@ -686,16 +719,16 @@
             <div class="form-group">
               <div class="label-row">
                 <label for="home-down">Down Payment ($)</label>
-                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you bring to closing. 20% down avoids PMI (private mortgage insurance)&mdash;an extra monthly fee that protects the bank, not you. Even if you can&rsquo;t hit 20%, every dollar you put down reduces what you borrow and what you pay in interest.</span></button>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">The cash you bring to closing. On many conventional loans, 20% down can avoid private mortgage insurance. Rules vary by loan type. Every dollar down reduces what you borrow and the interest charged on that amount.</span></button>
               </div>
-              <input type="number" id="home-down" value="15000" min="0" oninput="calcHome()">
+              <input type="number" id="home-down" value="0" min="0" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
                 <label for="home-rate">Interest Rate (%)</label>
                 <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">Your mortgage rate depends on your credit score, the market, and your down payment. Even half a percent difference on a 30-year mortgage can mean tens of thousands of dollars. Shop around&mdash;don&rsquo;t just take the first offer.</span></button>
               </div>
-              <input type="number" id="home-rate" value="6.5" min="0" step="0.1" oninput="calcHome()">
+              <input type="number" id="home-rate" value="5" min="0" step="0.1" oninput="calcHome()">
             </div>
             <div class="form-group">
               <div class="label-row">
@@ -708,10 +741,11 @@
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Payment</div><div class="result-value" id="home-monthly" aria-live="polite">$853</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Principal + Interest</div><div class="result-value" id="home-monthly" aria-live="polite">$805</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$135,000</span></div>
             <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$172,185</span></div>
-            <div class="result-row"><span class="result-row-label">Total Cost of Home</span><span class="result-row-value" id="home-total">$307,185</span></div>
+            <div class="result-row"><span class="result-row-label">Purchase Price + Loan Interest</span><span class="result-row-value" id="home-total">$289,767</span></div>
+            <p class="loan-scope-note"><strong>What this includes:</strong> purchase price, down payment, principal, and loan interest. It does not include property tax, homeowners insurance, mortgage insurance, HOA dues, closing costs, utilities, or maintenance.</p>
             <div class="donut-wrapper">
               <canvas id="home-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
               <div class="donut-legend">
@@ -725,22 +759,18 @@
         <!-- CREDIT SCORE SLIDER — FULL WIDTH -->
         <div class="credit-slider-box" id="home-slider-box">
           <div class="credit-slider-header">
-            <div class="credit-slider-title">What Does Your Credit Score Really Cost You?</div>
-            <div class="credit-slider-subtitle">This is where it gets serious. On a 30-year mortgage, bad credit doesn&rsquo;t just cost you thousands&mdash;it costs you a house worth of money. Slide and see.</div>
+            <div class="credit-slider-title">What Can a Different APR Cost You?</div>
+            <div class="credit-slider-subtitle">Compare your entered rate with another possible offer. The book&rsquo;s high-cost mortgage example uses 8.5%.</div>
           </div>
           <div class="slider-main-layout">
             <div class="slider-control-area">
               <div class="slider-score-display">
-                <div class="slider-score-num" id="home-slider-score">550</div>
-                <div class="slider-score-label" id="home-slider-rating" style="color:#E74C3C;">Poor</div>
+                <div class="slider-score-num" id="home-slider-score">8.5%</div>
+                <div class="slider-score-label" id="home-slider-rating">Comparison APR</div>
               </div>
-              <input type="range" class="credit-range-slider" id="home-credit-slider" min="300" max="850" value="550" oninput="updateHomeSlider()">
+              <input type="range" class="credit-range-slider" id="home-credit-slider" min="0" max="15" step="0.1" value="8.5" aria-label="Comparison home loan interest rate" oninput="updateHomeSlider()">
               <div class="slider-range-labels">
-                <span>300<br><em>Worst</em></span>
-                <span>580<br><em>Poor</em></span>
-                <span>670<br><em>Fair</em></span>
-                <span>740<br><em>Good</em></span>
-                <span>850<br><em>Best</em></span>
+                <span>0%</span><span>3%</span><span>6%</span><span>9%</span><span>15%</span>
               </div>
             </div>
             <div class="slider-results">
@@ -753,21 +783,22 @@
               </div>
               <div class="slider-vs">VS</div>
               <div class="slider-result-card slider" id="home-slider-card">
-                <div class="slider-card-emoji" id="home-slider-emoji">&#x274C;</div>
-                <div class="slider-card-label slider" id="home-slider-label">Score of <span id="home-slider-card-score">550</span></div>
-                <div class="slider-card-rate" id="home-slider-rate">9.8% interest</div>
+                <div class="slider-card-emoji" id="home-slider-emoji" aria-hidden="true">&#x274C;</div>
+                <div class="slider-card-label slider" id="home-slider-label">Comparison Offer</div>
+                <div class="slider-card-rate" id="home-slider-rate">8.5% interest</div>
                 <div class="slider-card-total" id="home-slider-total">$444,290</div>
                 <div class="slider-card-monthly" id="home-slider-monthly">$1,165/mo</div>
               </div>
             </div>
           </div>
           <div class="slider-diff-bar" id="home-slider-diff">
-            <span id="home-slider-diff-text">Bad credit would cost you </span><span class="slider-diff-amount cost" id="home-slider-diff-amt">$137,105</span><span id="home-slider-diff-suffix"> extra&mdash;for the exact same house.</span>
+            <span id="home-slider-diff-text">The comparison rate would cost </span><span class="slider-diff-amount cost" id="home-slider-diff-amt">$125,000</span><span id="home-slider-diff-suffix"> more for the same home loan.</span>
           </div>
+          <p class="credit-slider-note">Rate examples are for learning, not current offers or approval predictions. Mortgage pricing and approval depend on many factors beyond a credit score.</p>
         </div>
         <div class="amort-chart-wrapper" style="margin-top:2rem;">
           <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem; color:var(--gold);">Where Your Money Goes Each Month</div>
-          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">On a 30-year mortgage, you can pay more in interest than the house itself. Look at how much of your early payments go straight to the bank. This is why credit score matters so much.</p>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem; line-height:1.5;">On a long mortgage, total interest can be very large. The interest share starts highest because the balance is highest, then falls as principal is repaid. Compare the full Loan Estimates, not only the monthly payment.</p>
           <div class="chart-legend" style="display:flex; gap:1.5rem; margin-bottom:0.75rem; font-size:0.8rem;">
             <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:#E74C3C;border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Interest</span></span>
             <span style="display:flex; align-items:center; gap:0.4rem;"><span style="width:12px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span><span style="color:var(--text-muted);">Principal</span></span>
@@ -778,9 +809,9 @@
     </div>
 
     <!-- RETIREMENT -->
-    <div class="calc-panel" id="calc-retirement">
+    <div class="calc-panel" id="calc-retirement" role="tabpanel" aria-labelledby="tab-retirement" hidden>
       <div class="calc-card">
-        <p class="calc-intro">&ldquo;The power of compound interest is real. Money you invest in your 20s is worth exponentially more than money you invest in your 40s. Small decisions. Compounded over time. Big impact.&rdquo;</p>
+        <p class="calc-intro">The book&rsquo;s lesson is simple: small decisions can compound over time. This tool shows one hypothetical path so you can see why starting early matters.</p>
         <div class="calc-grid">
           <div>
             <div class="form-group">
@@ -804,7 +835,7 @@
             <div class="form-group">
               <div class="label-row">
                 <label for="ret-return">Average Yearly Growth (%)</label>
-                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is how much your investments grow each year on average. The stock market has historically returned about 7% per year over long periods. You don&rsquo;t need to pick stocks&mdash;a simple index fund does this for you. Leave this at 7% if you&rsquo;re not sure.</span></button>
+                <button type="button" class="info-btn" onclick="toggleInfo(this)" aria-expanded="false" aria-label="More information">?<span class="info-tooltip">This is a hypothetical effective annual return used for the estimate. Real investments can rise or fall and may earn more or less. Try several rates instead of treating one result as a promise.</span></button>
               </div>
               <input type="number" id="ret-return" value="7" min="0" step="0.5" oninput="calcRetirement()">
             </div>
@@ -822,6 +853,7 @@
             <div class="result-row"><span class="result-row-label">What You Put In</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
             <div class="result-row"><span class="result-row-label">What Your Money Earned on Its Own</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
             <div class="result-row"><span class="result-row-label">Growth vs. Your Contributions</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">82%</span></div>
+            <p class="loan-scope-note"><strong>Remember:</strong> this is a hypothetical future-dollar estimate before inflation, taxes, and investment fees. Returns are not guaranteed.</p>
             <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">What Waiting 10 Years Costs You</div>
               <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
@@ -834,10 +866,10 @@
       </div>
     </div>
 
-    <!-- CREDIT SCORE ESTIMATOR -->
-    <div class="calc-panel" id="calc-credit">
+    <!-- CREDIT HABITS CHECKUP -->
+    <div class="calc-panel" id="calc-credit" role="tabpanel" aria-labelledby="tab-credit" hidden>
       <div class="calc-card">
-        <p class="calc-intro">&ldquo;Your credit score is your financial reputation. It follows you everywhere&mdash;apartments, car lots, job applications. Nobody teaches you this in school, but it&rsquo;s one of the most important numbers in your life.&rdquo;</p>
+        <p class="calc-intro">The book points readers to a Credit Score Estimator. This safer website checkup teaches the habits that may influence a score, but it cannot calculate or predict your actual credit score.</p>
         <div class="calc-grid">
           <div>
             <div class="form-group">
@@ -899,18 +931,16 @@
           </div>
           <div>
             <div class="result-box" style="margin-bottom:1rem;">
-              <div class="result-label">Estimated Credit Score Range</div>
-              <div class="result-value" id="credit-score" aria-live="polite">650 &ndash; 700</div>
-              <div class="result-sub" id="credit-rating" style="font-weight:600;">Good</div>
+              <div class="result-label">Credit Habit Strength</div>
+              <div class="result-value" id="credit-score" aria-live="polite">Building</div>
+              <div class="result-sub" id="credit-rating" style="font-weight:600;">Learning checkup &mdash; not a credit score</div>
             </div>
-            <div class="gauge-wrapper">
-              <canvas id="credit-gauge" width="280" height="170" style="width:280px;height:170px;"></canvas>
-            </div>
-            <div class="result-row"><span class="result-row-label">Payment History (35%)</span><span class="result-row-value" id="credit-detail-payment">Good</span></div>
-            <div class="result-row"><span class="result-row-label">Credit Utilization (30%)</span><span class="result-row-value" id="credit-detail-util">30%</span></div>
-            <div class="result-row"><span class="result-row-label">Length of History (15%)</span><span class="result-row-value" id="credit-detail-length">1&ndash;3 years</span></div>
-            <div class="result-row"><span class="result-row-label">Credit Mix (10%)</span><span class="result-row-value" id="credit-detail-mix">Two types</span></div>
-            <div class="result-row"><span class="result-row-label">New Inquiries (10%)</span><span class="result-row-value" id="credit-detail-inq">None</span></div>
+            <p class="loan-scope-note"><strong>Want the real information?</strong> Review your reports at <a href="https://www.annualcreditreport.com/" target="_blank" rel="noopener">AnnualCreditReport.com</a> and get a score from a lender or reputable score provider. Some new borrowers do not have enough history to generate a score yet.</p>
+            <div class="result-row"><span class="result-row-label">Payment History (commonly 35%)</span><span class="result-row-value" id="credit-detail-payment">Good</span></div>
+            <div class="result-row"><span class="result-row-label">Amounts Owed (commonly 30%)</span><span class="result-row-value" id="credit-detail-util">30%</span></div>
+            <div class="result-row"><span class="result-row-label">Length of History (commonly 15%)</span><span class="result-row-value" id="credit-detail-length">1&ndash;3 years</span></div>
+            <div class="result-row"><span class="result-row-label">Credit Mix (commonly 10%)</span><span class="result-row-value" id="credit-detail-mix">Two types</span></div>
+            <div class="result-row"><span class="result-row-label">New Credit (commonly 10%)</span><span class="result-row-value" id="credit-detail-inq">None</span></div>
             <div id="credit-tips" style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.75rem; color:var(--gold);">How to Improve Your Score</div>
               <div id="credit-tips-list" style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;"></div>
@@ -922,12 +952,13 @@
     </div>
 
     <!-- BUDGET CALCULATOR -->
-    <div class="calc-panel" id="calc-budget">
+    <div class="calc-panel" id="calc-budget" role="tabpanel" aria-labelledby="tab-budget" hidden>
       <div class="calc-card">
-        <p class="calc-intro">&ldquo;Nobody sits you down after graduation and says, &lsquo;Here&rsquo;s how to manage a paycheck.&rsquo; You get that first real check and it feels like a lot&mdash;until rent, food, a car payment, and a phone bill eat it alive. A budget isn&rsquo;t about restricting yourself. It&rsquo;s about knowing where your money goes so you can make it work for you.&rdquo;</p>
+        <p class="calc-intro">A budget is a plan for your take-home pay. Enter what you actually spend, set aside savings on purpose, and give the unallocated money a job before it disappears.</p>
         <div class="calc-grid">
           <div>
             <div class="form-group"><label for="budget-income">Monthly Take-Home Pay ($)</label><input type="number" id="budget-income" value="2400" min="0" oninput="calcBudget()"></div>
+            <div class="form-group"><label for="budget-savings">Planned Savings ($)</label><input type="number" id="budget-savings" value="200" min="0" oninput="calcBudget()"><p class="credit-slider-note">Money only counts as savings here when you choose an amount for it.</p></div>
             <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1.5rem; margin-top:0.5rem;">
               <div style="font-weight:600; font-size:0.85rem; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Your Monthly Expenses</div>
               <div class="form-group"><label for="budget-rent">Rent / Housing ($)</label><input type="number" id="budget-rent" value="700" min="0" oninput="calcBudget()"></div>
@@ -939,17 +970,18 @@
               <div class="form-group"><label for="budget-food">Groceries / Food ($)</label><input type="number" id="budget-food" value="300" min="0" oninput="calcBudget()"></div>
               <div class="form-group"><label for="budget-streaming">Streaming &amp; Subscriptions ($)</label><input type="number" id="budget-streaming" value="45" min="0" oninput="calcBudget()"></div>
               <div class="form-group"><label for="budget-personal">Personal &amp; Entertainment ($)</label><input type="number" id="budget-personal" value="80" min="0" oninput="calcBudget()"></div>
-              <div class="form-group"><label for="budget-other">Other Expenses ($)</label><input type="number" id="budget-other" value="50" min="0" oninput="calcBudget()"></div>
+              <div class="form-group"><label for="budget-other">Other Needs or Bills ($)</label><input type="number" id="budget-other" value="50" min="0" oninput="calcBudget()"></div>
             </div>
           </div>
           <div>
             <div class="result-box" style="margin-bottom:1rem;">
-              <div class="result-label">Money Left Over</div>
+              <div class="result-label">Unallocated Money</div>
               <div class="result-value" id="budget-remaining" aria-live="polite">$670</div>
               <div class="result-sub" id="budget-status" aria-live="polite">You have room to save and invest</div>
             </div>
             <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,800</span></div>
-            <div class="result-row"><span class="result-row-label">Total Expenses</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$2,130</span></div>
+            <div class="result-row"><span class="result-row-label">Total Spending</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$1,910</span></div>
+            <div class="result-row"><span class="result-row-label">Planned Savings</span><span class="result-row-value" id="budget-planned-savings" style="color:var(--gold);">$200</span></div>
             <div class="result-row"><span class="result-row-label">Expenses as % of Income</span><span class="result-row-value" id="budget-pct">76%</span></div>
 
             <div style="margin-top:1.5rem;">
@@ -1513,7 +1545,7 @@ function drawCreditGauge(scoreMid, ratingColor) {
 }
 
 // BUDGET DONUT
-function drawBudgetDonut(expenses, income) {
+function drawBudgetDonut(expenses, income, plannedSavings) {
   const colors = ['#9B59B6','#8E44AD','#E74C3C','#E67E22','#F39C12','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
   const segments = [];
   const legendItems = [];
@@ -1526,13 +1558,18 @@ function drawBudgetDonut(expenses, income) {
     }
     i++;
   }
-  // Add remaining as savings
+  if (plannedSavings > 0) {
+    segments.push({ value: plannedSavings, color: '#C9A84C' });
+    const plannedPct = income > 0 ? Math.round((plannedSavings / income) * 100) : 0;
+    legendItems.push('<div><span class="donut-legend-dot" style="background:#C9A84C;"></span>Planned Savings <strong>' + plannedPct + '%</strong></div>');
+  }
+  // Show money that still needs a job separately from planned savings.
   const totalExp = Object.values(expenses).reduce((a, b) => a + b, 0);
-  const remaining = income - totalExp;
+  const remaining = income - totalExp - plannedSavings;
   if (remaining > 0) {
     segments.push({ value: remaining, color: 'rgba(212,175,55,0.4)' });
     const savPct = income > 0 ? Math.round((remaining / income) * 100) : 0;
-    legendItems.push('<div><span class="donut-legend-dot" style="background:rgba(212,175,55,0.4);"></span>Savings <strong>' + savPct + '%</strong></div>');
+    legendItems.push('<div><span class="donut-legend-dot" style="background:rgba(212,175,55,0.4);"></span>Unallocated <strong>' + savPct + '%</strong></div>');
   }
   drawDonut('budget-donut', segments, income > 0 ? Math.round((totalExp / income) * 100) + '%' : '0%');
   document.getElementById('budget-donut-legend').innerHTML = legendItems.join('');
@@ -1632,40 +1669,10 @@ function calcHome() {
   drawAmortChart('home-amort-chart', loan, rate, term);
 }
 
-// === CREDIT SCORE SLIDER SYSTEM ===
-// Real-world rate tiers based on credit score ranges
-function autoRateFromScore(score) {
-  if (score >= 780) return 4.5;
-  if (score >= 740) return 5.2;
-  if (score >= 700) return 6.5;
-  if (score >= 670) return 8.5;
-  if (score >= 620) return 11.5;
-  if (score >= 560) return 14.5;
-  if (score >= 500) return 18.0;
-  return 22.0;
-}
-function homeRateFromScore(score) {
-  if (score >= 780) return 5.8;
-  if (score >= 740) return 6.2;
-  if (score >= 700) return 6.8;
-  if (score >= 670) return 7.5;
-  if (score >= 620) return 8.5;
-  if (score >= 560) return 9.8;
-  if (score >= 500) return 11.5;
-  return 13.5;
-}
-function creditRating(score) {
-  if (score >= 750) return { label: 'Excellent', color: '#1ABC9C' };
-  if (score >= 700) return { label: 'Good', color: '#27AE60' };
-  if (score >= 650) return { label: 'Fair', color: '#F1C40F' };
-  if (score >= 580) return { label: 'Poor', color: '#E67E22' };
-  return { label: 'Very Poor', color: '#E74C3C' };
-}
-
-function updateCreditSlider(prefix, rateFunc, suffix) {
-  const score = +document.getElementById(prefix + '-credit-slider').value;
-  const rating = creditRating(score);
-  const sliderRate = rateFunc(score);
+// === APR COMPARISON SLIDER ===
+// Users compare actual or hypothetical offers instead of treating a score as a guaranteed rate.
+function updateRateSlider(prefix, suffix) {
+  const sliderRate = numberFromInput(prefix + '-credit-slider', 0);
 
   // Read current loan params
   const priceId = prefix === 'auto' ? 'auto-price' : 'home-price';
@@ -1689,18 +1696,15 @@ function updateCreditSlider(prefix, rateFunc, suffix) {
   const sliderTotal = sliderCalc.total + down;
   const diff = sliderTotal - userTotal;
 
-  // Score display — color the number to match rating
-  const scoreEl = document.getElementById(prefix + '-slider-score');
-  scoreEl.textContent = score;
-  scoreEl.style.color = rating.color;
-  document.getElementById(prefix + '-slider-rating').textContent = rating.label;
-  document.getElementById(prefix + '-slider-rating').style.color = rating.color;
+  // APR display
+  const rateDisplay = document.getElementById(prefix + '-slider-score');
+  rateDisplay.textContent = sliderRate.toFixed(1) + '%';
+  rateDisplay.style.color = sliderRate > userRate ? '#E74C3C' : sliderRate < userRate ? '#27AE60' : 'var(--gold)';
 
   // Slider card
-  document.getElementById(prefix + '-slider-rate').textContent = sliderRate.toFixed(1) + '% interest';
+  document.getElementById(prefix + '-slider-rate').textContent = sliderRate.toFixed(1) + '% APR';
   document.getElementById(prefix + '-slider-total').textContent = fmt(sliderTotal);
   document.getElementById(prefix + '-slider-monthly').textContent = fmt(sliderCalc.monthly) + '/mo';
-  document.getElementById(prefix + '-slider-card-score').textContent = score;
 
   // Emoji + card color
   const card = document.getElementById(prefix + '-slider-card');
@@ -1725,26 +1729,26 @@ function updateCreditSlider(prefix, rateFunc, suffix) {
   if (Math.abs(diff) < threshold) {
     diffAmt.textContent = 'about the same';
     diffAmt.className = 'slider-diff-amount';
-    diffText.textContent = 'At this score, you\u2019d pay ';
-    diffSuffix.textContent = ' as your current rate.';
+    diffText.textContent = 'These two rates cost ';
+    diffSuffix.textContent = ' over the full loan term.';
     diffBar.classList.remove('savings');
   } else if (diff > 0) {
     diffAmt.textContent = fmt(diff);
     diffAmt.className = 'slider-diff-amount cost';
-    diffText.textContent = 'Bad credit would cost you ';
-    diffSuffix.textContent = ' extra\u2014for the exact same ' + suffix + '.';
+    diffText.textContent = 'The comparison rate would cost ';
+    diffSuffix.textContent = ' more for the same ' + suffix + '.';
     diffBar.classList.remove('savings');
   } else {
     diffAmt.textContent = fmt(Math.abs(diff));
     diffAmt.className = 'slider-diff-amount save';
-    diffText.textContent = 'Better credit would save you ';
-    diffSuffix.textContent = ' on this ' + suffix + '. That\u2019s real money.';
+    diffText.textContent = 'The comparison rate would save ';
+    diffSuffix.textContent = ' on the same ' + suffix + '.';
     diffBar.classList.add('savings');
   }
 }
 
-function updateAutoSlider() { updateCreditSlider('auto', autoRateFromScore, 'car'); }
-function updateHomeSlider() { updateCreditSlider('home', homeRateFromScore, 'house'); }
+function updateAutoSlider() { updateRateSlider('auto', 'car loan'); }
+function updateHomeSlider() { updateRateSlider('home', 'home loan'); }
 
 function calcRetirement() {
   const age = numberFromInput('ret-age', 22);
@@ -1757,7 +1761,8 @@ function calcRetirement() {
     document.getElementById('ret-retire').value = retire;
   }
   const years = Math.max(retire - age, 0);
-  const r = ret / 100 / 12;
+  const annualRate = Math.max(ret, 0) / 100;
+  const r = annualRate > 0 ? Math.pow(1 + annualRate, 1 / 12) - 1 : 0;
   const n = years * 12;
   let total = current * Math.pow(1 + r, n);
   if (r > 0) total += monthly * ((Math.pow(1 + r, n) - 1) / r);
@@ -1780,7 +1785,7 @@ function calcRetirement() {
   animatedFmt('ret-lost', total - lateTotal);
 }
 
-// CREDIT SCORE ESTIMATOR
+// CREDIT HABITS CHECKUP — teaches factors without manufacturing a score.
 function calcCredit() {
   var payment = +document.getElementById('credit-payment').value;
   var util = numberFromInput('credit-util', 30);
@@ -1788,8 +1793,8 @@ function calcCredit() {
   var mix = +document.getElementById('credit-mix').value;
   var inquiries = +document.getElementById('credit-inquiries').value;
 
-  // FICO-like weighted score: Payment 35%, Utilization 30%, Length 15%, Mix 10%, Inquiries 10%
-  // Each factor scores 0-100, then weighted and mapped to 300-850 range
+  // Common FICO category weights are used only to organize the learning checkup.
+  // Exact importance varies by credit profile; this does not calculate a score.
   var paymentScore = [0, 15, 35, 60, 85, 100][payment]; // index 1-5
   var utilScore;
   if (util <= 10) utilScore = 100;
@@ -1808,22 +1813,16 @@ function calcCredit() {
   else inqScore = 15;
 
   var weighted = paymentScore * 0.35 + utilScore * 0.30 + lengthScore * 0.15 + mixScore * 0.10 + inqScore * 0.10;
-  var scoreLow = Math.max(300, Math.round(300 + weighted * 5.0));
-  var scoreHigh = Math.min(850, scoreLow + 50);
-  var scoreMid = (scoreLow + scoreHigh) / 2;
+  var rating;
+  var ratingColor;
+  if (weighted >= 85) { rating = 'Strong Habits'; ratingColor = '#27AE60'; }
+  else if (weighted >= 60) { rating = 'Building Habits'; ratingColor = '#F1C40F'; }
+  else { rating = 'Needs Attention'; ratingColor = '#E74C3C'; }
 
-  // Unified rating: same thresholds the credit-score slider uses
-  var ratingInfo = creditRating(scoreMid);
-  var rating = ratingInfo.label;
-  var ratingColor = ratingInfo.color;
-
-  document.getElementById('credit-score').innerHTML = scoreLow + ' &ndash; ' + scoreHigh;
+  document.getElementById('credit-score').textContent = rating;
   document.getElementById('credit-score').style.color = ratingColor;
-  document.getElementById('credit-rating').textContent = rating;
-  document.getElementById('credit-rating').style.color = ratingColor;
-
-  // Draw semicircle gauge
-  drawCreditGauge(scoreMid, ratingColor);
+  document.getElementById('credit-rating').textContent = 'Learning checkup — not a credit score';
+  document.getElementById('credit-rating').style.color = 'var(--text-muted)';
 
   // Detail labels
   var paymentLabels = ['', 'Very Poor', 'Poor', 'Fair', 'Good', 'Excellent'];
@@ -1852,6 +1851,7 @@ function calcCredit() {
 // BUDGET CALCULATOR
 function calcBudget() {
   var income = numberFromInput('budget-income', 0);
+  var plannedSavings = numberFromInput('budget-savings', 0);
   var expenses = {
     'Rent / Housing': numberFromInput('budget-rent', 0),
     'Utilities': numberFromInput('budget-utilities', 0),
@@ -1862,35 +1862,36 @@ function calcBudget() {
     'Groceries / Food': numberFromInput('budget-food', 0),
     'Streaming / Subs': numberFromInput('budget-streaming', 0),
     'Personal / Fun': numberFromInput('budget-personal', 0),
-    'Other': numberFromInput('budget-other', 0)
+    'Other Needs or Bills': numberFromInput('budget-other', 0)
   };
 
   var totalExp = 0;
   for (var k in expenses) totalExp += expenses[k];
-  var remaining = income - totalExp;
+  var remaining = income - totalExp - plannedSavings;
   var pct = income > 0 ? Math.round((totalExp / income) * 100) : 0;
 
   document.getElementById('budget-remaining').style.color = remaining >= 0 ? 'var(--gold)' : '#E74C3C';
   document.getElementById('budget-remaining').textContent = (remaining >= 0 ? '' : '-') + fmt(Math.abs(remaining));
   document.getElementById('budget-total-income').textContent = fmt(income);
   document.getElementById('budget-total-expenses').textContent = fmt(totalExp);
+  document.getElementById('budget-planned-savings').textContent = fmt(plannedSavings);
   document.getElementById('budget-pct').textContent = pct + '%';
 
   // Budget donut
-  drawBudgetDonut(expenses, income);
+  drawBudgetDonut(expenses, income, plannedSavings);
   document.getElementById('budget-pct').style.color = pct > 90 ? '#E74C3C' : pct > 75 ? '#F1C40F' : 'var(--gold)';
 
   if (remaining < 0) {
-    document.getElementById('budget-status').textContent = 'You\u2019re spending more than you make';
+    document.getElementById('budget-status').textContent = 'Your plan is above your take-home pay';
     document.getElementById('budget-status').style.color = '#E74C3C';
   } else if (remaining < income * 0.1) {
-    document.getElementById('budget-status').textContent = 'Tight\u2014not much room to save';
+    document.getElementById('budget-status').textContent = 'Little unallocated money remains';
     document.getElementById('budget-status').style.color = '#E67E22';
   } else if (remaining < income * 0.2) {
-    document.getElementById('budget-status').textContent = 'Decent\u2014try to save more if you can';
+    document.getElementById('budget-status').textContent = 'Some money still needs a job';
     document.getElementById('budget-status').style.color = '#F1C40F';
   } else {
-    document.getElementById('budget-status').textContent = 'You have room to save and invest';
+    document.getElementById('budget-status').textContent = 'Give the remaining money a purpose';
     document.getElementById('budget-status').style.color = '#27AE60';
   }
 
@@ -1923,9 +1924,9 @@ function calcBudget() {
   document.getElementById('budget-20').textContent = fmt(save20);
 
   // Categorize: Needs = rent, utilities, car, insurance, gas, food, phone. Wants = streaming, personal, other.
-  var needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
-  var wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
-  var savingsActual = Math.max(0, remaining);
+  var needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'] + expenses['Other Needs or Bills'];
+  var wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'];
+  var savingsActual = plannedSavings;
   document.getElementById('budget-needs-actual').textContent = fmt(needsActual);
   document.getElementById('budget-needs-actual').style.color = needsActual > needs50 ? '#E74C3C' : '#27AE60';
   document.getElementById('budget-wants-actual').textContent = fmt(wantsActual);
@@ -1934,10 +1935,10 @@ function calcBudget() {
   document.getElementById('budget-savings-actual').style.color = savingsActual >= save20 ? '#27AE60' : '#E74C3C';
 
   var rec = '';
-  if (remaining < 0) rec = 'You\u2019re spending more than you bring in. That\u2019s not sustainable. Look at your biggest expenses and find one thing to cut or reduce. Even $50 a month changes the trajectory.';
-  else if (savingsActual < save20) rec = 'You\u2019re saving ' + fmt(savingsActual) + ' \u2014 the guideline suggests ' + fmt(save20) + '. That\u2019s okay if you\u2019re just starting out. The important thing is you\u2019re saving something. Look for places to trim if you can \u2014 streaming services and eating out are usually the easiest wins.';
+  if (remaining < 0) rec = 'Your plan is ' + fmt(Math.abs(remaining)) + ' above your take-home pay. Reduce a category or lower the savings target until the plan balances.';
+  else if (savingsActual < save20) rec = 'You planned ' + fmt(savingsActual) + ' for savings. The 20% guideline would be ' + fmt(save20) + ', but it is a starting point, not a pass-or-fail rule. Pick an amount you can repeat.';
   else if (needsActual > needs50) rec = 'Your needs are above 50% of income. That\u2019s common when you\u2019re young and building your life. As your income grows, work to get this ratio down. The fact that you\u2019re tracking it means you\u2019re already ahead of most people.';
-  else rec = 'You\u2019re in solid shape. Consider putting that extra ' + fmt(savingsActual) + ' into an emergency fund first (aim for 3 months of expenses), then start investing. Even small amounts invested early grow into big numbers over time.';
+  else rec = 'Your planned savings meets the guideline. You still have ' + fmt(Math.max(0, remaining)) + ' unallocated. Give it a job: another bill, debt payoff, a goal, or more savings.';
   document.getElementById('budget-recommendation').textContent = rec;
 }
 
@@ -1974,14 +1975,21 @@ document.addEventListener('keydown', function(e) {
 });
 
 function switchCalc(id, el) {
-  document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.calc-panel').forEach(p => {
+    p.classList.remove('active');
+    p.hidden = true;
+  });
   document.querySelectorAll('.calc-tab').forEach(t => {
     t.classList.remove('active');
     t.setAttribute('aria-selected', 'false');
+    t.tabIndex = -1;
   });
-  document.getElementById('calc-' + id).classList.add('active');
+  const panel = document.getElementById('calc-' + id);
+  panel.hidden = false;
+  panel.classList.add('active');
   el.classList.add('active');
   el.setAttribute('aria-selected', 'true');
+  el.tabIndex = 0;
   // Redraw chart after panel becomes visible (needs a frame for layout)
   requestAnimationFrame(function() {
     if (id === 'auto') calcAuto();
@@ -1992,7 +2000,31 @@ function switchCalc(id, el) {
   });
 }
 
+function setupCalculatorAccessibility() {
+  const tabs = Array.from(document.querySelectorAll('.calc-tab'));
+  tabs.forEach(function(tab, index) {
+    tab.addEventListener('keydown', function(event) {
+      let nextIndex = null;
+      if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+      else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = tabs.length - 1;
+      if (nextIndex === null) return;
+      event.preventDefault();
+      tabs[nextIndex].focus();
+      tabs[nextIndex].click();
+    });
+  });
+
+  document.querySelectorAll('.info-btn').forEach(function(button) {
+    const row = button.closest('.label-row');
+    const label = row ? row.querySelector('label') : null;
+    if (label) button.setAttribute('aria-label', 'More information about ' + label.textContent.trim());
+  });
+}
+
 // INIT — run auto first (visible), defer others until their tab is shown
+setupCalculatorAccessibility();
 calcAuto();
 calcRetirement();
 calcCredit();
@@ -2037,6 +2069,7 @@ function downloadBudgetExcel(btn) {
 
 function buildBudgetWorkbook() {
   const income = numberFromInput('budget-income', 0);
+  const plannedSavings = numberFromInput('budget-savings', 0);
   const expenses = {
     'Rent / Housing': numberFromInput('budget-rent', 0),
     'Utilities': numberFromInput('budget-utilities', 0),
@@ -2047,23 +2080,23 @@ function buildBudgetWorkbook() {
     'Groceries / Food': numberFromInput('budget-food', 0),
     'Streaming / Subs': numberFromInput('budget-streaming', 0),
     'Personal / Fun': numberFromInput('budget-personal', 0),
-    'Other': numberFromInput('budget-other', 0)
+    'Other Needs or Bills': numberFromInput('budget-other', 0)
   };
 
   // Build data
   const totalExp = Object.values(expenses).reduce((a, b) => a + b, 0);
-  const remaining = income - totalExp;
+  const remaining = income - totalExp - plannedSavings;
   const needs50 = Math.round(income * 0.50);
   const wants30 = Math.round(income * 0.30);
   const save20 = Math.round(income * 0.20);
-  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'];
-  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'] + expenses['Other'];
-  const savingsActual = Math.max(0, remaining);
+  const needsActual = expenses['Rent / Housing'] + expenses['Utilities'] + expenses['Car Payment'] + expenses['Car Insurance'] + expenses['Gas / Transport'] + expenses['Groceries / Food'] + expenses['Cell Phone'] + expenses['Other Needs or Bills'];
+  const wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'];
+  const savingsActual = plannedSavings;
   const recommendation = remaining < 0
-    ? 'Your expenses are higher than your income. Look for one bill to reduce before adding new spending.'
+    ? 'Your plan is higher than your take-home pay. Reduce spending or the savings target until it balances.'
     : remaining < income * 0.10
-      ? 'You have a little room left. Try to protect at least a small emergency fund contribution.'
-      : 'You have room to save. Give every leftover dollar a job before it disappears.';
+      ? 'Your plan is close to fully assigned. Keep a small buffer for expenses that change.'
+      : 'You still have unallocated money. Give it a job before it disappears.';
 
   const cells = {};
   const merges = ['A1:F1', 'A2:F2', 'A3:F3', 'A4:F4', 'A6:F6', 'A9:F9', 'A12:F12', 'A27:F27', 'A33:F33', 'A34:F34', 'A36:F36'];
@@ -2099,13 +2132,15 @@ function buildBudgetWorkbook() {
   styleRow(7, 6);
   put('A7', { type: 's', value: 'Total Income', style: 6 });
   put('B7', { type: 'n', formula: 'B10', value: income, style: 7 });
-  put('C7', { type: 's', value: 'Total Expenses', style: 6 });
+  put('C7', { type: 's', value: 'Total Spending', style: 6 });
   put('D7', { type: 'n', formula: 'B24', value: totalExp, style: 7 });
-  put('E7', { type: 's', value: 'Money Left Over', style: 6 });
+  put('E7', { type: 's', value: 'Unallocated Money', style: 6 });
   put('F7', { type: 'n', formula: 'B25', value: remaining, style: 7 });
 
   put('A10', { type: 's', value: 'Monthly Take-Home Pay', style: 9 });
   put('B10', { type: 'n', value: income, style: 10 });
+  put('D10', { type: 's', value: 'Planned Savings', style: 9 });
+  put('E10', { type: 'n', value: plannedSavings, style: 10 });
 
   styleRow(13, 8, 1, 4);
   put('A13', { type: 's', value: 'Category', style: 8 });
@@ -2116,18 +2151,18 @@ function buildBudgetWorkbook() {
   const expenseRows = Object.keys(expenses);
   expenseRows.forEach(function(label, index) {
     const row = 14 + index;
-    const type = ['Streaming / Subs', 'Personal / Fun', 'Other'].includes(label) ? 'Want' : 'Need';
+    const type = ['Streaming / Subs', 'Personal / Fun'].includes(label) ? 'Want' : 'Need';
     put('A' + row, { type: 's', value: label, style: 9 });
     put('B' + row, { type: 'n', value: expenses[label], style: 10 });
     put('C' + row, { type: 'n', formula: 'IF($B$10=0,0,B' + row + '/$B$10)', value: income > 0 ? expenses[label] / income : 0, style: 11 });
     put('D' + row, { type: 's', value: type, style: 9 });
   });
 
-  put('A24', { type: 's', value: 'Total Expenses', style: 12 });
+  put('A24', { type: 's', value: 'Total Spending', style: 12 });
   put('B24', { type: 'n', formula: 'SUM(B14:B23)', value: totalExp, style: 13 });
   put('C24', { type: 'n', formula: 'IF($B$10=0,0,B24/$B$10)', value: income > 0 ? totalExp / income : 0, style: 14 });
-  put('A25', { type: 's', value: 'Money Left Over', style: 15 });
-  put('B25', { type: 'n', formula: 'B10-B24', value: remaining, style: remaining < 0 ? 17 : 16 });
+  put('A25', { type: 's', value: 'Unallocated Money', style: 15 });
+  put('B25', { type: 'n', formula: 'B10-B24-E10', value: remaining, style: remaining < 0 ? 17 : 16 });
   put('C25', { type: 'n', formula: 'IF($B$10=0,0,B25/$B$10)', value: income > 0 ? remaining / income : 0, style: 18 });
 
   styleRow(28, 8, 1, 5);
@@ -2138,17 +2173,17 @@ function buildBudgetWorkbook() {
   put('A29', { type: 's', value: 'Needs', style: 9 });
   put('B29', { type: 's', value: '50%', style: 24 });
   put('C29', { type: 'n', formula: '$B$10*50%', value: needs50, style: 10 });
-  put('D29', { type: 'n', formula: 'SUM(B14:B20)', value: needsActual, style: 10 });
+  put('D29', { type: 'n', formula: 'SUM(B14:B20)+B23', value: needsActual, style: 10 });
   put('E29', { type: 'fstr', formula: 'IF(D29<=C29,"On Track","Over")', value: needsActual <= needs50 ? 'On Track' : 'Over', style: needsActual <= needs50 ? 19 : 20 });
   put('A30', { type: 's', value: 'Wants', style: 9 });
   put('B30', { type: 's', value: '30%', style: 24 });
   put('C30', { type: 'n', formula: '$B$10*30%', value: wants30, style: 10 });
-  put('D30', { type: 'n', formula: 'SUM(B21:B23)', value: wantsActual, style: 10 });
+  put('D30', { type: 'n', formula: 'SUM(B21:B22)', value: wantsActual, style: 10 });
   put('E30', { type: 'fstr', formula: 'IF(D30<=C30,"On Track","Over")', value: wantsActual <= wants30 ? 'On Track' : 'Over', style: wantsActual <= wants30 ? 19 : 20 });
   put('A31', { type: 's', value: 'Savings', style: 9 });
   put('B31', { type: 's', value: '20%', style: 24 });
   put('C31', { type: 'n', formula: '$B$10*20%', value: save20, style: 10 });
-  put('D31', { type: 'n', formula: 'MAX(0,B25)', value: savingsActual, style: 10 });
+  put('D31', { type: 'n', formula: 'E10', value: savingsActual, style: 10 });
   put('E31', { type: 'fstr', formula: 'IF(D31>=C31,"On Track","Under")', value: savingsActual >= save20 ? 'On Track' : 'Under', style: savingsActual >= save20 ? 19 : 20 });
 
   styleRow(34, 21);

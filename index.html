@@ -41,7 +41,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -192,6 +192,52 @@
   }
   .purchase-note a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.45); }
   .purchase-note a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+
+  /* BOOK COMPANION START */
+  .companion-start {
+    background: var(--purple-deep);
+    padding-top: 78px;
+    padding-bottom: 84px;
+  }
+  .companion-start .container { max-width: 960px; }
+  .companion-start-heading { max-width: 760px; }
+  .companion-start-heading .section-text { max-width: 680px; }
+  .companion-paths {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.75rem;
+  }
+  .companion-path {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.9rem;
+    min-height: 150px;
+    padding: 1.35rem 0.25rem 1rem;
+    border-top: 1px solid rgba(201,168,76,0.55);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .companion-path:hover { border-color: var(--gold-light); transform: translateY(-3px); }
+  .companion-path-number {
+    color: var(--gold);
+    font: 700 0.72rem/1 'Inter', sans-serif;
+    letter-spacing: 1px;
+    padding-top: 0.3rem;
+  }
+  .companion-path strong {
+    display: block;
+    color: var(--gold-light);
+    font: 700 1.15rem/1.25 'Playfair Display', serif;
+    margin-bottom: 0.55rem;
+  }
+  .companion-path span:last-child {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
 
   /* SECTIONS */
   section { padding: 100px 2rem; }
@@ -559,12 +605,30 @@
     .hero-inner { max-width: 700px; }
     .hero-quote { max-width: 580px; }
     .about-headshot { width: 180px; height: 180px; }
+    .nav-links { display: none; }
+    .nav-toggle { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
+      top: 70px; left: 0; right: 0; max-height: calc(100vh - 70px);
+      max-height: calc(100dvh - 70px); overflow-y: auto;
+      background: rgba(15,6,32,0.98); padding: 1.25rem 2rem;
+      gap: 0.35rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-links.open > li { width: 100%; }
+    .nav-links.open a, .nav-links.open .nav-dropdown-trigger {
+      display: flex; align-items: center; width: 100%; min-height: 44px;
+    }
+    .nav-dropdown > a::after, .nav-dropdown-trigger::after { display: none; }
+    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
+    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
+    .nav-dropdown-menu a { padding: 0 0 0 1rem; font-size: 0.85rem !important; }
   }
 
   /* RESPONSIVE — MOBILE */
   @media (max-width: 768px) {
     .nav-links { display: none; }
-    .nav-toggle { display: block; }
+    .nav-toggle { display: grid; place-items: center; min-width: 44px; min-height: 44px; }
     .nav-subtitle { display: none; }
     .nav-links.open {
       display: flex; flex-direction: column; position: absolute;
@@ -586,6 +650,11 @@
     .retailer-actions { flex-direction: column; align-items: center; }
     .retailer-actions .btn { width: 100%; max-width: 280px; text-align: center; }
     .btn-retailer { min-width: 0; }
+
+    /* Companion start */
+    .companion-start { padding-top: 56px; padding-bottom: 60px; }
+    .companion-paths { grid-template-columns: 1fr; gap: 0.4rem; margin-top: 2rem; }
+    .companion-path { min-height: 0; padding: 1.15rem 0; }
 
     /* About */
     .about-headshot { width: 160px; height: 160px; }
@@ -659,7 +728,7 @@
       "alternateName": "DREAM/BIG: A Father & Mentor's Guide to Life After High School",
       "headline": "DREAM/BIG: A Father & Mentor's Guide to Life After High School",
       "description": "A practical life after high school book and graduation gift for young adults, with guidance on financial literacy, career building, relationships, resilience, purpose, and giving back.",
-      "isbn": "9798234036643",
+      "isbn": "9798234036636",
       "bookFormat": "https://schema.org/Paperback",
       "datePublished": "2026-04-03",
       "inLanguage": "en",
@@ -771,7 +840,7 @@
           "name": "What free tools are included on the website?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The site includes a First Money Moves guide, free financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. These tools help readers understand paychecks, emergency savings, student loans, auto loans, mortgages, retirement savings, budgeting, credit, FAFSA, insurance terms, and other real-world money decisions."
+            "text": "The site includes a chapter-by-chapter companion, a First Money Moves guide, financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. Readers can reflect on all eight DREAM/BIG principles, choose one next step, and practice real-world money decisions."
           }
         },
         {
@@ -804,6 +873,7 @@
     <li class="nav-dropdown">
       <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" onclick="toggleTools(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="companion.html">Chapter Companion</a>
         <a href="first-money-moves.html">First Money Moves</a>
         <a href="calculators.html">Calculators</a>
         <a href="visualizer.html">Visualizer</a>
@@ -825,15 +895,41 @@
     <h1>DREAM/BIG</h1>
     <p class="hero-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</p>
     <p class="hero-author">By Corey L. Cook</p>
-    <p class="hero-quote">&ldquo;I was 20 years old when I graduated from high school. I&rsquo;d been held back twice&mdash;once in first grade, then again in fifth. I made a decision to stop letting that embarrassment define me and start letting it drive me. Twenty-one years later, I am the Chief Operating Officer of a major development corporation. Every chapter of this book is built from the decisions that got me here. This is your roadmap.&rdquo;</p>
+    <p class="hero-quote">&ldquo;I was 20 years old when I graduated from high school. Twenty. I&rsquo;d been held back twice&mdash;once in first grade, then again in fifth. Then something changed. I made a decision&mdash;to stop letting that embarrassment define me, and start letting it drive me. That&rsquo;s what this book is about: Decisions. This is your starting point. Let&rsquo;s begin.&rdquo;</p>
     <div class="hero-cta">
       <a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="hero">Buy Direct</a>
-      <a href="calculators.html" class="btn btn-outline">Try the Calculators</a>
+      <a href="companion.html" class="btn btn-outline">Start the Companion</a>
     </div>
     <p class="purchase-note">Best way to support the author. Ships through IngramSpark. Also available through major retailers.</p>
     <div class="retailer-actions" aria-label="Retailer purchase options">
       <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="hero-retailer"><span class="retailer-mark retailer-mark-amazon" aria-hidden="true">a</span><span>Amazon</span></a>
       <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="hero-retailer"><span class="retailer-mark retailer-mark-bn" aria-hidden="true">B&amp;N</span><span>Barnes &amp; Noble</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK COMPANION START -->
+<section class="companion-start" id="companion">
+  <div class="container">
+    <div class="companion-start-heading">
+      <span class="section-label">Use the Book</span>
+      <h2 class="section-title">Read a chapter. Make one move.</h2>
+      <div class="divider"></div>
+      <p class="section-text">The book gives you the framework. These companion tools help you turn it into action. Start with one chapter, one decision, or one money question. Your work stays on your device unless you choose to ask the coach.</p>
+    </div>
+    <div class="companion-paths" aria-label="Ways to use the DREAM/BIG companion">
+      <a class="companion-path" href="companion.html">
+        <span class="companion-path-number">01</span>
+        <span><strong>Chapter Companion</strong><span>Reflect on each DREAM/BIG principle and choose one practical next step.</span></span>
+      </a>
+      <a class="companion-path" href="first-money-moves.html">
+        <span class="companion-path-number">02</span>
+        <span><strong>First Money Moves</strong><span>Decode a paycheck, build a starter emergency fund, and check a student loan.</span></span>
+      </a>
+      <a class="companion-path" href="visualizer.html">
+        <span class="companion-path-number">03</span>
+        <span><strong>See Decisions Over Time</strong><span>Move the sliders to see how saving, credit, and debt choices can shape the future.</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -852,7 +948,7 @@
         <h2 class="section-title">Corey L. Cook</h2>
         <div class="divider"></div>
         <p class="section-text">Corey Cook is the Chief Operating Officer of the Erie Downtown Development Corporation (EDDC) in downtown Erie, Pennsylvania. He helps oversee a $150 million development portfolio, including construction management, property management, tenant relationships, and community development initiatives. Born and raised on the Lower East Side of Erie, Corey&rsquo;s path to leadership was anything but traditional&mdash;and that&rsquo;s exactly why he wrote this book.</p>
-        <p class="section-text" style="margin-top:1rem;">Before joining EDDC, Corey spent over 16 years at UPS, working his way from a part-time union employee loading trucks to a management role overseeing dispatch operations for all of Erie County. During those same years, he founded LifeThruMusic, a nonprofit music mentoring program that grew from 10 kids in an afterschool music room at his alma mater to serving multiple cities in PA and eventually working in New Jersey, serving hundreds of young people. That work led to a live interview on Good Morning America, gubernatorial appointments by both Governor Tom Wolf and Governor Josh Shapiro, and recognition for his civic contributions to the Erie community.</p>
+        <p class="section-text" style="margin-top:1rem;">Before joining EDDC, Corey spent over 16 years at UPS, working his way from a part-time union employee loading trucks to a management role overseeing dispatch operations for all of Erie County. During those same years, he founded LifeThruMusic, a nonprofit music mentoring program that grew from 10 kids in a community room to serving young people across Pennsylvania and later in New Jersey. That work led to a live interview on Good Morning America, gubernatorial appointments by both Governor Tom Wolf and Governor Josh Shapiro, and recognition for his civic contributions to the Erie community.</p>
         <p class="section-text" style="margin-top:1rem;">Corey is also the founder and CEO of Cook Media LLC, a media production company specializing in wedding photography and videography, live sound, and recently, book publishing. He serves on multiple boards, including the Greater Erie Economic Development Corporation, United Way of Erie County, and the Pennsylvania Council on Inclusive Procurement, to name a few. He is a drummer, pianist, and the creator of the DREAM/BIG book series&mdash;of which this is the first volume, followed by GROW/, LAUNCH/, and LEGACY/.</p>
         <p class="section-text" style="margin-top:1rem;">This book started as a graduation gift for his children&mdash;a way to pass down the lessons, mistakes, and hard-won wisdom he wished someone had laid out for him when he walked across the stage at 20 years old. But as he wrote, it became clear the message was bigger than his own family. DREAM/BIG is for every young person standing at the edge of adulthood, especially those from communities where the roadmap isn&rsquo;t always clear.</p>
         <div class="about-stats">
@@ -902,21 +998,21 @@
       <div class="feature-card">
         <div class="feature-letter">R</div>
         <div class="feature-body">
-          <div class="feature-title">Relationships &amp; Support Systems</div>
+          <div class="feature-title">Relationships and Support Systems</div>
           <div class="feature-desc">Your network is your net worth. Not just about money&mdash;it&rsquo;s the compound interest of treating people well and showing up consistently.</div>
         </div>
       </div>
       <div class="feature-card">
         <div class="feature-letter">E</div>
         <div class="feature-body">
-          <div class="feature-title">Education &amp; Lifelong Learning</div>
+          <div class="feature-title">Education and Lifelong Learning</div>
           <div class="feature-desc">A degree is a credential. The actual learning is what matters. And learning never stops&mdash;it happens everywhere, in every passion you pursue and every skill you develop.</div>
         </div>
       </div>
       <div class="feature-card">
         <div class="feature-letter">A</div>
         <div class="feature-body">
-          <div class="feature-title">Adaptability &amp; Resilience</div>
+          <div class="feature-title">Adaptability and Resilience</div>
           <div class="feature-desc">How you wait matters as much as what you&rsquo;re waiting for. Stay patient. Stay consistent. Stay ready.</div>
         </div>
       </div>
@@ -998,7 +1094,7 @@
       </details>
       <details class="faq-item">
         <summary>What free tools are included on the website?</summary>
-        <p>The site includes a <a href="first-money-moves.html">First Money Moves guide</a>, free financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary. These tools help readers understand paychecks, emergency savings, student loans, auto loans, mortgages, retirement savings, budgeting, credit, FAFSA, insurance terms, and other real-world money decisions.</p>
+        <p>Start with the <a href="companion.html">Chapter Companion</a> to reflect on any of the eight DREAM/BIG principles and choose one next step. The site also includes a <a href="first-money-moves.html">First Money Moves guide</a>, financial calculators, the DREAM/BIG Money Visualizer, and a plain-language financial literacy glossary.</p>
       </details>
       <details class="faq-item">
         <summary>Is this book only for students going to college?</summary>
@@ -1428,38 +1524,6 @@ document.addEventListener('keydown', function(e) {
   window.addEventListener('scroll', requestCoverMotion, { passive: true });
   window.addEventListener('resize', requestCoverMotion);
 })();
-
-// CALCULATOR BANNER
-(function() {
-  if (sessionStorage.getItem('calcBannerDismissed')) return;
-  var banner = document.createElement('div');
-  banner.id = 'calc-banner';
-  banner.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;"><span style="font-size:0.9rem;color:#F5F5F5;"><strong style="color:#D4AF37;">Free Financial Calculators</strong> — See what your decisions really cost before you sign.</span><a href="calculators.html" style="display:inline-block;padding:7px 20px;background:#D4AF37;color:#0F0620;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;border-radius:3px;text-decoration:none;">Try Them</a><button type="button" onclick="dismissCalcBanner()" style="background:none;border:none;color:#B8A8D0;font-size:1.3rem;cursor:pointer;padding:0 0 0 0.5rem;line-height:1;" aria-label="Dismiss">&times;</button></div>';
-  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(26,10,46,0.97);backdrop-filter:blur(12px);border-top:1px solid rgba(212,175,55,0.25);padding:12px 2rem;transform:translateY(100%);transition:transform 0.4s ease;';
-  document.body.appendChild(banner);
-  function showBanner() {
-    if (!document.getElementById('calc-banner')) return;
-    banner.style.transform = 'translateY(0)';
-    document.body.style.paddingBottom = banner.offsetHeight + 'px';
-    document.documentElement.style.setProperty('--calc-banner-offset', banner.offsetHeight + 'px');
-    window.removeEventListener('scroll', maybeShowBanner);
-  }
-  function maybeShowBanner() {
-    if (window.scrollY > window.innerHeight * 0.65) showBanner();
-  }
-  setTimeout(function() {
-    maybeShowBanner();
-    window.addEventListener('scroll', maybeShowBanner, { passive: true });
-  }, 5000);
-})();
-function dismissCalcBanner() {
-  var b = document.getElementById('calc-banner');
-  b.style.transform = 'translateY(100%)';
-  document.body.style.paddingBottom = '';
-  document.documentElement.style.setProperty('--calc-banner-offset', '0px');
-  sessionStorage.setItem('calcBannerDismissed', '1');
-  setTimeout(function() { b.remove(); }, 400);
-}
 
 </script>
 </body>

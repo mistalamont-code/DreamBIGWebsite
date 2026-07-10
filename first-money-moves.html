@@ -39,7 +39,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -232,6 +232,8 @@
     line-height: 1.18; margin-bottom: 0.65rem; color: var(--text);
   }
   .tool-header p { color: var(--text-muted); max-width: 800px; }
+  .tool-header p + p { margin-top: 0.65rem; }
+  .tool-header a { color: var(--gold); text-underline-offset: 3px; }
   .tool-grid {
     display: grid; grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
     gap: 2.25rem; padding: 2.5rem;
@@ -287,6 +289,7 @@
   .result-row-value { color: var(--text); font-weight: 700; text-align: right; }
   .result-row-value.danger { color: var(--danger); }
   .result-row-value.success { color: var(--success); }
+  .result-row-value.neutral { color: var(--text-muted); }
 
   .stacked-bar {
     height: 18px; border-radius: 999px; overflow: hidden; display: flex;
@@ -314,6 +317,11 @@
     color: var(--text-muted); font-size: 0.9rem; line-height: 1.65;
   }
   .timeline-note strong { color: var(--teal); }
+  .timeline-note[hidden] { display: none; }
+  .warning-note {
+    background: rgba(231,76,60,0.08); border-color: rgba(231,76,60,0.35);
+  }
+  .warning-note strong { color: var(--danger); }
 
   .ratio-meter {
     margin: 1.2rem 0 0.8rem; padding: 1rem; border-radius: 8px;
@@ -331,6 +339,9 @@
     transition: left 0.25s ease;
   }
   .meter-labels { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.72rem; }
+  .ratio-meter.is-na .meter-track { background: rgba(255,255,255,0.1); }
+  .ratio-meter.is-na .meter-pin { display: none; }
+  .ratio-meter.is-na .meter-labels { visibility: hidden; }
 
   details.formula-box {
     margin-top: 1.25rem; background: rgba(15,6,32,0.42);
@@ -389,6 +400,43 @@
   .legal-content ul { padding-left: 1.5rem; margin: 0.75rem 0; }
   .legal-close { position: fixed; top: 2rem; right: 2rem; background: none; border: none; color: var(--gold); font-size: 2rem; cursor: pointer; z-index: 201; }
 
+  @media (max-width: 1024px) {
+    nav { padding: 0 1.25rem; }
+    .nav-brand { min-height: 44px; }
+    .nav-links { display: none; }
+    .nav-toggle {
+      display: grid; place-items: center; min-width: 44px; min-height: 44px;
+    }
+    .nav-subtitle { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
+      top: 70px; left: 0; right: 0; max-height: calc(100vh - 70px);
+      max-height: calc(100dvh - 70px); overflow-y: auto;
+      background: rgba(15,6,32,0.98); padding: 1.25rem; gap: 0.35rem;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-links.open > li { width: 100%; }
+    .nav-links.open > li > a,
+    .nav-links.open .nav-dropdown > button {
+      display: flex; align-items: center; width: 100%; min-height: 44px;
+    }
+    .nav-dropdown > button::after { display: none; }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu { display: none; }
+    .nav-dropdown > button[aria-expanded="true"] + .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu {
+      display: none; position: static; transform: none; padding: 0; min-width: 0;
+    }
+    .nav-dropdown-menu-inner {
+      background: none; border: none; box-shadow: none; padding: 0; min-width: 0;
+      backdrop-filter: none;
+    }
+    .nav-dropdown-menu a {
+      display: flex; align-items: center; min-height: 44px; padding: 0 0 0 1rem;
+      font-size: 0.85rem !important;
+    }
+  }
+
   @media (max-width: 980px) {
     .quick-cards { grid-template-columns: 1fr; }
     .tool-intro { display: block; }
@@ -398,18 +446,6 @@
 
   @media (max-width: 768px) {
     nav { padding: 0 1.25rem; }
-    .nav-links { display: none; }
-    .nav-toggle { display: block; }
-    .nav-subtitle { display: none; }
-    .nav-links.open {
-      display: flex; flex-direction: column; align-items: flex-start; position: absolute;
-      top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
-      padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
-    }
-    .nav-dropdown > button::after { display: none; }
-    .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
-    .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
-    .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
     section { padding: 60px 1.25rem; }
     .first-money-hero { min-height: 0; padding: 118px 1.25rem 58px; }
     .hero-actions { display: grid; grid-template-columns: 1fr; }
@@ -474,9 +510,10 @@
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#book">The Book</a></li>
     <li class="nav-dropdown">
-      <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
-      <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
-        <a href="first-money-moves.html" style="color:var(--gold);">First Money Moves</a>
+      <button type="button" aria-expanded="false" aria-haspopup="true" aria-controls="tools-menu" onclick="toggleToolsMenu(this)">Tools</button>
+      <div class="nav-dropdown-menu" id="tools-menu"><div class="nav-dropdown-menu-inner">
+        <a href="first-money-moves.html" aria-current="page" style="color:var(--gold);">First Money Moves</a>
+        <a href="companion.html">Chapter Companion</a>
         <a href="calculators.html">Calculators</a>
         <a href="visualizer.html">Visualizer</a>
         <a href="glossary.html">Glossary</a>
@@ -501,7 +538,7 @@
         </div>
         <p class="hero-note"><strong>Privacy note:</strong> the numbers you enter are calculated in this browser and are not sent to a server.</p>
 
-        <div class="quick-cards" aria-label="Tools on this page">
+        <div class="quick-cards" role="group" aria-label="Tools on this page">
           <div class="quick-card">
             <strong>Paycheck Decoder</strong>
             <span>Estimate gross pay, deductions, and the amount that actually lands in your account.</span>
@@ -524,23 +561,23 @@
       <div class="tool-intro">
         <div>
           <span class="section-label">Companion Tools</span>
-          <h2 class="section-title" style="font-size:clamp(2rem,4vw,3.2rem);">Practice the math before it is real</h2>
+          <h2 class="section-title" id="money-tools-heading" style="font-size:clamp(2rem,4vw,3.2rem);">Practice the math before it is real</h2>
           <p class="section-text">These estimates are simplified on purpose. They are built for learning, comparison, and better questions, not for replacing tax, legal, lending, or financial advice.</p>
         </div>
         <div class="privacy-chip">Local-only calculations</div>
       </div>
 
-      <div class="tool-tabs" role="tablist" aria-label="First money moves tools">
-        <button type="button" class="tool-tab active" id="tab-paycheck" role="tab" aria-selected="true" aria-controls="panel-paycheck" onclick="switchTool('paycheck', this)">Paycheck Decoder</button>
-        <button type="button" class="tool-tab" id="tab-emergency" role="tab" aria-selected="false" aria-controls="panel-emergency" onclick="switchTool('emergency', this)">Emergency Fund Builder</button>
-        <button type="button" class="tool-tab" id="tab-loans" role="tab" aria-selected="false" aria-controls="panel-loans" onclick="switchTool('loans', this)">Student Loan Reality Check</button>
+      <div class="tool-tabs" id="money-tool-tabs" role="tablist" aria-labelledby="money-tools-heading">
+        <button type="button" class="tool-tab active" id="tab-paycheck" role="tab" aria-selected="true" aria-controls="panel-paycheck" tabindex="0" onclick="switchTool('paycheck', this)">Paycheck Decoder</button>
+        <button type="button" class="tool-tab" id="tab-emergency" role="tab" aria-selected="false" aria-controls="panel-emergency" tabindex="-1" onclick="switchTool('emergency', this)">Emergency Fund Builder</button>
+        <button type="button" class="tool-tab" id="tab-loans" role="tab" aria-selected="false" aria-controls="panel-loans" tabindex="-1" onclick="switchTool('loans', this)">Student Loan Reality Check</button>
       </div>
 
       <article class="tool-panel active" id="panel-paycheck" role="tabpanel" aria-labelledby="tab-paycheck">
         <div class="tool-card">
           <div class="tool-header">
             <h2>Paycheck Decoder</h2>
-            <p>Your offer might say one number, your schedule might say another, and your deposit is usually smaller than both. Decode the path from hourly pay to take-home pay.</p>
+            <p>This is a simplified estimate for a W-2 employee. It traces hourly pay to a possible deposit, but actual withholding and whether pay or benefits are taxable vary by worker, employer, and location.</p>
           </div>
           <div class="tool-grid">
             <div class="input-panel">
@@ -570,14 +607,15 @@
                   <div class="form-group">
                     <label for="pay-pretax">Pre-tax deductions (%)</label>
                     <input type="number" id="pay-pretax" min="0" max="40" step="0.5" value="0" inputmode="decimal" oninput="calcPaycheck()">
-                    <p class="field-help">Use this for benefits or retirement deductions that lower taxable pay.</p>
+                    <p class="field-help">Use this simplified input for benefits or retirement deductions that may lower taxable pay. Tax treatment varies by deduction.</p>
                   </div>
                 </div>
                 <hr class="input-divider">
                 <div class="form-grid">
                   <div class="form-group">
-                    <label for="pay-federal">Federal withholding (%)</label>
-                    <input type="number" id="pay-federal" min="0" max="40" step="0.5" value="10" inputmode="decimal" oninput="calcPaycheck()">
+                    <label for="pay-federal">Federal income tax withholding estimate (%)</label>
+                    <input type="number" id="pay-federal" min="0" max="40" step="0.5" value="10" inputmode="decimal" aria-describedby="pay-federal-help" oninput="calcPaycheck()">
+                    <p class="field-help" id="pay-federal-help">This is not your final federal tax rate or tax bill.</p>
                   </div>
                   <div class="form-group">
                     <label for="pay-state">State/local withholding (%)</label>
@@ -596,6 +634,9 @@
                 <div class="result-value" id="pay-net" aria-live="polite">$0</div>
                 <div class="result-sub" id="pay-net-sub">per paycheck</div>
               </div>
+              <div class="timeline-note warning-note" id="pay-warning" role="alert" hidden>
+                <strong>Check the amounts entered.</strong> Estimated deductions and taxes exceed gross pay, so take-home pay is not available.
+              </div>
               <div class="mini-grid">
                 <div class="mini-card"><div class="mini-label">Gross per check</div><div class="mini-value" id="pay-gross">$0</div></div>
                 <div class="mini-card"><div class="mini-label">Annual take-home</div><div class="mini-value" id="pay-annual">$0</div></div>
@@ -613,7 +654,7 @@
                 <span><i class="legend-dot" style="background:var(--warning);"></i>Deductions</span>
               </div>
               <div style="margin-top:1.2rem;">
-                <div class="result-row"><span class="result-row-label">Estimated FICA payroll tax</span><span class="result-row-value" id="pay-fica">$0</span></div>
+                <div class="result-row"><span class="result-row-label">Social Security + Medicare (FICA)</span><span class="result-row-value" id="pay-fica">$0</span></div>
                 <div class="result-row"><span class="result-row-label">Estimated federal withholding</span><span class="result-row-value" id="pay-fed-tax">$0</span></div>
                 <div class="result-row"><span class="result-row-label">Estimated state/local withholding</span><span class="result-row-value" id="pay-state-tax">$0</span></div>
                 <div class="result-row"><span class="result-row-label">Total deductions and withholding</span><span class="result-row-value danger" id="pay-total-deductions">$0</span></div>
@@ -623,8 +664,9 @@
                 <ul>
                   <li>Weekly gross pay = regular hours up to 40 + overtime hours at 1.5x.</li>
                   <li>Gross per check = weekly gross pay x 52 / pay periods per year.</li>
-                  <li>FICA estimate = gross pay x 7.65% for Social Security and Medicare.</li>
-                  <li>Federal and state/local withholding use the percentages entered here, after the pre-tax deduction estimate.</li>
+                  <li>Social Security + Medicare (FICA) estimate = gross pay x 7.65%.</li>
+                  <li>Federal and state/local withholding use the percentages entered here after the pre-tax deduction estimate.</li>
+                  <li>Actual withholding and taxability vary. Wage limits, additional Medicare tax, and the tax treatment of each deduction can change a real paycheck.</li>
                 </ul>
               </details>
             </div>
@@ -713,6 +755,7 @@
           <div class="tool-header">
             <h2>Student Loan Reality Check</h2>
             <p>A loan balance is only the beginning. Interest, time, and starting income decide how heavy the payment feels after school.</p>
+            <p>This simplified tool applies one interest rate to one current balance. If you have multiple loans or disbursements, use the <a href="https://studentaid.gov/loan-simulator/" target="_blank" rel="noopener">Federal Student Aid Loan Simulator</a> for a loan-by-loan estimate.</p>
           </div>
           <div class="tool-grid">
             <div class="input-panel">
@@ -720,12 +763,13 @@
                 <legend>Loan estimate</legend>
                 <div class="form-grid">
                   <div class="form-group">
-                    <label for="loan-principal">Total borrowed</label>
+                    <label for="loan-principal">Current loan balance</label>
                     <input type="number" id="loan-principal" min="0" step="500" value="25000" inputmode="decimal" oninput="calcLoans()">
                   </div>
                   <div class="form-group">
-                    <label for="loan-apr">Interest rate APR (%)</label>
-                    <input type="number" id="loan-apr" min="0" max="30" step="0.1" value="6.5" inputmode="decimal" oninput="calcLoans()">
+                    <label for="loan-apr">Interest rate (%)</label>
+                    <input type="number" id="loan-apr" min="0" max="30" step="0.1" value="6.5" inputmode="decimal" aria-describedby="loan-rate-help" oninput="calcLoans()">
+                    <p class="field-help" id="loan-rate-help">APR may include certain fees, so it can differ from the interest rate entered here.</p>
                   </div>
                   <div class="form-group">
                     <label for="loan-term">Repayment term</label>
@@ -737,20 +781,21 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="loan-type">Loan type estimate</label>
-                    <select id="loan-type" onchange="calcLoans()">
-                      <option value="unsubsidized" selected>Unsubsidized / private</option>
-                      <option value="subsidized">Subsidized federal</option>
+                    <label for="loan-type">Does interest grow before repayment?</label>
+                    <select id="loan-type" aria-describedby="loan-interest-growth-help" onchange="calcLoans()">
+                      <option value="unsubsidized" selected>Usually yes</option>
+                      <option value="subsidized">Usually no</option>
                     </select>
-                    <p class="field-help">Subsidized federal loans usually do not add interest while you are in school at least half time.</p>
+                    <p class="field-help" id="loan-interest-growth-help">Usually yes: unsubsidized federal and many private loans. Usually no: subsidized federal loans while you are enrolled at least half time and during the grace period. Check your loan details.</p>
                   </div>
                   <div class="form-group">
-                    <label for="loan-grace">Months before repayment</label>
-                    <input type="number" id="loan-grace" min="0" max="48" step="1" value="6" inputmode="numeric" oninput="calcLoans()">
+                    <label for="loan-grace">Months interest grows before repayment</label>
+                    <input type="number" id="loan-grace" min="0" max="120" step="1" value="6" inputmode="numeric" oninput="calcLoans()">
                   </div>
                   <div class="form-group">
                     <label for="loan-salary">Expected starting salary</label>
-                    <input type="number" id="loan-salary" min="0" step="1000" value="42000" inputmode="decimal" oninput="calcLoans()">
+                    <input type="number" id="loan-salary" min="0" step="1000" value="42000" inputmode="decimal" aria-describedby="loan-salary-help" oninput="calcLoans()">
+                    <p class="field-help" id="loan-salary-help">Enter annual gross pay before taxes and deductions. Use $0 if it is unknown; payment share will show N/A.</p>
                   </div>
                   <div class="form-group">
                     <label for="loan-extra">Extra monthly payment</label>
@@ -769,7 +814,7 @@
                 <div class="mini-card"><div class="mini-label">Total repaid</div><div class="mini-value" id="loan-total">$0</div></div>
                 <div class="mini-card"><div class="mini-label">Interest cost</div><div class="mini-value" id="loan-interest">$0</div></div>
               </div>
-              <div class="ratio-meter" aria-label="Payment compared with gross monthly income">
+              <div class="ratio-meter" id="loan-ratio-meter" role="group" aria-label="Payment compared with gross monthly income">
                 <div class="result-row" style="border-bottom:0; padding:0;">
                   <span class="result-row-label">Payment share of gross monthly income</span>
                   <span class="result-row-value" id="loan-income-share">0%</span>
@@ -784,9 +829,9 @@
               <details class="formula-box">
                 <summary>Formula used</summary>
                 <ul>
-                  <li>Monthly rate = APR / 12.</li>
-                  <li>Unsubsidized/private pre-repayment interest is a simple estimate: borrowed amount x monthly rate x months before repayment.</li>
-                  <li>Subsidized federal mode sets pre-repayment interest to $0 for this simplified estimate.</li>
+                  <li>Monthly rate = entered interest rate / 12. This tool does not calculate APR; APR may include fees and differ from the entered rate.</li>
+                  <li>The "usually yes" pre-repayment interest is a simple estimate: current balance x monthly rate x months interest grows.</li>
+                  <li>The "usually no" setting adds $0 of pre-repayment interest in this simplified estimate.</li>
                   <li>Monthly payment uses a standard amortization formula over the selected repayment term.</li>
                   <li>Extra payment results are simulated month by month until payoff.</li>
                 </ul>
@@ -798,7 +843,7 @@
 
       <div class="calc-disclaimer">
         <p><strong>Educational disclaimer:</strong> These tools use simplified formulas for learning and comparison. They do not provide professional financial, tax, investment, legal, lending, or student aid advice. Actual paycheck withholding, benefits, tax rules, loan terms, fees, subsidies, repayment plans, and lender calculations can vary. Review real documents and consult qualified professionals before making major financial decisions.</p>
-        <div class="resource-links" aria-label="Official resources">
+        <div class="resource-links" role="navigation" aria-label="Official resources">
           <a href="https://www.irs.gov/individuals/tax-withholding-estimator" target="_blank" rel="noopener">IRS Tax Withholding Estimator</a>
           <a href="https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/" target="_blank" rel="noopener">CFPB Emergency Fund Guide</a>
           <a href="https://studentaid.gov/loan-simulator/" target="_blank" rel="noopener">Federal Student Aid Loan Simulator</a>
@@ -878,6 +923,7 @@ function toggleNav(btn) {
   const links = document.querySelector('.nav-links');
   const open = links.classList.toggle('open');
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
 }
 
 function toggleToolsMenu(btn) {
@@ -906,6 +952,16 @@ document.addEventListener('keydown', function(e) {
     const menu = document.querySelector('.nav-dropdown-menu');
     if (btn) btn.setAttribute('aria-expanded', 'false');
     if (menu) menu.style.display = '';
+    const navLinks = document.querySelector('.nav-links');
+    const navToggle = document.querySelector('.nav-toggle');
+    if (navLinks && navLinks.classList.contains('open')) {
+      navLinks.classList.remove('open');
+      if (navToggle) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Menu');
+        navToggle.focus();
+      }
+    }
   }
 });
 
@@ -913,7 +969,10 @@ document.querySelectorAll('.nav-links a').forEach(function(link) {
   link.addEventListener('click', function() {
     document.querySelector('.nav-links').classList.remove('open');
     const toggle = document.querySelector('.nav-toggle');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Menu');
+    }
   });
 });
 
@@ -995,21 +1054,44 @@ function payFrequencyLabel(periods) {
 }
 
 function switchTool(name, btn) {
+  const selectedTab = btn || document.getElementById('tab-' + name);
+  if (!selectedTab) return;
+  const selectedPanelId = selectedTab.getAttribute('aria-controls') || ('panel-' + name);
+
   document.querySelectorAll('.tool-panel').forEach(function(panel) {
-    panel.hidden = true;
-    panel.classList.remove('active');
+    const selected = panel.id === selectedPanelId;
+    panel.hidden = !selected;
+    panel.classList.toggle('active', selected);
   });
-  document.querySelectorAll('.tool-tab').forEach(function(tab) {
-    tab.classList.remove('active');
-    tab.setAttribute('aria-selected', 'false');
+  document.querySelectorAll('#money-tool-tabs [role="tab"]').forEach(function(tab) {
+    const selected = tab === selectedTab;
+    tab.classList.toggle('active', selected);
+    tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+    tab.setAttribute('tabindex', selected ? '0' : '-1');
   });
-  const panel = document.getElementById('panel-' + name);
-  if (panel) {
-    panel.hidden = false;
-    panel.classList.add('active');
-  }
-  btn.classList.add('active');
-  btn.setAttribute('aria-selected', 'true');
+}
+
+function handleToolTabsKeydown(e) {
+  const tabs = Array.from(document.querySelectorAll('#money-tool-tabs [role="tab"]'));
+  const currentIndex = tabs.indexOf(e.target);
+  if (currentIndex < 0) return;
+
+  let nextIndex = null;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextIndex = (currentIndex + 1) % tabs.length;
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+  if (e.key === 'Home') nextIndex = 0;
+  if (e.key === 'End') nextIndex = tabs.length - 1;
+  if (nextIndex === null) return;
+
+  e.preventDefault();
+  const nextTab = tabs[nextIndex];
+  switchTool(null, nextTab);
+  nextTab.focus();
+}
+
+function initToolTabs() {
+  const tablist = document.getElementById('money-tool-tabs');
+  if (tablist) tablist.addEventListener('keydown', handleToolTabsKeydown);
 }
 
 function setBarWidth(id, part, total) {
@@ -1037,17 +1119,20 @@ function calcPaycheck() {
   const federal = taxable * federalPct;
   const state = taxable * statePct;
   const totalDeductions = pretax + fica + federal + state + posttax;
+  const deductionsExceedGross = totalDeductions > gross;
   const net = Math.max(0, gross - totalDeductions);
   const annualNet = net * periods;
 
-  setText('pay-net', fmtMoney(net, true));
-  setText('pay-net-sub', payFrequencyLabel(periods) + ' estimate');
+  setText('pay-net', deductionsExceedGross ? 'N/A' : fmtMoney(net, true));
+  setText('pay-net-sub', deductionsExceedGross ? 'Deductions and taxes exceed gross pay' : payFrequencyLabel(periods) + ' estimate');
   setText('pay-gross', fmtMoney(gross, true));
-  setText('pay-annual', fmtMoney(annualNet));
+  setText('pay-annual', deductionsExceedGross ? 'N/A' : fmtMoney(annualNet));
   setText('pay-fica', fmtMoney(fica, true));
   setText('pay-fed-tax', fmtMoney(federal, true));
   setText('pay-state-tax', fmtMoney(state, true));
   setText('pay-total-deductions', fmtMoney(totalDeductions, true));
+  const warning = document.getElementById('pay-warning');
+  if (warning) warning.hidden = !deductionsExceedGross;
 
   setBarWidth('pay-net-bar', net, gross);
   setBarWidth('pay-fica-bar', fica, gross);
@@ -1067,25 +1152,30 @@ function calcEmergency() {
   const target = essentials * months;
   const gap = Math.max(0, target - current);
   const monthlyContribution = contribution * periods / 12;
-  const progress = target > 0 ? Math.min(100, (current / target) * 100) : 100;
-  const starterTarget = Math.min(target || 500, 500);
+  const progress = target > 0 ? Math.min(100, (current / target) * 100) : 0;
+  const starterTarget = target > 0 ? Math.min(target, 500) : 0;
   const starterGap = Math.max(0, starterTarget - current);
 
   setText('ef-months-out', months + ' ' + plural(months, 'month'));
   setText('ef-target', fmtMoney(target));
-  setText('ef-target-sub', months + ' ' + plural(months, 'month') + ' of essentials');
+  setText('ef-target-sub', target > 0 ? months + ' ' + plural(months, 'month') + ' of essentials' : 'Add monthly essentials to create a target');
   setText('ef-monthly', fmtMoney(essentials));
-  setText('ef-gap', fmtMoney(gap));
-  setText('ef-progress-text', fmtPercent(progress));
+  setText('ef-gap', target > 0 ? fmtMoney(gap) : 'N/A');
+  setText('ef-progress-text', target > 0 ? fmtPercent(progress) : '0% / N/A');
   setText('ef-monthly-contribution', fmtMoney(monthlyContribution) + '/mo');
-  setText('ef-starter', fmtMoney(starterTarget));
+  setText('ef-starter', target > 0 ? fmtMoney(starterTarget) : 'N/A');
   const fill = document.getElementById('ef-progress');
   if (fill) fill.style.width = progress + '%';
+  const progressText = document.getElementById('ef-progress-text');
+  if (progressText) {
+    progressText.classList.toggle('success', target > 0);
+    progressText.classList.toggle('neutral', target <= 0);
+  }
 
   const timeline = document.getElementById('ef-timeline');
   if (!timeline) return;
   if (target <= 0) {
-    timeline.innerHTML = '<strong>Add your essentials</strong> to see a target.';
+    timeline.innerHTML = '<strong>Progress is not available yet.</strong> Add at least one monthly essential to create a target. A $0 target is not treated as complete.';
   } else if (gap <= 0) {
     timeline.innerHTML = '<strong>You are at or above this target.</strong> Keep the money separate from everyday spending so it is ready when life happens.';
   } else if (monthlyContribution <= 0) {
@@ -1145,47 +1235,55 @@ function simulatePayoff(principal, annualRate, payment, maxMonths) {
 }
 
 function calcLoans() {
-  const borrowed = readNumber('loan-principal', 0);
-  const apr = readNumber('loan-apr', 0);
+  const currentBalance = readNumber('loan-principal', 0);
+  const annualRate = readNumber('loan-apr', 0);
   const termYears = readNumber('loan-term', 10);
-  const loanType = document.getElementById('loan-type') ? document.getElementById('loan-type').value : 'unsubsidized';
+  const interestGrowth = document.getElementById('loan-type') ? document.getElementById('loan-type').value : 'unsubsidized';
   const graceMonths = readNumber('loan-grace', 0);
   const salary = readNumber('loan-salary', 0);
   const extra = readNumber('loan-extra', 0);
-  const monthlyRate = apr / 100 / 12;
-  const graceInterest = loanType === 'subsidized' ? 0 : borrowed * monthlyRate * graceMonths;
-  const repaymentBalance = borrowed + graceInterest;
+  const monthlyRate = annualRate / 100 / 12;
+  const graceInterest = interestGrowth === 'subsidized' ? 0 : currentBalance * monthlyRate * graceMonths;
+  const repaymentBalance = currentBalance + graceInterest;
   const months = termYears * 12;
-  const payment = amortizedPayment(repaymentBalance, apr, months);
+  const payment = amortizedPayment(repaymentBalance, annualRate, months);
   const totalRepaid = payment * months;
-  const interestCost = Math.max(0, totalRepaid - borrowed);
+  const interestCost = Math.max(0, totalRepaid - currentBalance);
   const monthlyIncome = salary / 12;
-  const incomeShare = monthlyIncome > 0 ? (payment / monthlyIncome) * 100 : 0;
-  const standard = simulatePayoff(repaymentBalance, apr, payment, months + 2);
-  const withExtra = simulatePayoff(repaymentBalance, apr, payment + extra, months + 600);
+  const hasSalary = monthlyIncome > 0;
+  const incomeShare = hasSalary ? (payment / monthlyIncome) * 100 : null;
+  const standard = simulatePayoff(repaymentBalance, annualRate, payment, months + 2);
+  const withExtra = simulatePayoff(repaymentBalance, annualRate, payment + extra, months + 600);
   const saved = extra > 0 && withExtra.paidOff ? Math.max(0, standard.interest - withExtra.interest) : 0;
 
   setText('loan-payment', fmtMoney(payment, true));
   setText('loan-total', fmtMoney(totalRepaid));
   setText('loan-interest', fmtMoney(interestCost));
-  setText('loan-income-share', fmtPercent(incomeShare, incomeShare < 10 ? 1 : 0));
+  setText('loan-income-share', hasSalary ? fmtPercent(incomeShare, incomeShare < 10 ? 1 : 0) : 'N/A');
   setText('loan-grace-interest', fmtMoney(graceInterest));
   setText('loan-repay-balance', fmtMoney(repaymentBalance));
   setText('loan-extra-result', extra > 0 && withExtra.paidOff ? fmtMoney(saved) + ' saved' : 'Add extra to compare');
 
+  const ratioMeter = document.getElementById('loan-ratio-meter');
+  if (ratioMeter) ratioMeter.classList.toggle('is-na', !hasSalary);
   const pin = document.getElementById('loan-meter-pin');
-  if (pin) pin.style.left = Math.max(0, Math.min(100, (incomeShare / 20) * 100)) + '%';
+  if (pin && hasSalary) pin.style.left = Math.max(0, Math.min(100, (incomeShare / 20) * 100)) + '%';
 
   const note = document.getElementById('loan-note');
   if (!note) return;
-  let pressure = 'roomier';
-  if (incomeShare > 12) pressure = 'heavy';
-  else if (incomeShare > 8) pressure = 'tight';
-  let message = '<strong>' + fmtPercent(incomeShare, incomeShare < 10 ? 1 : 0) + ' of gross monthly income</strong> goes to the estimated payment, before rent, food, transportation, taxes, and savings. That can feel ' + pressure + ' depending on the rest of the budget.';
-  if (loanType === 'subsidized') {
-    message += ' This uses subsidized mode, so it does not add interest before repayment in this simplified estimate.';
+  let message = '';
+  if (!hasSalary) {
+    message = '<strong>Payment share is N/A.</strong> Enter an expected starting salary above $0 to compare this payment with gross monthly income. The payment estimate itself does not change.';
+  } else {
+    let pressure = 'roomier';
+    if (incomeShare > 12) pressure = 'heavy';
+    else if (incomeShare > 8) pressure = 'tight';
+    message = '<strong>' + fmtPercent(incomeShare, incomeShare < 10 ? 1 : 0) + ' of gross monthly income</strong> goes to the estimated payment, before rent, food, transportation, taxes, and savings. That can feel ' + pressure + ' depending on the rest of the budget.';
+  }
+  if (interestGrowth === 'subsidized') {
+    message += ' The "usually no" setting adds no pre-repayment interest in this simplified estimate; confirm the subsidy and status shown in your loan details.';
   } else if (graceInterest > 0) {
-    message += ' Because this is set to unsubsidized/private, it adds estimated interest before repayment begins.';
+    message += ' The "usually yes" setting adds estimated simple interest before repayment begins.';
   }
   if (extra > 0 && withExtra.paidOff) {
     message += ' Paying an extra ' + fmtMoney(extra) + '/mo could shorten payoff to about <strong>' + formatDuration(withExtra.months) + '</strong>.';
@@ -1194,6 +1292,7 @@ function calcLoans() {
 }
 
 function initTools() {
+  initToolTabs();
   calcPaycheck();
   calcEmergency();
   calcLoans();

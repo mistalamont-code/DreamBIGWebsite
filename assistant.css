@@ -204,14 +204,31 @@
   .ai-assistant-toggle {
     right: 1rem;
     bottom: calc(1rem + var(--calc-banner-offset, 0px));
-    padding: 0.78rem 0.9rem;
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+  }
+
+  .ai-assistant-toggle-label,
+  .ai-assistant-toggle[aria-expanded='true'] {
+    display: none;
   }
 
   .ai-assistant-panel {
-    right: 1rem;
-    bottom: calc(4.65rem + var(--calc-banner-offset, 0px));
-    width: calc(100vw - 2rem);
-    max-height: calc(100vh - 6rem);
+    right: 0.5rem;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+    width: auto;
+    max-height: calc(100vh - 1rem);
+    max-height: calc(100dvh - 1rem - env(safe-area-inset-bottom, 0px));
+  }
+
+  .ai-assistant-messages {
+    min-height: 0;
   }
 
   .ai-assistant-form {
@@ -220,5 +237,49 @@
 
   .ai-assistant-send {
     min-height: 42px;
+  }
+}
+
+@media (max-height: 600px) {
+  .ai-assistant-toggle[aria-expanded='true'] {
+    display: none;
+  }
+
+  .ai-assistant-panel {
+    inset: 0.35rem;
+    width: auto;
+    max-height: none;
+  }
+
+  .ai-assistant-header {
+    padding: 0.7rem 0.85rem 0.6rem;
+  }
+
+  .ai-assistant-messages {
+    min-height: 0;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .ai-assistant-suggestions {
+    display: none;
+  }
+
+  .ai-assistant-form {
+    flex-direction: row;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .ai-assistant-input {
+    min-height: 44px;
+    max-height: 64px;
+    resize: none;
+  }
+
+  .ai-assistant-send {
+    min-height: 44px;
+  }
+
+  .ai-assistant-status {
+    padding: 0 0.85rem 0.55rem;
   }
 }

@@ -9,7 +9,10 @@
   var refs = {};
 
   function pageKind() {
-    var path = window.location.pathname;
+    var path = window.location.pathname.toLowerCase();
+    if (path.indexOf('companion') !== -1) return 'companion';
+    if (path.indexOf('first-money-moves') !== -1) return 'first-money-moves';
+    if (path.indexOf('visualizer') !== -1) return 'visualizer';
     if (path.indexOf('calculators') !== -1) return 'calculators';
     if (path.indexOf('glossary') !== -1) return 'glossary';
     return 'site';
@@ -22,11 +25,30 @@
     return el;
   }
 
+  function cleanAssistantText(text) {
+    return text
+      .replace(/\r\n?/g, '\n')
+      .replace(/^\s{0,3}#{1,6}[ \t]+/gm, '')
+      .replace(/^\s{0,3}(?:[-+*]|>)[ \t]+/gm, '')
+      .replace(/^\s{0,3}\d+[.)][ \t]+/gm, '')
+      .replace(/^\s*```(?:[a-z0-9_-]+)?\s*$/gim, '')
+      .replace(/\*\*([^*\n]+)\*\*/g, '$1')
+      .replace(/__([^_\n]+)__/g, '$1')
+      .replace(/`([^`\n]+)`/g, '$1')
+      .replace(/\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g, '$1 ($2)')
+      .replace(/(^|[\s(])\*([^*\n]+)\*(?=$|[\s).,!?:;])/g, '$1$2')
+      .replace(/(^|[\s(])_([^_\n]+)_(?=$|[\s).,!?:;])/g, '$1$2')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
   function addMessage(role, text) {
     var message = createEl('div', 'ai-assistant-message ' + role);
-    message.textContent = text;
+    var displayText = role === 'assistant' ? cleanAssistantText(text) : text;
+    message.textContent = displayText;
     refs.messages.appendChild(message);
     refs.messages.scrollTop = refs.messages.scrollHeight;
+    return displayText;
   }
 
   function setStatus(text) {
@@ -60,6 +82,27 @@
 
   function suggestionsForPage() {
     var kind = pageKind();
+    if (kind === 'companion') {
+      return [
+        'Which chapter fits my decision?',
+        'Help me choose one next step',
+        'How should I use this reflection?'
+      ];
+    }
+    if (kind === 'first-money-moves') {
+      return [
+        'How do I read my paycheck?',
+        'How much emergency savings do I need?',
+        'How does student loan interest work?'
+      ];
+    }
+    if (kind === 'visualizer') {
+      return [
+        'Why does starting early matter?',
+        'How does credit change loan costs?',
+        'Why are minimum payments expensive?'
+      ];
+    }
     if (kind === 'glossary') {
       return [
         'Explain APR in plain English',
@@ -69,14 +112,14 @@
     }
     if (kind === 'calculators') {
       return [
-        'Explain my calculator result',
+        'How do I read these calculator results?',
         'How can I lower interest?',
         'What does credit utilization mean?'
       ];
     }
     return [
       'What is the DREAM/BIG framework?',
-      'What should I do with my first paycheck?',
+      'Help me turn a chapter into one next step',
       'How do I start building credit?'
     ];
   }
@@ -86,11 +129,12 @@
     refs.toggle.type = 'button';
     refs.toggle.setAttribute('aria-expanded', 'false');
     refs.toggle.setAttribute('aria-controls', 'ai-assistant-panel');
+    refs.toggle.setAttribute('aria-label', 'Ask the DREAM/BIG Coach');
 
     var mark = createEl('span', 'ai-assistant-toggle-mark', '?');
     mark.setAttribute('aria-hidden', 'true');
     refs.toggle.appendChild(mark);
-    refs.toggle.appendChild(document.createTextNode('Ask Coach'));
+    refs.toggle.appendChild(createEl('span', 'ai-assistant-toggle-label', 'Ask Coach'));
 
     refs.panel = createEl('section', 'ai-assistant-panel');
     refs.panel.id = 'ai-assistant-panel';
@@ -135,7 +179,7 @@
     refs.input.name = 'assistant-question';
     refs.input.rows = 2;
     refs.input.maxLength = maxInputLength;
-    refs.input.placeholder = 'Ask a money question...';
+    refs.input.placeholder = 'Ask about a chapter or decision...';
     refs.input.setAttribute('aria-label', 'Ask the DREAM/BIG Coach');
 
     refs.send = createEl('button', 'ai-assistant-send', 'Send');
@@ -156,7 +200,7 @@
     document.body.appendChild(refs.toggle);
     document.body.appendChild(refs.panel);
 
-    addMessage('assistant', 'Ask me to explain a term, a calculator result, or a money decision in plain language.');
+    addMessage('assistant', 'Tell me which chapter or decision you are working through. I can help you understand it and choose one practical next step.');
   }
 
   function sendCurrentInput() {
@@ -211,7 +255,7 @@
       .then(function(data) {
         var reply = typeof data.reply === 'string' ? data.reply.trim() : '';
         if (!reply) throw new Error('Empty assistant reply');
-        addMessage('assistant', reply);
+        reply = addMessage('assistant', reply);
         conversation.push({ role: 'assistant', content: reply });
         conversation = conversation.slice(-maxHistory);
         setStatus('');

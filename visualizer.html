@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Money Visualizer — DREAM/BIG Financial Literacy Tool</title>
-<meta name="description" content="Use the DREAM/BIG Money Visualizer to see how saving early, building good credit, and avoiding minimum payments can change your financial future over time.">
+<meta name="description" content="Use the DREAM/BIG Money Visualizer to explore hypothetical savings growth, illustrative credit costs, and fixed-payment credit card payoff scenarios.">
 <meta property="og:title" content="Money Visualizer — DREAM/BIG">
 <meta property="og:description" content="Move the sliders and watch financial decisions change over time. A free DREAM/BIG tool for life after high school.">
 <meta property="og:type" content="website">
@@ -39,7 +39,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -90,7 +90,11 @@
   .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
   .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.3s; }
   .nav-links a:hover { color: var(--gold); }
-  .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+  .nav-toggle {
+    display: none; align-items: center; justify-content: center; flex: 0 0 44px;
+    width: 44px; height: 44px; padding: 0; background: none; border: none;
+    color: var(--gold); font-size: 1.5rem; line-height: 1; cursor: pointer;
+  }
   .nav-dropdown { position: relative; }
   .nav-dropdown > button {
     background: none; border: none; cursor: pointer; font: inherit;
@@ -172,12 +176,13 @@
     background: transparent; color: var(--text-muted); border-radius: 4px;
     cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 700;
     font-size: 0.82rem; letter-spacing: 0.7px; text-transform: uppercase;
-    transition: all 0.25s;
+    min-height: 44px; transition: all 0.25s;
   }
   .tool-tab.active { background: var(--gold); color: var(--purple-deep); border-color: var(--gold); }
   .tool-tab:hover:not(.active) { color: var(--gold); border-color: var(--gold); }
   .scenario { display: none; }
   .scenario.active { display: block; }
+  .scenario[hidden] { display: none; }
   .scenario-card {
     background: var(--purple-card); border: 1px solid rgba(201,168,76,0.16);
     border-radius: 8px; overflow: hidden;
@@ -219,6 +224,7 @@
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem;
     margin-bottom: 1.25rem;
   }
+  .saving-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metric {
     background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.16);
     border-radius: 8px; padding: 1rem;
@@ -309,20 +315,26 @@
     .path-strip { grid-template-columns: 1fr 1fr; }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
-    .nav-toggle { display: block; }
+    .nav-toggle { display: inline-flex; }
     .nav-subtitle { display: none; }
     .nav-links.open {
       display: flex; flex-direction: column; align-items: flex-start; position: absolute;
       top: 70px; left: 0; right: 0; background: rgba(15,6,32,0.98);
       padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.15);
+      max-height: calc(100vh - 70px); max-height: calc(100dvh - 70px);
+      overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
     }
+    .nav-links a, .nav-dropdown > button { display: flex; align-items: center; min-height: 44px; }
     .nav-dropdown > button::after { display: none; }
     .nav-dropdown-menu { display: block; position: static; transform: none; padding: 0; min-width: 0; }
     .nav-dropdown-menu-inner { background: none; border: none; box-shadow: none; padding: 0; min-width: 0; backdrop-filter: none; }
     .nav-dropdown-menu a { padding: 0; font-size: 0.85rem !important; }
+  }
+
+  @media (max-width: 768px) {
     section { padding: 60px 1.25rem; }
     .visualizer-hero { padding-top: 115px; }
     .scenario-header, .scenario-body { padding: 1.5rem; }
@@ -340,7 +352,7 @@
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Web",
   "url": "https://www.lifeafterhighschoolbook.com/visualizer.html",
-  "description": "An interactive financial literacy visualizer with sliders that show how saving early, building good credit, and avoiding minimum payments can change financial outcomes over time.",
+  "description": "An interactive financial literacy visualizer with hypothetical savings growth, illustrative credit cost examples, and fixed-payment credit card payoff scenarios.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -361,13 +373,14 @@
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
   </a>
-  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">&#9776;</button>
   <ul class="nav-links" id="nav-links">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#book">The Book</a></li>
     <li class="nav-dropdown">
       <button type="button" aria-expanded="false" aria-haspopup="true" onclick="toggleToolsMenu(this)">Tools</button>
       <div class="nav-dropdown-menu"><div class="nav-dropdown-menu-inner">
+        <a href="companion.html">Chapter Companion</a>
         <a href="first-money-moves.html">First Money Moves</a>
         <a href="calculators.html">Calculators</a>
         <a href="visualizer.html" style="color:var(--gold);">Visualizer</a>
@@ -393,24 +406,24 @@
     <div class="hero-proof" aria-label="What this tool shows">
       <div class="proof-card"><strong>Time</strong><span>Small savings can grow when you start early.</span></div>
       <div class="proof-card"><strong>Credit</strong><span>The same loan can cost more with a lower score.</span></div>
-      <div class="proof-card"><strong>Debt</strong><span>Minimum payments can keep a balance alive for years.</span></div>
+      <div class="proof-card"><strong>Debt</strong><span>A fixed monthly payment can keep a balance alive for years.</span></div>
     </div>
   </div>
 </section>
 
 <section class="tool-shell" id="visualizer">
   <div class="container">
-    <div class="tool-tabs" role="tablist" aria-label="Money visualizer scenarios">
-      <button type="button" class="tool-tab active" role="tab" aria-selected="true" aria-controls="scenario-saving" onclick="switchScenario('saving', this)">Start Early</button>
-      <button type="button" class="tool-tab" role="tab" aria-selected="false" aria-controls="scenario-credit" onclick="switchScenario('credit', this)">Credit Cost</button>
-      <button type="button" class="tool-tab" role="tab" aria-selected="false" aria-controls="scenario-debt" onclick="switchScenario('debt', this)">Debt Trap</button>
+    <div class="tool-tabs" role="tablist" aria-label="Money visualizer scenarios" onkeydown="handleScenarioKeydown(event)">
+      <button type="button" class="tool-tab active" id="tab-saving" role="tab" aria-selected="true" aria-controls="scenario-saving" tabindex="0" onclick="switchScenario('saving', this)">Start Early</button>
+      <button type="button" class="tool-tab" id="tab-credit" role="tab" aria-selected="false" aria-controls="scenario-credit" tabindex="-1" onclick="switchScenario('credit', this)">Credit Cost</button>
+      <button type="button" class="tool-tab" id="tab-debt" role="tab" aria-selected="false" aria-controls="scenario-debt" tabindex="-1" onclick="switchScenario('debt', this)">Fixed Payment Payoff</button>
     </div>
 
-    <article class="scenario active" id="scenario-saving">
+    <article class="scenario active" id="scenario-saving" role="tabpanel" aria-labelledby="tab-saving">
       <div class="scenario-card">
         <div class="scenario-header">
           <h2>Start Early vs. Wait</h2>
-          <p>Saving is not only about how much you put away. It is about how long your money has to work before you need it.</p>
+          <p>Compare monthly deposits using a hypothetical effective annual return. Returns are hypothetical, not guaranteed. Outputs are future dollars before inflation, taxes, and fees.</p>
         </div>
         <div class="scenario-body">
           <div class="controls" aria-label="Start early controls">
@@ -428,8 +441,9 @@
               <input type="range" id="save-wait" min="1" max="20" step="1" value="7" oninput="updateSaving()">
             </div>
             <div class="control">
-              <div class="control-row"><label for="save-growth">Annual growth</label><output id="save-growth-out">7%</output></div>
-              <input type="range" id="save-growth" min="0" max="10" step="0.5" value="7" oninput="updateSaving()">
+              <div class="control-row"><label for="save-growth">Hypothetical annual return</label><output id="save-growth-out">7%</output></div>
+              <input type="range" id="save-growth" min="0" max="10" step="0.5" value="7" aria-describedby="save-growth-note" oninput="updateSaving()">
+              <p class="range-note" id="save-growth-note">Treated as an effective annual rate and converted to an equivalent monthly rate. Deposits occur at month-end.</p>
             </div>
             <div class="control">
               <div class="control-row"><label for="save-end">Compare at age</label><output id="save-end-out">65</output></div>
@@ -437,10 +451,11 @@
             </div>
           </div>
           <div class="visual-area">
-            <div class="metric-grid">
+            <div class="metric-grid saving-metrics">
               <div class="metric"><div class="metric-label">Start now</div><div class="metric-value" id="save-now-total" aria-live="polite">$0</div><div class="metric-sub" id="save-now-sub">By age 65</div></div>
               <div class="metric"><div class="metric-label">Wait path</div><div class="metric-value" id="save-wait-total" aria-live="polite">$0</div><div class="metric-sub" id="save-wait-sub">Starting at age 25</div></div>
-              <div class="metric"><div class="metric-label">Time advantage</div><div class="metric-value" id="save-diff" aria-live="polite">$0</div><div class="metric-sub">Money time helped build</div></div>
+              <div class="metric"><div class="metric-label">Extra contributions</div><div class="metric-value" id="save-extra-contributions" aria-live="polite">$0</div><div class="metric-sub">Deposits made before the wait path starts</div></div>
+              <div class="metric"><div class="metric-label">Extra investment growth</div><div class="metric-value" id="save-extra-growth" aria-live="polite">$0</div><div class="metric-sub">Hypothetical growth beyond contributions</div></div>
             </div>
             <div class="chart-card">
               <div class="chart-title">
@@ -463,17 +478,17 @@
                 <text class="chart-label" id="save-axis-top" x="8" y="48">$0</text>
               </svg>
             </div>
-            <div class="takeaway" id="save-takeaway"></div>
+            <div class="takeaway" id="save-takeaway" aria-live="polite"></div>
           </div>
         </div>
       </div>
     </article>
 
-    <article class="scenario" id="scenario-credit">
+    <article class="scenario" id="scenario-credit" role="tabpanel" aria-labelledby="tab-credit" hidden>
       <div class="scenario-card">
         <div class="scenario-header">
-          <h2>Good Credit vs. Expensive Credit</h2>
-          <p>Your credit score is not just a report card. It changes the interest rate, the monthly payment, and the real price of the same purchase.</p>
+          <h2>Credit Cost Examples</h2>
+          <p>Explore how illustrative rates change a fixed-rate installment loan. Rates are examples only, not current offers or predictions, and lenders consider factors beyond credit score.</p>
         </div>
         <div class="scenario-body">
           <div class="controls" aria-label="Credit cost controls">
@@ -487,21 +502,22 @@
             </div>
             <div class="control">
               <div class="control-row"><label for="credit-score">Credit score</label><output id="credit-score-out">620</output></div>
-              <input type="range" id="credit-score" min="520" max="820" step="10" value="620" oninput="updateCredit()">
-              <p class="range-note">This compares your selected score to a strong 760 score.</p>
+              <input type="range" id="credit-score" min="520" max="820" step="10" value="620" aria-describedby="credit-score-ranges credit-model-note" oninput="updateCredit()">
+              <p class="range-note" id="credit-score-ranges">FICO labels: Poor below 580; Fair 580-669; Good 670-739; Very Good 740-799; Exceptional 800+.</p>
+              <p class="range-note" id="credit-model-note">This learning model compares with a Very Good 760 baseline. Rates are illustrative examples only, not current offers or predictions; lenders consider more than score.</p>
             </div>
           </div>
           <div class="visual-area">
             <div class="metric-grid">
-              <div class="metric"><div class="metric-label">Selected score rate</div><div class="metric-value" id="credit-rate">0%</div><div class="metric-sub" id="credit-rating">Fair</div></div>
-              <div class="metric"><div class="metric-label">Extra interest</div><div class="metric-value" id="credit-extra" aria-live="polite">$0</div><div class="metric-sub">Compared with strong credit</div></div>
-              <div class="metric"><div class="metric-label">Monthly difference</div><div class="metric-value" id="credit-monthly-diff" aria-live="polite">$0</div><div class="metric-sub">Same purchase, different score</div></div>
+              <div class="metric"><div class="metric-label">Illustrative rate</div><div class="metric-value" id="credit-rate">0%</div><div class="metric-sub" id="credit-rating">Fair</div></div>
+              <div class="metric"><div class="metric-label" id="credit-interest-diff-label">Additional interest</div><div class="metric-value" id="credit-interest-diff" aria-live="polite">$0</div><div class="metric-sub" id="credit-interest-diff-sub">More than 760 baseline</div></div>
+              <div class="metric"><div class="metric-label" id="credit-monthly-diff-label">Higher monthly payment</div><div class="metric-value" id="credit-monthly-diff" aria-live="polite">$0</div><div class="metric-sub" id="credit-monthly-diff-sub">More than 760 baseline</div></div>
             </div>
             <div class="chart-card">
-              <div class="chart-title"><span>Total interest paid</span><div class="legend"><span><i style="background:var(--gold);"></i>Strong credit</span><span><i style="background:var(--danger);"></i>Selected score</span></div></div>
+              <div class="chart-title"><span>Total interest paid</span><div class="legend"><span><i style="background:var(--gold);"></i>760 baseline</span><span><i style="background:var(--danger);"></i>Selected score</span></div></div>
               <div class="bar-compare">
                 <div class="bar-row">
-                  <div class="bar-label">Strong credit</div>
+                  <div class="bar-label">760 baseline</div>
                   <div class="bar-track"><div class="bar-fill" id="credit-good-bar" style="background:var(--gold);"></div></div>
                   <div class="bar-value" id="credit-good-interest">$0</div>
                 </div>
@@ -513,25 +529,25 @@
               </div>
             </div>
             <div class="path-strip">
-              <div class="path-step"><span id="credit-good-monthly">$0/mo</span><p>Payment with a 760 score.</p></div>
+              <div class="path-step"><span id="credit-good-monthly">$0/mo</span><p>Payment with the 760 baseline.</p></div>
               <div class="path-step"><span id="credit-selected-monthly">$0/mo</span><p>Payment with your selected score.</p></div>
-              <div class="path-step"><span id="credit-good-total">$0</span><p>Total paid with strong credit.</p></div>
+              <div class="path-step"><span id="credit-good-total">$0</span><p>Total paid with the 760 baseline.</p></div>
               <div class="path-step"><span id="credit-selected-total">$0</span><p>Total paid with selected score.</p></div>
             </div>
-            <div class="takeaway" id="credit-takeaway"></div>
+            <div class="takeaway" id="credit-takeaway" aria-live="polite"></div>
           </div>
         </div>
       </div>
     </article>
 
-    <article class="scenario" id="scenario-debt">
+    <article class="scenario" id="scenario-debt" role="tabpanel" aria-labelledby="tab-debt" hidden>
       <div class="scenario-card">
         <div class="scenario-header">
-          <h2>The Minimum Payment Trap</h2>
-          <p>Credit card debt gets dangerous when the payment barely beats the interest. This shows how long a balance can follow you.</p>
+          <h2>Fixed Payment Payoff</h2>
+          <p>This simplified model keeps one dollar payment fixed every month. Actual card minimums vary by issuer and may change over time.</p>
         </div>
         <div class="scenario-body">
-          <div class="controls" aria-label="Debt trap controls">
+          <div class="controls" aria-label="Fixed payment payoff controls">
             <div class="control">
               <div class="control-row"><label for="debt-balance">Card balance</label><output id="debt-balance-out">$3,000</output></div>
               <input type="range" id="debt-balance" min="500" max="10000" step="250" value="3000" oninput="updateDebt()">
@@ -543,19 +559,19 @@
             <div class="control">
               <div class="control-row"><label for="debt-payment">Monthly payment</label><output id="debt-payment-out">$75</output></div>
               <input type="range" id="debt-payment" min="25" max="500" step="25" value="75" oninput="updateDebt()">
-              <p class="range-note">Try raising this by $50 and watch the years change.</p>
+              <p class="range-note">This amount stays fixed in the model. Try raising it by $50 and watch the years change.</p>
             </div>
           </div>
           <div class="visual-area">
             <div class="metric-grid">
-              <div class="metric"><div class="metric-label">Payoff time</div><div class="metric-value" id="debt-time" aria-live="polite">0 mo</div><div class="metric-sub">If you keep this payment</div></div>
+              <div class="metric"><div class="metric-label">Payoff time</div><div class="metric-value" id="debt-time" aria-live="polite">0 mo</div><div class="metric-sub">With this fixed payment</div></div>
               <div class="metric"><div class="metric-label">Interest paid</div><div class="metric-value" id="debt-interest" aria-live="polite">$0</div><div class="metric-sub">Money that does not lower the balance</div></div>
               <div class="metric"><div class="metric-label">Add $50/month</div><div class="metric-value" id="debt-fifty" aria-live="polite">$0</div><div class="metric-sub">Interest you could avoid</div></div>
             </div>
             <div class="chart-card">
               <div class="chart-title"><span>Balance falling over time</span><div class="legend"><span><i style="background:var(--gold);"></i>Remaining balance</span></div></div>
               <svg class="money-chart" viewBox="0 0 640 300" role="img" aria-labelledby="debt-chart-title">
-                <title id="debt-chart-title">Credit card balance payoff chart</title>
+                <title id="debt-chart-title">Fixed-payment credit card payoff chart</title>
                 <line class="grid-line" x1="52" y1="55" x2="610" y2="55"></line>
                 <line class="grid-line" x1="52" y1="120" x2="610" y2="120"></line>
                 <line class="grid-line" x1="52" y1="185" x2="610" y2="185"></line>
@@ -569,7 +585,7 @@
                 <text class="chart-label" id="debt-axis-top" x="8" y="48">$0</text>
               </svg>
             </div>
-            <div class="takeaway" id="debt-takeaway"></div>
+            <div class="takeaway" id="debt-takeaway" aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -644,6 +660,7 @@ function toggleNav(btn) {
   const links = document.querySelector('.nav-links');
   const open = links.classList.toggle('open');
   btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 }
 
 function toggleToolsMenu(btn) {
@@ -670,6 +687,16 @@ document.addEventListener('keydown', function(e) {
     const menu = document.querySelector('.nav-dropdown-menu');
     if (btn) btn.setAttribute('aria-expanded', 'false');
     if (menu) menu.style.display = '';
+    const links = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.nav-toggle');
+    if (links && links.classList.contains('open')) {
+      links.classList.remove('open');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        toggle.focus();
+      }
+    }
   }
 });
 
@@ -677,7 +704,10 @@ document.querySelectorAll('.nav-links a').forEach(function(link) {
   link.addEventListener('click', function() {
     document.querySelector('.nav-links').classList.remove('open');
     const toggle = document.querySelector('.nav-toggle');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
   });
 });
 
@@ -709,26 +739,72 @@ function fmtPercent(value) { return Number(value).toFixed(value % 1 === 0 ? 0 : 
 function getNumber(id) { return Number(document.getElementById(id).value); }
 function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
 
-function switchScenario(name, btn) {
-  document.querySelectorAll('.scenario').forEach(function(panel) { panel.classList.remove('active'); });
-  document.querySelectorAll('.tool-tab').forEach(function(tab) { tab.classList.remove('active'); tab.setAttribute('aria-selected', 'false'); });
-  document.getElementById('scenario-' + name).classList.add('active');
-  btn.classList.add('active');
-  btn.setAttribute('aria-selected', 'true');
+function switchScenario(name, btn, focusTab) {
+  const targetId = 'scenario-' + name;
+  document.querySelectorAll('.scenario').forEach(function(panel) {
+    const isActive = panel.id === targetId;
+    panel.classList.toggle('active', isActive);
+    panel.hidden = !isActive;
+  });
+  document.querySelectorAll('.tool-tab').forEach(function(tab) {
+    const isActive = tab === btn;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    tab.setAttribute('tabindex', isActive ? '0' : '-1');
+  });
+  if (focusTab) btn.focus();
+}
+
+function handleScenarioKeydown(event) {
+  const tabs = Array.from(event.currentTarget.querySelectorAll('[role="tab"]'));
+  const currentIndex = tabs.indexOf(event.target);
+  if (currentIndex < 0) return;
+
+  let nextIndex;
+  if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+  if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+  if (event.key === 'Home') nextIndex = 0;
+  if (event.key === 'End') nextIndex = tabs.length - 1;
+  if (nextIndex === undefined) return;
+
+  event.preventDefault();
+  const nextTab = tabs[nextIndex];
+  const scenarioName = nextTab.getAttribute('aria-controls').replace('scenario-', '');
+  switchScenario(scenarioName, nextTab, true);
+}
+
+function monthlyRateFromEffectiveAnnual(annualRate) {
+  return Math.pow(1 + annualRate / 100, 1 / 12) - 1;
 }
 
 function futureValueMonthly(monthly, annualRate, months) {
-  const rate = annualRate / 100 / 12;
+  const rate = monthlyRateFromEffectiveAnnual(annualRate);
   if (months <= 0) return 0;
   if (rate === 0) return monthly * months;
   return monthly * ((Math.pow(1 + rate, months) - 1) / rate);
+}
+
+function savingsComparison(monthly, annualRate, monthsNow, monthsWait) {
+  const nowTotal = futureValueMonthly(monthly, annualRate, monthsNow);
+  const waitTotal = futureValueMonthly(monthly, annualRate, monthsWait);
+  const totalAdvantage = nowTotal - waitTotal;
+  const extraContributions = monthly * Math.max(monthsNow - monthsWait, 0);
+  const growthDifference = totalAdvantage - extraContributions;
+  const extraInvestmentGrowth = Math.abs(growthDifference) < 1e-8 ? 0 : growthDifference;
+  return {
+    nowTotal: nowTotal,
+    waitTotal: waitTotal,
+    totalAdvantage: totalAdvantage,
+    extraContributions: extraContributions,
+    extraInvestmentGrowth: extraInvestmentGrowth
+  };
 }
 
 function savingsSeries(monthly, annualRate, startAge, waitStartAge, endAge) {
   const values = [];
   let now = 0;
   let wait = 0;
-  const monthlyRate = annualRate / 100 / 12;
+  const monthlyRate = monthlyRateFromEffectiveAnnual(annualRate);
   for (let age = startAge; age <= endAge; age++) {
     if (age > startAge) {
       for (let m = 0; m < 12; m++) {
@@ -762,9 +838,9 @@ function updateSaving() {
   const waitStartAge = Math.min(startAge + waitYears, endAge);
   const monthsNow = Math.max((endAge - startAge) * 12, 0);
   const monthsWait = Math.max((endAge - waitStartAge) * 12, 0);
-  const nowTotal = futureValueMonthly(monthly, growth, monthsNow);
-  const waitTotal = futureValueMonthly(monthly, growth, monthsWait);
-  const diff = nowTotal - waitTotal;
+  const comparison = savingsComparison(monthly, growth, monthsNow, monthsWait);
+  const nowTotal = comparison.nowTotal;
+  const waitTotal = comparison.waitTotal;
   const series = savingsSeries(monthly, growth, startAge, waitStartAge, endAge);
   const maxValue = Math.max(nowTotal, waitTotal, 1);
 
@@ -775,7 +851,8 @@ function updateSaving() {
   setText('save-end-out', endAge);
   setText('save-now-total', fmtMoney(nowTotal));
   setText('save-wait-total', fmtMoney(waitTotal));
-  setText('save-diff', fmtMoney(diff));
+  setText('save-extra-contributions', fmtMoney(comparison.extraContributions));
+  setText('save-extra-growth', fmtMoney(comparison.extraInvestmentGrowth));
   setText('save-now-sub', 'By age ' + endAge);
   setText('save-wait-sub', 'Starting at age ' + waitStartAge);
   setText('save-axis-left', startAge);
@@ -792,8 +869,10 @@ function updateSaving() {
   document.getElementById('save-now-dot').setAttribute('cy', nowLast[1]);
   document.getElementById('save-wait-dot').setAttribute('cx', waitLast[0]);
   document.getElementById('save-wait-dot').setAttribute('cy', waitLast[1]);
-  setText('save-takeaway', '');
-  document.getElementById('save-takeaway').innerHTML = '<strong>Takeaway:</strong> Starting ' + waitYears + ' years earlier adds about <strong>' + fmtMoney(diff) + '</strong> by age ' + endAge + '. That is <a href="glossary.html">compound interest</a> doing work you do not have to do later.';
+  const breakdown = growth === 0
+    ? 'The entire difference is <strong>' + fmtMoney(comparison.extraContributions) + '</strong> in extra contributions; investment growth is <strong>$0</strong> because the hypothetical return is 0%.'
+    : 'That separates into <strong>' + fmtMoney(comparison.extraContributions) + '</strong> in extra contributions and about <strong>' + fmtMoney(comparison.extraInvestmentGrowth) + '</strong> in hypothetical <a href="glossary.html">investment growth</a>.';
+  document.getElementById('save-takeaway').innerHTML = '<strong>Takeaway:</strong> Starting ' + waitYears + ' years earlier creates about <strong>' + fmtMoney(comparison.totalAdvantage) + '</strong> more by age ' + endAge + '. ' + breakdown;
 }
 
 function rateFromScore(score) {
@@ -807,11 +886,17 @@ function rateFromScore(score) {
 }
 
 function creditRating(score) {
-  if (score >= 740) return 'Strong';
-  if (score >= 700) return 'Good';
-  if (score >= 660) return 'Fair';
-  if (score >= 620) return 'Needs work';
-  return 'Expensive';
+  if (score >= 800) return 'Exceptional';
+  if (score >= 740) return 'Very Good';
+  if (score >= 670) return 'Good';
+  if (score >= 580) return 'Fair';
+  return 'Poor';
+}
+
+function comparisonDirection(value) {
+  if (value > 0.005) return 1;
+  if (value < -0.005) return -1;
+  return 0;
 }
 
 function loanPayment(principal, annualRate, years) {
@@ -826,37 +911,45 @@ function updateCredit() {
   const years = getNumber('credit-term');
   const score = getNumber('credit-score');
   const selectedRate = rateFromScore(score);
-  const strongRate = rateFromScore(760);
+  const baselineRate = rateFromScore(760);
   const selectedMonthly = loanPayment(amount, selectedRate, years);
-  const strongMonthly = loanPayment(amount, strongRate, years);
+  const baselineMonthly = loanPayment(amount, baselineRate, years);
   const selectedTotal = selectedMonthly * years * 12;
-  const strongTotal = strongMonthly * years * 12;
+  const baselineTotal = baselineMonthly * years * 12;
   const selectedInterest = selectedTotal - amount;
-  const strongInterest = strongTotal - amount;
-  const extraInterest = selectedInterest - strongInterest;
-  const monthlyDiff = selectedMonthly - strongMonthly;
-  const maxInterest = Math.max(selectedInterest, strongInterest, 1);
+  const baselineInterest = baselineTotal - amount;
+  const interestDiff = selectedInterest - baselineInterest;
+  const monthlyDiff = selectedMonthly - baselineMonthly;
+  const interestDirection = comparisonDirection(interestDiff);
+  const monthlyDirection = comparisonDirection(monthlyDiff);
+  const maxInterest = Math.max(selectedInterest, baselineInterest, 1);
 
   setText('credit-loan-out', fmtMoney(amount));
   setText('credit-term-out', years + (years === 1 ? ' year' : ' years'));
   setText('credit-score-out', score);
   setText('credit-rate', fmtPercent(selectedRate));
-  setText('credit-rating', creditRating(score) + ' credit');
-  setText('credit-extra', fmtMoney(Math.abs(extraInterest)));
+  setText('credit-rating', creditRating(score));
+  setText('credit-interest-diff-label', interestDirection > 0 ? 'Additional interest' : interestDirection < 0 ? 'Interest reduction' : 'Interest difference');
+  setText('credit-interest-diff', fmtMoney(Math.abs(interestDiff)));
+  setText('credit-interest-diff-sub', interestDirection > 0 ? 'More than 760 baseline' : interestDirection < 0 ? 'Less than 760 baseline' : 'Same as 760 baseline');
+  setText('credit-monthly-diff-label', monthlyDirection > 0 ? 'Higher monthly payment' : monthlyDirection < 0 ? 'Lower monthly payment' : 'Monthly payment difference');
   setText('credit-monthly-diff', fmtMoney(Math.abs(monthlyDiff)));
-  setText('credit-good-interest', fmtMoney(strongInterest));
+  setText('credit-monthly-diff-sub', monthlyDirection > 0 ? 'More than 760 baseline' : monthlyDirection < 0 ? 'Less than 760 baseline' : 'Same as 760 baseline');
+  setText('credit-good-interest', fmtMoney(baselineInterest));
   setText('credit-selected-interest', fmtMoney(selectedInterest));
-  setText('credit-good-monthly', fmtMoney(strongMonthly) + '/mo');
+  setText('credit-good-monthly', fmtMoney(baselineMonthly) + '/mo');
   setText('credit-selected-monthly', fmtMoney(selectedMonthly) + '/mo');
-  setText('credit-good-total', fmtMoney(strongTotal));
+  setText('credit-good-total', fmtMoney(baselineTotal));
   setText('credit-selected-total', fmtMoney(selectedTotal));
-  document.getElementById('credit-good-bar').style.width = Math.max(5, (strongInterest / maxInterest) * 100) + '%';
+  document.getElementById('credit-good-bar').style.width = Math.max(5, (baselineInterest / maxInterest) * 100) + '%';
   document.getElementById('credit-selected-bar').style.width = Math.max(5, (selectedInterest / maxInterest) * 100) + '%';
 
-  const phrase = extraInterest >= 0
-    ? 'This selected score would add about <strong>' + fmtMoney(extraInterest) + '</strong> in interest compared with strong credit.'
-    : 'This selected score is already strong enough to save about <strong>' + fmtMoney(Math.abs(extraInterest)) + '</strong> compared with the 760 baseline.';
-  document.getElementById('credit-takeaway').innerHTML = '<strong>Takeaway:</strong> ' + phrase + ' A <a href="glossary.html">credit score</a> changes the real price of the same thing.';
+  const phrase = interestDirection > 0
+    ? 'At these illustrative rates, the selected example pays about <strong>' + fmtMoney(interestDiff) + ' more in total interest</strong> than the 760 baseline.'
+    : interestDirection < 0
+      ? 'At these illustrative rates, the selected example pays about <strong>' + fmtMoney(Math.abs(interestDiff)) + ' less in total interest</strong> than the 760 baseline.'
+      : 'The selected example uses the same illustrative rate as the 760 baseline, so the modeled interest and payment are equal.';
+  document.getElementById('credit-takeaway').innerHTML = '<strong>Takeaway:</strong> ' + phrase + ' This shows how a loan rate can change the price of the same purchase; actual terms depend on score and other lender criteria.';
 }
 
 function payoff(balance, apr, payment) {
@@ -866,19 +959,19 @@ function payoff(balance, apr, payment) {
   const values = [{ month: 0, balance: current }];
   for (let month = 1; month <= 600; month++) {
     const interest = current * monthlyRate;
-    if (payment <= interest && current > 1) return { stuck: true, months: Infinity, totalPaid: Infinity, interestPaid: Infinity, values: values };
+    if (payment <= interest && current > 1) return { stuck: true, reason: 'payment-not-above-interest', months: Infinity, totalPaid: Infinity, interestPaid: Infinity, values: values };
     current += interest;
     const paid = Math.min(payment, current);
     current -= paid;
     totalPaid += paid;
     if (month % 3 === 0 || current <= 0) values.push({ month: month, balance: Math.max(current, 0) });
-    if (current <= 0.01) return { stuck: false, months: month, totalPaid: totalPaid, interestPaid: totalPaid - balance, values: values };
+    if (current <= 0.01) return { stuck: false, reason: 'paid-off', months: month, totalPaid: totalPaid, interestPaid: totalPaid - balance, values: values };
   }
-  return { stuck: true, months: Infinity, totalPaid: Infinity, interestPaid: Infinity, values: values };
+  return { stuck: true, reason: 'over-600-months', months: Infinity, totalPaid: Infinity, interestPaid: Infinity, values: values };
 }
 
 function formatMonths(months) {
-  if (!Number.isFinite(months)) return 'Stuck';
+  if (!Number.isFinite(months)) return 'No payoff';
   if (months < 12) return months + ' mo';
   const years = Math.floor(months / 12);
   const rem = months % 12;
@@ -914,16 +1007,19 @@ function updateDebt() {
   setText('debt-apr-out', fmtPercent(apr));
   setText('debt-payment-out', fmtMoney(payment));
   setText('debt-time', formatMonths(result.months));
-  setText('debt-interest', result.stuck ? 'Still growing' : fmtMoney(result.interestPaid));
+  setText('debt-interest', result.stuck ? (result.reason === 'over-600-months' ? 'Beyond model' : 'No payoff') : fmtMoney(result.interestPaid));
   setText('debt-fifty', result.stuck ? 'Try more' : fmtMoney(Math.max(saved, 0)));
   setText('debt-axis-top', fmtMoney(balance));
-  setText('debt-axis-right', result.stuck ? '600+ mo' : formatMonths(result.months));
+  setText('debt-axis-right', result.stuck ? (result.reason === 'over-600-months' ? '600+ mo' : 'No payoff') : formatMonths(result.months));
   updateDebtChart(result.values, balance);
 
   if (result.stuck) {
-    document.getElementById('debt-takeaway').innerHTML = '<strong>Takeaway:</strong> This payment is too low for this APR. The balance barely moves because interest keeps catching up. Raise the payment or lower the <a href="glossary.html">APR</a>.';
+    const noPayoffReason = result.reason === 'over-600-months'
+      ? 'This fixed payment does not pay off the balance within the model\'s 600-month limit.'
+      : 'This fixed payment is no more than the first month\'s interest, so it does not reduce the balance.';
+    document.getElementById('debt-takeaway').innerHTML = '<strong>Takeaway:</strong> ' + noPayoffReason + ' Raise the fixed payment or lower the <a href="glossary.html">APR</a>.';
   } else {
-    document.getElementById('debt-takeaway').innerHTML = '<strong>Takeaway:</strong> At this pace, the card takes <strong>' + formatMonths(result.months) + '</strong> and costs about <strong>' + fmtMoney(result.interestPaid) + '</strong> in interest. Adding $50/month could avoid about <strong>' + fmtMoney(Math.max(saved, 0)) + '</strong>.';
+    document.getElementById('debt-takeaway').innerHTML = '<strong>Takeaway:</strong> With this fixed payment, payoff takes <strong>' + formatMonths(result.months) + '</strong> and costs about <strong>' + fmtMoney(result.interestPaid) + '</strong> in interest. Adding $50/month could avoid about <strong>' + fmtMoney(Math.max(saved, 0)) + '</strong>.';
   }
 }
 
