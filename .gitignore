@@ -31,3 +31,18 @@ chatbot-worker.js
 
 # Local dev/preview tooling
 .claude/
+
+# Source art & marketing exports — kept locally, not shipped to the site.
+# These are working files (high-res sources, logo exports, social-banner
+# renders) that no page references. Optimized, referenced assets in images/
+# are committed normally.
+/marketing/
+images/book-front-source.png
+images/db-logo-exact-4096.png
+images/db-logo-exact-512.png
+images/db-logo-exact.svg
+images/db-logo-profile.png
+images/facebook-cover.png
+images/facebook-cover-sharp.jpg
+images/facebook-cover-upload.jpg
+images/facebook-cover-upload 2.jpg
