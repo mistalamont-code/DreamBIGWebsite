@@ -119,6 +119,14 @@
     background: url('images/erie-sunset.jpg') center center / cover no-repeat;
     position: relative; overflow: hidden;
   }
+  @supports (background-image: image-set(url('images/erie-sunset.webp') type('image/webp'))) {
+    .hero {
+      background-image: image-set(
+        url('images/erie-sunset.webp') type('image/webp'),
+        url('images/erie-sunset.jpg') type('image/jpeg')
+      );
+    }
+  }
   .hero::before {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(180deg,
@@ -1148,7 +1156,6 @@
     <p>We collect only the information you voluntarily provide:</p>
     <ul>
       <li><strong>Email address</strong> &mdash; when you subscribe to our newsletter</li>
-      <li><strong>Name and contact information</strong> &mdash; when you submit a speaking engagement inquiry</li>
     </ul>
     <p>The financial calculators on this site run entirely in your browser. We do not collect, store, or transmit any data you enter into the calculators.</p>
     <p>If you use the optional DREAM/BIG AI Coach, the question you type and recent chat context are sent through our secure server endpoint to an AI service provider so a response can be generated. Do not enter Social Security numbers, account numbers, passwords, bank logins, or other sensitive personal data.</p>

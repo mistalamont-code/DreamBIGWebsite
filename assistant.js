@@ -254,7 +254,7 @@
       })
       .then(function(data) {
         var reply = typeof data.reply === 'string' ? data.reply.trim() : '';
-        if (!reply) throw new Error('Empty assistant reply');
+        if (!reply) throw new Error('The coach did not send a reply. Try asking again in a moment.');
         reply = addMessage('assistant', reply);
         conversation.push({ role: 'assistant', content: reply });
         conversation = conversation.slice(-maxHistory);

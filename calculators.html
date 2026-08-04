@@ -529,6 +529,13 @@
       transition-duration: .001ms !important;
     }
   }
+  .book-cta {
+    margin-top: 3rem; padding: 1.75rem 2rem;
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px; display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 1.25rem;
+  }
+  .book-cta p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 560px; margin: 0; }
 </style>
 <script type="application/ld+json">
 {
@@ -681,8 +688,8 @@
                 <div class="slider-card-emoji" id="auto-slider-emoji" aria-hidden="true">&#x274C;</div>
                 <div class="slider-card-label slider" id="auto-slider-label">Comparison Offer</div>
                 <div class="slider-card-rate" id="auto-slider-rate">13.0% APR</div>
-                <div class="slider-card-total" id="auto-slider-total">$38,961</div>
-                <div class="slider-card-monthly" id="auto-slider-monthly">$464/mo</div>
+                <div class="slider-card-total" id="auto-slider-total">$34,130</div>
+                <div class="slider-card-monthly" id="auto-slider-monthly">$569/mo</div>
               </div>
             </div>
           </div>
@@ -742,16 +749,16 @@
           </div>
           <div>
             <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Principal + Interest</div><div class="result-value" id="home-monthly" aria-live="polite">$805</div></div>
-            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$135,000</span></div>
-            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$172,185</span></div>
-            <div class="result-row"><span class="result-row-label">Purchase Price + Loan Interest</span><span class="result-row-value" id="home-total">$289,767</span></div>
+            <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$150,000</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$139,884</span></div>
+            <div class="result-row"><span class="result-row-label">Purchase Price + Loan Interest</span><span class="result-row-value" id="home-total">$289,884</span></div>
             <p class="loan-scope-note"><strong>What this includes:</strong> purchase price, down payment, principal, and loan interest. It does not include property tax, homeowners insurance, mortgage insurance, HOA dues, closing costs, utilities, or maintenance.</p>
             <div class="donut-wrapper">
               <canvas id="home-donut" class="donut-canvas" width="140" height="140" style="width:140px;height:140px;"></canvas>
               <div class="donut-legend">
-                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="home-donut-prin">$135,000</strong></div>
-                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="home-donut-int">$172,185</strong></div>
-                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="home-donut-pct">56% of your payments go to the bank</div>
+                <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="home-donut-prin">$150,000</strong></div>
+                <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="home-donut-int">$139,884</strong></div>
+                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="home-donut-pct">48% of your payments go to the bank</div>
               </div>
             </div>
           </div>
@@ -777,17 +784,17 @@
               <div class="slider-result-card yours">
                 <div class="slider-card-emoji">&#x2705;</div>
                 <div class="slider-card-label yours">With Your Rate</div>
-                <div class="slider-card-rate" id="home-yours-rate">6.5% interest</div>
-                <div class="slider-card-total" id="home-yours-total">$307,185</div>
-                <div class="slider-card-monthly" id="home-yours-monthly">$853/mo</div>
+                <div class="slider-card-rate" id="home-yours-rate">5.0% interest</div>
+                <div class="slider-card-total" id="home-yours-total">$289,884</div>
+                <div class="slider-card-monthly" id="home-yours-monthly">$805/mo</div>
               </div>
               <div class="slider-vs">VS</div>
               <div class="slider-result-card slider" id="home-slider-card">
                 <div class="slider-card-emoji" id="home-slider-emoji" aria-hidden="true">&#x274C;</div>
                 <div class="slider-card-label slider" id="home-slider-label">Comparison Offer</div>
                 <div class="slider-card-rate" id="home-slider-rate">8.5% interest</div>
-                <div class="slider-card-total" id="home-slider-total">$444,290</div>
-                <div class="slider-card-monthly" id="home-slider-monthly">$1,165/mo</div>
+                <div class="slider-card-total" id="home-slider-total">$415,213</div>
+                <div class="slider-card-monthly" id="home-slider-monthly">$1,153/mo</div>
               </div>
             </div>
           </div>
@@ -848,17 +855,17 @@
             </div>
           </div>
           <div>
-            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">What You Could Retire With</div><div class="result-value" id="ret-total" aria-live="polite">$578,326</div></div>
+            <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">What You Could Retire With</div><div class="result-value" id="ret-total" aria-live="polite">$613,509</div></div>
             <div class="result-row"><span class="result-row-label">Years of Growth</span><span class="result-row-value" id="ret-years">43 years</span></div>
             <div class="result-row"><span class="result-row-label">What You Put In</span><span class="result-row-value" id="ret-contributed">$103,200</span></div>
-            <div class="result-row"><span class="result-row-label">What Your Money Earned on Its Own</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$475,126</span></div>
-            <div class="result-row"><span class="result-row-label">Growth vs. Your Contributions</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">82%</span></div>
+            <div class="result-row"><span class="result-row-label">What Your Money Earned on Its Own</span><span class="result-row-value" id="ret-growth" style="color:var(--gold);">$510,309</span></div>
+            <div class="result-row"><span class="result-row-label">Share of Final Balance From Growth</span><span class="result-row-value" id="ret-pct" style="color:var(--gold);">83%</span></div>
             <p class="loan-scope-note"><strong>Remember:</strong> this is a hypothetical future-dollar estimate before inflation, taxes, and investment fees. Returns are not guaranteed.</p>
             <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); border-radius:8px;">
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">What Waiting 10 Years Costs You</div>
               <div class="compare-text">If you start at <strong id="ret-late-age">32</strong> instead of <strong id="ret-start-age">22</strong>:</div>
-              <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$264,012</div>
-              <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$314,314</strong> less. Time is the most powerful ingredient. Start now.</div>
+              <div class="compare-amount" style="color:var(--gold);" id="ret-late-total">$294,486</div>
+              <div class="compare-text" style="margin-top:0.5rem;">That&rsquo;s <strong id="ret-lost">$319,023</strong> less. Time is the most powerful ingredient. Start now.</div>
             </div>
 
           </div>
@@ -976,13 +983,13 @@
           <div>
             <div class="result-box" style="margin-bottom:1rem;">
               <div class="result-label">Unallocated Money</div>
-              <div class="result-value" id="budget-remaining" aria-live="polite">$670</div>
+              <div class="result-value" id="budget-remaining" aria-live="polite">$290</div>
               <div class="result-sub" id="budget-status" aria-live="polite">You have room to save and invest</div>
             </div>
-            <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,800</span></div>
+            <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,400</span></div>
             <div class="result-row"><span class="result-row-label">Total Spending</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$1,910</span></div>
             <div class="result-row"><span class="result-row-label">Planned Savings</span><span class="result-row-value" id="budget-planned-savings" style="color:var(--gold);">$200</span></div>
-            <div class="result-row"><span class="result-row-label">Expenses as % of Income</span><span class="result-row-value" id="budget-pct">76%</span></div>
+            <div class="result-row"><span class="result-row-label">Expenses as % of Income</span><span class="result-row-value" id="budget-pct">80%</span></div>
 
             <div style="margin-top:1.5rem;">
               <div style="font-weight:600; font-size:0.9rem; margin-bottom:0.75rem; color:var(--gold);">Where Your Money Goes</div>
@@ -997,9 +1004,9 @@
               <div style="font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; color:var(--gold);">The 50/30/20 Guideline</div>
               <div style="color:var(--text-muted); font-size:0.82rem; line-height:1.6; margin-bottom:0.75rem;">A lot of financial experts recommend this framework as a starting point. It&rsquo;s not a strict rule&mdash;do what works for your situation. The goal is to be intentional about where your money goes.</div>
               <div style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">
-                <div class="result-row"><span class="result-row-label">Needs (50% = <span id="budget-50">$1,200</span>)</span><span class="result-row-value" id="budget-needs-actual">$1,370</span></div>
-                <div class="result-row"><span class="result-row-label">Wants (30% = <span id="budget-30">$720</span>)</span><span class="result-row-value" id="budget-wants-actual">$190</span></div>
-                <div class="result-row"><span class="result-row-label">Savings (20% = <span id="budget-20">$480</span>)</span><span class="result-row-value" id="budget-savings-actual">$490</span></div>
+                <div class="result-row"><span class="result-row-label">Needs (50% = <span id="budget-50">$1,200</span>)</span><span class="result-row-value" id="budget-needs-actual">$1,785</span></div>
+                <div class="result-row"><span class="result-row-label">Wants (30% = <span id="budget-30">$720</span>)</span><span class="result-row-value" id="budget-wants-actual">$125</span></div>
+                <div class="result-row"><span class="result-row-label">Savings (20% = <span id="budget-20">$480</span>)</span><span class="result-row-value" id="budget-savings-actual">$200</span></div>
               </div>
               <div id="budget-recommendation" style="margin-top:1rem; color:var(--text-muted); font-size:0.85rem; line-height:1.7;"></div>
             </div>
@@ -1018,6 +1025,10 @@
       <p><strong>Disclaimer:</strong> These calculators are provided for educational and illustrative purposes only and do not constitute financial, investment, tax, or legal advice. All results are estimates based on the information you enter and standard mathematical formulas. Actual loan terms, interest rates, and investment returns will vary based on your creditworthiness, lender, market conditions, and other factors. Consult a qualified financial advisor, tax professional, or licensed lender before making any financial decisions. Corey L. Cook and Cook Media LLC are not responsible for any financial decisions made based on these calculators.</p>
     </div>
 
+    <div class="book-cta">
+      <p>These calculators come straight from the &ldquo;M&rdquo; in DREAM/BIG&mdash;Monetary Success. The book walks through the decisions behind every one of these numbers.</p>
+      <a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="calculators-footer">Get the Book</a>
+    </div>
     <a href="index.html" class="back-link">&larr; Back to DREAM/BIG</a>
   </div>
 </section>
@@ -1049,7 +1060,6 @@
     <p>We collect only the information you voluntarily provide:</p>
     <ul>
       <li><strong>Email address</strong> &mdash; when you subscribe to our newsletter</li>
-      <li><strong>Name and contact information</strong> &mdash; when you submit a speaking engagement inquiry</li>
     </ul>
     <p>The financial calculators on this site run entirely in your browser. We do not collect, store, or transmit any data you enter into the calculators.</p>
     <p>If you use the optional DREAM/BIG AI Coach, the question you type and recent chat context are sent through our secure server endpoint to an AI service provider so a response can be generated. Do not enter Social Security numbers, account numbers, passwords, bank logins, or other sensitive personal data.</p>
@@ -1456,111 +1466,26 @@ function drawDonut(canvasId, segments, centerText) {
   }
 }
 
-// SEMICIRCLE GAUGE
-function drawCreditGauge(scoreMid, ratingColor) {
-  const canvas = document.getElementById('credit-gauge');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const w = canvas.clientWidth || 280;
-  const h = canvas.clientHeight || 170;
-  canvas.width = w * dpr;
-  canvas.height = h * dpr;
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, w, h);
-
-  const cx = w / 2, cy = h - 15;
-  const radius = Math.min(w / 2, h) - 25;
-  const lineW = 18;
-  const startAngle = Math.PI;
-  const endAngle = 2 * Math.PI;
-
-  // Background arc segments
-  const colors = ['#E74C3C', '#E67E22', '#F1C40F', '#27AE60', '#1ABC9C'];
-  const ranges = [300, 500, 600, 700, 780, 850]; // 5 segments
-  for (let i = 0; i < 5; i++) {
-    const segStart = startAngle + ((ranges[i] - 300) / 550) * Math.PI;
-    const segEnd = startAngle + ((ranges[i + 1] - 300) / 550) * Math.PI;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, segStart, segEnd);
-    ctx.lineWidth = lineW;
-    ctx.strokeStyle = colors[i];
-    ctx.globalAlpha = 0.25;
-    ctx.stroke();
-  }
-  ctx.globalAlpha = 1;
-
-  // Active arc (filled up to score)
-  const scorePct = Math.max(0, Math.min(1, (scoreMid - 300) / 550));
-  const scoreAngle = startAngle + scorePct * Math.PI;
-  for (let i = 0; i < 5; i++) {
-    const segStart = startAngle + ((ranges[i] - 300) / 550) * Math.PI;
-    const segEnd = Math.min(scoreAngle, startAngle + ((ranges[i + 1] - 300) / 550) * Math.PI);
-    if (segEnd <= segStart) continue;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, segStart, segEnd);
-    ctx.lineWidth = lineW;
-    ctx.strokeStyle = colors[i];
-    ctx.lineCap = 'butt';
-    ctx.stroke();
-  }
-
-  // Needle
-  const needleAngle = scoreAngle;
-  const needleLen = radius - lineW / 2 - 8;
-  const nx = cx + Math.cos(needleAngle) * needleLen;
-  const ny = cy + Math.sin(needleAngle) * needleLen;
-  ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.lineTo(nx, ny);
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = '#F5F5F5';
-  ctx.lineCap = 'round';
-  ctx.stroke();
-
-  // Center dot
-  ctx.beginPath();
-  ctx.arc(cx, cy, 6, 0, Math.PI * 2);
-  ctx.fillStyle = ratingColor;
-  ctx.fill();
-
-  // Score text
-  ctx.fillStyle = ratingColor;
-  ctx.font = 'bold 28px Playfair Display, serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'bottom';
-  ctx.fillText(Math.round(scoreMid), cx, cy - 12);
-
-  // Range labels
-  ctx.font = '10px Inter, sans-serif';
-  ctx.fillStyle = '#B8A8D0';
-  ctx.textAlign = 'center';
-  const labelR = radius + lineW / 2 + 12;
-  ['300', '500', '600', '700', '780', '850'].forEach((label, i) => {
-    const a = startAngle + ((ranges[i] - 300) / 550) * Math.PI;
-    const lx = cx + Math.cos(a) * labelR;
-    const ly = cy + Math.sin(a) * labelR;
-    ctx.fillText(label, lx, ly);
-  });
-}
 
 // BUDGET DONUT
 function drawBudgetDonut(expenses, income, plannedSavings) {
   const colors = ['#9B59B6','#8E44AD','#E74C3C','#E67E22','#F39C12','#3498DB','#27AE60','#F1C40F','#1ABC9C','#95A5A6'];
   const segments = [];
   const legendItems = [];
+  const totalOutflow = Object.values(expenses).reduce((a, b) => a + b, 0) + plannedSavings;
+  const denom = Math.max(income, totalOutflow);
   let i = 0;
   for (const label in expenses) {
     if (expenses[label] > 0) {
       segments.push({ value: expenses[label], color: colors[i % colors.length] });
-      const pct = income > 0 ? Math.round((expenses[label] / income) * 100) : 0;
+      const pct = denom > 0 ? Math.round((expenses[label] / denom) * 100) : 0;
       legendItems.push('<div><span class="donut-legend-dot" style="background:' + colors[i % colors.length] + ';"></span>' + label + ' <strong>' + pct + '%</strong></div>');
     }
     i++;
   }
   if (plannedSavings > 0) {
     segments.push({ value: plannedSavings, color: '#C9A84C' });
-    const plannedPct = income > 0 ? Math.round((plannedSavings / income) * 100) : 0;
+    const plannedPct = denom > 0 ? Math.round((plannedSavings / denom) * 100) : 0;
     legendItems.push('<div><span class="donut-legend-dot" style="background:#C9A84C;"></span>Planned Savings <strong>' + plannedPct + '%</strong></div>');
   }
   // Show money that still needs a job separately from planned savings.
@@ -1568,7 +1493,7 @@ function drawBudgetDonut(expenses, income, plannedSavings) {
   const remaining = income - totalExp - plannedSavings;
   if (remaining > 0) {
     segments.push({ value: remaining, color: 'rgba(212,175,55,0.4)' });
-    const savPct = income > 0 ? Math.round((remaining / income) * 100) : 0;
+    const savPct = denom > 0 ? Math.round((remaining / denom) * 100) : 0;
     legendItems.push('<div><span class="donut-legend-dot" style="background:rgba(212,175,55,0.4);"></span>Unallocated <strong>' + savPct + '%</strong></div>');
   }
   drawDonut('budget-donut', segments, income > 0 ? Math.round((totalExp / income) * 100) + '%' : '0%');
@@ -1591,7 +1516,7 @@ function numberFromInput(id, fallback) {
     const max = Number(input.max);
     if (Number.isFinite(max) && value > max) value = max;
   }
-  if (String(input.value) !== String(value)) input.value = value;
+  if (String(input.value) !== String(value) && document.activeElement !== input) input.value = value;
   return value;
 }
 
