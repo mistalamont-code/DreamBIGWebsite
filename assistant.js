@@ -151,7 +151,7 @@
     headingWrap.appendChild(title);
     headingWrap.appendChild(subtitle);
 
-    refs.close = createEl('button', 'ai-assistant-close', 'x');
+    refs.close = createEl('button', 'ai-assistant-close', '×');
     refs.close.type = 'button';
     refs.close.setAttribute('aria-label', 'Close coach');
 
@@ -211,6 +211,7 @@
     }
 
     refs.input.value = '';
+    refs.suggestions.style.display = 'none';
     addMessage('user', text);
     conversation.push({ role: 'user', content: text });
     conversation = conversation.slice(-maxHistory);
