@@ -69,7 +69,7 @@
   }
 
   /* NAV */
-  nav {
+  .site-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(201,168,76,0.15);
@@ -207,43 +207,6 @@
   .companion-start .container { max-width: 960px; }
   .companion-start-heading { max-width: 760px; }
   .companion-start-heading .section-text { max-width: 680px; }
-  .companion-paths {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.75rem;
-  }
-  .companion-path {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.9rem;
-    min-height: 150px;
-    padding: 1.35rem 0.25rem 1rem;
-    border-top: 1px solid rgba(201,168,76,0.55);
-    color: var(--text);
-    text-decoration: none;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .companion-path:hover { border-color: var(--gold-light); transform: translateY(-3px); }
-  .companion-path-number {
-    color: var(--gold);
-    font: 700 0.72rem/1 'Inter', sans-serif;
-    letter-spacing: 1px;
-    padding-top: 0.3rem;
-  }
-  .companion-path strong {
-    display: block;
-    color: var(--gold-light);
-    font: 700 1.15rem/1.25 'Playfair Display', serif;
-    margin-bottom: 0.55rem;
-  }
-  .companion-path span:last-child {
-    display: block;
-    color: var(--text-muted);
-    font-size: 0.88rem;
-    line-height: 1.65;
-  }
-
   /* SECTIONS */
   section { padding: 100px 2rem; }
   .container { max-width: 800px; margin: 0 auto; }
@@ -659,9 +622,6 @@
 
     /* Companion start */
     .companion-start { padding-top: 56px; padding-bottom: 60px; }
-    .companion-paths { grid-template-columns: 1fr; gap: 0.4rem; margin-top: 2rem; }
-    .companion-path { min-height: 0; padding: 1.15rem 0; }
-
     /* About */
     .about-headshot { width: 160px; height: 160px; }
     .about-headline { font-size: 1.3rem; }
@@ -698,7 +658,7 @@
 
   /* RESPONSIVE — SMALL PHONE */
   @media (max-width: 380px) {
-    nav { padding: 0 1rem; }
+    .site-nav { padding: 0 1rem; }
     .nav-logo { font-size: 1.2rem; }
     section { padding: 50px 1rem; }
     .hero { padding: 115px 1rem 45px; }
@@ -867,7 +827,7 @@
 <a href="#main" class="skip-link">Skip to content</a>
 
 <!-- NAV -->
-<nav aria-label="Main">
+<nav class="site-nav" aria-label="Main">
   <a href="#" class="nav-brand">
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
@@ -923,20 +883,6 @@
       <div class="divider"></div>
       <p class="section-text">The book gives you the framework. These companion tools help you turn it into action. Start with one chapter, one decision, or one money question. Your work stays on your device unless you choose to ask the coach.</p>
     </div>
-    <nav class="companion-paths" aria-label="Ways to use the DREAM/BIG companion">
-      <a class="companion-path" href="companion.html">
-        <span class="companion-path-number">01</span>
-        <span><strong>Chapter Companion</strong><span>Reflect on each DREAM/BIG principle and choose one practical next step.</span></span>
-      </a>
-      <a class="companion-path" href="first-money-moves.html">
-        <span class="companion-path-number">02</span>
-        <span><strong>First Money Moves</strong><span>Decode a paycheck, build a starter emergency fund, and check a student loan.</span></span>
-      </a>
-      <a class="companion-path" href="visualizer.html">
-        <span class="companion-path-number">03</span>
-        <span><strong>See Decisions Over Time</strong><span>Move the sliders to see how saving, credit, and debt choices can shape the future.</span></span>
-      </a>
-    </nav>
   </div>
 </section>
 

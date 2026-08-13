@@ -74,7 +74,7 @@
   }
   .skip-link:focus { left: 0; }
 
-  nav {
+  .site-nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(15,6,32,0.95); backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(201,168,76,0.15);
@@ -323,7 +323,7 @@
   }
 
   @media (max-width: 1024px) {
-    nav { padding: 0 1.25rem; }
+    .site-nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
     .nav-toggle { display: inline-flex; }
     .nav-subtitle { display: none; }
@@ -389,7 +389,7 @@
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
-<nav>
+<nav class="site-nav" aria-label="Main">
   <a href="index.html" class="nav-brand">
     <span class="nav-logo">DREAM/BIG</span>
     <span class="nav-subtitle">A Father &amp; Mentor&rsquo;s Guide to Life After High School</span>
