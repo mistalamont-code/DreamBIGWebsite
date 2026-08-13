@@ -10,10 +10,7 @@
   gtag('config', 'G-JGYNWJQC7G');
 </script>
 <!-- Vercel Web Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script src="analytics.js" defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Financial Literacy Glossary — DREAM/BIG by Corey L. Cook</title>
@@ -37,9 +34,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -812,6 +809,15 @@ document.addEventListener('keydown', function(e) {
     document.querySelectorAll('.legal-overlay.active').forEach(function(el) {
       closeLegal(el.id.replace('legal-', ''));
     });
+    var links = document.querySelector('.nav-links');
+    var toggle = document.querySelector('.nav-toggle');
+    if (links && links.classList.contains('open')) {
+      links.classList.remove('open');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    }
   }
   if (e.key === 'Tab') {
     var activeOverlay = document.querySelector('.legal-overlay.active');

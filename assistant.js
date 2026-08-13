@@ -282,6 +282,9 @@
     if (status === 503) {
       return 'The coach is still being set up. Try again later.';
     }
+    if (status === 504) {
+      return 'The coach took too long to respond. Try again in a minute.';
+    }
     if (status >= 500) {
       return 'The coach service hit a temporary issue. Try again in a minute.';
     }

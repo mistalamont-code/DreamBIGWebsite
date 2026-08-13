@@ -10,10 +10,7 @@
   gtag('config', 'G-JGYNWJQC7G');
 </script>
 <!-- Vercel Web Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script src="analytics.js" defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>First Money Moves &mdash; DREAM/BIG Financial Literacy Tools</title>
@@ -37,9 +34,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -57,7 +54,7 @@
     --accent: #C9A84C;
     --success: #2ECC71;
     --warning: #F1C40F;
-    --danger: #E74C3C;
+    --danger: #FF6B60;
     --teal: #4FC3B1;
   }
 
@@ -858,11 +855,11 @@
 
       <div class="calc-disclaimer">
         <p><strong>Educational disclaimer:</strong> These tools use simplified formulas for learning and comparison. They do not provide professional financial, tax, investment, legal, lending, or student aid advice. Actual paycheck withholding, benefits, tax rules, loan terms, fees, subsidies, repayment plans, and lender calculations can vary. Review real documents and consult qualified professionals before making major financial decisions.</p>
-        <div class="resource-links" role="navigation" aria-label="Official resources">
+        <nav class="resource-links" aria-label="Official resources">
           <a href="https://www.irs.gov/individuals/tax-withholding-estimator" target="_blank" rel="noopener">IRS Tax Withholding Estimator</a>
           <a href="https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/" target="_blank" rel="noopener">CFPB Emergency Fund Guide</a>
           <a href="https://studentaid.gov/loan-simulator/" target="_blank" rel="noopener">Federal Student Aid Loan Simulator</a>
-        </div>
+        </nav>
       </div>
 
       <div class="book-cta">

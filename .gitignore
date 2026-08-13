@@ -31,6 +31,7 @@ chatbot-worker.js
 
 # Local dev/preview tooling
 .claude/
+/output/
 
 # Source art & marketing exports — kept locally, not shipped to the site.
 # These are working files (high-res sources, logo exports, social-banner

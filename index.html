@@ -10,10 +10,7 @@
   gtag('config', 'G-JGYNWJQC7G');
 </script>
 <!-- Vercel Web Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script src="analytics.js" defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DREAM/BIG Book — Life After High School Guide by Corey L. Cook</title>
@@ -39,9 +36,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -293,6 +290,7 @@
   .about-headshot img {
     width: 100%; height: 100%; object-fit: cover;
   }
+  .about-headshot picture { display: block; width: 100%; height: 100%; }
   .about-content { text-align: center; }
   .about-content .section-label, .about-content .section-title { text-align: center; }
   .about-content .divider { margin: 1.25rem auto 2rem; }
@@ -909,7 +907,7 @@
       <a href="companion.html" class="btn btn-outline">Start the Companion</a>
     </div>
     <p class="purchase-note">Best way to support the author. Ships through IngramSpark. Also available through major retailers.</p>
-    <div class="retailer-actions" aria-label="Retailer purchase options">
+    <div class="retailer-actions" role="group" aria-label="Retailer purchase options">
       <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="hero-retailer"><span class="retailer-mark retailer-mark-amazon" aria-hidden="true">a</span><span>Amazon</span></a>
       <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="hero-retailer"><span class="retailer-mark retailer-mark-bn" aria-hidden="true">B&amp;N</span><span>Barnes &amp; Noble</span></a>
     </div>
@@ -925,7 +923,7 @@
       <div class="divider"></div>
       <p class="section-text">The book gives you the framework. These companion tools help you turn it into action. Start with one chapter, one decision, or one money question. Your work stays on your device unless you choose to ask the coach.</p>
     </div>
-    <div class="companion-paths" aria-label="Ways to use the DREAM/BIG companion">
+    <nav class="companion-paths" aria-label="Ways to use the DREAM/BIG companion">
       <a class="companion-path" href="companion.html">
         <span class="companion-path-number">01</span>
         <span><strong>Chapter Companion</strong><span>Reflect on each DREAM/BIG principle and choose one practical next step.</span></span>
@@ -938,7 +936,7 @@
         <span class="companion-path-number">03</span>
         <span><strong>See Decisions Over Time</strong><span>Move the sliders to see how saving, credit, and debt choices can shape the future.</span></span>
       </a>
-    </div>
+    </nav>
   </div>
 </section>
 
@@ -949,7 +947,10 @@
       <p class="about-headline">&ldquo;You are the sum of your decisions.&rdquo;</p>
       <p class="about-headline-attr">&mdash; Corey Cook</p>
       <div class="about-headshot">
-        <img src="images/headshot.jpg" alt="Corey L. Cook - Author of DREAM/BIG" width="900" height="900" loading="lazy">
+        <picture>
+          <source srcset="images/headshot-480.webp" type="image/webp">
+          <img src="images/headshot.jpg" alt="Corey L. Cook - Author of DREAM/BIG" width="480" height="480" loading="lazy">
+        </picture>
       </div>
       <div class="about-content">
         <span class="section-label">About the Author</span>
@@ -960,9 +961,9 @@
         <p class="section-text" style="margin-top:1rem;">Corey is also the founder and CEO of Cook Media LLC, a media production company specializing in wedding photography and videography, live sound, and recently, book publishing. He serves on multiple boards, including the Greater Erie Economic Development Corporation, United Way of Erie County, and the Pennsylvania Council on Inclusive Procurement, to name a few. He is a drummer, pianist, and the creator of the DREAM/BIG book series&mdash;of which this is the first volume, followed by GROW/, LAUNCH/, and LEGACY/.</p>
         <p class="section-text" style="margin-top:1rem;">This book started as a graduation gift for his children&mdash;a way to pass down the lessons, mistakes, and hard-won wisdom he wished someone had laid out for him when he walked across the stage at 20 years old. But as he wrote, it became clear the message was bigger than his own family. DREAM/BIG is for every young person standing at the edge of adulthood, especially those from communities where the roadmap isn&rsquo;t always clear.</p>
         <div class="about-stats">
-          <div class="stat"><div class="stat-number" data-stat-prefix="$" data-stat-value="150" data-stat-suffix="M" aria-label="$150 million">$150M</div><div class="stat-label">Development Portfolio</div></div>
-          <div class="stat"><div class="stat-number" data-stat-value="16" data-stat-suffix="+" aria-label="16 plus years">16+</div><div class="stat-label">Years at UPS</div></div>
-          <div class="stat"><div class="stat-number" data-stat-value="20" data-stat-suffix="+" aria-label="20 plus years mentoring young people">20+</div><div class="stat-label">Years Mentoring Young People</div></div>
+          <div class="stat"><div class="stat-number" data-stat-prefix="$" data-stat-value="150" data-stat-suffix="M">$150M</div><div class="stat-label">Development Portfolio</div></div>
+          <div class="stat"><div class="stat-number" data-stat-value="16" data-stat-suffix="+">16+</div><div class="stat-label">Years at UPS</div></div>
+          <div class="stat"><div class="stat-number" data-stat-value="20" data-stat-suffix="+">20+</div><div class="stat-label">Years Mentoring Young People</div></div>
           <div class="stat"><div class="stat-number stat-wordmark">Good Morning<br>America</div><div class="stat-label">Featured On</div></div>
         </div>
       </div>
@@ -1057,7 +1058,7 @@
     <div style="text-align:center; margin-top:3rem;">
       <a href="https://shop.ingramspark.com/b/084?params=auYcam1uPTDm9D041XR3ygueD2kILv5ChfIouqtAr0y" class="btn btn-gold" target="_blank" rel="noopener" data-buy-link="ingram" data-buy-location="book-section">Buy Direct</a>
       <p class="purchase-note">Best way to support the author. Ships through IngramSpark. Also available through major retailers.</p>
-      <div class="retailer-actions" aria-label="Retailer purchase options">
+      <div class="retailer-actions" role="group" aria-label="Retailer purchase options">
         <a href="https://www.amazon.com/Dream-Big-Father-Mentors-School/dp/B0H3WW14QK" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="amazon" data-buy-location="book-section-retailer"><span class="retailer-mark retailer-mark-amazon" aria-hidden="true">a</span><span>Amazon</span></a>
         <a href="https://www.barnesandnoble.com/w/dream-big-corey-l-cook/1149965008?ean=9798234036643" class="btn btn-outline btn-retailer" target="_blank" rel="noopener" data-buy-link="barnes-noble" data-buy-location="book-section-retailer"><span class="retailer-mark retailer-mark-bn" aria-hidden="true">B&amp;N</span><span>Barnes &amp; Noble</span></a>
       </div>
@@ -1356,6 +1357,15 @@ document.addEventListener('keydown', function(e) {
     document.querySelectorAll('.legal-overlay.active').forEach(function(el) {
       closeLegal(el.id.replace('legal-', ''));
     });
+    var links = document.querySelector('.nav-links');
+    var toggle = document.querySelector('.nav-toggle');
+    if (links && links.classList.contains('open')) {
+      links.classList.remove('open');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    }
   }
   if (e.key === 'Tab') {
     var activeOverlay = document.querySelector('.legal-overlay.active');

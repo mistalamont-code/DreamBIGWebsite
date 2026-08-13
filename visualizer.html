@@ -10,10 +10,7 @@
   gtag('config', 'G-JGYNWJQC7G');
 </script>
 <!-- Vercel Web Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script src="analytics.js" defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Money Visualizer — DREAM/BIG Financial Literacy Tool</title>
@@ -37,9 +34,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -427,10 +424,10 @@
       <a class="btn btn-gold" href="#visualizer">Start Visualizing</a>
       <a class="btn btn-outline" href="glossary.html">Look Up Money Terms</a>
     </div>
-    <div class="hero-proof" aria-label="What this tool shows">
-      <div class="proof-card"><strong>Time</strong><span>Small savings can grow when you start early.</span></div>
-      <div class="proof-card"><strong>Credit</strong><span>The same loan can cost more with a lower score.</span></div>
-      <div class="proof-card"><strong>Debt</strong><span>A fixed monthly payment can keep a balance alive for years.</span></div>
+    <div class="hero-proof" role="list" aria-label="What this tool shows">
+      <div class="proof-card" role="listitem"><strong>Time</strong><span>Small savings can grow when you start early.</span></div>
+      <div class="proof-card" role="listitem"><strong>Credit</strong><span>The same loan can cost more with a lower score.</span></div>
+      <div class="proof-card" role="listitem"><strong>Debt</strong><span>A fixed monthly payment can keep a balance alive for years.</span></div>
     </div>
   </div>
 </section>
@@ -450,7 +447,7 @@
           <p>Compare monthly deposits using a hypothetical effective annual return. Returns are hypothetical, not guaranteed. Outputs are future dollars before inflation, taxes, and fees.</p>
         </div>
         <div class="scenario-body">
-          <div class="controls" aria-label="Start early controls">
+          <div class="controls" role="group" aria-label="Start early controls">
             <div class="control">
               <div class="control-row"><label for="save-monthly">Monthly savings</label><output id="save-monthly-out">$100</output></div>
               <input type="range" id="save-monthly" min="25" max="500" step="25" value="100" oninput="updateSaving()">
@@ -515,7 +512,7 @@
           <p>Explore how illustrative rates change a fixed-rate installment loan. Rates are examples only, not current offers or predictions, and lenders consider factors beyond credit score.</p>
         </div>
         <div class="scenario-body">
-          <div class="controls" aria-label="Credit cost controls">
+          <div class="controls" role="group" aria-label="Credit cost controls">
             <div class="control">
               <div class="control-row"><label for="credit-loan">Loan amount</label><output id="credit-loan-out">$25,000</output></div>
               <input type="range" id="credit-loan" min="5000" max="60000" step="1000" value="25000" oninput="updateCredit()">
@@ -571,7 +568,7 @@
           <p>This simplified model keeps one dollar payment fixed every month. Actual card minimums vary by issuer and may change over time.</p>
         </div>
         <div class="scenario-body">
-          <div class="controls" aria-label="Fixed payment payoff controls">
+          <div class="controls" role="group" aria-label="Fixed payment payoff controls">
             <div class="control">
               <div class="control-row"><label for="debt-balance">Card balance</label><output id="debt-balance-out">$3,000</output></div>
               <input type="range" id="debt-balance" min="500" max="10000" step="250" value="3000" oninput="updateDebt()">

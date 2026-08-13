@@ -10,10 +10,7 @@
   gtag('config', 'G-JGYNWJQC7G');
 </script>
 <!-- Vercel Web Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script src="analytics.js" defer></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Financial Calculators — DREAM/BIG by Corey L. Cook</title>
@@ -37,9 +34,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="assistant.css">
 <script src="assistant.js" defer></script>
 <style>
@@ -56,6 +53,7 @@
     --text: #F5F5F5;
     --text-muted: #B8A8D0;
     --accent: #C9A84C;
+    --danger: #FF6B60;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -235,9 +233,9 @@
     margin-top: 1.5rem; padding: 1.5rem; background: rgba(192,57,43,0.08);
     border: 1px solid rgba(192,57,43,0.2); border-radius: 8px;
   }
-  .compare-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: #E74C3C; }
+  .compare-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--danger); }
   .compare-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-  .compare-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #E74C3C; font-weight: 700; }
+  .compare-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--danger); font-weight: 700; }
 
   /* CREDIT SCORE SLIDER */
   .credit-slider-box {
@@ -327,7 +325,7 @@
     margin-bottom: 0.35rem;
   }
   .slider-card-label.yours { color: #27AE60; }
-  .slider-card-label.slider { color: #E74C3C; }
+  .slider-card-label.slider { color: var(--danger); }
   .slider-card-label.slider.good { color: #27AE60; }
   .slider-card-rate {
     font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.35rem;
@@ -351,7 +349,7 @@
     font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
     display: inline-block; transition: color 0.3s;
   }
-  .slider-diff-amount.cost { color: #E74C3C; }
+  .slider-diff-amount.cost { color: var(--danger); }
   .slider-diff-amount.save { color: #27AE60; }
 
   /* DONUT CHART */
@@ -359,6 +357,7 @@
   .donut-canvas { flex-shrink: 0; }
   .donut-legend { font-size: 0.85rem; color: var(--text-muted); line-height: 2; }
   .donut-legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .donut-percentage-note { margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted); }
 
   /* COMPARISON BARS */
   .compare-visual { margin-top: 1rem; }
@@ -645,7 +644,7 @@
           <div>
             <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Loan Payment</div><div class="result-value" id="auto-monthly" aria-live="polite">$460</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="auto-loan">$25,000</span></div>
-            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:#E74C3C;">$2,625</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="auto-interest" style="color:var(--danger);">$2,625</span></div>
             <div class="result-row"><span class="result-row-label">Vehicle Price + Loan Interest</span><span class="result-row-value" id="auto-total">$27,625</span></div>
             <p class="loan-scope-note"><strong>What this includes:</strong> vehicle price, down payment, principal, and loan interest. It does not include sales tax, title or dealer fees, insurance, fuel, maintenance, or repairs.</p>
             <div class="donut-wrapper">
@@ -653,7 +652,7 @@
               <div class="donut-legend">
                 <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="auto-donut-prin">$25,000</strong></div>
                 <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="auto-donut-int">$2,625</strong></div>
-                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="auto-donut-pct">10% of your payments go to the bank</div>
+                <div class="donut-percentage-note" id="auto-donut-pct">10% of your payments go to the bank</div>
               </div>
             </div>
           </div>
@@ -750,7 +749,7 @@
           <div>
             <div class="result-box" style="margin-bottom:1rem;"><div class="result-label">Monthly Principal + Interest</div><div class="result-value" id="home-monthly" aria-live="polite">$805</div></div>
             <div class="result-row"><span class="result-row-label">Loan Amount</span><span class="result-row-value" id="home-loan">$150,000</span></div>
-            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:#E74C3C;">$139,884</span></div>
+            <div class="result-row"><span class="result-row-label">Total Interest Paid</span><span class="result-row-value" id="home-interest" style="color:var(--danger);">$139,884</span></div>
             <div class="result-row"><span class="result-row-label">Purchase Price + Loan Interest</span><span class="result-row-value" id="home-total">$289,884</span></div>
             <p class="loan-scope-note"><strong>What this includes:</strong> purchase price, down payment, principal, and loan interest. It does not include property tax, homeowners insurance, mortgage insurance, HOA dues, closing costs, utilities, or maintenance.</p>
             <div class="donut-wrapper">
@@ -758,7 +757,7 @@
               <div class="donut-legend">
                 <div><span class="donut-legend-dot" style="background:var(--gold);"></span>Principal: <strong id="home-donut-prin">$150,000</strong></div>
                 <div><span class="donut-legend-dot" style="background:#E74C3C;"></span>Interest: <strong id="home-donut-int">$139,884</strong></div>
-                <div style="margin-top:0.5rem; font-size:0.78rem; opacity:0.7;" id="home-donut-pct">48% of your payments go to the bank</div>
+                <div class="donut-percentage-note" id="home-donut-pct">48% of your payments go to the bank</div>
               </div>
             </div>
           </div>
@@ -987,7 +986,7 @@
               <div class="result-sub" id="budget-status" aria-live="polite">You have room to save and invest</div>
             </div>
             <div class="result-row"><span class="result-row-label">Total Income</span><span class="result-row-value" id="budget-total-income">$2,400</span></div>
-            <div class="result-row"><span class="result-row-label">Total Spending</span><span class="result-row-value" id="budget-total-expenses" style="color:#E74C3C;">$1,910</span></div>
+            <div class="result-row"><span class="result-row-label">Total Spending</span><span class="result-row-value" id="budget-total-expenses" style="color:var(--danger);">$1,910</span></div>
             <div class="result-row"><span class="result-row-label">Planned Savings</span><span class="result-row-value" id="budget-planned-savings" style="color:var(--gold);">$200</span></div>
             <div class="result-row"><span class="result-row-label">Expenses as % of Income</span><span class="result-row-value" id="budget-pct">80%</span></div>
 
@@ -1214,6 +1213,15 @@ document.addEventListener('keydown', function(e) {
       const menu = dd.querySelector('.nav-dropdown-menu');
       if (btn) btn.setAttribute('aria-expanded', 'false');
       if (menu) menu.style.display = '';
+    }
+    const links = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.nav-toggle');
+    if (links && links.classList.contains('open')) {
+      links.classList.remove('open');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
     }
   }
 });
@@ -1624,7 +1632,7 @@ function updateRateSlider(prefix, suffix) {
   // APR display
   const rateDisplay = document.getElementById(prefix + '-slider-score');
   rateDisplay.textContent = sliderRate.toFixed(1) + '%';
-  rateDisplay.style.color = sliderRate > userRate ? '#E74C3C' : sliderRate < userRate ? '#27AE60' : 'var(--gold)';
+  rateDisplay.style.color = sliderRate > userRate ? 'var(--danger)' : sliderRate < userRate ? '#27AE60' : 'var(--gold)';
 
   // Slider card
   document.getElementById(prefix + '-slider-rate').textContent = sliderRate.toFixed(1) + '% APR';
@@ -1742,7 +1750,7 @@ function calcCredit() {
   var ratingColor;
   if (weighted >= 85) { rating = 'Strong Habits'; ratingColor = '#27AE60'; }
   else if (weighted >= 60) { rating = 'Building Habits'; ratingColor = '#F1C40F'; }
-  else { rating = 'Needs Attention'; ratingColor = '#E74C3C'; }
+  else { rating = 'Needs Attention'; ratingColor = 'var(--danger)'; }
 
   document.getElementById('credit-score').textContent = rating;
   document.getElementById('credit-score').style.color = ratingColor;
@@ -1753,7 +1761,7 @@ function calcCredit() {
   var paymentLabels = ['', 'Very Poor', 'Poor', 'Fair', 'Good', 'Excellent'];
   document.getElementById('credit-detail-payment').textContent = paymentLabels[payment];
   document.getElementById('credit-detail-util').textContent = util + '%';
-  document.getElementById('credit-detail-util').style.color = util <= 30 ? '#27AE60' : util <= 50 ? '#F1C40F' : '#E74C3C';
+  document.getElementById('credit-detail-util').style.color = util <= 30 ? '#27AE60' : util <= 50 ? '#F1C40F' : 'var(--danger)';
   var lengthLabels = ['', '<1 year', '1\u20133 years', '3\u20137 years', '7\u201315 years', '15+ years'];
   document.getElementById('credit-detail-length').textContent = lengthLabels[length];
   var mixLabels = ['', 'One type', 'Two types', 'Three+ types'];
@@ -1795,7 +1803,7 @@ function calcBudget() {
   var remaining = income - totalExp - plannedSavings;
   var pct = income > 0 ? Math.round((totalExp / income) * 100) : 0;
 
-  document.getElementById('budget-remaining').style.color = remaining >= 0 ? 'var(--gold)' : '#E74C3C';
+  document.getElementById('budget-remaining').style.color = remaining >= 0 ? 'var(--gold)' : 'var(--danger)';
   document.getElementById('budget-remaining').textContent = (remaining >= 0 ? '' : '-') + fmt(Math.abs(remaining));
   document.getElementById('budget-total-income').textContent = fmt(income);
   document.getElementById('budget-total-expenses').textContent = fmt(totalExp);
@@ -1804,11 +1812,11 @@ function calcBudget() {
 
   // Budget donut
   drawBudgetDonut(expenses, income, plannedSavings);
-  document.getElementById('budget-pct').style.color = pct > 90 ? '#E74C3C' : pct > 75 ? '#F1C40F' : 'var(--gold)';
+  document.getElementById('budget-pct').style.color = pct > 90 ? 'var(--danger)' : pct > 75 ? '#F1C40F' : 'var(--gold)';
 
   if (remaining < 0) {
     document.getElementById('budget-status').textContent = 'Your plan is above your take-home pay';
-    document.getElementById('budget-status').style.color = '#E74C3C';
+    document.getElementById('budget-status').style.color = 'var(--danger)';
   } else if (remaining < income * 0.1) {
     document.getElementById('budget-status').textContent = 'Little unallocated money remains';
     document.getElementById('budget-status').style.color = '#E67E22';
@@ -1853,11 +1861,11 @@ function calcBudget() {
   var wantsActual = expenses['Streaming / Subs'] + expenses['Personal / Fun'];
   var savingsActual = plannedSavings;
   document.getElementById('budget-needs-actual').textContent = fmt(needsActual);
-  document.getElementById('budget-needs-actual').style.color = needsActual > needs50 ? '#E74C3C' : '#27AE60';
+  document.getElementById('budget-needs-actual').style.color = needsActual > needs50 ? 'var(--danger)' : '#27AE60';
   document.getElementById('budget-wants-actual').textContent = fmt(wantsActual);
-  document.getElementById('budget-wants-actual').style.color = wantsActual > wants30 ? '#E74C3C' : '#27AE60';
+  document.getElementById('budget-wants-actual').style.color = wantsActual > wants30 ? 'var(--danger)' : '#27AE60';
   document.getElementById('budget-savings-actual').textContent = fmt(savingsActual);
-  document.getElementById('budget-savings-actual').style.color = savingsActual >= save20 ? '#27AE60' : '#E74C3C';
+  document.getElementById('budget-savings-actual').style.color = savingsActual >= save20 ? '#27AE60' : 'var(--danger)';
 
   var rec = '';
   if (remaining < 0) rec = 'Your plan is ' + fmt(Math.abs(remaining)) + ' above your take-home pay. Reduce a category or lower the savings target until the plan balances.';

@@ -17,6 +17,7 @@ const MAX_MESSAGE_CHARS = 1000;
 const MAX_TOTAL_CHARS = 6000;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 12;
+const ANTHROPIC_TIMEOUT_MS = 20000;
 const rateLimitBuckets = new Map();
 
 const SYSTEM_PROMPT = `You are the DREAM/BIG Companion Coach — a friendly, straight-talking mentor built for young people navigating life after high school. You support the eight-principle DREAM/BIG framework and plain-language financial literacy. You were created as part of the DREAM/BIG book and website by Corey L. Cook.
@@ -153,20 +154,29 @@ module.exports = async function handler(req, res) {
       return sendJson(res, 503, { error: 'AI service is not configured yet.' });
     }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5-20251001',
-        max_tokens: 700,
-        system: SYSTEM_PROMPT + contextPrompt(body.context),
-        messages: recentMessages,
-      }),
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), ANTHROPIC_TIMEOUT_MS);
+    let response;
+
+    try {
+      response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+        },
+        signal: controller.signal,
+        body: JSON.stringify({
+          model: process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5-20251001',
+          max_tokens: 700,
+          system: SYSTEM_PROMPT + contextPrompt(body.context),
+          messages: recentMessages,
+        }),
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -184,6 +194,9 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 200, { reply: reply.trim() });
   } catch (err) {
     console.error('Assistant API error:', err);
+    if (err && err.name === 'AbortError') {
+      return sendJson(res, 504, { error: 'The coach took too long to respond. Please try again.' });
+    }
     return sendJson(res, 500, { error: 'Something went wrong. Please try again.' });
   }
 };
