@@ -281,7 +281,7 @@
       return 'This page is not allowed to use the coach. Refresh the official site and try again.';
     }
     if (status === 503) {
-      return 'The coach is still being set up. Try again later.';
+      return 'The coach is temporarily unavailable. You can still use the calculators, glossary, and chapter companion. Try again later.';
     }
     if (status === 504) {
       return 'The coach took too long to respond. Try again in a minute.';

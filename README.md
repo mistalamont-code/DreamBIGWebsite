@@ -35,6 +35,19 @@ In Vercel, add these environment variables:
 
 - `ANTHROPIC_API_KEY` — required
 - `ANTHROPIC_MODEL` — optional, defaults to `claude-haiku-4-5-20251001`
+- `COACH_ENABLED` — optional; set to `false` and redeploy to pause paid coach requests without disabling the static learning tools.
+
+### Cost and Safety Controls
+
+The function limits input size, conversation length, output tokens, and request duration. It does not retry paid requests. The first completed answer in each conversation receives an application-supplied educational notice, and the chat panel header carries a standing disclaimer; prompt rules require projection assumptions and distinguish short-term savings from investment risk. These controls reduce risk but do not guarantee that an AI answer is accurate.
+
+The in-memory 12-request/minute/IP limiter is only a per-instance fallback, not a shared or monthly spending limit. Configure a Vercel Firewall rule for request paths starting with `/api/assistant` (covering trailing-slash variants), using a fixed 60-second window, 12 requests per IP, and a 429 response. Publish the rule after review. Edge counters are regional; many students behind one school IP share that allowance. Monitor legitimate traffic before adjusting it.
+
+In the Anthropic Console, use a dedicated DREAM/BIG workspace/key and set an owner-approved monthly spend limit under that workspace's spend settings. A Vercel budget does not cap Anthropic API charges. A spend cap can interrupt the coach when exhausted; the static tools continue to work. Do not assume either external control is enabled merely because it is documented here.
+
+### Regression Tests
+
+Run `node --test tests/*.test.cjs`. Tests use mocked provider responses and canvas drawing; no API key or paid requests are needed. For a release, also check both loan charts at 0% and positive rates in desktop/mobile browsers, and send a small number of real coach questions after deploying. Browser previews alone do not exercise the Vercel Function.
 
 ## Contact
 
